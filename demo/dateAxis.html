@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<title>Date Axis</title>
+
+		<!-- JQuery dependence -->
+		<script src="../src/core/js/jquery.js"></script>
+		<script src="../src/core/js/jquery.sideswap.js"></script>
+		<!-- JQplot dependence -->
+		<script src="../src/core/js/jquery.jqplot.js"></script>
+		<script src="../src/core/js/chartsLoading.js"></script>
+		<!--[if lt IE 9]><script language="javascript" src="../src/core/excanvas.js"></script><![endif] -->
+
+		<!-- Axes -->
+		<script src="../src/plugins/axis/jqplot.dateAxisRenderer.js"></script>
+
+		<!-- Customization theme -->
+		<script src="../src/plugins/themes/extendedThemes.js"></script>
+
+		<!-- Export PNG -->
+		<script src="../src/plugins/export/exportImg.js"></script>
+
+		<script src="../src/plugins/fullscreener/fullscreener.js"></script>
+		<link type="text/css" rel="stylesheet" href="../src/plugins/fullscreener/fullscreener.css"/>
+	</head>
+	<body>
+
+		<div id="chart1" style="margin:20px;"></div>
+
+		<script type="text/javascript">
+			$(function(){
+			var line1=[['2008-09-30',4], ['2008-10-30',6.5], ['2008-11-30',5.7], ['2008-12-30',9], ['2009-01-30',8.2]];
+			var plot1 = $.jqplot('chart1', [line1], {
+					title:'Default Date Axis',
+					axes:{
+						xaxis:{
+							renderer:$.jqplot.DateAxisRenderer, 
+							tickOptions: {
+								formatString: '%Y #%V',
+								typeFormatter: 'php'
+							}
+						}
+					},
+					series:[{lineWidth:4, markerOptions:{style:'square'}}]
+				});
+			});
+		</script>
+	</body>
+</html>
