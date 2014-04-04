@@ -1,5 +1,5 @@
-var compressor = require('node-minify');
 var fs = require('fs');
+var compressor = require('yuicompressor');
 
 var sigKill = 0;
 
@@ -47,8 +47,16 @@ if(sigKill == 0){
 		process.argv.forEach(function (pluginDir, index, array) {
 			if (index > 1) {
 				if (pluginDir.lastIndexOf("--core")>-1){
-					uglify('core', "js");
-					uglify('core', "css");
+					try {
+						uglify('core', "js");
+					}catch (e){
+						console.error("Error on uglifying");
+					}
+					try {
+						uglify('core', "css");
+					}catch (e){
+						console.error("Error on uglifying");
+					}
 				}else{
 					uglify('plugins', pluginDir);
 				}
@@ -75,32 +83,47 @@ function uglify(folder, pluginDir){
 				src = srcFolder + file;
 				dest = (distFolder + file).replace('.js', '.min.js')
 				// console.log('src: ' + src);
-				// console.log('dest: ' + dest);
-				var mode = null;
-				if (file.lastIndexOf(".css")){
-					mode = 'yui-css'
-				}else if (file.lastIndexOf(".js")){
-					mode = 'uglifyjs';  
-				}
-				if(mode !=null){
-					new compressor.minify({
-						type: mode,
-						fileIn: src,
-						fileOut: dest,
-						callback: function(err, min){
-							if (err!=null){
-								console.log(err);
-							}
-						}
-					});
-				}else{
-					console.log("File type not supported: " + file);
-				}
-			}		
+				console.log('dest: ' + dest);
+
+				compress(src, dest);
+			}
 		});
 	}
 }
 
 function notInProtectedFiles(file){
-	return ["jquery.js"].indexOf(file)==-1;
+	return [""].indexOf(file)==-1;
+}
+
+function compress(file, dest){
+	var mode = null;
+	if (file.lastIndexOf(".css")){
+		mode = 'css'
+	}else if (file.lastIndexOf(".js")){
+		mode = 'js';
+	}
+	if(mode !=null){
+
+		compressor.compress(file, {
+			//Compressor Options:
+			charset: 'utf8',
+			type: mode,
+			nomunge: true,
+			'line-break': 80,
+		}, function(err, data, extra) {
+			//err   If compressor encounters an error, it's stderr will be here
+			//data  The compressed string, you write it out where you want it
+			//extra The stderr (warnings are printed here in case you want to echo them
+			fs.writeFile(dest, data , function(err){
+				if (err){
+					console.log("error");
+				}else {
+					console.log('It\'s saved!: ' + dest);
+				}
+			});
+		});
+	}else{
+		console.log("File type not supported: " + file);
+	}
+	
 }
