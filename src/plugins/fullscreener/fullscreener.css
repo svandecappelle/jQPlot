@@ -30,7 +30,6 @@
 
 .popup.is-active .chart{
 	margin: auto;
-	padding: 1em;
 	box-shadow: 0 5px 16px rgba(0, 0, 0, 0.25);
 	border: 1px solid #bbb;
 	background: -webkit-linear-gradient(top, #fff, #ddd) !important;
@@ -72,7 +71,7 @@
 
 .popup.is-active{
 	position: fixed;
-	z-index: 1000;
+	z-index: 1001;
 	top: 5%;
 	bottom: 5%;
 	left: 5%;
