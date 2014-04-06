@@ -27,6 +27,7 @@
 				console.log(plot1.series[0].color);
 				plot1.series[0].color = "#FF0000";
 				plot1.series[0].data = [[1,1],[2,4],[5,3]];
+				plot1.replot({resetAxes: true});
 				plot1.drawSeries({color:"#FF0000"},0)
 			}
 		</script>
