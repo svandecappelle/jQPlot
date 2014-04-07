@@ -349,10 +349,7 @@
     $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.move = function(pid, x, y){
         var pointLblPosition = this.serie.labelsSlices[pid].position();
         var tooltip = this.serie.labelsSlices[pid].find(".tooltip");
-        console.log("height"+this.serie.labelsSlices[pid].height() * 2);
         var topPos = y - pointLblPosition.top - (this.serie.labelsSlices[pid].height()*2 + tooltip.height());
-        console.log("pos"+(y - pointLblPosition.top));
-        console.log("toppos"+topPos);
         var leftPos = x - pointLblPosition.left - this.serie.labelsSlices[pid].width() - tooltip.width() / 2;
         tooltip.css({left: leftPos, top: topPos});
     };
@@ -579,85 +576,90 @@
             var pad = false, 
                 reverse = false,
                 nr, nc;
-            var s = series[0];
-            var colorGenerator = new $.jqplot.ColorGenerator(s.seriesColors);
             
-            if (s.show) {
-                var pd = s.data;
-                if (this.numberRows) {
-                    nr = this.numberRows;
-                    if (!this.numberColumns){
-                        nc = Math.ceil(pd.length/nr);
-                    }
-                    else{
-                        nc = this.numberColumns;
-                    }
-                }
-                else if (this.numberColumns) {
-                    nc = this.numberColumns;
-                    nr = Math.ceil(pd.length/this.numberColumns);
-                }
-                else {
-                    nr = pd.length;
-                    nc = 1;
-                }
+            for (var serieIdx = 0; serieIdx <= series.length - 1; serieIdx+=1) {
+
+                var s = series[serieIdx];
                 
-                var i, j, tr, td1, td2, lt, rs, color;
-                var idx = 0;    
+                var colorGenerator = new $.jqplot.ColorGenerator(s.seriesColors);
                 
-                for (i=0; i<nr; i++) {
-                    if (reverse){
-                        tr = $('<tr class="jqplot-table-legend"></tr>').prependTo(this._elem);
-                    }
-                    else{
-                        tr = $('<tr class="jqplot-table-legend"></tr>').appendTo(this._elem);
-                    }
-                    for (j=0; j<nc; j++) {
-                        if (idx < pd.length){
-                            lt = this.labels[idx] || pd[idx][0].toString();
-                            color = colorGenerator.next();
-                            if (!reverse){
-                                if (i>0){
-                                    pad = true;
-                                }
-                                else{
-                                    pad = false;
-                                }
-                            }
-                            else{
-                                if (i == nr -1){
-                                    pad = false;
-                                }
-                                else{
-                                    pad = true;
-                                }
-                            }
-                            rs = (pad) ? this.rowSpacing : '0';
-                
-                            td1 = $('<td class="jqplot-table-legend" style="text-align:center;padding-top:'+rs+';">'+
-                                '<div><div class="jqplot-table-legend-swatch" style="border-color:'+color+';"></div>'+
-                                '</div></td>');
-                            td2 = $('<td class="jqplot-table-legend" style="padding-top:'+rs+';"></td>');
-                            if (this.escapeHtml){
-                                td2.text(lt);
-                            }
-                            else {
-                                td2.html(lt);
-                            }
-                            if (reverse) {
-                                td2.prependTo(tr);
-                                td1.prependTo(tr);
-                            }
-                            else {
-                                td1.appendTo(tr);
-                                td2.appendTo(tr);
-                            }
-                            pad = true;
+                if (s.show) {
+                    var pd = s.data;
+                    if (this.numberRows) {
+                        nr = this.numberRows;
+                        if (!this.numberColumns){
+                            nc = Math.ceil(pd.length/nr);
                         }
-                        idx++;
-                    }   
+                        else{
+                            nc = this.numberColumns;
+                        }
+                    }
+                    else if (this.numberColumns) {
+                        nc = this.numberColumns;
+                        nr = Math.ceil(pd.length/this.numberColumns);
+                    }
+                    else {
+                        nr = pd.length;
+                        nc = 1;
+                    }
+                    
+                    var i, j, tr, td1, td2, lt, rs, color;
+                    var idx = 0;    
+                    
+                    for (i=0; i<nr; i++) {
+                        if (reverse){
+                            tr = $('<tr class="jqplot-table-legend"></tr>').prependTo(this._elem);
+                        }
+                        else{
+                            tr = $('<tr class="jqplot-table-legend"></tr>').appendTo(this._elem);
+                        }
+                        for (j=0; j<nc; j++) {
+                            if (idx < pd.length){
+                                lt = this.labels[idx] || pd[idx][0].toString();
+                                color = colorGenerator.next();
+                                if (!reverse){
+                                    if (i>0){
+                                        pad = true;
+                                    }
+                                    else{
+                                        pad = false;
+                                    }
+                                }
+                                else{
+                                    if (i == nr -1){
+                                        pad = false;
+                                    }
+                                    else{
+                                        pad = true;
+                                    }
+                                }
+                                rs = (pad) ? this.rowSpacing : '0';
+                    
+                                td1 = $('<td class="jqplot-table-legend" style="text-align:center;padding-top:'+rs+';">'+
+                                    '<div><div class="jqplot-table-legend-swatch" style="border-color:'+color+';"></div>'+
+                                    '</div></td>');
+                                td2 = $('<td class="jqplot-table-legend" style="padding-top:'+rs+';"></td>');
+                                if (this.escapeHtml){
+                                    td2.text(lt);
+                                }
+                                else {
+                                    td2.html(lt);
+                                }
+                                if (reverse) {
+                                    td2.prependTo(tr);
+                                    td1.prependTo(tr);
+                                }
+                                else {
+                                    td1.appendTo(tr);
+                                    td2.appendTo(tr);
+                                }
+                                pad = true;
+                            }
+                            idx++;
+                        }   
+                    }
                 }
-            }
+            };
         }
         return this._elem;                
     };

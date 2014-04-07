@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<title>Donut</title>
+
+		<!-- JQuery dependence -->
+		<script src="../build/dist/core/js/jquery.min.js"></script>
+		<script src="../build/dist/core/js/jquery.sideswap.min.js"></script>
+		<!-- JQplot dependence -->
+		<script src="../build/dist/core/js/jquery.jqplot.min.js"></script>
+		<script src="../build/dist/core/js/chartsLoading.min.js"></script>
+		<!--[if lt IE 9]><script language="javascript" src="../src/core/excanvas.js"></script><![endif] -->
+
+		<!--<script src="../build/dist/plugins/themes/extendedThemes.min.js"></script>-->
+		<script src="../build/dist/plugins/themes/extendedThemes.min.js"></script>
+		
+
+		<script src="../src/plugins/donut/jqplot.donutRenderer.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="../src/core/css/jquery.jqplot.css">
+	</head>
+	<body>
+
+		<div id="chart1" style="margin:20px; height:500px;"></div>
+
+		<script type="text/javascript">
+			$(function(){
+				
+				var s1 = [['/home/svandecappelle', 30], ['/home/user', 16], ['/var/www', 4], ['/var/log', 10], ['/tmp', 5], ['/', 35]];
+				var s2 = [['/home',46], ['/var',14], ['/tmp',5], ['/',35]];
+				
+				var plot1 = $.jqplot('chart1', [s1, s2], {
+					title:'Donut',
+					seriesDefaults: {
+						renderer: $.jqplot.DonutRenderer,
+						rendererOptions: {
+							showDataLabels: true,
+							showDataCategoryOnHover : true,
+							sliceMargin: 2,
+							ringMargin: 8,
+							startAngle: -90,
+						}
+					},
+					legend: { show:true, location: 'e', renderer: $.jqplot.DonutLegendRenderer }
+				});
+				plot1.themeEngine.newTheme('bluealpha_pie', new VklThemes().get('bluealpha_pie', plot1));
+				plot1.activateTheme('bluealpha_pie');
+			});
+		</script>
+	</body>
+</html>
