@@ -257,3 +257,53 @@ div.jqplot-noData-container {
 	text-align: center;
 	background-color: rgba(96%, 96%, 96%, 0.3);
 }
+
+
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover {
+  position: relative;
+  display: inline;
+}
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover  .tooltip {
+    position: absolute;
+    width: auto;
+    min-width: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    color: #FFFFFF;
+    text-shadow: 0px 0px 4px #800000;
+    background: #000000;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0px 0px 2px #800000;
+}
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    width: 0; height: 0;
+    border-top: 8px solid #000000;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;   
+}
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip {
+    opacity: 0.8;
+    margin: auto;
+    z-index: 999;
+}
+
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover.hidden .tooltip{
+    display: none;
+}
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover{
+    
+}
+
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover{
+    display: block;
+}

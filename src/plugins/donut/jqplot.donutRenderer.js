@@ -131,6 +131,11 @@
         // prop: showDataLabels
         // true to show data labels on slices.
         this.showDataLabels = false;
+        
+        // prop showDataCategory
+        // true to show the str category of a slice.
+        this.showDataCategoryOnHover == true;
+        
         // prop: dataLabelFormatString
         // Format string for data labels.  If none, '%s' is used for "label" and for arrays, '%d' for value and '%d%%' for percentage.
         this.dataLabelFormatString = null;
@@ -180,6 +185,10 @@
         this._sliceAngles = [];
         // index of the currenty highlighted point, if any
         this._highlightedPoint = null;
+
+        this.highlightLabelSliceRenderer = new $.jqplot.DonutHighlighterLabelSliceRenderer(this);
+        // labels of slices.
+        this.labelsSlices = [];
         
         // set highlight colors if none provided
         if (this.highlightColors.length == 0) {
@@ -325,6 +334,29 @@
         ctx.restore();
     };
     
+    $.jqplot.DonutHighlighterLabelSliceRenderer = function(serie){
+        this.serie = serie;
+    };
+
+    $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.highlight = function(pid){
+        this.serie.labelsSlices[pid].removeClass("hidden");
+    };
+    $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.unhighlight = function(pid){
+        for (var i = this.serie.labelsSlices.length - 1; i >= 0; i--) {
+            this.serie.labelsSlices[i].addClass("hidden");
+        };
+    };
+    $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.move = function(pid, x, y){
+        var pointLblPosition = this.serie.labelsSlices[pid].position();
+        var tooltip = this.serie.labelsSlices[pid].find(".tooltip");
+        console.log("height"+this.serie.labelsSlices[pid].height() * 2);
+        var topPos = y - pointLblPosition.top - (this.serie.labelsSlices[pid].height()*2 + tooltip.height());
+        console.log("pos"+(y - pointLblPosition.top));
+        console.log("toppos"+topPos);
+        var leftPos = x - pointLblPosition.left - this.serie.labelsSlices[pid].width() - tooltip.width() / 2;
+        tooltip.css({left: leftPos, top: topPos});
+    };
+
     // called with scope of series
     $.jqplot.DonutRenderer.prototype.draw = function (ctx, gd, options, plot) {
         var i;
@@ -419,6 +451,8 @@
             if (this.showDataLabels && gd[i][2]*100 >= this.dataLabelThreshold) {
                 var fstr, avgang = (ang1+ang2)/2, label;
                 
+
+
                 if (this.dataLabels == 'label') {
                     fstr = this.dataLabelFormatString || '%s';
                     label = $.jqplot.sprintf(fstr, gd[i][0]);
@@ -435,21 +469,36 @@
                     fstr = this.dataLabelFormatString || '%s';
                     label = $.jqplot.sprintf(fstr, this.dataLabels[i]);
                 }
-                
+
                 var fact = this._innerRadius + this._thickness * this.dataLabelPositionFactor + this.sliceMargin + this.dataLabelNudge;
                 
                 var x = this._center[0] + Math.cos(avgang) * fact + this.canvas._offsets.left;
                 var y = this._center[1] + Math.sin(avgang) * fact + this.canvas._offsets.top;
                 
-                var labelelem = $('<span class="jqplot-donut-series jqplot-data-label" style="position:absolute;">' + label + '</span>').insertBefore(plot.eventCanvas._elem);
+
+                var labelelem;
+                if (this.showDataCategoryOnHover){
+                    var fstrTooltip = this.dataLabelFormatString || '%s';
+                    labelTooltip = $.jqplot.sprintf(fstrTooltip, gd[i][0]);
+
+                    var tooltip = '<span class="tooltip">' + labelTooltip + '</span>';
+                    var txt = '<span class="jqplot-donut-series jqplot-data-label" style="position:absolute;">' + label + tooltip + + '</span>'
+                    var labelelem = $(txt).insertBefore(plot.eventCanvas._elem);
+
+                    this.labelsSlices.push(labelelem);
+                    labelelem.addClass('jqplot-donut-show-hover hidden');
+                }else{
+                    var labelelem = $('<span class="jqplot-donut-series jqplot-data-label" style="position:absolute;">' + label + '</span>').insertBefore(plot.eventCanvas._elem);
+                }
+
                 x -= labelelem.width()/2;
                 y -= labelelem.height()/2;
                 x = Math.round(x);
                 y = Math.round(y);
                 labelelem.css({left: x, top: y});
+                
             }
         }
-               
     };
     
     $.jqplot.DonutAxisRenderer = function() {
@@ -681,6 +730,7 @@
         s._highlightedPoint = pidx;
         plot.plugins.donutRenderer.highlightedSeriesIndex = sidx;
         s.renderer.drawSlice.call(s, canvas._ctx, s._sliceAngles[pidx][0], s._sliceAngles[pidx][1], s.highlightColors[pidx], false);
+        s.highlightLabelSliceRenderer.highlight(pidx);
     }
     
     function unhighlight (plot) {
@@ -691,6 +741,9 @@
         }
         plot.plugins.donutRenderer.highlightedSeriesIndex = null;
         plot.target.trigger('jqplotDataUnhighlight');
+        for (var i = plot.series.length - 1; i >= 0; i--) {
+           plot.series[i].highlightLabelSliceRenderer.unhighlight();
+        };
     }
  
     function handleMove(ev, gridpos, datapos, neighbor, plot) {
@@ -705,8 +758,14 @@
                 evt.pageX = ev.pageX;
                 evt.pageY = ev.pageY;
                 plot.target.trigger(evt, ins);
-                highlight (plot, ins[0], ins[1]);
+                for (var i = plot.series.length - 1; i >= 0; i--) {
+                   plot.series[i].highlightLabelSliceRenderer.unhighlight();
+                };
+                highlight (plot, ins[0], ins[1]);    
+            }else{
+                plot.series[ins[0]].highlightLabelSliceRenderer.move(ins[1], evt1.pageX, evt1.pageY);
             }
+
         }
         else if (neighbor == null) {
             unhighlight (plot);
