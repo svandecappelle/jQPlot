@@ -5,7 +5,7 @@
 		<!-- JQuery dependence -->
 		<script src="../build/dist/core/jquery.min.js"></script>
 		<!-- JQplot dependence -->
-		<script src="../build/dist/core/jquery.jqplot.min.js"></script>
+		<script src="../src/core/jquery.jqplot.js"></script>
 		<script src="../build/dist/plugins/bar/jqplot.barRenderer.min.js"></script>
 
 		<!-- Axes -->
@@ -15,31 +15,32 @@
 		<script src="../build/dist/plugins/axis/jqplot.canvasAxisTickRenderer.min.js"></script>
 		<script src="../build/dist/plugins/text/jqplot.canvasTextRenderer.min.js"></script>
 
-		<!-- Customization theme -->
 		<script src="../build/dist/plugins/themes/extendedThemes.min.js"></script>
+		<script src="../src/plugins/overlay/jqplot.canvasOverlay.js"></script>
 
 		<!-- Export PNG -->
 		<script src="../build/dist/plugins/export/exportImg.min.js"></script>
 
 		<script src="../build/dist/plugins/fullscreener/fullscreener.min.js"></script>
+		<script src="../build/dist/plugins/highlighter/jqplot.highlighter.min.js"></script>
 		<link type="text/css" rel="stylesheet" href="../build/dist/plugins/fullscreener/fullscreener.min.css"/>
+
+		<link type="text/css" rel="stylesheet" href="../build/dist/core/jquery.jqplot.min.css"/>
 	</head>
 	<body>
 
-		<div id="chart1" style="margin:20px; width:500px;"></div>
+		<div id="chart1" style="margin:20px; width:500px;height:800px;"></div>
 
 		<script type="text/javascript">
+			
 			$(function(){
 
 			var serie1=[['2008-09-01',4], ['2008-09-02',6], ['2008-09-03',5], ['2008-09-04',0], ['2008-09-05',8]];
-			var serie2=[['2008-09-01',1], ['2008-09-02',1], ['2008-09-03',5], ['2008-09-04',9], ['2008-09-05',15]];
-			var serie3=[['2008-09-01',1], ['2008-09-02',0], ['2008-09-03',0], ['2008-09-04',0], ['2008-09-05',0]];
-			var serie4=[2,0,1,4,1];
-			var categories=['2008-09-01','2008-09-02','2008-09-03','2008-09-04','2008-09-05'];
+			var serie2=[['2008-09-01',2], ['2008-09-02',1], ['2008-09-03',5], ['2008-09-04',9], ['2008-09-05',6]];
+			var serie3=[['2008-09-01',2], ['2008-09-02',0], ['2008-09-03',0], ['2008-09-04',0], ['2008-09-05',0]];
+			var serie4=[['2008-09-01',2], ['2008-09-02',0], ['2008-09-03',0], ['2008-09-04',0], ['2008-09-05',0]];
 
-			var line1 = [['Nissan', 4],['Porche', 6],['Acura', 2],['Aston Martin', 5],['Rolls Royce', 6]];
-
-			var plot1 = $.jqplot('chart1', [serie1,serie2,serie3], {
+			var plot1 = $.jqplot('chart1', [serie1,serie2,serie3, serie4], {
 					title:'Bar',
 					axes:{
 						xaxis:{
@@ -55,9 +56,45 @@
 							barMargin: 30,
 						}
 					},
+					canvasOverlay: {
+						show: true,
+						bellowSeries: true,
+            			objects: [
+							{rectangle: {
+								name: 'barney',
+								xmin: [0],
+								xmax: [2.5],
+								ymin: [0],
+								ymax: [2000],
+								xOffset: 0,
+								color: 'rgba(122, 122, 122,0.5)',
+								shadow: false,
+								showTooltip: true,
+								tooltipLocation: 'n'
+							}}/*,{rectangle: {
+								name: 'barney',
+								xmin: [2.5],
+								xmax: [5.5],
+								ymin: [0],
+								ymax: [2000],
+								xOffset: 0,
+								color: 'rgba(0, 122, 25,0.5)',
+								shadow: false,
+								showTooltip: true,
+								tooltipLocation: 'n'
+							}}*/]
+					},
+					highlighter: {
+						show: true,
+						sizeAdjust: 7.5
+					},
 					stackSeries: true,
 				});
+				//plot1.themeEngine.newTheme('bluealpha', new VklThemes().get('bluealpha', plot1));
+				//plot1.activateTheme('bluealpha');
+				//plot1.replot();
 			});
+			
 		</script>
 	</body>
 </html>

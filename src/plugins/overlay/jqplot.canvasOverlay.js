@@ -34,6 +34,7 @@
     $.jqplot.CanvasOverlay = function(opts){
         var options = opts || {};
         this.options = {
+            bellowSeries: false,
             show: $.jqplot.config.enablePlugins,
             deferDraw: false
         };
@@ -426,6 +427,7 @@
             start,
             stop;
         if (this.options.show) {
+            // TODO here if I want to have z-index different on all overlay; 
             this.canvas._ctx.clearRect(0,0,this.canvas.getWidth(), this.canvas.getHeight());
             for (var k=0; k<objs.length; k++) {
                 obj = objs[k];
@@ -760,7 +762,14 @@
         }
         co.canvas = new $.jqplot.GenericCanvas();
         
-        this.eventCanvas._elem.before(co.canvas.createElement(this._gridPadding, 'jqplot-overlayCanvas-canvas', this._plotDimensions, this));
+        //this.eventCanvas._elem.before(co.canvas.createElement(this._gridPadding, 'jqplot-overlayCanvas-canvas', this._plotDimensions, this));
+        var targetCanvas = this.eventCanvas;
+        console.log(this.plugins.canvasOverlay.options.bellowSeries);
+        if(this.plugins.canvasOverlay.options.bellowSeries == true){
+            targetCanvas = this.bellowSeriesCanvas;
+        }
+        targetCanvas._elem.before(co.canvas.createElement(this._gridPadding, 'jqplot-overlayCanvas-canvas', this._plotDimensions, this));
+
         co.canvas.setContext();
         if (!co.deferDraw) {
             co.draw(this);
@@ -772,12 +781,11 @@
         co._tooltipElem.addClass('jqplot-canvasOverlay-tooltip');
         co._tooltipElem.css({position:'absolute', display:'none'});
         
-        this.eventCanvas._elem.before(co._tooltipElem);
-        this.eventCanvas._elem.bind('mouseleave', { elem: co._tooltipElem }, function (ev) { ev.data.elem.hide(); });
+        targetCanvas._elem.before(co._tooltipElem);
+        targetCanvas._elem.bind('mouseleave', { elem: co._tooltipElem }, function (ev) { ev.data.elem.hide(); });
 
         var co = null;
     };
-
 
     function showTooltip(plot, obj, gridpos, datapos) {
         var co = plot.plugins.canvasOverlay;
@@ -793,6 +801,10 @@
                 y = gridpos[1] + plot._gridPadding.top - opts.tooltipOffset - elem.outerHeight(true);
                 break;
             case 'n':
+                //console.log(plot._gridPadding.left);
+                //console.log(elem.outerWidth(true));
+                //console.log(gridpos[0] + plot._gridPadding.left - elem.outerWidth(true)/2);
+                
                 x = gridpos[0] + plot._gridPadding.left - elem.outerWidth(true)/2;
                 y = gridpos[1] + plot._gridPadding.top - opts.tooltipOffset - elem.outerHeight(true);
                 break;

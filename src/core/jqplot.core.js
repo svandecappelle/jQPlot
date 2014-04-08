@@ -420,6 +420,7 @@
      *     are parsed.
      * $.jqplot.eventListenerHooks - called at the end of plot drawing, binds
      *     listeners to the event canvas which lays on top of the grid area.
+     * $.jqplot.preDrawAllSeriesHooks - called before the first serie drawn and after grid drawn.
      * $.jqplot.preDrawSeriesShadowHooks - called before series shadows are drawn.
      * $.jqplot.postDrawSeriesShadowHooks - called after series shadows are drawn.
      * 
@@ -441,6 +442,7 @@
     $.jqplot.postParseSeriesOptionsHooks = [];
     $.jqplot.eventListenerHooks = [];
     $.jqplot.preDrawSeriesShadowHooks = [];
+    $.jqplot.preDrawAllSeriesHooks = [];
     $.jqplot.postDrawSeriesShadowHooks = [];
 
     // A superclass holding some common properties and methods.
@@ -1790,6 +1792,8 @@
         // a hidden container, call the replot method when the container is shown.
         this.drawIfHidden = false;
         this.eventCanvas = new $.jqplot.GenericCanvas();
+        
+        this.bellowSeriesCanvas = new $.jqplot.GenericCanvas();
         // prop: fillBetween
         // Fill between 2 line series in a plot.
         // Options object:
@@ -1927,6 +1931,7 @@
         this.preParseSeriesOptionsHooks = new $.jqplot.HooksManager();
         this.postParseSeriesOptionsHooks = new $.jqplot.HooksManager();
         this.eventListenerHooks = new $.jqplot.EventListenerManager();
+        this.preDrawAllSeriesHooks = new $.jqplot.HooksManager();
         this.preDrawSeriesShadowHooks = new $.jqplot.HooksManager();
         this.postDrawSeriesShadowHooks = new $.jqplot.HooksManager();
         
@@ -3048,7 +3053,21 @@
             
                 this.target.append(this.grid.createElement(this._gridPadding, this));
                 this.grid.draw();
-                
+
+                for (i=0, l=$.jqplot.preDrawAllSeriesHooks.length; i<l; i++) {
+                    $.jqplot.preDrawAllSeriesHooks[i].call(this);
+                }
+                for (i=0, l=this.preDrawAllSeriesHooks.hooks.length; i<l; i++) {
+                    this.preDrawAllSeriesHooks.hooks[i].apply(this, this.preDrawAllSeriesHooks.args[i]);
+                }
+
+                // Need to use filled canvas to capture events in IE.
+                // Also, canvas seems to block selection of other elements in document on FF.
+                this.target.append(this.bellowSeriesCanvas.createElement(this._gridPadding, 'jqplot-bellow-series-canvas', null, this));
+                this.bellowSeriesCanvas.setContext();
+                this.bellowSeriesCanvas._ctx.fillStyle = 'rgba(0,0,0,0)';
+                this.bellowSeriesCanvas._ctx.fillRect(0,0,this.bellowSeriesCanvas._ctx.canvas.width, this.bellowSeriesCanvas._ctx.canvas.height);
+
                 var series = this.series;
                 var seriesLength = series.length;
                 // put the shadow canvases behind the series canvases so shadows don't overlap on stacked bars.
@@ -3097,6 +3116,8 @@
                     }
                     this.legend.pack(legendPadding);                
                 }
+
+
             
                 // register event listeners on the overlay canvas
                 for (var i=0, l=$.jqplot.eventListenerHooks.length; i<l; i++) {
