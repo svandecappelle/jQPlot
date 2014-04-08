@@ -104,6 +104,7 @@ function uglify(folder, pluginDir){
 				
 				src = srcFolder + file;
 				dest = (distFolder + file).replace('.js', '.min.js')
+				dest = dest.replace('.css', '.min.css')
 				// console.log('src: ' + src);
 				console.log('dest: ' + dest);
 
