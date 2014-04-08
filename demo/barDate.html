@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<title>Bar date Axis</title>
+
+		<!-- JQuery dependence -->
+		<script src="../build/dist/core/jquery.min.js"></script>
+		<!-- JQplot dependence -->
+		<script src="../src/core/jquery.jqplot.js"></script>
+		<script src="../src/plugins/bar/jqplot.barRenderer.js"></script>
+
+		<!-- Axes -->
+		<script src="../src/plugins/axis/jqplot.dateAxisRenderer.js"></script>
+		<script src="../src/plugins/axis/jqplot.categoryAxisRenderer.js"></script>
+
+		<script src="../build/dist/plugins/axis/jqplot.canvasAxisTickRenderer.min.js"></script>
+		<script src="../build/dist/plugins/text/jqplot.canvasTextRenderer.min.js"></script>
+
+		<!-- Customization theme -->
+		<script src="../src/plugins/themes/extendedThemes.js"></script>
+
+		<!-- Export PNG -->
+		<script src="../src/plugins/export/exportImg.js"></script>
+
+		<script src="../src/plugins/fullscreener/fullscreener.js"></script>
+		<link type="text/css" rel="stylesheet" href="../src/plugins/fullscreener/fullscreener.css"/>
+	</head>
+	<body>
+
+		<div id="chart1" style="margin:20px; width:500px;"></div>
+
+		<script type="text/javascript">
+			$(function(){
+
+			var serie1=[['2008-09-01',4], ['2008-09-02',6], ['2008-09-03',5], ['2008-09-04',0], ['2008-09-05',8]];
+			var serie2=[['2008-09-01',1], ['2008-09-02',1], ['2008-09-03',5], ['2008-09-04',9], ['2008-09-05',15]];
+			var serie3=[['2008-09-01',1], ['2008-09-02',0], ['2008-09-03',0], ['2008-09-04',0], ['2008-09-05',0]];
+			var serie4=[2,0,1,4,1];
+			var categories=['2008-09-01','2008-09-02','2008-09-03','2008-09-04','2008-09-05'];
+
+			var line1 = [['Nissan', 4],['Porche', 6],['Acura', 2],['Aston Martin', 5],['Rolls Royce', 6]];
+
+			var plot1 = $.jqplot('chart1', [serie1,serie2,serie3], {
+					title:'Bar',
+					axes:{
+						xaxis:{
+							renderer:$.jqplot.CategoryAxisRenderer,
+							//min: "2008-08-31",
+							//max: "2008-09-06"
+						}
+					},
+					seriesDefaults:{
+						renderer: $.jqplot.BarRenderer,
+						rendererOptions: {
+							varyBarColor: true,
+							barMargin: 30,
+						}
+					},
+					stackSeries: true,
+				});
+			});
+		</script>
+	</body>
+</html>

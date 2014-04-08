@@ -2,9 +2,10 @@
  * jqPlot
  * Pure JavaScript plotting plugin using jQuery
  *
- * Version: 1.0.0b2_r1012
+ * Version: @VERSION
+ * Revision: @REVISION
  *
- * Copyright (c) 2009-2011 Chris Leonello
+ * Copyright (c) 2009-2013 Chris Leonello
  * jqPlot is currently available for use in all personal or commercial projects 
  * under both the MIT (http://www.opensource.org/licenses/mit-license.php) and GPL 
  * version 2.0 (http://www.gnu.org/licenses/gpl-2.0.html) licenses. This means that you can 
@@ -100,7 +101,7 @@
         // null will compute ringMargin based on sliceMargin.
         this.ringMargin = null;
         // prop: fill
-        // true or false, wether to fil the slices.
+        // true or false, whether to fil the slices.
         this.fill = true;
         // prop: shadowOffset
         // offset of the shadow from the slice and offset of 
@@ -131,11 +132,6 @@
         // prop: showDataLabels
         // true to show data labels on slices.
         this.showDataLabels = false;
-        
-        // prop showDataCategory
-        // true to show the str category of a slice.
-        this.showDataCategoryOnHover == true;
-        
         // prop: dataLabelFormatString
         // Format string for data labels.  If none, '%s' is used for "label" and for arrays, '%d' for value and '%d%%' for percentage.
         this.dataLabelFormatString = null;
@@ -185,10 +181,6 @@
         this._sliceAngles = [];
         // index of the currenty highlighted point, if any
         this._highlightedPoint = null;
-
-        this.highlightLabelSliceRenderer = new $.jqplot.DonutHighlighterLabelSliceRenderer(this);
-        // labels of slices.
-        this.labelsSlices = [];
         
         // set highlight colors if none provided
         if (this.highlightColors.length == 0) {
@@ -334,26 +326,6 @@
         ctx.restore();
     };
     
-    $.jqplot.DonutHighlighterLabelSliceRenderer = function(serie){
-        this.serie = serie;
-    };
-
-    $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.highlight = function(pid){
-        this.serie.labelsSlices[pid].removeClass("hidden");
-    };
-    $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.unhighlight = function(pid){
-        for (var i = this.serie.labelsSlices.length - 1; i >= 0; i--) {
-            this.serie.labelsSlices[i].addClass("hidden");
-        };
-    };
-    $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.move = function(pid, x, y){
-        var pointLblPosition = this.serie.labelsSlices[pid].position();
-        var tooltip = this.serie.labelsSlices[pid].find(".tooltip");
-        var topPos = y - pointLblPosition.top - (this.serie.labelsSlices[pid].height()*2 + tooltip.height());
-        var leftPos = x - pointLblPosition.left - this.serie.labelsSlices[pid].width() - tooltip.width() / 2;
-        tooltip.css({left: leftPos, top: topPos});
-    };
-
     // called with scope of series
     $.jqplot.DonutRenderer.prototype.draw = function (ctx, gd, options, plot) {
         var i;
@@ -448,8 +420,6 @@
             if (this.showDataLabels && gd[i][2]*100 >= this.dataLabelThreshold) {
                 var fstr, avgang = (ang1+ang2)/2, label;
                 
-
-
                 if (this.dataLabels == 'label') {
                     fstr = this.dataLabelFormatString || '%s';
                     label = $.jqplot.sprintf(fstr, gd[i][0]);
@@ -466,36 +436,21 @@
                     fstr = this.dataLabelFormatString || '%s';
                     label = $.jqplot.sprintf(fstr, this.dataLabels[i]);
                 }
-
+                
                 var fact = this._innerRadius + this._thickness * this.dataLabelPositionFactor + this.sliceMargin + this.dataLabelNudge;
                 
                 var x = this._center[0] + Math.cos(avgang) * fact + this.canvas._offsets.left;
                 var y = this._center[1] + Math.sin(avgang) * fact + this.canvas._offsets.top;
                 
-
-                var labelelem;
-                if (this.showDataCategoryOnHover){
-                    var fstrTooltip = this.dataLabelFormatString || '%s';
-                    labelTooltip = $.jqplot.sprintf(fstrTooltip, gd[i][0]);
-
-                    var tooltip = '<span class="tooltip">' + labelTooltip + '</span>';
-                    var txt = '<span class="jqplot-donut-series jqplot-data-label" style="position:absolute;">' + label + tooltip + + '</span>'
-                    var labelelem = $(txt).insertBefore(plot.eventCanvas._elem);
-
-                    this.labelsSlices.push(labelelem);
-                    labelelem.addClass('jqplot-donut-show-hover hidden');
-                }else{
-                    var labelelem = $('<span class="jqplot-donut-series jqplot-data-label" style="position:absolute;">' + label + '</span>').insertBefore(plot.eventCanvas._elem);
-                }
-
+                var labelelem = $('<span class="jqplot-donut-series jqplot-data-label" style="position:absolute;">' + label + '</span>').insertBefore(plot.eventCanvas._elem);
                 x -= labelelem.width()/2;
                 y -= labelelem.height()/2;
                 x = Math.round(x);
                 y = Math.round(y);
                 labelelem.css({left: x, top: y});
-                
             }
         }
+               
     };
     
     $.jqplot.DonutAxisRenderer = function() {
@@ -576,90 +531,85 @@
             var pad = false, 
                 reverse = false,
                 nr, nc;
+            var s = series[0];
+            var colorGenerator = new $.jqplot.ColorGenerator(s.seriesColors);
             
-            for (var serieIdx = 0; serieIdx <= series.length - 1; serieIdx+=1) {
-
-                var s = series[serieIdx];
-                
-                var colorGenerator = new $.jqplot.ColorGenerator(s.seriesColors);
-                
-                if (s.show) {
-                    var pd = s.data;
-                    if (this.numberRows) {
-                        nr = this.numberRows;
-                        if (!this.numberColumns){
-                            nc = Math.ceil(pd.length/nr);
-                        }
-                        else{
-                            nc = this.numberColumns;
-                        }
+            if (s.show) {
+                var pd = s.data;
+                if (this.numberRows) {
+                    nr = this.numberRows;
+                    if (!this.numberColumns){
+                        nc = Math.ceil(pd.length/nr);
                     }
-                    else if (this.numberColumns) {
+                    else{
                         nc = this.numberColumns;
-                        nr = Math.ceil(pd.length/this.numberColumns);
-                    }
-                    else {
-                        nr = pd.length;
-                        nc = 1;
-                    }
-                    
-                    var i, j, tr, td1, td2, lt, rs, color;
-                    var idx = 0;    
-                    
-                    for (i=0; i<nr; i++) {
-                        if (reverse){
-                            tr = $('<tr class="jqplot-table-legend"></tr>').prependTo(this._elem);
-                        }
-                        else{
-                            tr = $('<tr class="jqplot-table-legend"></tr>').appendTo(this._elem);
-                        }
-                        for (j=0; j<nc; j++) {
-                            if (idx < pd.length){
-                                lt = this.labels[idx] || pd[idx][0].toString();
-                                color = colorGenerator.next();
-                                if (!reverse){
-                                    if (i>0){
-                                        pad = true;
-                                    }
-                                    else{
-                                        pad = false;
-                                    }
-                                }
-                                else{
-                                    if (i == nr -1){
-                                        pad = false;
-                                    }
-                                    else{
-                                        pad = true;
-                                    }
-                                }
-                                rs = (pad) ? this.rowSpacing : '0';
-                    
-                                td1 = $('<td class="jqplot-table-legend" style="text-align:center;padding-top:'+rs+';">'+
-                                    '<div><div class="jqplot-table-legend-swatch" style="border-color:'+color+';"></div>'+
-                                    '</div></td>');
-                                td2 = $('<td class="jqplot-table-legend" style="padding-top:'+rs+';"></td>');
-                                if (this.escapeHtml){
-                                    td2.text(lt);
-                                }
-                                else {
-                                    td2.html(lt);
-                                }
-                                if (reverse) {
-                                    td2.prependTo(tr);
-                                    td1.prependTo(tr);
-                                }
-                                else {
-                                    td1.appendTo(tr);
-                                    td2.appendTo(tr);
-                                }
-                                pad = true;
-                            }
-                            idx++;
-                        }   
                     }
                 }
-            };
+                else if (this.numberColumns) {
+                    nc = this.numberColumns;
+                    nr = Math.ceil(pd.length/this.numberColumns);
+                }
+                else {
+                    nr = pd.length;
+                    nc = 1;
+                }
+                
+                var i, j, tr, td1, td2, lt, rs, color;
+                var idx = 0;    
+                
+                for (i=0; i<nr; i++) {
+                    if (reverse){
+                        tr = $('<tr class="jqplot-table-legend"></tr>').prependTo(this._elem);
+                    }
+                    else{
+                        tr = $('<tr class="jqplot-table-legend"></tr>').appendTo(this._elem);
+                    }
+                    for (j=0; j<nc; j++) {
+                        if (idx < pd.length){
+                            lt = this.labels[idx] || pd[idx][0].toString();
+                            color = colorGenerator.next();
+                            if (!reverse){
+                                if (i>0){
+                                    pad = true;
+                                }
+                                else{
+                                    pad = false;
+                                }
+                            }
+                            else{
+                                if (i == nr -1){
+                                    pad = false;
+                                }
+                                else{
+                                    pad = true;
+                                }
+                            }
+                            rs = (pad) ? this.rowSpacing : '0';
+                
+                            td1 = $('<td class="jqplot-table-legend" style="text-align:center;padding-top:'+rs+';">'+
+                                '<div><div class="jqplot-table-legend-swatch" style="border-color:'+color+';"></div>'+
+                                '</div></td>');
+                            td2 = $('<td class="jqplot-table-legend" style="padding-top:'+rs+';"></td>');
+                            if (this.escapeHtml){
+                                td2.text(lt);
+                            }
+                            else {
+                                td2.html(lt);
+                            }
+                            if (reverse) {
+                                td2.prependTo(tr);
+                                td1.prependTo(tr);
+                            }
+                            else {
+                                td1.appendTo(tr);
+                                td2.appendTo(tr);
+                            }
+                            pad = true;
+                        }
+                        idx++;
+                    }   
+                }
+            }
         }
         return this._elem;                
     };
@@ -732,7 +682,6 @@
         s._highlightedPoint = pidx;
         plot.plugins.donutRenderer.highlightedSeriesIndex = sidx;
         s.renderer.drawSlice.call(s, canvas._ctx, s._sliceAngles[pidx][0], s._sliceAngles[pidx][1], s.highlightColors[pidx], false);
-        s.highlightLabelSliceRenderer.highlight(pidx);
     }
     
     function unhighlight (plot) {
@@ -743,9 +692,6 @@
         }
         plot.plugins.donutRenderer.highlightedSeriesIndex = null;
         plot.target.trigger('jqplotDataUnhighlight');
-        for (var i = plot.series.length - 1; i >= 0; i--) {
-           plot.series[i].highlightLabelSliceRenderer.unhighlight();
-        };
     }
  
     function handleMove(ev, gridpos, datapos, neighbor, plot) {
@@ -757,17 +703,12 @@
             plot.target.trigger(evt1, ins);
             if (plot.series[ins[0]].highlightMouseOver && !(ins[0] == plot.plugins.donutRenderer.highlightedSeriesIndex && ins[1] == plot.series[ins[0]]._highlightedPoint)) {
                 var evt = jQuery.Event('jqplotDataHighlight');
+                evt.which = ev.which;
                 evt.pageX = ev.pageX;
                 evt.pageY = ev.pageY;
                 plot.target.trigger(evt, ins);
-                for (var i = plot.series.length - 1; i >= 0; i--) {
-                   plot.series[i].highlightLabelSliceRenderer.unhighlight();
-                };
-                highlight (plot, ins[0], ins[1]);    
-            }else{
-                plot.series[ins[0]].highlightLabelSliceRenderer.move(ins[1], evt1.pageX, evt1.pageY);
+                highlight (plot, ins[0], ins[1]);
             }
-
         }
         else if (neighbor == null) {
             unhighlight (plot);
@@ -779,6 +720,7 @@
             var ins = [neighbor.seriesIndex, neighbor.pointIndex, neighbor.data];
             if (plot.series[ins[0]].highlightMouseDown && !(ins[0] == plot.plugins.donutRenderer.highlightedSeriesIndex && ins[1] == plot.series[ins[0]]._highlightedPoint)) {
                 var evt = jQuery.Event('jqplotDataHighlight');
+                evt.which = ev.which;
                 evt.pageX = ev.pageX;
                 evt.pageY = ev.pageY;
                 plot.target.trigger(evt, ins);
@@ -801,6 +743,7 @@
         if (neighbor) {
             var ins = [neighbor.seriesIndex, neighbor.pointIndex, neighbor.data];
             var evt = jQuery.Event('jqplotDataClick');
+            evt.which = ev.which;
             evt.pageX = ev.pageX;
             evt.pageY = ev.pageY;
             plot.target.trigger(evt, ins);
@@ -815,6 +758,7 @@
                 unhighlight(plot);
             }
             var evt = jQuery.Event('jqplotDataRightClick');
+            evt.which = ev.which;
             evt.pageX = ev.pageX;
             evt.pageY = ev.pageY;
             plot.target.trigger(evt, ins);

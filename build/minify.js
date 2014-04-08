@@ -3,66 +3,88 @@ var compressor = require('yuicompressor');
 
 var sigKill = 0;
 
-process.argv.forEach(function (pluginDir, index, array) {
-	if (index > 1){
-		if (process.argv.indexOf("--clean")>-1 && pluginDir.lastIndexOf("--clean")==-1){
-			console.log("cleaning generated prod files...");
-			
-			if(process.argv.indexOf("--core")>-1){
-				console.log("Cleaning core");
-				distClean = 'dist/core/js/';
-				cleanFolder('dist/core/js/');
-				cleanFolder('dist/core/css/');
-			}else{
-				console.log("Cleaning plugin: " + pluginDir);
-				cleanFolder('dist/plugins/' + pluginDir+'/');
-			}
-			
+main();
 
-			sigKill = 1;
-		}
+function main(){
+	if (process.argv.indexOf("--help") !== -1 || process.argv.indexOf("-h") !== -1 && process.argv.length < 3){
+		usage();
+		sigKill = 1;
 	}
-});
 
-function cleanFolder(distClean){
-	filesToClean = fs.readdirSync(distClean);
-	// console.log(filesToClean);
-	
-	filesToClean.forEach(function (file, index, array){
-		if(notInProtectedFiles(file)){
-			console.log("Clean " + file);
-			fs.unlinkSync(distClean + file);
-			console.log("Cleaned " + file);
-		}else{
-			console.log("Protected file " + file);
+	if (sigKill == 0){
+		cleanRoutine();
+	}
+
+	if(sigKill == 0){
+		building();
+	}
+}
+
+function building(){
+	console.log("Starting uglifier");
+	process.argv.forEach(function (pluginDir, index, array) {
+		if (index > 1) {
+			if (pluginDir.lastIndexOf("--core")>-1){
+				try {
+					uglify('core', "");
+				}catch (e){
+					console.error("Error on uglifying");
+				}
+			}else if(pluginDir ==="--all-plugins"){
+				console.log("Building all plugins: ");
+				foldersToBuild = fs.readdirSync('../src/plugins/');
+				foldersToBuild.forEach(function (file, index, array){
+					console.log("Building "+file);
+					uglify('plugins', file);
+				});
+			}else{
+				uglify('plugins', pluginDir);
+			}
 		}
 	});
 }
 
-if(sigKill == 0){
-	if (process.argv.length < 3){
-		console.log("Usage: ");
-	}else{
-		console.log("Starting uglifier");
-		process.argv.forEach(function (pluginDir, index, array) {
-			if (index > 1) {
-				if (pluginDir.lastIndexOf("--core")>-1){
-					try {
-						uglify('core', "js");
-					}catch (e){
-						console.error("Error on uglifying");
-					}
-					try {
-						uglify('core', "css");
-					}catch (e){
-						console.error("Error on uglifying");
-					}
+function cleanRoutine(){
+	process.argv.forEach(function (pluginDir, index, array) {
+		if (index > 1){
+			if (process.argv.indexOf("--clean")>-1 && pluginDir.lastIndexOf("--clean")==-1){
+				console.log("cleaning generated prod files...");
+				
+				if(process.argv.indexOf("--core")>-1){
+					console.log("Cleaning core");
+					cleanFolder('dist/core/');
 				}else{
-					uglify('plugins', pluginDir);
+					if(pluginDir==="--all-plugins"){
+						console.log("Cleaning all plugins: ");
+						foldersToClean = fs.readdirSync('dist/plugins/');
+						foldersToClean.forEach(function (file, index, array){
+							console.log("Cleaning "+file);
+							cleanFolder('dist/plugins/' + file +'/');
+						});
+					}else{
+						console.log("Cleaning plugin - : " + pluginDir);
+						cleanFolder('dist/plugins/' + pluginDir+'/');
+					}
 				}
+				
+				sigKill = 1;
 			}
-		});
-	}
+		}
+	});
+}
+
+function usage(){
+	console.log("Usage: \n");
+	console.log("node minify.js [Options]");
+	console.log("Options: ");
+	console.log("\t--core: Build all core files.");
+	console.log("\t--all-plugins: Build all plugins files.");
+	console.log("\tplugins-name: Build a single plugins files (using is name).");
+	console.log("\t--clean: Clean a plugin or the core.");
+	console.log("\t\t--core: Clean the core.");
+	console.log("\t\t--all-plugins: Clean all plugins.");
+	console.log("\t\tplugin-name: Clean the plugin named 'plugin-name'.");
+	console.log("\t--help|-h: Show this Usage.");
 }
 
 function uglify(folder, pluginDir){
@@ -124,6 +146,20 @@ function compress(file, dest){
 		});
 	}else{
 		console.log("File type not supported: " + file);
-	}
+	}	
+}
+
+function cleanFolder(distClean){
+	filesToClean = fs.readdirSync(distClean);
+	// console.log(filesToClean);
 	
+	filesToClean.forEach(function (file, index, array){
+		if(notInProtectedFiles(file)){
+			console.log("Clean " + file);
+			fs.unlinkSync(distClean + file);
+			console.log("Cleaned " + file);
+		}else{
+			console.log("Protected file " + file);
+		}
+	});
 }
