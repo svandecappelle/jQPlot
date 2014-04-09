@@ -20,3 +20,7 @@ body{
 	margin-right: 5px;
 	margin-left: 5px;
 }
+
+.CodeMirror-foldgutter-open, .CodeMirror-foldgutter-folded{
+	margin-left: 7px;
+}
