@@ -1,0 +1,5 @@
+.overlay{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(52,52,52,.5);z-index:-1;opacity:0;transition:all .3s linear}
+.fullscreener{cursor:pointer;color:rgba(125,125,125,1)}.fullscreener:hover{color:rgba(255,125,125,1)}
+.overlay.is-active{opacity:1;z-index:1000}.popup.is-active .chart{margin:auto;box-shadow:0 5px 16px rgba(0,0,0,0.25);border:1px solid #bbb;background:-webkit-linear-gradient(top,#fff,#ddd) !important;background:-moz-linear-gradient(top,#fff,#ddd) !important;background:linear-gradient(top,#fff,#ddd) !important;background:#fff}
+.popup .close{display:none}.popup.is-active .close{color:white;right:-30px;text-align:right;padding-right:6px;top:-27px;position:absolute;display:block;cursor:pointer;font-style:normal;font-size:28px;font-family:Arial,Baskerville,monospace;overflow:visible;cursor:pointer;background:transparent;border:0;-webkit-appearance:none;display:block;outline:0;padding:0;z-index:1046;-webkit-box-shadow:none;box-shadow:none}
+.popup.is-active{position:fixed;z-index:1001;top:5%;bottom:5%;left:5%;right:5%}
