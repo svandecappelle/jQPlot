@@ -185,7 +185,7 @@
         this._sliceAngles = [];
         // index of the currenty highlighted point, if any
         this._highlightedPoint = null;
-        console.log("init");
+        
         this.highlightLabelSliceRenderer = new $.jqplot.DonutHighlighterLabelSliceRenderer(this);
         // labels of slices.
         this.labelsSlices = [];
@@ -340,7 +340,6 @@
 
     $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.highlight = function(pid){
         this.serie.labelsSlices[pid].removeClass("hidden");
-        console.log(this.serie.labelsSlices[pid]);
     };
     $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.unhighlight = function(pid){
         for (var i = this.serie.labelsSlices.length - 1; i >= 0; i--) {
