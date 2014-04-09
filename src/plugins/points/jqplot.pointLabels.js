@@ -263,7 +263,7 @@
         }
         return offset; 
     };
-    
+
     // called with scope of series
     $.jqplot.PointLabels.draw = function (sctx, options, plot) {
         var p = this.plugins.pointLabels;
@@ -273,7 +273,9 @@
         for (var i=0; i<p._elems.length; i++) {
             // Memory Leaks patch
             // p._elems[i].remove();
-            p._elems[i].emptyForce();
+            if(p._elems[i]){
+                p._elems[i].emptyForce();
+            }
         }
         p._elems.splice(0, p._elems.length);
 
@@ -308,6 +310,21 @@
 
                 elem.addClass('jqplot-point-label jqplot-series-'+this.index+' jqplot-point-'+i);
                 elem.css('position', 'absolute');
+                
+                if(!$.jqplot.isDarkColor(this.color)){
+                    if(p.darkColor !== undefined){
+                        elem.css('color', p.darkColor);
+                    }else{
+                        elem.css('color', 'white');
+                    }
+                }else{
+                     if(p.brightColor !== undefined){
+                        elem.css('color', p.brightColor);
+                    }else{
+                        elem.css('color', 'black');
+                    }
+                }
+
                 elem.insertAfter(sctx.canvas);
 
                 if (p.escapeHTML) {

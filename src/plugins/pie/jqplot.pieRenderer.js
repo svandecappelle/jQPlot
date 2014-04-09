@@ -607,7 +607,7 @@
                 nc;
             var s = series[0];
             var colorGenerator = new $.jqplot.ColorGenerator(s.seriesColors);
-            
+            //console.log(s.seriesColors);
             if (s.show) {
                 var pd = s.data;
                 if (this.numberRows) {
@@ -779,6 +779,26 @@
         canvas._ctx.clearRect(0,0,canvas._ctx.canvas.width, canvas._ctx.canvas.height);
         s._highlightedPoint = pidx;
         plot.plugins.pieRenderer.highlightedSeriesIndex = sidx;
+
+        // need to regenerate highlight color (for theme change color fixes).
+
+        // set highlight colors if none provided
+        if (s.highlightColors.length == 0) {
+            for (var i=0; i<s.seriesColors.length; i++){
+                var rgba = $.jqplot.getColorComponents(this.seriesColors[i]);
+                var newrgb = [rgba[0], rgba[1], rgba[2]];
+                var sum = newrgb[0] + newrgb[1] + newrgb[2];
+                for (var j=0; j<3; j++) {
+                    // when darkening, lowest color component can be is 60.
+                    newrgb[j] = (sum > 570) ?  newrgb[j] * 0.8 : newrgb[j] + 0.3 * (255 - newrgb[j]);
+                    newrgb[j] = parseInt(newrgb[j], 10);
+                }
+                s.highlightColors.push('rgb('+newrgb[0]+','+newrgb[1]+','+newrgb[2]+')');
+            }
+        }
+        
+        s.highlightColorGenerator = new $.jqplot.ColorGenerator(s.highlightColors);
+
         s.renderer.drawSlice.call(s, canvas._ctx, s._sliceAngles[pidx][0], s._sliceAngles[pidx][1], s.highlightColorGenerator.get(pidx), false);
     }
     

@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<title>Fullscreen plot</title>
+
+		<!-- JQuery dependence -->
+		<script src="../../../build/dist/core/jquery.min.js"></script>
+		<!-- JQplot dependence -->
+		<script src="../../../build/dist/core/jquery.jqplot.min.js"></script>
+		<!-- Axes -->
+		<script src="../../../build/dist/plugins/axis/jqplot.dateAxisRenderer.min.js"></script>
+		<script src="../../../build/dist/plugins/axis/jqplot.canvasAxisTickRenderer.min.js"></script>
+		<script src="../../../build/dist/plugins/text/jqplot.canvasTextRenderer.min.js"></script>
+
+		<script src="../../../build/dist/plugins/fullscreener/fullscreener.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="../../../build/dist/plugins/fullscreener/fullscreener.min.css"/>
+	</head>
+	<body>
+
+		
+		<div id="chart-resizable">
+			<input onClick="fullscreen()" type="button" value="Fullscreen"/>
+			<div class="overlay">
+			</div>
+			<div class="popup">
+				<div class="resizable">
+					<div id="chart1" class="chart" style="margin:20px;">
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var plot1;
+			$(function(){
+			var line1=[['2008-09-30',4], ['2008-10-30',6.5], ['2008-11-30',5.7], ['2008-12-30',9], ['2009-01-30',8.2]];
+			plot1 = $.jqplot('chart1', [line1], {
+					title:'Fullscreen demo',
+					axes:{
+						xaxis:{
+							renderer:$.jqplot.DateAxisRenderer,
+							rendererOptions:{
+								tickRenderer:$.jqplot.CanvasAxisTickRenderer
+                			},
+							tickOptions: {
+								formatString: '%Y #%V',
+								typeFormatter: 'php',
+								fontSize:'10pt',
+                    			fontFamily:'Tahoma',
+                    			angle:-40
+							} 
+						}
+					},
+					series:[{lineWidth:4, markerOptions:{style:'square'}}]
+				});
+			});
+
+			function fullscreen(){
+				$.jqplot.toggleFullscreen("chart-resizable",plot1);
+			}
+		</script>
+	</body>
+</html>

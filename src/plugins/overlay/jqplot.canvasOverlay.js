@@ -780,7 +780,6 @@
         elem = null;
         co._tooltipElem.addClass('jqplot-canvasOverlay-tooltip');
         co._tooltipElem.css({position:'absolute', display:'none'});
-        
         targetCanvas._elem.before(co._tooltipElem);
         targetCanvas._elem.bind('mouseleave', { elem: co._tooltipElem }, function (ev) { ev.data.elem.hide(); });
 
@@ -792,44 +791,39 @@
         var elem = co._tooltipElem;
 
         var opts = obj.options, x, y;
-
         elem.html($.jqplot.sprintf(opts.tooltipFormatString, datapos[0], datapos[1]));
         
         switch (opts.tooltipLocation) {
             case 'nw':
-                x = gridpos[0] + plot._gridPadding.left - elem.outerWidth(true) - opts.tooltipOffset;
+                x = gridpos[0] - plot._gridPadding.left - elem.outerWidth(true)*1.5 - opts.tooltipOffset;
                 y = gridpos[1] + plot._gridPadding.top - opts.tooltipOffset - elem.outerHeight(true);
                 break;
             case 'n':
-                //console.log(plot._gridPadding.left);
-                //console.log(elem.outerWidth(true));
-                //console.log(gridpos[0] + plot._gridPadding.left - elem.outerWidth(true)/2);
-                
-                x = gridpos[0] + plot._gridPadding.left - elem.outerWidth(true)/2;
-                y = gridpos[1] + plot._gridPadding.top - opts.tooltipOffset - elem.outerHeight(true);
+                x = gridpos[0] - elem.outerWidth(true) - opts.tooltipOffset;
+                y = gridpos[1] + plot._gridPadding.top - opts.tooltipOffset - elem.outerHeight(true)*1.5;
                 break;
             case 'ne':
-                x = gridpos[0] + plot._gridPadding.left + opts.tooltipOffset;
+                x = gridpos[0] + plot._gridPadding.left - elem.outerWidth(true)/1.5 - opts.tooltipOffset;
                 y = gridpos[1] + plot._gridPadding.top - opts.tooltipOffset - elem.outerHeight(true);
                 break;
             case 'e':
-                x = gridpos[0] + plot._gridPadding.left + opts.tooltipOffset;
+                x = gridpos[0] + plot._gridPadding.left - elem.outerWidth(true)/1.5 - opts.tooltipOffset;
                 y = gridpos[1] + plot._gridPadding.top - elem.outerHeight(true)/2;
                 break;
             case 'se':
-                x = gridpos[0] + plot._gridPadding.left + opts.tooltipOffset;
-                y = gridpos[1] + plot._gridPadding.top + opts.tooltipOffset;
+                x = gridpos[0] + plot._gridPadding.left - elem.outerWidth(true)/1.5 - opts.tooltipOffset;
+                y = gridpos[1] + plot._gridPadding.top + opts.tooltipOffset + elem.outerHeight(true)*0.5;
                 break;
             case 's':
-                x = gridpos[0] + plot._gridPadding.left - elem.outerWidth(true)/2;
-                y = gridpos[1] + plot._gridPadding.top + opts.tooltipOffset;
+                x = gridpos[0] - elem.outerWidth(true) - opts.tooltipOffset;
+                y = gridpos[1] + plot._gridPadding.top + opts.tooltipOffset + elem.outerHeight(true)*0.5;
                 break;
             case 'sw':
-                x = gridpos[0] + plot._gridPadding.left - elem.outerWidth(true) - opts.tooltipOffset;
-                y = gridpos[1] + plot._gridPadding.top + opts.tooltipOffset;
+                x = gridpos[0] - plot._gridPadding.left - elem.outerWidth(true)*1.5 - opts.tooltipOffset;
+                y = gridpos[1] + plot._gridPadding.top + opts.tooltipOffset + elem.outerHeight(true)*0.5;
                 break;
             case 'w':
-                x = gridpos[0] + plot._gridPadding.left - elem.outerWidth(true) - opts.tooltipOffset;
+                x = gridpos[0] - plot._gridPadding.left - elem.outerWidth(true)*1.5 - opts.tooltipOffset;
                 y = gridpos[1] + plot._gridPadding.top - elem.outerHeight(true)/2;
                 break;
             default: // same as 'nw'
@@ -840,6 +834,7 @@
 
         elem.css('left', x);
         elem.css('top', y);
+        elem.css('z-index', 1);
         if (opts.fadeTooltip) {
             // Fix for stacked up animations.  Thnanks Trevor!
             elem.stop(true,true).fadeIn(opts.tooltipFadeSpeed);
@@ -896,6 +891,7 @@
         var elem;
         for (var i=0; i<l; i++) {
             obj = objs[i];
+
             if (obj.options.showTooltip) {
             	var n;
                 if (obj.type === 'rectangle') {
@@ -913,6 +909,7 @@
                 //    not near any line, no highlighting
 
                 // near line, not currently highlighting
+
                 if (n && co.highlightObjectIndex == null) {
                     switch (obj.type) {
                         case 'line':
@@ -930,7 +927,7 @@
                             break;
                             
                         case 'rectangle':
-                            showTooltip(plot, obj, [obj.gridStart[0], gridpos.y], [obj.options.x, datapos[1]]);
+                            showTooltip(plot, obj, [ev.pageX, gridpos.y], [obj.options.x, datapos[1]]);
                             break;
                             
                         default:
@@ -969,7 +966,7 @@
                             break;
                             
                         case 'rectangle':
-                            showTooltip(plot, obj, [obj.gridStart[0], gridpos.y], [obj.options.x, datapos[1]]);
+                            showTooltip(plot, obj, [ev.pageX, gridpos.y], [obj.options.x, datapos[1]]);
                             break;
                             
                         default:
@@ -999,7 +996,7 @@
                             break;
                             
                         case 'rectangle':
-                            showTooltip(plot, obj, [obj.gridStart[0], gridpos.y], [obj.options.x, datapos[1]]);
+                            showTooltip(plot, obj, [ev.pageX, gridpos.y], [obj.options.x, datapos[1]]);
                             break;
                             
                         default:

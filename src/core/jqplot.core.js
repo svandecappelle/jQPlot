@@ -1323,6 +1323,8 @@
         for (i=0, l=d.length; i<l; i++) {
             if (! this.breakOnNull) {
                 if (d[i] == null || d[i][0] == null || d[i][1] == null) {
+                    // svandecappelle modification to implements null values in canvas. TODO check non-regression.
+                    temp.push(d[i]);
                     continue;
                 }
                 else {
@@ -3952,6 +3954,42 @@
         }
         ret[3] = parseFloat(m[4]) ? parseFloat(m[4]) : 1.0;
         return ret;
+    };
+
+    // know if a color is dark or not
+    $.jqplot.isDarkColor = function(color){
+        var L = 0;
+        var rgba = this.getColorRGB(color);
+        if (rgba != null) {
+        L = 0.300 * (rgba[0] / 255) + 0.590 * (rgba[1] / 255) + 0.110 * (rgba[2] / 255);
+        }
+        return L < 0.45;
+    };
+
+    $.jqplot.getColorRGB = function(color){
+        var rgbError = [0, 0, 0];
+        var red, green, blue;
+        if (color.lastIndexOf("rgb")!=-1) {
+            color = color.replaceAll("rgb", "");
+            color = color.replaceAll("rgba", "");
+            color = color.replaceAll("\\(", "");
+            color = color.replaceAll("\\)", "");
+            color = color.replaceAll(" ", "");
+            var rgbString = color.split(",");
+            red = Integer.parseInt(rgbString[0]);
+            green = Integer.parseInt(rgbString[1]);
+            blue = Integer.parseInt(rgbString[2]);
+            var rgb = [red, green, blue];
+            return rgb;
+        } else if (color.lastIndexOf("#")!=-1) {
+            red = parseInt(color.substring(1, 3), 16);
+            green = parseInt(color.substring(3, 5), 16);
+            blue = parseInt(color.substring(5), 16);
+            var rgb = [red, green, blue];
+            return rgb;
+        }else{
+            return null;
+        }
     };
     
     $.jqplot.colorKeywordMap = {
