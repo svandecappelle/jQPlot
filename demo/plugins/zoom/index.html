@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<title>Donut</title>
+
+		<!-- JQuery dependence -->
+		<script src="../../../build/dist/core/jquery.min.js"></script>
+		<!-- JQplot dependence -->
+		<script src="../../../build/dist/core/jquery.jqplot.min.js"></script>
+
+		<script src="../../../build/dist/plugins/themes/extendedThemes.min.js"></script>
+		<script src="../../../build/dist/plugins/cursor/jqplot.cursor.min.js"></script>
+		<script src="../../../build/dist/plugins/mobile/jqplot.mobile.min.js"></script>
+		<!--<script src="../../../../jQPlot/src/plugins/cursor/jqplot.cursor.js"></script>-->
+
+		<link rel="stylesheet" type="text/css" href="../../../build/dist/core/jquery.jqplot.min.css">
+	</head>
+	<body>
+
+		<div id="chart1" style="margin:20px; width:800px; height:500px;"></div>
+
+		<script type="text/javascript">
+			$(function(){
+				
+				var s1 = [ 30, 16, 4, 10, 5, 35];
+				var s2 = [46,14,5,35];
+				
+				var plot1 = $.jqplot('chart1', [s1, s2], {
+					title:'Donut',
+					seriesDefaults: {
+					}, 
+					cursor:{ 
+						show: true,
+						zoom:true, 
+						showTooltip:false
+					} 
+				});
+				//plot1.themeEngine.newTheme('bluealpha_pie', new VklThemes().get('bluealpha_pie', plot1));
+				//plot1.activateTheme('bluealpha_pie');
+				//plot1.resetZoom();
+				//plot1.doZoom();
+				//plot1.plugins.cursor._zoom.start[0] = 1;
+				//plot1.plugins.cursor._zoom.start[1] = 1;
+				//plot1.plugins.cursor.handleZoomMove({});
+				//plot1.plugins.cursor.doZoom({x:10,y:10}, [1,1,1,1], plot1, plot1.plugins.cursor);
+				//plot1.plugins.cursor.setZoom({x:300,y:426},{x:376,y:457},plot1);
+			});
+		</script>
+		<script src="../../common/$.jqplot.demo.common.js"></script>
+	</body>
+</html>
