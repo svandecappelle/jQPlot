@@ -3969,19 +3969,19 @@
     $.jqplot.getColorRGB = function(color){
         var rgbError = [0, 0, 0];
         var red, green, blue;
-        if (color.lastIndexOf("rgb")!=-1) {
-            color = color.replaceAll("rgb", "");
-            color = color.replaceAll("rgba", "");
-            color = color.replaceAll("\\(", "");
-            color = color.replaceAll("\\)", "");
-            color = color.replaceAll(" ", "");
+        if (color!==undefined && color.lastIndexOf("rgb")!=-1) {
+            color = color.replace("rgba", "");
+            color = color.replace("rgb", "");
+            color = color.replace("\\(", "");
+            color = color.replace("\\)", "");
+            color = color.replace(" ", "");
             var rgbString = color.split(",");
-            red = Integer.parseInt(rgbString[0]);
-            green = Integer.parseInt(rgbString[1]);
-            blue = Integer.parseInt(rgbString[2]);
+            red = parseInt(rgbString[0]);
+            green = parseInt(rgbString[1]);
+            blue = parseInt(rgbString[2]);
             var rgb = [red, green, blue];
             return rgb;
-        } else if (color.lastIndexOf("#")!=-1) {
+        } else if (color!==undefined && color.lastIndexOf("#")!=-1) {
             red = parseInt(color.substring(1, 3), 16);
             green = parseInt(color.substring(3, 5), 16);
             blue = parseInt(color.substring(5), 16);

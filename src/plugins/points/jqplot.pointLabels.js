@@ -338,7 +338,6 @@
                     location = oppositeLocations[locationIndicies[location]];
                 }
 
-
                 var ell = xax.u2p(pd[i][0]) + p.xOffset(elem, location);
                 var elt = yax.u2p(pd[i][1]) + p.yOffset(elem, location);
 
@@ -347,8 +346,8 @@
                 if (this._stack && !p.stackedValue) {
                     if (this.barDirection === "vertical") {
                         elt = (this._barPoints[i][0][1] + this._barPoints[i][1][1]) / 2 + plot._gridPadding.top - 0.5 * elem.outerHeight(true);
-                    }
-                    else {
+                        ell = (this._barPoints[i][2][0] + this._barPoints[i][0][0]) / 2 + plot._gridPadding.left - 0.5 * elem.outerWidth(true);
+                    }else {
                         ell = (this._barPoints[i][2][0] + this._barPoints[i][0][0]) / 2 + plot._gridPadding.left - 0.5 * elem.outerWidth(true);
                     }
                 }
@@ -361,8 +360,12 @@
                         elt -= this._barNudge;
                     }
                 }
+                
                 elem.css('left', ell);
                 elem.css('top', elt);
+
+                
+
                 var elr = ell + elem.width();
                 var elb = elt + elem.height();
                 var et = p.edgeTolerance;

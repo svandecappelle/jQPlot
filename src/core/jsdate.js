@@ -659,7 +659,7 @@
             monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'],
             dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
             dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
-            formatString: '%Y-%m-%d %H:%M:%S'
+            formatString: '%d-%m-%Y %H:%M:%S'
         },
         
         'de': {
@@ -739,7 +739,7 @@
     // Set english variants to 'en'
     jsDate.regional['en-US'] = jsDate.regional['en-GB'] = jsDate.regional['en'];
     jsDate.config.gwtintegration = true;
-    
+
     /**
      * Try to determine the users locale based on the lang attribute of the html page.  Defaults to 'en'
      * if it cannot figure out a locale of if the locale does not have a localization defined.
