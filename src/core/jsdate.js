@@ -738,6 +738,7 @@
     
     // Set english variants to 'en'
     jsDate.regional['en-US'] = jsDate.regional['en-GB'] = jsDate.regional['en'];
+    jsDate.config.gwtintegration = true;
     
     /**
      * Try to determine the users locale based on the lang attribute of the html page.  Defaults to 'en'
@@ -747,14 +748,23 @@
      
     jsDate.regional.getLocale = function () {
         var l = jsDate.config.defaultLocale;
-        
-        if ( document && document.getElementsByTagName('html') && document.getElementsByTagName('html')[0].lang ) {
-            l = document.getElementsByTagName('html')[0].lang;
-            if (!jsDate.regional.hasOwnProperty(l)) {
-                l = jsDate.config.defaultLocale;
+
+        if (jsDate.config.gwtintegration && window['__gwt_Locale'] !== undefined){
+            var tmpl =  window['__gwt_Locale'];
+            if(jsDate.regional.hasOwnProperty(tmpl.replace("_","-"))){
+                l =  tmpl.replace("_","-");
+            }else if(jsDate.regional.hasOwnProperty(tmpl.split('_')[0])){
+                l = tmpl.split('_')[0];
+            }
+        }else{    
+            if ( document && document.getElementsByTagName('html') && document.getElementsByTagName('html')[0].lang ) {
+                l = document.getElementsByTagName('html')[0].lang;
+                if (!jsDate.regional.hasOwnProperty(l)) {
+                    l = jsDate.config.defaultLocale;
+                }
             }
         }
-        
+
         return l;
     };
     

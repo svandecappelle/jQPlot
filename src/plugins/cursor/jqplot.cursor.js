@@ -348,6 +348,7 @@
     };
     
     $.jqplot.Cursor.prototype.doZoom = function (gridpos, datapos, plot, cursor) {
+
         var c = cursor;
         var axes = plot.axes;
         var zaxes = c._zoom.axes;
@@ -359,6 +360,7 @@
         // don't zoom if zoom area is too small (in pixels)
         if ((c.constrainZoomTo == 'none' && Math.abs(gridpos.x - c._zoom.start[0]) > 6 && Math.abs(gridpos.y - c._zoom.start[1]) > 6) || (c.constrainZoomTo == 'x' && Math.abs(gridpos.x - c._zoom.start[0]) > 6) ||  (c.constrainZoomTo == 'y' && Math.abs(gridpos.y - c._zoom.start[1]) > 6)) {
             if (!plot.plugins.cursor.zoomProxy) {
+                
                 for (var ax in datapos) {
                     // make a copy of the original axes to revert back.
                     if (c._zoom.axes[ax] == undefined) {
@@ -372,7 +374,7 @@
                         c._zoom.axes[ax].tickFormatString = (axes[ax].tickOptions != null) ? axes[ax].tickOptions.formatString :  '';
                     }
 
-
+                    console.log("zzom")
                     if ((c.constrainZoomTo == 'none') || (c.constrainZoomTo == 'x' && ax.charAt(0) == 'x') || (c.constrainZoomTo == 'y' && ax.charAt(0) == 'y')) {   
                         dp = datapos[ax];
                         if (dp != null) {           
@@ -845,7 +847,44 @@
         return {offsets:go, gridPos:gridPos, dataPos:dataPos};
     }    
     
+    $.jqplot.Cursor.prototype.setZoom = function (posStart, posStop, plot) {
+
+        var startEv = {pageX:posStart.x, pageY:posStart.y, preventDefault: function(){console.log("prevent")}, data:{plot: plot}};
+        var stopEv = {pageX:posStop.x, pageY:posStop.y, preventDefault: function(){console.log("prevent")}, data:{plot: plot}};
+
+        var gridpos = getEventPosition(startEv).gridPos;
+        var datapos = getEventPosition(startEv).dataPos;
+
+        var c = plot.plugins.cursor;
+        if (c.constrainZoomTo == 'x') {
+            c._zoom.start = [gridpos.x, 0];
+        }
+        else if (c.constrainZoomTo == 'y') {
+            c._zoom.start = [0, gridpos.y];
+        }
+        else {
+            c._zoom.start = [gridpos.x, gridpos.y];
+        }
+        c._zoom.started = true;
+        for (var ax in datapos) {
+            // get zoom starting position.
+            c._zoom.axes.start[ax] = datapos[ax];
+        }  
+        if(plot.plugins.mobile){
+            $(document).bind('vmousemove.jqplotCursor', {plot:plot}, handleZoomMove);              
+        } else {
+            $(document).bind('mousemove.jqplotCursor', {plot:plot}, handleZoomMove);              
+        }
+
+        handleMouseDown(startEv, gridpos, datapos, {}, plot);
+        handleZoomMove(startEv);
+        handleMouseUp(stopEv);
+    }
+
     function handleZoomMove(ev) {
+console.log(ev.pageX);
+        console.log(ev.pageY);
+
         var plot = ev.data.plot;
         var c = plot.plugins.cursor;
         // don't do anything if not on grid.
@@ -942,6 +981,10 @@
     function handleMouseUp(ev) {
         var plot = ev.data.plot;
         var c = plot.plugins.cursor;
+
+        console.log(ev.pageX);
+        console.log(ev.pageY);
+
         if (c.zoom && c._zoom.zooming && !c.zoomTarget) {
             var xpos = c._zoom.gridpos.x;
             var ypos = c._zoom.gridpos.y;
@@ -976,7 +1019,8 @@
             }
             c._zoom.end = [xpos, ypos];
             c._zoom.gridpos = {x:xpos, y:ypos};
-            
+            console.log(c._zoom.gridpos);
+            console.log(datapos);
             c.doZoom(c._zoom.gridpos, datapos, plot, c);
         }
         c._zoom.started = false;
