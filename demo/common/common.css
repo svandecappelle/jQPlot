@@ -9,9 +9,21 @@ body{
 	background-image: url('img/fabric_of_squares_gray.png');
 }
 
-.coding>div{
+.coding{
 	width:100%;
 	height: 50%;
+	display: inline-block;
+}
+
+.coding>div{
+	width:50%;
+	height: 100%;
+	display: inline-block;
+}
+
+.coding .CodeMirror{
+	width:45%;
+	height: 100%;
 	display: inline-block;
 }
 

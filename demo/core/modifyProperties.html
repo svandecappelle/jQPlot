@@ -3,9 +3,11 @@
 		<title>Change dynamic option</title>
 
 		<!-- JQuery dependence -->
-		<script src="../build/dist/core/jquery.min.js"></script>
+		<script src="../../build/dist/core/jquery.min.js"></script>
 		<!-- JQplot dependence -->
-		<script src="../build/dist/core/jquery.jqplot.min.js"></script>
+		<script src="../../build/dist/core/jquery.jqplot.min.js"></script>
+		<script src="../../build/dist/plugins/legend/jqplot.enhancedLegendRenderer.min.js"></script>
+		<script src="../../build/dist/plugins/overlay/jqplot.canvasOverlay.min.js"></script>
 	</head>
 	<body>
 
@@ -15,16 +17,67 @@
 			var plot1;
 			$(function(){
 			var line1=[[1,4], [2,6.5], [3,5.7], [4,9], [5,8.2]];
+
+
+			canv = {
+							show: true,
+							bellowSeries: true,
+	            			objects: [
+								{rectangle: {
+									name: 'barney',
+									xmin: [1],
+									xmax: [1.5],
+									ymin: [0],
+									ymax: [2000],
+									xOffset: 0,
+									color: 'rgba(122, 122, 122,0.5)',
+									shadow: false,
+									showTooltip: true,
+									tooltipLocation: 'ne',
+									tooltipFormatString: '<b><i><span style="color:red;">Passe</span></i></b> %.2f',
+								}}]};
+
+
 			plot1 = $.jqplot('chart1', [line1], {
+					axes: {
+						yaxis: {
+							min: 1, 
+							max: 5
+						}
+					},
 					title:'Update chart',
-					series:[{lineWidth:4, markerOptions:{style:'square'}}]
+					series:[{lineWidth:4, markerOptions:{style:'square'}}],
+					legend: {
+						show: true,
+						renderer: $.jqplot.EnhancedLegendRenderer,
+						rendererOptions:{
+							seriesToggleReplot: { resetAxes: true }
+						},
+						placement: 'outside'
+					},
+					canvasOverlay: canv
 				});
 			});
 			function changeColor(){
 				console.log(plot1.series[0].color);
 				plot1.series[0].color = "#FF0000";
 				plot1.series[0].data = [[1,1],[2,4],[5,3]];
-				plot1.replot({resetAxes: true});
+				plot1.replot({resetAxes: true, /*axes: {yaxis:{min:4, max:9}}*/});
+
+				plot1.replot({resetAxes: true,
+                    canvasOverlay:{
+                         objects : [{
+                           rectangle: {
+                              name : 'Upper Focus',
+                              shadow: false,
+                              ymin : 5,
+                              ymax : 6,
+                              color: 'rgba(240,0,30,.3)',
+                              tooltipFormatString: '<b><i><span style="color:red;">New</span></i></b> %.2f',
+                           }
+                          }]
+                      }});
+
 				plot1.drawSeries({color:"#FF0000"},0)
 			}
 		</script>
