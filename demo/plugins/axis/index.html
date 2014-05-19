@@ -18,11 +18,15 @@
 		<script src="../../../build/dist/plugins/export/exportImg.min.js"></script>
 
 		<script src="../../../build/dist/plugins/fullscreener/fullscreener.min.js"></script>
+		<script src="../../../build/dist/plugins/legend/jqplot.enhancedLegendRenderer.min.js"></script>
+
 		<link type="text/css" rel="stylesheet" href="../../../build/dist/plugins/fullscreener/fullscreener.min.css"/>
+		<link type="text/css" rel="stylesheet" href="../../../build/dist/core/jquery.jqplot.min.css"/>
 	</head>
 	<body>
+
 		<div class="coding">
-			<div id="chart1"></div>
+		<div id="chart1"></div>
 
 			<script type="text/javascript">
 				$(function(){
@@ -36,6 +40,19 @@
 							tickOptions: {
 								fontSize:'10pt',
 	                			fontFamily:'Tahoma',
+							}
+						},
+						legend:{
+							renderer: $.jqplot.EnhancedLegendRenderer,
+							show:true,
+							placement: "outsideGrid",
+							location: "ne",
+							rowSpacing: "0px",
+							rendererOptions: {
+								// set to true to replot when toggling series on/off
+								// set to an options object to pass in replot options.
+								seriesToggle: 'normal',
+								seriesToggleReplot: {resetAxes: true}
 							}
 						},
 						axes:{
@@ -53,6 +70,10 @@
 						},
 						series:[{lineWidth:4, markerOptions:{style:'square'}}]
 					});
+
+					$('#chart1').bind('jqplotLegendToggleSerie', function (ev) {
+						console.log(ev.name);
+					})
 				});
 			</script>
 		</div>
