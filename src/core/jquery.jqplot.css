@@ -258,11 +258,11 @@ div.jqplot-noData-container {
     background-color: rgba(96%, 96%, 96%, 0.3);
 }
 
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover {
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover {
   position: relative;
   display: inline;
 }
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover  .tooltip {
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip {
     position: absolute;
     width: auto;
     min-width: 20px;
@@ -279,7 +279,7 @@ span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover  .tooltip {
     border-radius: 6px;
     box-shadow: 0px 0px 2px #800000;
 }
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip:after {
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip:after, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip:after {
     content: '';
     position: absolute;
     top: 100%;
@@ -290,17 +290,17 @@ span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip:afte
     border-right: 8px solid transparent;
     border-left: 8px solid transparent;   
 }
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip {
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip {
     opacity: 0.8;
     margin: auto;
     z-index: 999;
 }
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover.hidden .tooltip{
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover.hidden .tooltip, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover.hidden .tooltip {
     display: none;
 }
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover{
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover {
     
 }
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover{
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover{
     display: block;
 }

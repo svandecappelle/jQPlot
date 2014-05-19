@@ -137,6 +137,11 @@
         // True to center the data label at its position.
         // False to set the inside facing edge of the label at its position.
         this.dataLabelCenterOn = true;
+
+          // prop showDataCategory
+        // true to show the str category of a slice.
+        this.showDataCategoryOnHover == true;
+
         // prop: startAngle
         // Angle to start drawing pie in degrees.  
         // According to orientation of canvas coordinate system:
@@ -154,7 +159,7 @@
         if (options.highlightMouseDown && options.highlightMouseOver == null) {
             options.highlightMouseOver = false;
         }
-        
+
         $.extend(true, this, options);
 
         if (this.sliceMargin < 0) {
@@ -168,6 +173,10 @@
         // index of the currenty highlighted point, if any
         this._highlightedPoint = null;
         
+        this.highlightLabelSliceRenderer = new $.jqplot.PieHighlighterLabelSliceRenderer(this);
+         // labels of slices.
+        this.labelsSlices = [];
+
         // set highlight colors if none provided
         if (this.highlightColors.length == 0) {
             for (var i=0; i<this.seriesColors.length; i++){
@@ -347,9 +356,30 @@
             }
         }
     };
+
+    $.jqplot.PieHighlighterLabelSliceRenderer = function(serie){
+        this.serie = serie;
+    };
+
+    $.jqplot.PieHighlighterLabelSliceRenderer.prototype.highlight = function(pid){
+        this.serie.labelsSlices[pid].removeClass("hidden");
+    };
+    $.jqplot.PieHighlighterLabelSliceRenderer.prototype.unhighlight = function(pid){
+        for (var i = this.serie.labelsSlices.length - 1; i >= 0; i--) {
+            this.serie.labelsSlices[i].addClass("hidden");
+        };
+    };
+    $.jqplot.PieHighlighterLabelSliceRenderer.prototype.move = function(pid, x, y){
+        var pointLblPosition = this.serie.labelsSlices[pid].position();
+        var tooltip = this.serie.labelsSlices[pid].find(".tooltip");
+        var topPos = y - pointLblPosition.top - (this.serie.labelsSlices[pid].height()*2 + tooltip.height());
+        var leftPos = x - pointLblPosition.left - this.serie.labelsSlices[pid].width() - tooltip.width() / 2;
+        tooltip.css({left: leftPos, top: topPos});
+    };
     
     // called with scope of series
     $.jqplot.PieRenderer.prototype.draw = function (ctx, gd, options, plot) {
+        this.labelsSlices= [];
         var i;
         var opts = (options != undefined) ? options : {};
         // offset and direction of offset due to legend placement
@@ -484,8 +514,23 @@
             
                 var x = this._center[0] + Math.cos(avgang) * fact + this.canvas._offsets.left;
                 var y = this._center[1] + Math.sin(avgang) * fact + this.canvas._offsets.top;
-            
-                var labelelem = $('<div class="jqplot-pie-series jqplot-data-label" style="position:absolute;">' + label + '</div>').insertBefore(plot.eventCanvas._elem);
+                
+                var labelelem;
+                if (this.showDataCategoryOnHover){
+                    alert("toto")
+                    var fstrTooltip = this.dataLabelFormatString || '%s';
+                    labelTooltip = $.jqplot.sprintf(fstrTooltip, gd[i][0]);
+
+                    var tooltip = '<span class="tooltip">' + labelTooltip + '</span>';
+                    var txt = '<span class="jqplot-pie-series jqplot-data-label" style="position:absolute;">' + label + tooltip + + '</span>'
+                    var labelelem = $(txt).insertBefore(plot.eventCanvas._elem);
+
+                    this.labelsSlices.push(labelelem);
+                    labelelem.addClass('jqplot-pie-show-hover hidden');
+                }else{
+                    labelelem = $('<div class="jqplot-pie-series jqplot-data-label" style="position:absolute;">' + label + '</div>').insertBefore(plot.eventCanvas._elem);
+                }
+
                 if (this.dataLabelCenterOn) {
                     x -= labelelem.width()/2;
                     y -= labelelem.height()/2;
@@ -800,6 +845,7 @@
         s.highlightColorGenerator = new $.jqplot.ColorGenerator(s.highlightColors);
 
         s.renderer.drawSlice.call(s, canvas._ctx, s._sliceAngles[pidx][0], s._sliceAngles[pidx][1], s.highlightColorGenerator.get(pidx), false);
+        s.highlightLabelSliceRenderer.highlight(pidx);
     }
     
     function unhighlight (plot) {
@@ -810,6 +856,9 @@
         }
         plot.plugins.pieRenderer.highlightedSeriesIndex = null;
         plot.target.trigger('jqplotDataUnhighlight');
+        for (var i = plot.series.length - 1; i >= 0; i--) {
+           plot.series[i].highlightLabelSliceRenderer.unhighlight();
+        };
     }
  
     function handleMove(ev, gridpos, datapos, neighbor, plot) {
@@ -826,6 +875,11 @@
                 evt.pageY = ev.pageY;
                 plot.target.trigger(evt, ins);
                 highlight (plot, ins[0], ins[1]);
+                for (var i = plot.series.length - 1; i >= 0; i--) {
+                   plot.series[i].highlightLabelSliceRenderer.unhighlight();
+                };
+            }else{
+                plot.series[ins[0]].highlightLabelSliceRenderer.move(ins[1], evt1.pageX, evt1.pageY);
             }
         }
         else if (neighbor == null) {
@@ -887,6 +941,8 @@
     // create a canvas which we can draw on.
     // insert it before the eventCanvas, so eventCanvas will still capture events.
     function postPlotDraw() {
+        this.highlightLabelSliceRenderer = new $.jqplot.PieHighlighterLabelSliceRenderer(this);
+
         // Memory Leaks patch    
         if (this.plugins.pieRenderer && this.plugins.pieRenderer.highlightCanvas) {
             this.plugins.pieRenderer.highlightCanvas.resetCanvas();
