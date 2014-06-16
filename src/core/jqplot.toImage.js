@@ -180,8 +180,10 @@
             var templeft = left;
 
             for (var i=0; i<wl; i++) {
+                var oldw = w;
                 w += words[i];
-                if (context.measureText(w).width > tagwidth) {
+                // Merging merge#49 issue#794
+                if (oldw != '' && context.measureText(w).width > tagwidth) {
                     breaks.push(i);
                     w = '';
                     i--;
