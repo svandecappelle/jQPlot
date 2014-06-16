@@ -517,7 +517,6 @@
                 
                 var labelelem;
                 if (this.showDataCategoryOnHover){
-                    alert("toto")
                     var fstrTooltip = this.dataLabelFormatString || '%s';
                     labelTooltip = $.jqplot.sprintf(fstrTooltip, gd[i][0]);
 
