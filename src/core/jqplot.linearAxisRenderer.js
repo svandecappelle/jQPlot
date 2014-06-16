@@ -343,6 +343,18 @@
             min = ((this.min != null) ? this.min : db.min);
             max = ((this.max != null) ? this.max : db.max);
 
+
+            // Merging merge#42 - issue#744
+            //add padding if we are talking about a single-point series
+            if (min === max) {
+                var adj = 0.05;
+            if (min > 0) {
+                adj = Math.max(Math.log(min) / Math.LN10, 0.05);
+            }
+                min -= adj;
+                max += adj;
+            }
+
             var range = max - min;
             var rmin, rmax;
             var temp;
