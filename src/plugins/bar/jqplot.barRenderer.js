@@ -229,7 +229,8 @@
         for (var i=0; i < paxis._series.length; i++) {
             series = paxis._series[i];
             if (series === this) {
-                pos = i;
+                // Merging merge#45 issue#767
+                pos = nseries; // Current series number, 0-based
             }
             // is the series rendered as a bar?
             if (series.renderer.constructor == $.jqplot.BarRenderer) {
