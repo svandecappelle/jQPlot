@@ -732,8 +732,16 @@
             dayNames: ['söndag','måndag','tisdag','onsdag','torsdag','fredag','lördag'],
             dayNamesShort: ['sön','mån','tis','ons','tor','fre','lör'],
             formatString: '%Y-%m-%d %H:%M:%S'
+        },
+        // Merging merge#44
+        'fi': {
+            monthNames: ['tammikuu','helmikuu','maaliskuu','huhtikuu','toukokuu','kesäkuu','heinäkuu','elokuu','syyskuu','lokakuu','marraskuu','joulukuu'],
+            monthNamesShort: ['tammi','helmi','maalis','huhti','touko','kesä','heinä','elo','syys','loka','marras','joulu'],
+            dayNames: ['sunnuntai','maanantai','tiistai','keskiviikko','torstai','perjantai','lauantai'],
+            dayNamesShort: ['su','ma','ti','ke','to','pe','la'],
+            formatString: '%Y-%m-%d %H:%M:%S'
         }
-    
+
     };
     
     // Set english variants to 'en'
