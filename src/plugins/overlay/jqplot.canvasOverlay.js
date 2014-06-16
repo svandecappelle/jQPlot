@@ -764,7 +764,6 @@
         
         //this.eventCanvas._elem.before(co.canvas.createElement(this._gridPadding, 'jqplot-overlayCanvas-canvas', this._plotDimensions, this));
         var targetCanvas = this.eventCanvas;
-        console.log(this.plugins.canvasOverlay.options.bellowSeries);
         if(this.plugins.canvasOverlay.options.bellowSeries == true){
             targetCanvas = this.bellowSeriesCanvas;
         }

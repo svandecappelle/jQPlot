@@ -339,7 +339,6 @@
             }
     
             var t = this._ticks;
-            console.log(t.length);
             for (var i=0; i<t.length; i++) {
                 var tick = t[i];
                 if (tick.showLabel && (!tick.isMinorTick || this.showMinorTicks)) {
@@ -352,7 +351,7 @@
             // now make group labels
             // TODO there is a bug on categoryu renderer stack serie. Categories doesn't shows in axis.
             //console.log(this); 
-            //this.groupLabels = this._ticks;
+            //this.groupLabels = this.ticks;
             for (var i=0; i<this.groupLabels.length; i++)
             {
                 var elem = $('<div style="position:absolute;" class="jqplot-'+this.name+'-groupLabel"></div>');

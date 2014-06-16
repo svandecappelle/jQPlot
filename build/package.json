@@ -1,0 +1,10 @@
+{
+	"name"	: "jqplot-mignifier",
+	"description"	: "A Javascript jqplot-mignifier",
+	"keywords"	: ["javascript", "jqplot", "builder"],
+	"author"	: "Steeve Vandecappelle <me@mizore.fr>",
+	"dependencies": {
+		"yuicompressor": "*"
+	},
+	"version": 	"0.0.1"
+}
