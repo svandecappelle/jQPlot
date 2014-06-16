@@ -213,8 +213,6 @@
         plot.eventListenerHooks.addOnce('jqplotClick', handleClick);
         plot.eventListenerHooks.addOnce('jqplotRightClick', handleRightClick);
         plot.postDrawHooks.addOnce(postPlotDraw);
-        
-        
     };
     
     $.jqplot.DonutRenderer.prototype.setGridData = function(plot) {

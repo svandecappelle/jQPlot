@@ -229,7 +229,33 @@
         return this._elem;
     };
 
+    function getEventPosition(ev) {
+        var plot = ev.data.plot;
+        var go = plot.eventCanvas._elem.offset();
+        var gridPos = {x:ev.pageX - go.left, y:ev.pageY - go.top};
+        var dataPos = {xaxis:null, yaxis:null, x2axis:null, y2axis:null, y3axis:null, y4axis:null, y5axis:null, y6axis:null, y7axis:null, y8axis:null, y9axis:null, yMidAxis:null};
+        var an = ['xaxis', 'yaxis', 'x2axis', 'y2axis', 'y3axis', 'y4axis', 'y5axis', 'y6axis', 'y7axis', 'y8axis', 'y9axis', 'yMidAxis'];
+        var ax = plot.axes;
+        var n, axis;
+        for (n=11; n>0; n--) {
+            axis = an[n-1];
+            if (ax[axis].show) {
+                dataPos[axis] = ax[axis].series_p2u(gridPos[axis.charAt(0)]);
+            }
+        }
+
+        return {offsets:go, gridPos:gridPos, dataPos:dataPos};
+    }
+
     var handleToggle = function (ev) {
+        // TODO Bind here a toggle event
+
+        var positions = getEventPosition(ev);
+        var p = ev.data.plot;
+        var evt = $.Event('jqplotLegendToggleSerie');
+        evt.pageX = ev.pageX;
+        evt.pageY = ev.pageY;
+
         var d = ev.data,
             s = d.series,
             replot = d.replot,
@@ -237,6 +263,9 @@
             speed = d.speed,
             sidx = s.index,
             showing = false;
+
+        evt.name = p.series[sidx].label;
+        $(this).trigger(evt, [positions.gridPos, positions.dataPos, p]);
 
         if (s.canvas._elem.is(':hidden') || !s.show) {
             showing = true;

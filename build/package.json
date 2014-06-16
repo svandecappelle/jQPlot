@@ -1,10 +1,9 @@
 {
-	"name"	: "jqplot-mignifier",
-	"description"	: "A Javascript jqplot-mignifier",
-	"keywords"	: ["javascript", "jqplot", "builder"],
-	"author"	: "Steeve Vandecappelle <me@mizore.fr>",
+	"name": "jQplot-dist-builder",
+	"description": "jQplot dist builder",
+	"version": "0.0.1",
+	"private": true,
 	"dependencies": {
-		"yuicompressor": "*"
-	},
-	"version": 	"0.0.1"
+		"yuicompressor": "2.x"
+	}
 }
