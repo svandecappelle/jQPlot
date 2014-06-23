@@ -158,9 +158,9 @@
         var c = this.plugins.cursor;
 
         if (c.show) {
-            $.jqplot.eventListenerHooks.push(['jqplotMouseEnter', handleMouseEnter]);
-            $.jqplot.eventListenerHooks.push(['jqplotMouseLeave', handleMouseLeave]);
-            $.jqplot.eventListenerHooks.push(['jqplotMouseMove', handleMouseMove]);
+            this.eventListenerHooks.addOnce('jqplotMouseEnter', handleMouseEnter);
+            this.eventListenerHooks.addOnce('jqplotMouseLeave', handleMouseLeave);
+            this.eventListenerHooks.addOnce('jqplotMouseMove', handleMouseMove);
             
             if (c.showCursorLegend) {              
                 opts.legend = opts.legend || {};
@@ -170,14 +170,14 @@
             }
             
             if (c.zoom) {
-                $.jqplot.eventListenerHooks.push(['jqplotMouseDown', handleMouseDown]);
+                this.eventListenerHooks.addOnce('jqplotMouseDown', handleMouseDown);
                 
                 if (c.clickReset) {
-                    $.jqplot.eventListenerHooks.push(['jqplotClick', handleClick]);
+                    this.eventListenerHooks.addOnce('jqplotClick', handleClick);
                 }
                 
                 if (c.dblClickReset) {
-                    $.jqplot.eventListenerHooks.push(['jqplotDblClick', handleDblClick]);
+                    this.eventListenerHooks.addOnce('jqplotDblClick', handleDblClick);
                 }             
             }
     
