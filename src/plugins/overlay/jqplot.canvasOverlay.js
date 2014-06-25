@@ -448,18 +448,29 @@
                             // every draw of marker renderer.
                             mr.style = 'line';
                             opts.closePath = false;
-                            
-                            if (obj.options.xformat === "date"){
-                                xstart = plot.axes[obj.options.xaxis].series_u2p($.jsDate.createDate(obj.options.start[0]));
-                                xstop = plot.axes[obj.options.xaxis].series_u2p($.jsDate.createDate(obj.options.stop[0]));
+                            if (obj.options.xformat && obj.options.xformat.type === "date"){
+
+                                if (obj.options.xformat.format){
+                                    xstart = plot.axes[obj.options.xaxis].series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.start[0],obj.options.xformat.format)).getTime());
+                                    xstop = plot.axes[obj.options.xaxis].series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.stop[0],obj.options.xformat.format)).getTime());
+                                }else{
+                                    xstart = plot.axes[obj.options.xaxis].series_u2p($.jsDate.createDate(obj.options.start[0]));
+                                    xstop = plot.axes[obj.options.xaxis].series_u2p($.jsDate.createDate(obj.options.stop[0]));
+                                }
                             }else{
                                 xstart = plot.axes[obj.options.xaxis].series_u2p(obj.options.start[0]);
                                 xstop = plot.axes[obj.options.xaxis].series_u2p(obj.options.stop[0]);
                             }
 
-                            if (obj.options.yformat === "date"){
-                                ystart = plot.axes[obj.options.yaxis].series_u2p($.jsDate.createDate(obj.options.start[1]));
-                                ystop = plot.axes[obj.options.yaxis].series_u2p($.jsDate.createDate(obj.options.stop[1]));
+                            if (obj.options.yformat && obj.options.yformat.type === "date"){
+                                if (obj.options.yformat.format !== undefined){
+                                    console.log($.jsDate.strftime(obj.options.start[1],obj.options.yformat.format));
+                                    ystart = plot.axes[obj.options.yaxis].series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.start[1],obj.options.yformat.format)).getTime());
+                                    ystop = plot.axes[obj.options.yaxis].series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.stop[1],obj.options.yformat.format)).getTime());
+                                }else{
+                                    ystart = plot.axes[obj.options.yaxis].series_u2p($.jsDate.createDate(obj.options.start[1]));
+                                    ystop = plot.axes[obj.options.yaxis].series_u2p($.jsDate.createDate(obj.options.stop[1]));
+                                }
                             }else{
                                 ystart = plot.axes[obj.options.yaxis].series_u2p(obj.options.start[1])
                                 ystop = plot.axes[obj.options.yaxis].series_u2p(obj.options.stop[1])
@@ -484,13 +495,21 @@
                                     y = plot.axes[obj.options.yaxis].series_u2p(obj.options.y),
                                     xminoff = obj.options.xminOffset || obj.options.xOffset,
                                     xmaxoff = obj.options.xmaxOffset || obj.options.xOffset;
-                                if (obj.options.yformat === "date"){
-                                    y = plot.axes[obj.options.yaxis].series_u2p($.jsDate.createDate(obj.options.y));
+                                if (obj.options.yformat && obj.options.yformat.type === "date"){
+                                    if (obj.options.yformat.format){
+                                        y = plot.axes[obj.options.yaxis].series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.y, obj.options.yformat.format)).getTime());
+                                    }else{
+                                        y = plot.axes[obj.options.yaxis].series_u2p($.jsDate.createDate(obj.options.y).getTime());
+                                    }
                                 }
 
                                 if (obj.options.xmin != null) {
-                                    if (obj.options.xformat === "date"){
-                                        xstart = xaxis.series_u2p($.jsDate.createDate(obj.options.xmin).getTime());
+                                    if (obj.options.xformat && obj.options.xformat.type === "date"){
+                                        if (obj.options.xformat.format){
+                                            xstart = xaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.xmin, obj.options.xformat.format)).getTime());
+                                        }else{
+                                            xstart = xaxis.series_u2p($.jsDate.createDate(obj.options.xmin).getTime());
+                                        }
                                     }else{
                                         xstart = xaxis.series_u2p(obj.options.xmin);
                                     }
@@ -504,8 +523,12 @@
                                     }
                                 }
                                 if (obj.options.xmax != null) {
-                                    if (obj.options.xformat === "date"){
-                                        xstop = xaxis.series_u2p($.jsDate.createDate(obj.options.xmax).getTime());
+                                    if (obj.options.xformat && obj.options.xformat.type === "date"){
+                                        if (obj.options.xformat.format){
+                                            xstop = xaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.xmax, obj.options.xformat.format)).getTime());
+                                        }else{
+                                            xstop = xaxis.series_u2p($.jsDate.createDate(obj.options.xmax).getTime());
+                                        }
                                     }else{
                                         xstop = xaxis.series_u2p(obj.options.xmax);
                                     }
@@ -545,13 +568,21 @@
                                     y = plot.axes[obj.options.yaxis].series_u2p(obj.options.y),
                                     xminoff = obj.options.xminOffset || obj.options.xOffset,
                                     xmaxoff = obj.options.xmaxOffset || obj.options.xOffset;
-                                if (obj.options.yformat === "date"){
-                                    y = plot.axes[obj.options.yaxis].series_u2p($.jsDate.createDate(obj.options.y));
+                                if (obj.options.yformat && obj.options.yformat.type === "date"){
+                                    if (obj.options.yformat.format){
+                                        y = plot.axes[obj.options.yaxis].series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.y, obj.options.yformat.format)).getTime());
+                                    }else{
+                                        y = plot.axes[obj.options.yaxis].series_u2p($.jsDate.createDate(obj.options.y).getTime());
+                                    }
                                 }
 
                                 if (obj.options.xmin != null) {
-                                    if (obj.options.xformat === "date"){
-                                        xstart = xaxis.series_u2p($.jsDate.createDate(obj.options.xmin).getTime());
+                                    if (obj.options.xformat && obj.options.xformat.type === "date"){
+                                        if (obj.options.xformat.format){
+                                            xstart = xaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.xmin, obj.options.xformat.format)).getTime());
+                                        }else{
+                                            xstart = xaxis.series_u2p($.jsDate.createDate(obj.options.xmin).getTime());
+                                        }
                                     }else{
                                         xstart = xaxis.series_u2p(obj.options.xmin);
                                     }
@@ -565,10 +596,14 @@
                                     }
                                 }
                                 if (obj.options.xmax != null) {
-                                    if (obj.options.xformat === "date"){
-                                        xstop = yaxis.series_u2p($.jsDate.createDate(obj.options.xmax).getTime());
+                                    if (obj.options.xformat && obj.options.xformat.type === "date"){
+                                        if (obj.options.xformat.format){
+                                            xstop = xaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.xmax, obj.options.xformat.format)).getTime());
+                                        }else{
+                                            xstop = xaxis.series_u2p($.jsDate.createDate(obj.options.xmax).getTime());
+                                        }
                                     }else{
-                                        xstop = yaxis.series_u2p(obj.options.xmax);
+                                        xstop = xaxis.series_u2p(obj.options.xmax);
                                     }
                                 }
                                 else if (xmaxoff != null) {
@@ -611,13 +646,21 @@
                                     x = plot.axes[obj.options.xaxis].series_u2p(obj.options.x),
                                     yminoff = obj.options.yminOffset || obj.options.yOffset,
                                     ymaxoff = obj.options.ymaxOffset || obj.options.yOffset;
-                                if (obj.options.xformat === "date"){
-                                    x = plot.axes[obj.options.xaxis].series_u2p($.jsDate.createDate(obj.options.x).getTime());
+                                if (obj.options.xformat && obj.options.xformat.type === "date"){
+                                    if (obj.options.xformat.format){
+                                        x = plot.axes[obj.options.xaxis].series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.x, obj.options.xformat.format)).getTime());
+                                    }else{
+                                        x = plot.axes[obj.options.xaxis].series_u2p($.jsDate.createDate(obj.options.x).getTime());
+                                    }
                                 }
 
                                 if (obj.options.ymin != null) {
-                                    if (obj.options.yformat === "date"){
-                                        ystart = yaxis.series_u2p($.jsDate.createDate(obj.options.ymin).getTime());
+                                    if (obj.options.yformat && obj.options.yformat.type === "date"){
+                                        if (obj.options.yformat.format){
+                                            ystart = yaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.ymin, obj.options.yformat.format)).getTime());
+                                        }else{
+                                            ystart = yaxis.series_u2p($.jsDate.createDate(obj.options.ymin).getTime());
+                                        }
                                     }else{
                                         ystart = yaxis.series_u2p(obj.options.ymin);
                                     }
@@ -631,8 +674,12 @@
                                     }
                                 }
                                 if (obj.options.ymax != null) {
-                                    if (obj.options.yformat === "date"){
-                                        ystop = yaxis.series_u2p($.jsDate.createDate(obj.options.ymax).getTime());
+                                    if (obj.options.yformat && obj.options.yformat.type === "date"){
+                                        if (obj.options.yformat.format){
+                                            ystop = yaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.ymax, obj.options.yformat.format)).getTime());
+                                        }else{
+                                            ystop = yaxis.series_u2p($.jsDate.createDate(obj.options.ymax).getTime());
+                                        }
                                     }else{
                                         ystop = yaxis.series_u2p(obj.options.ymax);
                                     }
@@ -672,13 +719,21 @@
                                     x = plot.axes[obj.options.xaxis].series_u2p(obj.options.x),
                                     yminoff = obj.options.yminOffset || obj.options.yOffset,
                                     ymaxoff = obj.options.ymaxOffset || obj.options.yOffset;
-                                if (obj.options.xformat === "date"){
-                                    x = plot.axes[obj.options.xaxis].series_u2p($.jsDate.createDate(obj.options.x).getTime());
+                                if (obj.options.xformat && obj.options.xformat.type === "date"){
+                                    if (obj.options.xformat.format){
+                                        x = plot.axes[obj.options.xaxis].series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.x, obj.options.xformat.format)).getTime());
+                                    }else{
+                                        x = plot.axes[obj.options.xaxis].series_u2p($.jsDate.createDate(obj.options.x).getTime());
+                                    }
                                 }
 
                                 if (obj.options.ymin != null) {
-                                    if (obj.options.yformat === "date"){
-                                        ystart = yaxis.series_u2p($.jsDate.createDate(obj.options.ymin).getTime());
+                                    if (obj.options.yformat && obj.options.yformat.type === "date"){
+                                        if (obj.options.yformat.format){
+                                            ystart = yaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.ymin, obj.options.yformat.format)).getTime());
+                                        }else{
+                                            ystart = yaxis.series_u2p($.jsDate.createDate(obj.options.ymin).getTime());
+                                        }
                                     }else{
                                         ystart = yaxis.series_u2p(obj.options.ymin);
                                     }
@@ -692,8 +747,12 @@
                                     }
                                 }
                                 if (obj.options.ymax != null) {
-                                    if (obj.options.yformat === "date"){
-                                        ystop = yaxis.series_u2p($.jsDate.createDate(obj.options.ymax).getTime());
+                                    if (obj.options.yformat && obj.options.yformat.type === "date"){
+                                        if (obj.options.yformat.format){
+                                            ystop = yaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.ymax, obj.options.yformat.format)).getTime());
+                                        }else{
+                                            ystop = yaxis.series_u2p($.jsDate.createDate(obj.options.ymax).getTime());
+                                        }
                                     }else{
                                         ystop = yaxis.series_u2p(obj.options.ymax);
                                     }
@@ -751,9 +810,12 @@
                                     xminoff = obj.options.xminOffset || obj.options.xOffset,
                                     xmaxoff = obj.options.xmaxOffset || obj.options.xOffset;
                             if (obj.options.xmin != null) {
-                                if (obj.options.xformat === "date"){
-                                    console.log("format date");
-                                    xstart = xaxis.series_u2p($.jsDate.createDate(obj.options.xmin).getTime());
+                                if (obj.options.xformat && obj.options.xformat.type === "date"){
+                                    if (obj.options.xformat.format){
+                                        xstart = xaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.xmin, obj.options.xformat.format)).getTime());
+                                    }else{
+                                        xstart = xaxis.series_u2p($.jsDate.createDate(obj.options.xmin).getTime());
+                                    }
                                 }else{
                                     xstart = xaxis.series_u2p(obj.options.xmin);
                                 }
@@ -767,11 +829,15 @@
                                 }
                             }
                             if (obj.options.xmax != null) {
-                                if (obj.options.xformat === "date"){
-                                    xstop = xaxis.series_u2p($.jsDate.createDate(obj.options.xmax).getTime());
-                                }else{
-                                    xstop = xaxis.series_u2p(obj.options.xmax);
-                                }
+                                if (obj.options.xformat && obj.options.xformat.type === "date"){
+                                        if (obj.options.xformat.format){
+                                            xstop = xaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.xmax, obj.options.xformat.format)).getTime());
+                                        }else{
+                                            xstop = xaxis.series_u2p($.jsDate.createDate(obj.options.xmax).getTime());
+                                        }
+                                    }else{
+                                        xstop = xaxis.series_u2p(obj.options.xmax);
+                                    }
                             }
                             else if (xmaxoff != null) {
                                 if ($.type(xmaxoff) == "number") {
@@ -789,7 +855,15 @@
                                 yminoff = obj.options.yminOffset || obj.options.yOffset,
                                 ymaxoff = obj.options.ymaxOffset || obj.options.yOffset;
                             if (obj.options.ymin != null) {
-                                ystart = yaxis.series_u2p(obj.options.ymin);
+                                if (obj.options.yformat && obj.options.yformat.type === "date"){
+                                    if (obj.options.yformat.format){
+                                        ystart = yaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.ymin, obj.options.yformat.format)).getTime());
+                                    }else{
+                                        ystart = yaxis.series_u2p($.jsDate.createDate(obj.options.ymin).getTime());
+                                    }
+                                }else{
+                                    ystart = yaxis.series_u2p(obj.options.ymin);
+                                }
                             }
                             else if (yminoff != null) {
                                 if ($.type(yminoff) == "number") {
@@ -800,8 +874,12 @@
                                 }
                             }
                             if (obj.options.ymax != null) {
-                                if (obj.options.yformat === "date"){
-                                    ystop = yaxis.series_u2p($.jsDate.createDate(obj.options.ymax).getTime());
+                                if (obj.options.yformat && obj.options.yformat.type === "date"){
+                                    if (obj.options.yformat.format){
+                                        ystop = yaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.ymax, obj.options.yformat.format)).getTime());
+                                    }else{
+                                        ystop = yaxis.series_u2p($.jsDate.createDate(obj.options.ymax).getTime());
+                                    }
                                 }else{
                                     ystop = yaxis.series_u2p(obj.options.ymax);
                                 }
