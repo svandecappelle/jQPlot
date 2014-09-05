@@ -131,7 +131,6 @@
         $.extend(true, this, options);
     };
     
-    var locations = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
     var locationIndicies = {'nw':0, 'n':1, 'ne':2, 'e':3, 'se':4, 's':5, 'sw':6, 'w':7};
     var oppositeLocations = ['se', 's', 'sw', 'w', 'nw', 'n', 'ne', 'e'];
     
@@ -148,8 +147,8 @@
     };
     
     // called with scope of series
-    $.jqplot.PointLabels.prototype.setLabels = function() {   
-        var p = this.plugins.pointLabels; 
+    $.jqplot.PointLabels.prototype.setLabels = function() {
+        var p = this.plugins.pointLabels;
         var labelIdx;
         if (p.seriesLabelIndex != null) {
             labelIdx = p.seriesLabelIndex;
@@ -261,16 +260,21 @@
                 offset = -elem.outerHeight(true) - this.ypadding;
                 break;
         }
-        return offset; 
+        return offset;
     };
 
     // called with scope of series
     $.jqplot.PointLabels.draw = function (sctx, options, plot) {
-        var p = this.plugins.pointLabels;
+		var i, len, p = this.plugins.pointLabels,
+			pd = this._plotData,
+			xax = this._xaxis,
+			yax = this._yaxis,
+			elem, helem;
+
         // set labels again in case they have changed.
         p.setLabels.call(this);
         // remove any previous labels
-        for (var i=0; i<p._elems.length; i++) {
+        for (i = 0, len = p._elems.length; i < len; i++) {
             // Memory Leaks patch
             // p._elems[i].remove();
             if(p._elems[i]){
@@ -280,21 +284,18 @@
         p._elems.splice(0, p._elems.length);
 
         if (p.show) {
-            var ax = '_'+this._stackAxis+'axis';
+            var ax = '_' + this._stackAxis + 'axis';
         
             if (!p.formatString) {
                 p.formatString = this[ax]._ticks[0].formatString;
                 p.formatter = this[ax]._ticks[0].formatter;
             }
-        
-            var pd = this._plotData;
-            var ppd = this._prevPlotData;
-            var xax = this._xaxis;
-            var yax = this._yaxis;
-            var elem, helem;
 
-            for (var i=0, l=p._labels.length; i < l; i++) {
-                var label = p._labels[i];
+            for (i = 0, len = p._labels.length; i < len; i++) {
+                var label = p._labels[i],
+                  location = p.location,
+						barPoint = this._barPoints[i],
+						ell, elt, elr, elb, et, scl, sct, scr, scb;
                 
                 if (label == null || (p.hideZeros && parseInt(label, 10) == 0)) {
                     continue;
@@ -307,21 +308,20 @@
 
                 elem = p._elems[i];
 
-
-                elem.addClass('jqplot-point-label jqplot-series-'+this.index+' jqplot-point-'+i);
+                elem.addClass('jqplot-point-label jqplot-series-' + this.index + ' jqplot-point-' + i);
                 elem.css('position', 'absolute');
                 
                 if(!$.jqplot.isDarkColor(this.color)){
                     if(p.darkColor !== undefined){
                         elem.css('color', p.darkColor);
                     }else{
-                        elem.css('color', 'white');
+	                    elem.addClass('jqplot-point-darkColor');
                     }
                 }else{
                      if(p.brightColor !== undefined){
                         elem.css('color', p.brightColor);
                     }else{
-                        elem.css('color', 'black');
+	                     elem.addClass('jqplot-point-brightColor');
                     }
                 }
 
@@ -333,22 +333,22 @@
                 else {
                     elem.html(label);
                 }
-                var location = p.location;
+
                 if ((this.fillToZero && pd[i][1] < 0) || (this.fillToZero && this._type === 'bar' && this.barDirection === 'horizontal' && pd[i][0] < 0) || (this.waterfall && parseInt(label, 10)) < 0) {
                     location = oppositeLocations[locationIndicies[location]];
                 }
 
-                var ell = xax.u2p(pd[i][0]) + p.xOffset(elem, location);
-                var elt = yax.u2p(pd[i][1]) + p.yOffset(elem, location);
+                ell = xax.u2p(pd[i][0]) + p.xOffset(elem, location);
+                elt = yax.u2p(pd[i][1]) + p.yOffset(elem, location);
 
                 // we have stacked chart but are not showing stacked values,
                 // place labels in center.
                 if (this._stack && !p.stackedValue) {
                     if (this.barDirection === "vertical") {
-                        elt = (this._barPoints[i][0][1] + this._barPoints[i][1][1]) / 2 + plot._gridPadding.top - 0.5 * elem.outerHeight(true);
-                        ell = (this._barPoints[i][2][0] + this._barPoints[i][0][0]) / 2 + plot._gridPadding.left - 0.5 * elem.outerWidth(true);
+                        elt = (barPoint[0][1] + barPoint[1][1]) / 2 + plot._gridPadding.top - 0.5 * elem.outerHeight(true);
+                        ell = (barPoint[2][0] + barPoint[0][0]) / 2 + plot._gridPadding.left - 0.5 * elem.outerWidth(true);
                     }else {
-                        ell = (this._barPoints[i][2][0] + this._barPoints[i][0][0]) / 2 + plot._gridPadding.left - 0.5 * elem.outerWidth(true);
+                        ell = (barPoint[2][0] + barPoint[0][0]) / 2 + plot._gridPadding.left - 0.5 * elem.outerWidth(true);
                     }
                 }
 
@@ -364,15 +364,13 @@
                 elem.css('left', ell);
                 elem.css('top', elt);
 
-                
-
-                var elr = ell + elem.width();
-                var elb = elt + elem.height();
-                var et = p.edgeTolerance;
-                var scl = $(sctx.canvas).position().left;
-                var sct = $(sctx.canvas).position().top;
-                var scr = sctx.canvas.width + scl;
-                var scb = sctx.canvas.height + sct;
+                elr = ell + elem.width();
+                elb = elt + elem.height();
+                et = p.edgeTolerance;
+                scl = $(sctx.canvas).position().left;
+                sct = $(sctx.canvas).position().top;
+                scr = sctx.canvas.width + scl;
+                scb = sctx.canvas.height + sct;
                 // if label is outside of allowed area, remove it
                 if (ell - et < scl || elt - et < sct || elr + et > scr || elb + et > scb) {
                     elem.remove();

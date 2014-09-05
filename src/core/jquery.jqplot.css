@@ -38,7 +38,7 @@
 
 
 .jqplot-xaxis-tick {
-    top: 0px;
+    top: 0;
     /* initial position untill tick is drawn in proper place */
     left: 15px;
 /*    padding-top: 10px;*/
@@ -46,7 +46,7 @@
 }
 
 .jqplot-x2axis-tick {
-    bottom: 0px;
+    bottom: 0;
     /* initial position untill tick is drawn in proper place */
     left: 15px;
 /*    padding-bottom: 10px;*/
@@ -54,7 +54,7 @@
 }
 
 .jqplot-yaxis-tick {
-    right: 0px;
+    right: 0;
     /* initial position untill tick is drawn in proper place */
     top: 15px;
 /*    padding-right: 10px;*/
@@ -63,7 +63,7 @@
 
 .jqplot-yaxis-tick.jqplot-breakTick {
     right: -20px;
-    margin-right: 0px;
+    margin-right: 0;
     padding:1px 5px 1px 5px;
     /*background-color: white;*/
     z-index: 2;
@@ -71,7 +71,7 @@
 }
 
 .jqplot-y2axis-tick, .jqplot-y3axis-tick, .jqplot-y4axis-tick, .jqplot-y5axis-tick, .jqplot-y6axis-tick, .jqplot-y7axis-tick, .jqplot-y8axis-tick, .jqplot-y9axis-tick {
-    left: 0px;
+    left: 0;
     /* initial position untill tick is drawn in proper place */
     top: 15px;
 /*    padding-left: 10px;*/
@@ -155,7 +155,7 @@ td.jqplot-table-legend-swatch {
 }
 
 tr.jqplot-table-legend:first td.jqplot-table-legend-swatch {
-    padding-top: 0px;
+    padding-top: 0;
 }
 */
 
@@ -173,8 +173,8 @@ div.jqplot-table-legend-swatch-outline {
 }
 
 div.jqplot-table-legend-swatch {
-    width:0px;
-    height:0px;
+    width:0;
+    height:0;
     border-top-width: 5px;
     border-bottom-width: 5px;
     border-left-width: 6px;
@@ -186,8 +186,8 @@ div.jqplot-table-legend-swatch {
 }
 
 .jqplot-title {
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     padding-bottom: 0.5em;
     font-size: 1.2em;
 }
@@ -217,6 +217,14 @@ table.jqplot-cursor-tooltip {
 .jqplot-point-label {
     font-size: 0.75em;
     z-index: 2;
+}
+
+.jqplot-point-darkColor {
+	color: #000000;
+}
+
+.jqplot-point-brightColor {
+	color: #ffffff;
 }
       
 td.jqplot-cursor-legend-swatch {
@@ -271,13 +279,13 @@ span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip, spa
     padding-top: 1px;
     padding-bottom: 1px;
     color: #FFFFFF;
-    text-shadow: 0px 0px 4px #800000;
+    text-shadow: 0 0 4px #800000;
     background: #000000;
     height: 30px;
     line-height: 30px;
     text-align: center;
     border-radius: 6px;
-    box-shadow: 0px 0px 2px #800000;
+    box-shadow: 0 0 2px #800000;
 }
 span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip:after, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip:after {
     content: '';
