@@ -1250,7 +1250,16 @@
         // prop: fillColor
         // CSS color spec to use for fill under line.  Defaults to line color.
         this.fillColor;
-        // prop: fillAlpha
+        // prop: fillGradient
+        // if true :enable gradient rendering for fill.
+		this.fillGradient = false;
+		// prop: fillGradientColor
+        // css colorif true :gradient Color combinated with Color.
+		this.fillGradientColor;
+		// prop: fillGradientDelay
+        // 0 for no delay,1 for no gradient.
+		this.fillGradientDelay;
+		// prop: fillAlpha
         // Alpha transparency to apply to the fill under the line.
         // Use this to adjust alpha separate from fill color.
         this.fillAlpha;
@@ -1352,15 +1361,22 @@
             this.negativeColor = plot.negativeColorGenerator.get(this.index);
         }
 
-
         if (!this.fillColor) {
             this.fillColor = this.color;
         }
         if (this.fillAlpha) {
             var comp = $.jqplot.normalize2rgb(this.fillColor);
             var comp = $.jqplot.getColorComponents(comp);
-            this.fillColor = 'rgba('+comp[0]+','+comp[1]+','+comp[2]+','+this.fillAlpha+')';
+            this.fillColor = 'rgba('+comp[0]+','+comp[1]+','+comp[2]+','+this.fillAlpha+')';		
+			if(this.fillGradient && this.fillGradientColor)
+				{
+				var comp2 = $.jqplot.normalize2rgb(this.fillGradientColor);
+				var comp2 = $.jqplot.getColorComponents(comp2);
+				this.fillGradientColor = 'rgba('+comp2[0]+','+comp2[1]+','+comp2[2]+','+this.fillAlpha+')';
+				}
         }
+
+			
         if ($.isFunction(this.renderer)) {
             this.renderer = new this.renderer();  
         }

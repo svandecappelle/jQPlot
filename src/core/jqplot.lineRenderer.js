@@ -163,7 +163,7 @@
         }
 
         // set the shape renderer options
-        var opts = {lineJoin:this.lineJoin, lineCap:this.lineCap, fill:this.fill, isarc:false, strokeStyle:this.color, fillStyle:this.fillColor, lineWidth:this.lineWidth, linePattern:this.linePattern, closePath:this.fill};
+        var opts = {lineJoin:this.lineJoin, lineCap:this.lineCap, fill:this.fill, isarc:false, strokeStyle:this.color, fillStyle:this.fillColor, lineWidth:this.lineWidth, linePattern:this.linePattern, closePath:this.fill,fillGradient:this.fillGradient,fillGradientColor:this.fillGradientColor,fillGradientDelay:this.fillGradientDelay};
         this.renderer.shapeRenderer.init(opts);
 
         var shadow_offset = options.shadowOffset;
