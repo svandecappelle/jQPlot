@@ -157,7 +157,7 @@
         this._barPoints = [];
         
         // set the shape renderer options
-        var opts = {lineJoin:'miter', lineCap:'round', fill:true, isarc:false, strokeStyle:this.color, fillStyle:this.color, closePath:this.fill};
+        var opts = {lineJoin:'miter', lineCap:'round', fill:true, isarc:false, strokeStyle:this.color, fillStyle:this.color, closePath:this.fill,fillGradient:this.fillGradient,fillGradientColor:this.fillGradientColor,fillGradientDelay:this.fillGradientDelay};
         this.renderer.shapeRenderer.init(opts);
         // set the shadow renderer options
         var sopts = {lineJoin:'miter', lineCap:'round', fill:true, isarc:false, angle:this.shadowAngle, offset:this.shadowOffset, alpha:this.shadowAlpha, depth:this.shadowDepth, closePath:this.fill};
