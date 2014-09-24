@@ -488,7 +488,18 @@
         
         for (var i=0; i<gd.length; i++) {
                       
-            this.renderer.drawSlice.call (this, ctx, this._sliceAngles[i][0], this._sliceAngles[i][1], colorGenerator.next(), false);
+            var sliceColor = colorGenerator.next();
+			if(this.labelColor == "complementary"){
+				var labelColor = '#'+rgbToHex(moveColor(hexToRGB(sliceColor),180));
+
+			}
+			else if (opts.labelColor !=""){
+				var labelColor = this.labelColor;
+			}
+			else {
+				var labelColor = "#FFFFFF";
+			}
+            this.renderer.drawSlice.call (this, ctx, this._sliceAngles[i][0], this._sliceAngles[i][1], sliceColor, false);
         
             if (this.showDataLabels && gd[i][2]*100 >= this.dataLabelThreshold) {
                 var fstr, avgang = (this._sliceAngles[i][0] + this._sliceAngles[i][1])/2, label;
@@ -527,7 +538,7 @@
                     this.labelsSlices.push(labelelem);
                     labelelem.addClass('jqplot-pie-show-hover hidden');
                 }else{
-                    labelelem = $('<div class="jqplot-pie-series jqplot-data-label" style="position:absolute;">' + label + '</div>').insertBefore(plot.eventCanvas._elem);
+                    labelelem = $('<div class="jqplot-pie-series jqplot-data-label" style="position:absolute;color:'+labelColor+';">' + label + '</div>').insertBefore(plot.eventCanvas._elem);
                 }
 
                 if (this.dataLabelCenterOn) {
@@ -977,3 +988,100 @@
 })(jQuery);
     
     
+function getHue (R,G,B) {
+	return (180/Math.PI*Math.atan2( Math.sqrt(3)*(G-B) , 2*R-G-B ));
+}
+
+function RGBToHSL(color) {
+	var R = ( color[0] / 255 );                     //RGB from 0 to 255
+	var G = ( color[1] / 255 );
+	var B = ( color[2] / 255 );
+
+	var Min = Math.min(R,G,B);    //Min. value of RGB
+	var Max = Math.max(R,G,B);  //Max. value of RGB
+	var del_Max = Max - Min;             //Delta RGB value
+
+	var L = ( Max + Min ) / 2;
+
+	if ( del_Max == 0 ){
+	   H = 0;
+	   S = 0;
+	}
+	else {
+	   if ( L < 0.5 ) S = del_Max / ( Max + Min );
+	   else S = del_Max / ( 2 - Max - Min );
+
+	   var del_R = ( ( ( Max - R ) / 6 ) + ( del_Max / 2 ) ) / del_Max;
+	   var del_G = ( ( ( Max - G ) / 6 ) + ( del_Max / 2 ) ) / del_Max;
+	   var del_B = ( ( ( Max - B ) / 6 ) + ( del_Max / 2 ) ) / del_Max;
+
+	   if ( R == Max ) var H = del_B - del_G;
+	   else if ( G == Max ) var H = ( 1 / 3 ) + del_R - del_B;
+	   else if ( B == Max ) var H = ( 2 / 3 ) + del_G - del_R;
+
+	   if ( H < 0 ) H += 1;
+	   if ( H > 1 ) H -= 1;
+	}
+	return ([H,S,L]);
+}
+
+function HSLtoRGB(hsl) {
+
+	var H = hsl[0];
+	var S = hsl[1];
+	var L = hsl[2];
+	if ( S == 0 ){
+		var R = L * 255;
+		var G = L * 255;
+		var B = L * 255;
+	}
+	else{
+		if ( L < 0.5 ) var var_2 = L * ( 1 + S );
+		else var var_2 = ( L + S ) - ( S * L );
+
+		var var_1 = 2 * L - var_2;
+
+		var R = Math.floor(255 * Hue_2_RGB( var_1, var_2, H + ( 1 / 3 ) ));
+		var G = Math.floor(255 * Hue_2_RGB( var_1, var_2, H ));
+		var B = Math.floor(255 * Hue_2_RGB( var_1, var_2, H - ( 1 / 3 ) ));
+	}
+	return ([R,G,B]);
+}
+
+function Hue_2_RGB( v1, v2, vH )
+{
+	if ( vH < 0 ) vH += 1;
+	if ( vH > 1 ) vH -= 1;
+	if ( ( 6 * vH ) < 1 ) {
+		return ( v1 + ( v2 - v1 ) * 6 * vH );
+	}
+	else if ( ( 2 * vH ) < 1 ) {
+		return ( v2 );
+	}
+	else if ( ( 3 * vH ) < 2 ) {
+		return ( v1 + ( v2 - v1 ) * ( ( 2 / 3 ) - vH ) * 6 );
+   	}
+	else return ( v1 );
+}
+
+function hexToRGB(h) {
+	if (h.charAt(0)=="#") h = h.substring(1,7);
+	
+	return [parseInt(h.substring(0,2),16),parseInt(h.substring(2,4),16),parseInt(h.substring(4,6),16)];
+}
+
+function moveColor(color,degrees){
+	var hsl = RGBToHSL(color);
+	hsl[0] = (((hsl[0]*360)+degrees)%360)/360;
+
+	return HSLtoRGB(hsl);
+}
+
+function rgbToHex(color) {return toHex(color[0])+toHex(color[1])+toHex(color[2])}
+function toHex(n) {
+ n = parseInt(n,10);
+ if (isNaN(n)) return "00";
+ n = Math.max(0,Math.min(n,255));
+ return "0123456789ABCDEF".charAt((n-n%16)/16)
+      + "0123456789ABCDEF".charAt(n%16);
+}
