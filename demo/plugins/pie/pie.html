@@ -10,6 +10,8 @@
 		<script src="../../../build/dist/plugins/themes/extendedThemes.min.js"></script>
 		<script src="../../../src/plugins/pie/jqplot.pieRenderer.js"></script>
 
+		<script src="../../../build/dist/plugins/highlighter/jqplot.highlighter.min.js"></script>
+
 		<link rel="stylesheet" type="text/css" href="../../../build/dist/core/jquery.jqplot.min.css">
 	</head>
 	<body>
@@ -18,15 +20,16 @@
 
 			<script type="text/javascript">
 				$(function(){
-					
+
 					var s1 = [['/home',46], ['/var',14], ['/tmp',5], ['/',35]];
-					
+
 					var plot1 = $.jqplot('chart1', [s1], {
 						title:'Disc usage',
 						seriesDefaults: {
 							renderer: $.jqplot.PieRenderer,
 							rendererOptions: {
 								showDataLabels: true,
+								labelColor: "red",
 								showDataCategoryOnHover : true,
 								sliceMargin: 1,
 								ringMargin: 8,

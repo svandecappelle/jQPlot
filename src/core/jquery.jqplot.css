@@ -226,7 +226,7 @@ table.jqplot-cursor-tooltip {
 .jqplot-point-brightColor {
 	color: #ffffff;
 }
-      
+
 td.jqplot-cursor-legend-swatch {
     vertical-align: middle;
     text-align: center;
@@ -296,18 +296,18 @@ span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip:afte
     width: 0; height: 0;
     border-top: 8px solid #000000;
     border-right: 8px solid transparent;
-    border-left: 8px solid transparent;   
+    border-left: 8px solid transparent;
 }
 span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip {
     opacity: 0.8;
     margin: auto;
     z-index: 999;
 }
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover.hidden .tooltip, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover.hidden .tooltip {
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover.hidden, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover.hidden {
     display: none;
 }
 span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover {
-    
+
 }
 span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover{
     display: block;
