@@ -1,9 +1,0 @@
-{
-	"name": "jQplot-dist-builder",
-	"description": "jQplot dist builder",
-	"version": "0.0.1",
-	"private": true,
-	"dependencies": {
-		"yuicompressor": "2.x"
-	}
-}
