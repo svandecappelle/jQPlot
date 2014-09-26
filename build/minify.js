@@ -32,7 +32,7 @@ function building(){
 				}
 			}else if(pluginDir ==="--all-plugins"){
 				console.log("Building all plugins: ");
-				foldersToBuild = fs.readdirSync('../src/plugins/');
+				foldersToBuild = fs.readdirSync('src/plugins/');
 				foldersToBuild.forEach(function (file, index, array){
 					console.log("Building "+file);
 					uglify('plugins', file);
@@ -52,18 +52,18 @@ function cleanRoutine(){
 				
 				if(process.argv.indexOf("--core")>-1){
 					console.log("Cleaning core");
-					cleanFolder('dist/core/');
+					cleanFolder('build/dist/core/');
 				}else{
 					if(pluginDir==="--all-plugins"){
 						console.log("Cleaning all plugins: ");
 						foldersToClean = fs.readdirSync('dist/plugins/');
 						foldersToClean.forEach(function (file, index, array){
 							console.log("Cleaning "+file);
-							cleanFolder('dist/plugins/' + file +'/');
+							cleanFolder('build/dist/plugins/' + file +'/');
 						});
 					}else{
 						console.log("Cleaning plugin - : " + pluginDir);
-						cleanFolder('dist/plugins/' + pluginDir+'/');
+						cleanFolder('build/dist/plugins/' + pluginDir+'/');
 					}
 				}
 				
@@ -89,14 +89,14 @@ function usage(){
 
 function uglify(folder, pluginDir){
 	if (['core','plugins'].indexOf(folder)>-1){
-		var srcFolder = '../src/'+folder+'/' + pluginDir + '/';
-		var distFolder = 'dist/'+folder+'/' + pluginDir + '/';
+		var srcFolder = 'src/'+folder+'/' + pluginDir + '/';
+		var distFolder = 'build/dist/'+folder+'/' + pluginDir + '/';
 		
 		if(!fs.existsSync(distFolder)){
 			fs.mkdirSync(distFolder);
 		}
 		
-		filesToUglify = fs.readdirSync('../src/'+folder+'/' + pluginDir);
+		filesToUglify = fs.readdirSync('./src/'+folder+'/' + pluginDir);
 
 		filesToUglify.forEach(function (file, index, array){
 			if(file.lastIndexOf(".min.")==-1 && notInProtectedFiles(file)){
