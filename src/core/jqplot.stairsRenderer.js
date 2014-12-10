@@ -61,7 +61,7 @@
 
                 // TODO let user choose if graph start O end infinite or not.
                 tempgd.push({0: 0, 1:gd[0]["1"]});
-                
+
                 for (var i=0; i<gd.length-1; i++) {
                     if (lastYPos === null){
                         lastYPos = gd[i]["1"];
@@ -73,7 +73,9 @@
                         tempgd.push(gd[i]);
                         if ((i + 1) < gd.length){
                             // i+1x; iy
-                            tempgd.push({0: gd[i + 1]["0"], 1: gd[i]["1"]});
+                            if(gd[i + 1]["1"]){
+                                tempgd.push({0: gd[i + 1]["0"], 1: gd[i]["1"]});
+                            }
                         }
                     }
                 }
