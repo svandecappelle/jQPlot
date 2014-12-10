@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title>Change dynamic option</title>
+
+		<!-- JQuery dependence -->
+		<script src="../../build/dist/core/jquery.min.js"></script>
+		<!-- JQplot dependence -->
+		<script src="../../build/dist/core/jquery.jqplot.min.js"></script>
+		<script src="../../build/dist/core/jqplot.stairsRenderer.min.js"></script>
+	</head>
+	<body>
+
+		<div id="chart1" style="margin:20px;"></div>
+		<script type="text/javascript">
+			var plot1;
+			$(function(){
+				var line1=[4, 3, 5, 8.2, 9, 12, 4, 5];
+				plot1 = $.jqplot('chart1', [line1], {
+					title:'Stairs chart',
+					seriesDefaults: {
+						renderer: $.jqplot.StairsRenderer
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
