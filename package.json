@@ -26,7 +26,9 @@
     }
   ],
   "scripts": {
-    "test": "node build/minify.js --core --all-plugins"
+    "dist": "node build/minify.js --core --all-plugins",
+    "core": "node build/minify.js --core",
+    "plugins": "node build/minify.js --all-plugins"
   },
   "bugs": "https://github.com/svandecappelle/jQPlot/issues/",
   "homepage": "https://github.com/svandecappelle/jQPlot/",
