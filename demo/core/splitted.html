@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Change dynamic option</title>
+
+		<!-- JQuery dependence -->
+		<script src="../../build/dist/core/jquery.min.js"></script>
+		<!-- JQplot dependence -->
+		<script src="../../build/dist/core/jquery.jqplot.min.js"></script>
+		<script src="../../build/dist/plugins/bar/jqplot.barRenderer.min.js"></script>
+	</head>
+	<body>
+
+		<div id="chart1" style="margin:20px;"></div>
+		<script type="text/javascript">
+			var plot1;
+			$(function(){
+			var line1=[4, 3, null , 5, 8.2, 9, 12, 4, 5, null, 6, 4, 5, null, null, 8, 7, 3, 4, null, 6];
+			plot1 = $.jqplot('chart1', [line1], {
+					title:'Update chart',
+					//series:[{lineWidth:4/*, markerOptions:{style:'square'}*/}],
+					seriesDefaults: {
+						rendererOptions: {
+							smooth: true	
+						}
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
