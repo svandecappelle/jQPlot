@@ -28,7 +28,7 @@ function building(){
 				try {
 					uglify('core', "");
 				}catch (e){
-					console.error("Error on uglifying");
+					console.error("Error on uglifying: ", e);
 				}
 			}else if(pluginDir ==="--all-plugins"){
 				console.log("Building all plugins: ");
