@@ -287,16 +287,12 @@
     // setup default renderers for axes and legend so user doesn't have to
     // called with scope of plot
     function preInit(target, data, options) {
-        options = options || {};
-        options.axesDefaults = $.extend(true, {pad:0}, options.axesDefaults);
-        options.seriesDefaults = options.seriesDefaults || {};
-        options.legend = $.extend(true, {placement:'outside'}, options.legend);
+        
         // only set these if there is a pie series
         var setopts = false;
         if (options.seriesDefaults.renderer == $.jqplot.BezierCurveRenderer) {
             setopts = true;
-        }
-        else if (options.series) {
+        }else if (options.series) {
             for (var i=0; i < options.series.length; i++) {
                 if (options.series[i].renderer == $.jqplot.BezierCurveRenderer) {
                     setopts = true;
@@ -305,6 +301,11 @@
         }
         
         if (setopts) {
+            options = options || {};
+            options.axesDefaults = $.extend(true, {pad:0}, options.axesDefaults);
+            options.seriesDefaults = options.seriesDefaults || {};
+            options.legend = $.extend(true, {placement:'outside'}, options.legend);
+
             options.axesDefaults.renderer = $.jqplot.BezierAxisRenderer;
         }
     }
