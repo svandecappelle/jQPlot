@@ -30,26 +30,6 @@
  */
 (function($) {
 
-    // Need to ensure pyramid axis and grid renderers are loaded.
-    // You should load these with script tags in the html head, that is more efficient
-    // as the browser will cache the request.
-    // Note, have to block with synchronous request in order to execute bar renderer code.
-    if ($.jqplot.PyramidAxisRenderer === undefined) {
-        $.ajax({
-            url: $.jqplot.pluginLocation + 'jqplot.pyramidAxisRenderer.js',
-            dataType: "script",
-            async: false
-        });
-    }
-    
-    if ($.jqplot.PyramidGridRenderer === undefined) {
-        $.ajax({
-            url: $.jqplot.pluginLocation + 'jqplot.pyramidGridRenderer.js',
-            dataType: "script",
-            async: false
-        });
-    }
-
     $.jqplot.PyramidRenderer = function(){
         $.jqplot.LineRenderer.call(this);
     };
