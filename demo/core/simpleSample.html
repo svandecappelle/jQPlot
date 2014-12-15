@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Change dynamic option</title>
+		<title>Simple sample</title>
 
 		<!-- JQuery dependence -->
 		<script src="../../build/dist/core/jquery.min.js"></script>
@@ -10,23 +10,19 @@
 	<body>
 
 		<div id="chart1" style="margin:20px;"></div>
-		<input type="button" onClick="changeColor()" value="Redraw with new options"/>
 		<script type="text/javascript">
 			var plot1;
 			$(function(){
 			var line1=[[1,4], [2,6.5], [3,5.7], [4,9], [5,8.2]];
 			plot1 = $.jqplot('chart1', [line1], {
-					title:'Update chart',
-					series:[{lineWidth:4, markerOptions:{style:'square'}}]
+					title: {
+						text: 'Simple chart',
+						fontFamily:'Helvetica',
+						fontSize: '14pt'
+					},
+					series: [{lineWidth:4, markerOptions:{style:'square'}}]
 				});
-			});
-			function changeColor(){
-				console.log(plot1.series[0].color);
-				plot1.series[0].color = "#FF0000";
-				plot1.series[0].data = [[1,1],[2,4],[5,3]];
-				plot1.replot({resetAxes: true});
-				plot1.drawSeries({color:"#FF0000"},0)
-			}
+			});	
 		</script>
 	</body>
 </html>

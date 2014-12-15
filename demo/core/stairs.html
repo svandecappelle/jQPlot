@@ -5,8 +5,15 @@
 		<!-- JQuery dependence -->
 		<script src="../../build/dist/core/jquery.min.js"></script>
 		<!-- JQplot dependence -->
+		<!--<script src="../../src/core/jquery.jqplot.js"></script>-->
 		<script src="../../build/dist/core/jquery.jqplot.min.js"></script>
 		<script src="../../build/dist/core/jqplot.stairsRenderer.min.js"></script>
+		<script src="../../build/dist/plugins/bezier/jqplot.BezierCurveRenderer.min.js"></script>
+
+		<script src="../../build/dist/plugins/pyramid/jqplot.pyramidRenderer.min.js"></script>
+		<script src="../../build/dist/plugins/pyramid/jqplot.pyramidAxisRenderer.min.js"></script>
+		<script src="../../build/dist/plugins/pyramid/jqplot.pyramidGridRenderer.min.js"></script>
+		
 	</head>
 	<body>
 
@@ -14,8 +21,11 @@
 		<script type="text/javascript">
 			var plot1;
 			$(function(){
-				var line1=[4, 3, 5, 8.2, null, 12, 4, 5];
-				plot1 = $.jqplot('chart1', [line1], {
+				//var line1=[4, 3, 5, 8.2, null, 12, 4, 5];
+				var line1=[4, 3, 5, 8, null, 12, 1, 5];
+
+				
+				plot1 = $.jqplot('chart1', [[4, 3, 5, 6, 8, 12, 1, 5]], {
 					title:'Stairs chart',
 					seriesDefaults: {
 						renderer: $.jqplot.StairsRenderer
