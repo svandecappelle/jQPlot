@@ -2066,7 +2066,7 @@
             if (data == null || $.isArray(data) == false || data.length == 0 || $.isArray(data[0]) == false || data[0].length == 0) {
                 
                 if (this.noDataIndicator.show == false) {
-                    throw new Error("No data specified");
+                    throw new Error("No data specified. (Tips: Use noDataIndicator to show a noDataIndicator on chart)");
                 }
                 
                 else {
