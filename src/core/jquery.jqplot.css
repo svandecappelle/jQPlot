@@ -263,7 +263,22 @@ div.jqplot-bubble-label.jqplot-bubble-label-highlight {
 
 div.jqplot-noData-container {
     text-align: center;
-    background-color: rgba(96%, 96%, 96%, 0.3);
+    background-color: rgba(18, 18, 18, 0.61);
+}
+
+div.jqplot-noData-contents>.outer-center {
+    position: relative;
+    border: 1px solid transparent;
+    border-width: 3px 0px 0px;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.15);
+    padding: 4px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-top-color: #C74097;
+    display:inline-block;
+}
+div.jqplot-noData-contents>.inner-center {
+    position: relative;
 }
 
 span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover {

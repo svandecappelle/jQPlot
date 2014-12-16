@@ -2090,9 +2090,9 @@
                         temp.css('top', this.eventCanvas._offsets.top);
                         temp.css('left', this.eventCanvas._offsets.left);
                         
-                        var temp2 = $('<div class="jqplot-noData-contents" style="text-align:center; position:relative; margin-left:auto; margin-right:auto;"></div>');
+                        var temp2 = $('<div class="jqplot-noData-contents" style="text-align:center; position:relative;"><div class="outer-center"><div class="inner-center"></div></div><div class="clear"></div></div>');
                         temp.append(temp2);
-                        temp2.html(this.noDataIndicator.indicator);
+                        temp2.find(".inner-center").html(this.noDataIndicator.indicator);
                         var th = temp2.height();
                         var tw = temp2.width();
                         temp2.height(th);
