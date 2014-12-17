@@ -13,6 +13,7 @@ jqPlot is a plotting and charting plugin for the jQuery Javascript framework. jq
 * Automatic trend line computation.
 * Tooltips and data point highlighting.
 * Sensible defaults for ease of use.
+* Large number of plugins renderers.
 
 | View  | Desc |
 | ----- | ---- |
