@@ -18,8 +18,8 @@ jqPlot is a plotting and charting plugin for the jQuery Javascript framework. jq
 | ----- | ---- |
 | ![LineStyles](http://www.jqplot.com/images/linestyles2.jpg) | Numerous line style options with 6 built in marker styles! |
 | ![Renderers](http://www.jqplot.com/images/barchart.jpg) | Lots of renderers |
-|  | Shadow control on lines, markers, the grid, everything! |
-|  |  |
-|  |  |
-|  |  |
+| ![shadows](http://www.jqplot.com/images/shadow2.jpg) | Shadow control on lines, markers, the grid, everything! |
+| ![drag&drop](http://www.jqplot.com/images/dragdrop2.jpg) | Drag and drop points with auto updating of data! |
+| ![logaxis](http://www.jqplot.com/images/logaxes2.jpg) | Log Axes with flexible tick marks! |
+| ![Trendlines](http://www.jqplot.com/images/trendline2.jpg) | Trend lines computed automatically! |
 |  |  |
