@@ -337,9 +337,14 @@
         var imgData = $(this).jqplotToImageStr({});
         if (imgData) {
             var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
-            $('body').append("<a id='jqplot-tmp-download-link' style='display:none;' href='" + imgData + "' download='chart-" + d + ".png"+"'></a>");
+            if($(this).find("#jqplot-tmp-download-link").length == 0){
+                $(this).append("<a id='jqplot-tmp-download-link' style='display:none;' href='" + imgData + "' download='chart-" + d + ".png"+"'></a>");
+            }else{
+                $(this).find('#jqplot-tmp-download-link').attr("href", imgData).attr("download", 'chart-' + d + '.png');
+            }
+
             $("#jqplot-tmp-download-link").trigger("click")
-            $("#jqplot-tmp-download-link").remove();
+            // $("#jqplot-tmp-download-link").remove();
         }
 
     };
