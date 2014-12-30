@@ -308,7 +308,7 @@
     $.fn.jqplotToImageStr = function(options) {
         var imgCanvas = $(this).jqplotToImageCanvas(options);
         if (imgCanvas) {
-            return imgCanvas.toDataURL("image/png");
+            return imgCanvas.toDataURL("image/png;base64;");
         }
         else {
             return null;
@@ -336,7 +336,9 @@
     $.fn.jqplotSaveImage = function() {
         var imgData = $(this).jqplotToImageStr({});
         if (imgData) {
-            window.location.href = imgData.replace("image/png", "image/octet-stream");
+            var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
+            $(this).attr("href", imgData).attr("download", "chart-" + d + ".png");
+            // window.location.href = imgData.replace("image/png", "image/octet-stream");
         }
 
     };
