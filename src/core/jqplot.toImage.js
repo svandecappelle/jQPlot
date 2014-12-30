@@ -337,8 +337,11 @@
         var imgData = $(this).jqplotToImageStr({});
         if (imgData) {
             var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
-            $(this).attr("href", imgData).attr("download", "chart-" + d + ".png");
-            // window.location.href = imgData.replace("image/png", "image/octet-stream");
+            if ($(this).find(".export-link").length != 0){
+                $(this).find(".export-link").attr("href", imgData).attr("download", "chart-" + d + ".png").click();
+            }else{
+                window.location.href = imgData.replace("image/png", "image/octet-stream");                
+            }
         }
 
     };
