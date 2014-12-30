@@ -337,11 +337,8 @@
         var imgData = $(this).jqplotToImageStr({});
         if (imgData) {
             var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
-            if ($(this).find(".export-link").length != 0){
-                $(this).find(".export-link").attr("href", imgData).attr("download", "chart-" + d + ".png").click();
-            }else{
-                window.location.href = imgData.replace("image/png", "image/octet-stream");                
-            }
+            w.document.write("<a id='jqplot-tmp-download-link' style='display:none;' href='" + imgData + "' download='chart-" + d + ".png"+"'></a>");
+            $("#jqplot-tmp-download-link").click().remove();
         }
 
     };
