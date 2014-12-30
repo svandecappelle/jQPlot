@@ -337,7 +337,7 @@
         var imgData = $(this).jqplotToImageStr({});
         if (imgData) {
             var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
-            $('body').append($("<a id='jqplot-tmp-download-link' style='display:none;' href='" + imgData + "' download='chart-" + d + ".png"+"'></a>"));
+            $('body').append("<a id='jqplot-tmp-download-link' style='display:none;' href='" + imgData + "' download='chart-" + d + ".png"+"'></a>");
             $("#jqplot-tmp-download-link").click().remove();
         }
 
