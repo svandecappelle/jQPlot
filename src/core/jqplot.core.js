@@ -2960,7 +2960,6 @@
                 this.baseCanvas.setContext();
 
                 if (this.options.background){
-                    console.log("has background");
                     this.baseCanvas._ctx.fillStyle = this.options.background;
                     this.baseCanvas._ctx.fillRect(0,0,this.baseCanvas._ctx.canvas.width, this.baseCanvas._ctx.canvas.height);    
                 }
