@@ -1764,6 +1764,7 @@
         // up to 4 axes are supported, each with its own options, 
         // See <Axis> for axis specific options.
         this.axes = {xaxis: new Axis('xaxis'), yaxis: new Axis('yaxis'), x2axis: new Axis('x2axis'), y2axis: new Axis('y2axis'), y3axis: new Axis('y3axis'), y4axis: new Axis('y4axis'), y5axis: new Axis('y5axis'), y6axis: new Axis('y6axis'), y7axis: new Axis('y7axis'), y8axis: new Axis('y8axis'), y9axis: new Axis('y9axis'), yMidAxis: new Axis('yMidAxis')};
+        // jqplot base canvas. Lowest canvas.
         this.baseCanvas = new $.jqplot.GenericCanvas();
         // true to intercept right click events and fire a 'jqplotRightClick' event.
         // this will also block the context menu.
@@ -1812,6 +1813,7 @@
         this.eventCanvas = new $.jqplot.GenericCanvas();
         
         this.bellowSeriesCanvas = new $.jqplot.GenericCanvas();
+
         // prop: fillBetween
         // Fill between 2 line series in a plot.
         // Options object:
@@ -2956,6 +2958,13 @@
                 // create an underlying canvas to be used for special features.
                 this.target.append(this.baseCanvas.createElement({left:0, right:0, top:0, bottom:0}, 'jqplot-base-canvas', null, this));
                 this.baseCanvas.setContext();
+
+                if (this.options.background){
+                    console.log("has background");
+                    this.baseCanvas._ctx.fillStyle = this.options.background;
+                    this.baseCanvas._ctx.fillRect(0,0,this.baseCanvas._ctx.canvas.width, this.baseCanvas._ctx.canvas.height);    
+                }
+                
                 this.target.append(this.title.draw());
                 this.title.pack({top:0, left:0});
                 
