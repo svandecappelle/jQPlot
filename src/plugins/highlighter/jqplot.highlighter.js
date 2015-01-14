@@ -237,12 +237,11 @@
         var opts = $.extend(true, {}, hl, serieshl);
 
         if (opts.useAxesFormatters) {
-            var xf = series._xaxis._ticks[0].formatter;
             var yf = series._yaxis._ticks[0].formatter;
             var xfstr = series._xaxis._ticks[0].formatString;
             var yfstr = series._yaxis._ticks[0].formatString;
             var str;
-            var xstr = xf(xfstr, neighbor.data[0]);
+            var xstr = series._xaxis._ticks[0].formatter(xfstr, neighbor.data[0]);
             var ystrs = [];
             for (var i=1; i<opts.yvalues+1; i++) {
                 ystrs.push(yf(yfstr, neighbor.data[i]));
