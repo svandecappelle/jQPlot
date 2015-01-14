@@ -238,14 +238,36 @@
 
         if (opts.useAxesFormatters) {
             var yf = series._yaxis._ticks[0].formatter;
-            var xfstr = series._xaxis._ticks[0].formatString;
+            if (opts.yaxis.formatter){
+                yf = opts.yaxis.formatter;
+            }
             var yfstr = series._yaxis._ticks[0].formatString;
+
+            if (opts.xaxis && opts.xaxis.formatString){
+                yfstr = opts.yaxis.formatString
+            }
+
+            var xfstr = series._xaxis._ticks[0].formatString;
+            
             var str;
-            var xstr = series._xaxis._ticks[0].formatter(xfstr, neighbor.data[0]);
+            var xstr;
+            if (opts.xaxis && opts.xaxis.formatter){
+                var xf = opts.xaxis.formatter;
+                if (opts.xaxis && opts.xaxis.formatString){
+                    xstr = xf(opts.xaxis.formatString, neighbor.data[0]);
+                }else{
+                    xstr = xf(xfstr, neighbor.data[0]);
+                }
+                
+            }else{
+                xstr = series._xaxis._ticks[0].formatter(xfstr, neighbor.data[0]);
+            }
+
             var ystrs = [];
             for (var i=1; i<opts.yvalues+1; i++) {
                 ystrs.push(yf(yfstr, neighbor.data[i]));
             }
+
             if (typeof opts.formatString === 'string') {
                 switch (opts.tooltipAxes) {
                     case 'both':
@@ -272,8 +294,7 @@
                         str = $.jqplot.sprintf.apply($.jqplot.sprintf, ystrs);
                         break;
                 } 
-            }
-            else {
+            }else {
                 switch (opts.tooltipAxes) {
                     case 'both':
                     case 'xy':
@@ -304,8 +325,7 @@
                     
                 }                
             }
-        }
-        else {
+        }else {
             var str;
             if (typeof opts.formatString ===  'string') {
                 str = $.jqplot.sprintf.apply($.jqplot.sprintf, [opts.formatString].concat(neighbor.data));
