@@ -243,7 +243,7 @@
             }
             var yfstr = series._yaxis._ticks[0].formatString;
 
-            if (opts.xaxis && opts.xaxis.formatString){
+            if (opts.yaxis && opts.yaxis.formatString){
                 yfstr = opts.yaxis.formatString
             }
 
