@@ -44,4 +44,5 @@ Last builded files are generated in the build directory.
 ```
 $(function(){
   $.jqplot(<ID_HTLM>, <DATAS>, <OPTIONS>);
-});```
+});
+```
