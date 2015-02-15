@@ -32,3 +32,16 @@ Last builded files are generated in the build directory.
 ## Requirements
 * To build from sources file you need nodejs
 * Type: ```npm run dist``` to build all distribution.
+
+# Usage:
+* Import into your web page:
+```
+<script src="../../../build/dist/core/jquery.min.js"></script>
+<script src="../../../build/dist/core/jquery.jqplot.min.js"></script>
+```
+* Import plugins if any
+* Call jqplot building system:
+```
+$(function(){
+  $.jqplot(<ID_HTLM>, <DATAS>, <OPTIONS>);
+});```
