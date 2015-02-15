@@ -24,3 +24,11 @@ jqPlot is a plotting and charting plugin for the jQuery Javascript framework. jq
 | ![logaxis](http://www.jqplot.com/images/logaxes2.jpg) | Log Axes with flexible tick marks! |
 | ![Trendlines](http://www.jqplot.com/images/trendline2.jpg) | Trend lines computed automatically! |
 |  |  |
+
+# Distribution
+Last builded files are generated in the build directory.  
+
+# Build from sources
+## Requirements
+* To build from sources file you need nodejs
+* Type: npm run dist to build all distribution.
