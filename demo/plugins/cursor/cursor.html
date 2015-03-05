@@ -20,15 +20,27 @@
 		<script src="../../../build/dist/plugins/fullscreener/fullscreener.min.js"></script>
 		<script src="../../../build/dist/plugins/legend/jqplot.enhancedLegendRenderer.min.js"></script>
 
-
-		<script src="../../../src/plugins/overlay/jqplot.canvasOverlay.js"></script>
 		<script src="../../../build/dist/plugins/cursor/jqplot.cursor.min.js"></script>
 
 		<link type="text/css" rel="stylesheet" href="../../../build/dist/plugins/fullscreener/fullscreener.min.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../build/dist/core/jquery.jqplot.min.css"/>
 	</head>
 	<body>
+		<style>
+			.jqplot-highlighter{
+				border: 1px solid #343434;	
+				border-collapse: collapse;
+			}
 
+			.jqplot-highlighter td{
+				border: 1px solid #343434;
+				padding: 2px;	
+			}
+
+			.jqplot-highlighter td.title{
+				color: red;	
+			}
+		</style>
 		<div class="coding">
 		<div id="chart2" style="margin:20px;"></div>
 		<script type="text/javascript">
@@ -48,6 +60,10 @@
 						axes:{
 							xaxis:{
 								renderer:$.jqplot.DateAxisRenderer,
+								tickOptions: {
+									 formatString: '%Y #%V', 
+									 typeFormatter: 'php'
+								}
 							}
 						},
 						seriesDefaults:{
@@ -72,7 +88,8 @@
 							horizontalLine: {
 								color: "#ff0000",
 								style: "dotted"
-							}
+							},
+							tooltipFormatString: "<table class=\"jqplot-highlighter\"><tr style=\"text-align:center;\"><td class=\"title\">%s</td><td>%s</td><td>%s</td></tr></table>"
 						},
 						stackSeries: true,
 					});
