@@ -145,6 +145,10 @@
         this.showTooltipOutsideZoom = false;
         // true if mouse is over grid, false if not.
         this.onGrid = false;
+
+        this.verticalLine = null;
+        this.horizontalLine = null;
+
         $.extend(true, this, options);
     };
     
@@ -537,16 +541,41 @@
         }
         c._tooltipElem.html(s);
     }
+
+    function convertToShapeOption(option){
+        if (option){
+            var output = {};
+
+            if (option.color){
+                output.strokeStyle = option.color;
+            }
+            
+            if (option.style){
+                output.linePattern = option.style;
+            }
+            
+            if (option.lineWidth){
+                output.lineWidth = option.lineWidth;
+            }
+            
+            return output;
+
+        }else{
+            return option;
+        }
+    }
     
     function moveLine(gridpos, plot) {
         var c = plot.plugins.cursor;
         var ctx = c.cursorCanvas._ctx;
         ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
         if (c.showVerticalLine) {
-            c.shapeRenderer.draw(ctx, [[gridpos.x, 0], [gridpos.x, ctx.canvas.height]]);
+            var optionsVertical = convertToShapeOption(c.verticalLine);
+            c.shapeRenderer.draw(ctx, [[gridpos.x, 0], [gridpos.x, ctx.canvas.height]], optionsVertical);
         }
         if (c.showHorizontalLine) {
-            c.shapeRenderer.draw(ctx, [[0, gridpos.y], [ctx.canvas.width, gridpos.y]]);
+            var optionsHorizontal = convertToShapeOption(c.horizontalLine);
+            c.shapeRenderer.draw(ctx, [[0, gridpos.y], [ctx.canvas.width, gridpos.y]], optionsHorizontal);
         }
         var ret = getIntersectingPoints(plot, gridpos.x, gridpos.y);
         if (c.showCursorLegend) {
