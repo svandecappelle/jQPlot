@@ -378,7 +378,6 @@
                         c._zoom.axes[ax].tickFormatString = (axes[ax].tickOptions != null) ? axes[ax].tickOptions.formatString :  '';
                     }
 
-                    console.log("zzom")
                     if ((c.constrainZoomTo == 'none') || (c.constrainZoomTo == 'x' && ax.charAt(0) == 'x') || (c.constrainZoomTo == 'y' && ax.charAt(0) == 'y')) {   
                         dp = datapos[ax];
                         if (dp != null) {           
@@ -518,12 +517,10 @@
                     if (cellid != -1) {
                         var data = ret.data[cellid].data;
                         if (c.useAxesFormatters) {
-                            var xf = series[i]._xaxis._ticks[0].formatter;
-                            var yf = series[i]._yaxis._ticks[0].formatter;
                             var xfstr = series[i]._xaxis._ticks[0].formatString;
                             var yfstr = series[i]._yaxis._ticks[0].formatString;
-                            sx = xf(xfstr, data[0]);
-                            sy = yf(yfstr, data[1]);
+                            sx = series[i]._xaxis._ticks[0].formatter(xfstr, data[0]);
+                            sy = series[i]._yaxis._ticks[0].formatter(yfstr, data[1]);
                         }
                         else {
                             sx = data[0];
@@ -911,9 +908,6 @@
     }
 
     function handleZoomMove(ev) {
-console.log(ev.pageX);
-        console.log(ev.pageY);
-
         var plot = ev.data.plot;
         var c = plot.plugins.cursor;
         // don't do anything if not on grid.
@@ -1010,10 +1004,6 @@ console.log(ev.pageX);
     function handleMouseUp(ev) {
         var plot = ev.data.plot;
         var c = plot.plugins.cursor;
-
-        console.log(ev.pageX);
-        console.log(ev.pageY);
-
         if (c.zoom && c._zoom.zooming && !c.zoomTarget) {
             var xpos = c._zoom.gridpos.x;
             var ypos = c._zoom.gridpos.y;
@@ -1048,8 +1038,6 @@ console.log(ev.pageX);
             }
             c._zoom.end = [xpos, ypos];
             c._zoom.gridpos = {x:xpos, y:ypos};
-            console.log(c._zoom.gridpos);
-            console.log(datapos);
             c.doZoom(c._zoom.gridpos, datapos, plot, c);
         }
         c._zoom.started = false;
