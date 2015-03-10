@@ -27,25 +27,25 @@
 	</head>
 	<body>
 		<style>
-			.jqplot-highlighter{
+			.jqplot-cursor-highlighter-head{
 				border: 1px solid #343434;	
-				border-collapse: collapse;
+				font-size: 12pt;
 			}
 
-			.jqplot-highlighter td{
-				border: 1px solid #343434;
-				padding: 2px;	
+			.jqplot-cursor-highlighter{
+
 			}
 
-			.jqplot-highlighter td.title{
-				color: red;	
-			}
 		</style>
 		<div class="coding">
 		<div id="chart2" style="margin:20px;"></div>
 		<script type="text/javascript">
 			$(function(){
-				console.log($.jsDate.createDate('2008-09-01 05:00:00').getTime());
+				var date = new $.jsDate();
+				date.set({syntax: "php"});
+				date.add(4, "day");
+				console.log(date);
+				console.log(date.strftime("%V"));
 
 				var serie1=[['2008-09-01',4],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
 				var serie2=[['2008-09-01',2],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
@@ -61,7 +61,7 @@
 							xaxis:{
 								renderer:$.jqplot.DateAxisRenderer,
 								tickOptions: {
-									 formatString: '%Y #%V', 
+									 formatString: '%Y #%U', 
 									 typeFormatter: 'php'
 								}
 							}
@@ -89,7 +89,9 @@
 								color: "#ff0000",
 								style: "dotted"
 							},
-							tooltipFormatString: "<table class=\"jqplot-highlighter\"><tr style=\"text-align:center;\"><td class=\"title\">%s</td><td>%s</td><td>%s</td></tr></table>"
+							tooltipFormatString: "<div class=\"jqplot-cursor-highlight\">%s%n: %s</div>",
+							insertHead: true,
+							headTooltipFormatString: "<div class=\"jqplot-cursor-highlighter-head\">%s</div>"
 						},
 						stackSeries: true,
 					});

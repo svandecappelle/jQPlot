@@ -149,6 +149,9 @@
         this.verticalLine = null;
         this.horizontalLine = null;
 
+        this.insertHead = false;
+        this.headTooltipFormatString = '%s';
+
         $.extend(true, this, options);
     };
     
@@ -480,10 +483,15 @@
         }
         if (c.showTooltipUnitPosition) {
             var g;
+
             for (var i=0; i<c.tooltipAxisGroups.length; i++) {
                 g = c.tooltipAxisGroups[i];
                 if (addbr) {
                     s += '<br />';
+                }else{
+                    var af = plot.axes[g[j]]._ticks[0].formatter;
+                    var afstr = plot.axes[g[j]]._ticks[0].formatString;
+                    s += af(afstr, datapos[g[j]]);
                 }
                 if (c.useAxesFormatters) {
                     for (var j=0; j<g.length; j++) {
@@ -521,6 +529,11 @@
                             var yfstr = series[i]._yaxis._ticks[0].formatString;
                             sx = series[i]._xaxis._ticks[0].formatter(xfstr, data[0]);
                             sy = series[i]._yaxis._ticks[0].formatter(yfstr, data[1]);
+                            if (!addbr && c.insertHead){
+                                s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
+                                s += '<br />';
+                            }
+                           
                         }
                         else {
                             sx = data[0];
