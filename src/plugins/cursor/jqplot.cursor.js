@@ -549,6 +549,13 @@
             }
             
         }
+
+        if (s === ""){
+            c._tooltipElem.css({display:'none'});
+        }else{
+            c._tooltipElem.css({display:'block'});
+        }
+
         c._tooltipElem.html(s);
     }
 
