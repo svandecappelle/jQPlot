@@ -151,6 +151,7 @@
 
         this.insertHead = false;
         this.headTooltipFormatString = '%s';
+        this.useSeriesColor = false;
 
         $.extend(true, this, options);
     };
@@ -519,6 +520,11 @@
                 if (series[i].show) {
                     var idx = series[i].index;
                     var label = series[i].label.toString();
+
+                    if (c.useSeriesColor){
+                        label = $.jqplot.sprintf("<span style=\"color:%s\">%s</span>", series[i].color, label);
+                    }
+
                     var cellid = $.inArray(idx, ret.indices);
                     var sx = undefined;
                     var sy = undefined;
@@ -533,7 +539,6 @@
                                 s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
                                 s += '<br />';
                             }
-                           
                         }
                         else {
                             sx = data[0];
