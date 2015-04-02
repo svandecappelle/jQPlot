@@ -499,7 +499,7 @@
                 if(c.yaxis || c.xaxis){
                     var yaxisStr;
                     if (c.yaxis && c.yaxis.formatter){
-                        yaxisStr = c.yaxis.formatter(datapos[g[1]]);
+                        yaxisStr = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, datapos[g[1]]);
                     }else{
                         var yfstr = g._yaxis._ticks[0].formatString;
                         sx = g._yaxis._ticks[0].formatter(yfstr, data[1]);
@@ -507,7 +507,7 @@
 
                     var xaxisStr;
                     if (c.xaxis && c.xaxis.formatter){
-                        xaxisStr = c.xaxis.formatter(datapos[g[0]]);
+                        xaxisStr = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, datapos[g[0]]);
                     }else{
                         var xfstr = g._xaxis._ticks[0].formatString;
                         sx = g._xaxis._ticks[0].formatter(xfstr, data[0]);
@@ -551,14 +551,14 @@
                         var data = ret.data[cellid].data;
                         if(c.yaxis || c.xaxis){
                             if (c.yaxis && c.yaxis.formatter){
-                                sy = c.yaxis.formatter(data[1]);
+                                sy = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, data[1]);
                             }else{
                                 var yfstr = series[i]._yaxis._ticks[0].formatString;
                                 sy = series[i]._yaxis._ticks[0].formatter(yfstr, data[1]);
                             }
 
                             if (c.xaxis && c.xaxis.formatter){
-                                sx = c.xaxis.formatter(data[0]);
+                                sx = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, data[0]);
                             }else{
                                 var xfstr = series[i]._xaxis._ticks[0].formatString;
                                 sx = series[i]._xaxis._ticks[0].formatter(xfstr, data[0]);
@@ -649,14 +649,14 @@
                     var data = ret.data[cellid].data;
                     if(c.yaxis || c.xaxis){
                         if (c.yaxis && c.yaxis.formatter){
-                            sy = c.yaxis.formatter(data[1]);
+                            sy = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, data[1]);
                         }else{
                             var yfstr = series._yaxis._ticks[0].formatString;
                             sy = series._yaxis._ticks[0].formatter(yfstr, data[1]);
                         }
 
                         if (c.xaxis && c.xaxis.formatter){
-                            sx = c.xaxis.formatter(data[0]);
+                            sx = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, data[0]);
                         }else{
                             var xfstr = series._xaxis._ticks[0].formatString;
                             sx = series._xaxis._ticks[0].formatter(xfstr, data[0]);
