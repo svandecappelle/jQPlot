@@ -152,6 +152,8 @@
         this.insertHead = false;
         this.headTooltipFormatString = '%s';
         this.useSeriesColor = false;
+        this.yaxis = null;
+        this.xaxis = null;
 
         $.extend(true, this, options);
     };
@@ -494,7 +496,25 @@
                     var afstr = plot.axes[g[j]]._ticks[0].formatString;
                     s += af(afstr, datapos[g[j]]);
                 }
-                if (c.useAxesFormatters) {
+                if(c.yaxis || c.xaxis){
+                    var yaxisStr;
+                    if (c.yaxis && c.yaxis.formatter){
+                        yaxisStr = c.yaxis.formatter(datapos[g[1]]);
+                    }else{
+                        var yfstr = g._yaxis._ticks[0].formatString;
+                        sx = g._yaxis._ticks[0].formatter(yfstr, data[1]);
+                    }
+
+                    var xaxisStr;
+                    if (c.xaxis && c.xaxis.formatter){
+                        xaxisStr = c.xaxis.formatter(datapos[g[0]]);
+                    }else{
+                        var xfstr = g._xaxis._ticks[0].formatString;
+                        sx = g._xaxis._ticks[0].formatter(xfstr, data[0]);
+                    }
+
+                    s += $.jqplot.sprintf(c.tooltipFormatString, xaxisStr, yaxisStr);
+                }else if (c.useAxesFormatters) {
                     for (var j=0; j<g.length; j++) {
                         if (j) {
                             s += ', ';
@@ -503,8 +523,7 @@
                         var afstr = plot.axes[g[j]]._ticks[0].formatString;
                         s += af(afstr, datapos[g[j]]);
                     }
-                }
-                else {
+                }else {
                     s += $.jqplot.sprintf(c.tooltipFormatString, datapos[g[0]], datapos[g[1]]);
                 }
                 addbr = true;
@@ -530,7 +549,25 @@
                     var sy = undefined;
                     if (cellid != -1) {
                         var data = ret.data[cellid].data;
-                        if (c.useAxesFormatters) {
+                        if(c.yaxis || c.xaxis){
+                            if (c.yaxis && c.yaxis.formatter){
+                                sy = c.yaxis.formatter(data[1]);
+                            }else{
+                                var yfstr = series[i]._yaxis._ticks[0].formatString;
+                                sy = series[i]._yaxis._ticks[0].formatter(yfstr, data[1]);
+                            }
+
+                            if (c.xaxis && c.xaxis.formatter){
+                                sx = c.xaxis.formatter(data[0]);
+                            }else{
+                                var xfstr = series[i]._xaxis._ticks[0].formatString;
+                                sx = series[i]._xaxis._ticks[0].formatter(xfstr, data[0]);
+                            }
+                            if (!addbr && c.insertHead){
+                                s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
+                                s += '<br />';
+                            }
+                        }else if (c.useAxesFormatters) {
                             var xfstr = series[i]._xaxis._ticks[0].formatString;
                             var yfstr = series[i]._yaxis._ticks[0].formatString;
                             sx = series[i]._xaxis._ticks[0].formatter(xfstr, data[0]);
@@ -539,8 +576,7 @@
                                 s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
                                 s += '<br />';
                             }
-                        }
-                        else {
+                        } else {
                             sx = data[0];
                             sy = data[1];
                         }
@@ -611,15 +647,29 @@
                 var sy = undefined;
                 if (cellid != -1) {
                     var data = ret.data[cellid].data;
-                    if (c.useAxesFormatters) {
+                    if(c.yaxis || c.xaxis){
+                        if (c.yaxis && c.yaxis.formatter){
+                            sy = c.yaxis.formatter(data[1]);
+                        }else{
+                            var yfstr = series._yaxis._ticks[0].formatString;
+                            sy = series._yaxis._ticks[0].formatter(yfstr, data[1]);
+                        }
+
+                        if (c.xaxis && c.xaxis.formatter){
+                            sx = c.xaxis.formatter(data[0]);
+                        }else{
+                            var xfstr = series._xaxis._ticks[0].formatString;
+                            sx = series._xaxis._ticks[0].formatter(xfstr, data[0]);
+                        }
+
+                    }else if (c.useAxesFormatters) {
                         var xf = series._xaxis._ticks[0].formatter;
                         var yf = series._yaxis._ticks[0].formatter;
                         var xfstr = series._xaxis._ticks[0].formatString;
                         var yfstr = series._yaxis._ticks[0].formatString;
                         sx = xf(xfstr, data[0]);
                         sy = yf(yfstr, data[1]);
-                    }
-                    else {
+                    } else {
                         sx = data[0];
                         sy = data[1];
                     }
