@@ -41,6 +41,11 @@
         // CSS spec for cursor style
         this.style = 'crosshair';
         this.previousCursor = 'auto';
+        // Constraint the tooltip position to the edge of screen.
+        // This will change the position of tooltip if tooltip 
+        // is not completly displayed on screen due 
+        // to tooltip size & cursor position.
+        this.constraintTooltipToScreen = false;
         // prop: show
         // whether to show the cursor or not.
         this.show = $.jqplot.config.enablePlugins;
@@ -716,8 +721,80 @@
     function moveTooltip(gridpos, plot) {
         var c = plot.plugins.cursor;  
         var elem = c._tooltipElem;
+        var fallbackTooltipLocation = null;
         switch (c.tooltipLocation) {
             case 'nw':
+                var x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+                var y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+                break;
+            case 'n':
+                var x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true)/2;
+                var y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+                break;
+            case 'ne':
+                var x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+                var y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+                break;
+            case 'e':
+                var x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+                var y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true)/2;
+                break;
+            case 'se':
+                var x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+                var y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+                break;
+            case 's':
+                var x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true)/2;
+                var y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+                break;
+            case 'sw':
+                var x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+                var y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+                break;
+            case 'w':
+                var x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+                var y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true)/2;
+                break;
+            default:
+                var x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+                var y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+                break;
+        }
+
+        if (c.constraintTooltipToScreen){
+            if (x < 0){
+                fallbackTooltipLocation = 's';
+            }else if( x > document.body.clientWidth){
+                fallbackTooltipLocation = 'n';
+            }
+
+            if (y < 0){
+                fallbackTooltipLocation += 'e';
+            }else if (y > document.body.clientHeight){
+                fallbackTooltipLocation += 'w';
+            }
+            if (fallbackTooltipLocation !== null){
+                setTooltipPosition(fallbackTooltipLocation, gridpos, plot);
+            }else{
+                elem.css('left', x);
+                elem.css('top', y);
+                elem = null;
+            }
+        }else{
+            elem.css('left', x);
+            elem.css('top', y);
+            elem = null;
+        }
+    }
+
+    function setTooltipPosition(location, gridpos, plot) {
+        var c = plot.plugins.cursor;  
+        var elem = c._tooltipElem;
+        switch (location) {
+            case 'nw':
+                if (x < 0 && y < 0){
+                    moveTooltip(gridpos, plot);
+                }
                 var x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
                 var y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
                 break;
