@@ -45,7 +45,7 @@
         // This will change the position of tooltip if tooltip 
         // is not completly displayed on screen due 
         // to tooltip size & cursor position.
-        this.constraintTooltipToScreen = false;
+        this.constrainTooltipToScreen = false;
         // prop: show
         // whether to show the cursor or not.
         this.show = $.jqplot.config.enablePlugins;
@@ -761,7 +761,7 @@
                 break;
         }
 
-        if (c.constraintTooltipToScreen){
+        if (c.constrainTooltipToScreen){
             if (x < 0){
                 fallbackTooltipLocation = 's';
             }else if( x > document.body.clientWidth){
