@@ -93,7 +93,12 @@
 							tooltipFormatString: "<div class=\"jqplot-cursor-highlight\">%s%n: %s</div>",
 							insertHead: true,
 							headTooltipFormatString: "<div class=\"jqplot-cursor-highlighter-head\">%s</div>",
-							constrainTooltipToScreen: true
+							constrainTooltipToScreen: true,
+							yaxis: {
+								formatter: function(formatString, ydata, serieIndex){
+									return (ydata!=null?ydata:"n/a") + " - Serie number: " + (serieIndex + 1);
+								}
+							}
 						},
 						stackSeries: true,
 					});

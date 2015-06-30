@@ -493,6 +493,7 @@
             var g;
 
             for (var i=0; i<c.tooltipAxisGroups.length; i++) {
+                var serieIndex = i;
                 g = c.tooltipAxisGroups[i];
                 if (addbr) {
                     s += '<br />';
@@ -504,18 +505,18 @@
                 if(c.yaxis || c.xaxis){
                     var yaxisStr;
                     if (c.yaxis && c.yaxis.formatter){
-                        yaxisStr = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, datapos[g[1]]);
+                        yaxisStr = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, datapos[g[1]], serieIndex);
                     }else{
                         var yfstr = g._yaxis._ticks[0].formatString;
-                        sx = g._yaxis._ticks[0].formatter(yfstr, data[1]);
+                        sx = g._yaxis._ticks[0].formatter(yfstr, data[1], serieIndex);
                     }
 
                     var xaxisStr;
                     if (c.xaxis && c.xaxis.formatter){
-                        xaxisStr = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, datapos[g[0]]);
+                        xaxisStr = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, datapos[g[0]], serieIndex);
                     }else{
                         var xfstr = g._xaxis._ticks[0].formatString;
-                        sx = g._xaxis._ticks[0].formatter(xfstr, data[0]);
+                        sx = g._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
                     }
 
                     s += $.jqplot.sprintf(c.tooltipFormatString, xaxisStr, yaxisStr);
@@ -526,7 +527,7 @@
                         }
                         var af = plot.axes[g[j]]._ticks[0].formatter;
                         var afstr = plot.axes[g[j]]._ticks[0].formatString;
-                        s += af(afstr, datapos[g[j]]);
+                        s += af(afstr, datapos[g[j]], serieIndex);
                     }
                 }else {
                     s += $.jqplot.sprintf(c.tooltipFormatString, datapos[g[0]], datapos[g[1]]);
@@ -541,6 +542,7 @@
             var addbr = false;
 
             for (var i = 0; i< series.length; i++) {
+                var serieIndex = i;
                 if (series[i].show) {
                     var idx = series[i].index;
                     var label = series[i].label.toString();
@@ -556,17 +558,17 @@
                         var data = ret.data[cellid].data;
                         if(c.yaxis || c.xaxis){
                             if (c.yaxis && c.yaxis.formatter){
-                                sy = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, data[1]);
+                                sy = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, data[1], serieIndex);
                             }else{
                                 var yfstr = series[i]._yaxis._ticks[0].formatString;
-                                sy = series[i]._yaxis._ticks[0].formatter(yfstr, data[1]);
+                                sy = series[i]._yaxis._ticks[0].formatter(yfstr, data[1], serieIndex);
                             }
 
                             if (c.xaxis && c.xaxis.formatter){
-                                sx = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, data[0]);
+                                sx = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, data[0], serieIndex);
                             }else{
                                 var xfstr = series[i]._xaxis._ticks[0].formatString;
-                                sx = series[i]._xaxis._ticks[0].formatter(xfstr, data[0]);
+                                sx = series[i]._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
                             }
                             if (!addbr && c.insertHead){
                                 s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
@@ -575,8 +577,8 @@
                         }else if (c.useAxesFormatters) {
                             var xfstr = series[i]._xaxis._ticks[0].formatString;
                             var yfstr = series[i]._yaxis._ticks[0].formatString;
-                            sx = series[i]._xaxis._ticks[0].formatter(xfstr, data[0]);
-                            sy = series[i]._yaxis._ticks[0].formatter(yfstr, data[1]);
+                            sx = series[i]._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
+                            sy = series[i]._yaxis._ticks[0].formatter(yfstr, data[1], serieIndex);
                             if (!addbr && c.insertHead){
                                 s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
                                 s += '<br />';
@@ -654,17 +656,17 @@
                     var data = ret.data[cellid].data;
                     if(c.yaxis || c.xaxis){
                         if (c.yaxis && c.yaxis.formatter){
-                            sy = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, data[1]);
+                            sy = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, data[1], idx);
                         }else{
                             var yfstr = series._yaxis._ticks[0].formatString;
-                            sy = series._yaxis._ticks[0].formatter(yfstr, data[1]);
+                            sy = series._yaxis._ticks[0].formatter(yfstr, data[1], idx);
                         }
 
                         if (c.xaxis && c.xaxis.formatter){
-                            sx = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, data[0]);
+                            sx = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, data[0], idx);
                         }else{
                             var xfstr = series._xaxis._ticks[0].formatString;
-                            sx = series._xaxis._ticks[0].formatter(xfstr, data[0]);
+                            sx = series._xaxis._ticks[0].formatter(xfstr, data[0], idx);
                         }
 
                     }else if (c.useAxesFormatters) {
@@ -672,8 +674,8 @@
                         var yf = series._yaxis._ticks[0].formatter;
                         var xfstr = series._xaxis._ticks[0].formatString;
                         var yfstr = series._yaxis._ticks[0].formatString;
-                        sx = xf(xfstr, data[0]);
-                        sy = yf(yfstr, data[1]);
+                        sx = xf(xfstr, data[0], idx);
+                        sy = yf(yfstr, data[1], idx);
                     } else {
                         sx = data[0];
                         sy = data[1];
