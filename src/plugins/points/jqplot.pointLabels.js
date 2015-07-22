@@ -270,6 +270,7 @@
 			xax = this._xaxis,
 			yax = this._yaxis,
 			elem, helem;
+        var that = this;
 
         // set labels again in case they have changed.
         p.setLabels.call(this);
@@ -293,9 +294,8 @@
 
             for (i = 0, len = p._labels.length; i < len; i++) {
                 var label = p._labels[i],
-                  location = p.location,
-						barPoint = this._barPoints[i],
-						ell, elt, elr, elb, et, scl, sct, scr, scb;
+                        location = p.location,
+                        ell, elt, elr, elb, et, scl, sct, scr, scb;
                 
                 if (label == null || (p.hideZeros && parseInt(label, 10) == 0)) {
                     continue;
@@ -344,6 +344,7 @@
                 // we have stacked chart but are not showing stacked values,
                 // place labels in center.
                 if (this._stack && !p.stackedValue) {
+                    var barPoint = that._barPoints[i];
                     if (this.barDirection === "vertical") {
                         elt = (barPoint[0][1] + barPoint[1][1]) / 2 + plot._gridPadding.top - 0.5 * elem.outerHeight(true);
                         ell = (barPoint[2][0] + barPoint[0][0]) / 2 + plot._gridPadding.left - 0.5 * elem.outerWidth(true);
@@ -372,9 +373,9 @@
                 scr = sctx.canvas.width + scl;
                 scb = sctx.canvas.height + sct;
                 // if label is outside of allowed area, remove it
-                if (ell - et < scl || elt - et < sct || elr + et > scr || elb + et > scb) {
+                /*if (ell - et < scl || elt - et < sct || elr + et > scr || elb + et > scb) {
                     elem.remove();
-                }
+                }*/
 
                 elem = null;
                 helem = null;
