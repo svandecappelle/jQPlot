@@ -1,8 +1,14 @@
 .coding{
-	width:50%;
+	width: 100%;
 	display: inline-block;
 	margin-right: 5px;
 	margin-left: 5px;
+	height: 50%;
+	margin-bottom: 30px;
+}
+
+.coding:last-of-type{
+	margin-bottom: 0px;
 }
 
 body{
@@ -10,8 +16,9 @@ body{
 }
 
 .coding>div{
-	width:100%;
+	width: 50%;
 	height: 50%;
+	position: absolute;
 	display: inline-block;
 }
 
@@ -19,6 +26,10 @@ body{
 	display: inline-block;
 	margin-right: 5px;
 	margin-left: 5px;
+	position: absolute;
+	right: 0px;
+	width: 50% !important;
+	max-width: 600px;
 }
 
 .CodeMirror-foldgutter-open, .CodeMirror-foldgutter-folded{
