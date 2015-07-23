@@ -36,5 +36,9 @@
   "docs": "https://github.com/svandecappelle/jQPlot/wiki/",
   "dependencies": {
     "yuicompressor": "2.4.8"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-uglify": "^0.9.1"
   }
 }
