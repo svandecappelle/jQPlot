@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cow tests</title>
+  <link rel="stylesheet" media="all" href="vendor/mocha.css">
+</head>
+<body>
+  <h1>Testing chart</h1>
+  <div id="chart" style="margin-top: 50px; margin-left: 10px; margin-right:10px;"></div>
+
+  <div id="mocha"><p><a href=".">Index</a></p></div>
+  <div id="messages"></div>
+  <div id="fixtures"></div>  
+
+  <script src="../dist/core/jquery.min.js"></script>
+  <script src="../dist/core/jquery.jqplot.min.js"></script>
+
+  <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../node_modules/chai/chai.js"></script>
+  
+  <script>
+    mocha.ui('bdd');
+    mocha.reporter('html');
+    var expect = chai.expect;
+  </script>
+  <script src="core/test.js"></script>
+  <script>
+    $(function() {
+      mocha.run();
+    });
+  </script>
+</body>
+</html>

@@ -35,9 +35,11 @@
   "homepage": "https://github.com/svandecappelle/jQPlot/",
   "docs": "https://github.com/svandecappelle/jQPlot/wiki/",
   "devDependencies": {
+    "chai": "^3.2.0",
     "grunt": "^0.4.5",
     "grunt-contrib-cssmin": "^0.12.3",
-    "grunt-contrib-uglify": "^0.9.1"
+    "grunt-contrib-uglify": "^0.9.1",
+    "mocha": "^2.2.5"
   },
   "engine": "node >= 0.12"
 }
