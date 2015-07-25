@@ -1748,3 +1748,7 @@ body.tests #mocha .test.fail h2:before {
   padding-right: 6px;
   color: #f00;
 }
+
+table.images-content tr th, table.images-content tr td{
+  padding: 2px;
+}
