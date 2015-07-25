@@ -1,209 +1,236 @@
-<!doctype html>
-<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
-<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <head>
+    <title>Jqplot</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" media="all" href="main.css"/>
+  </head>
 
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
-  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
+  <body class="index">
 
-  <!-- Jqplot demos: -->
-  <script src="javascripts/jqplot/core/jquery.min.js"></script>
-  <!-- JQplot dependence -->
-  <script src="javascripts/jqplot/core/jquery.jqplot.min.js"></script>
-  <!-- Axes -->
-  <script src="javascripts/jqplot/plugins/axis/jqplot.dateAxisRenderer.min.js"></script>
-  <script src="javascripts/jqplot/plugins/axis/jqplot.canvasAxisTickRenderer.min.js"></script>
-  <script src="javascripts/jqplot/plugins/text/jqplot.canvasTextRenderer.min.js"></script>
 
-  <script src="javascripts/jqplot/plugins/fullscreener/fullscreener.min.js"></script>
-  <link type="text/css" rel="stylesheet" href="javascripts/jqplot/plugins/fullscreener/fullscreener.min.css"/>
-
-  <!--Codemirror-->
-  <link rel="stylesheet" href="javascripts/codemirror-4.0/lib/codemirror.css">
-  <link rel="stylesheet" href="javascripts/codemirror-4.0/theme/twilight.css">
-  <script src="javascripts/codemirror-4.0/lib/codemirror.js"></script>
-  <script src="javascripts/codemirror-4.0/mode/javascript/javascript.js"></script>
-  <script src="javascripts/codemirror-4.0/addon/selection/active-line.js"></script>
-  <script src="javascripts/codemirror-4.0/addon/edit/matchbrackets.js"></script>
-
-  <title>Jqplot</title>
-  <meta name="description" content="JQplot revival">
-
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-</head>
-
-<body>
-
-  <div class="wrapper">
-    <header>
-      <h1 class="title">Jqplot</h1>
-    </header>
-    <div id="container">
-      <p class="tagline">JQplot revival</p>
-      <div id="main" role="main">
-        <div class="download-bar">
-        <div class="inner">
-          <a href="https://github.com/svandecappelle/jQPlot/tarball/master" class="download-button tar"><span>Download</span></a>
-          <a href="https://github.com/svandecappelle/jQPlot/zipball/master" class="download-button zip"><span>Download</span></a>
-          <a href="https://github.com/svandecappelle/jQPlot" class="code">View Jqplot on GitHub</a>
+    <nav id="primary">
+      <div class="nav-wrap">
+        <div class="logo">
+          <h1><a href="/">jQPlot Chart Library</a></h1>
         </div>
-        <span class="blc"></span><span class="trc"></span>
+        <div class="navlist">
+          <ul>
+            <li><a href="/guide/index.html">Guide</a></li>
+            <li><a href="/api/index.html" class="">API</a></li>
+            <li><a href="/plugins/index.html">Plugins</a></li>
+            <li><a href="/tests/index.html">Unit tests</a></li>
+          </ul>
         </div>
-        <article class="markdown-body">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Installation.</h3>
-<p>
-  <ul>
-    <li>Simply download the project (zip or tar.gz format).</li> 
-    <li>Add the following lines to your web page: 
-<textarea class="code-text" style="height:85px;">
-<!-- Jquery: -->
-<script src="path_to_your_jqplot_directory/jqplot/core/jquery.min.js"></script>
-<!-- JQplot core -->
-<script src="path_to_your_jqplot_directory/jqplot/core/jquery.jqplot.min.js"&gt;&lt;/script></textarea>
-    </li>
-    <li>
-      The plugins installations are discribed in the demos screen.
-    </li>
-    </ul>
-  </p>
-<h3>
-<a name="demo" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Demos</h3>
-<div>
-  <div id="chart-resizable">
-      <input onClick="fullscreen()" type="button" value="Fullscreen"/>
-      <div class="overlay">
       </div>
-      <div class="popup">
-        <div class="resizable">
-          <div id="chart1" class="chart" style="margin:20px;">
+    </nav>
+    <header>
+      <div class="header-wrap">
+        <div class="installation">
+          <div class="site-description"><p>Jqplot is a UI chart jquery library to build complexe charts using canvas.</p>
+          </div>
+          <div class="card-wrap">
+            <div class="card">
+              <div class="card-inner">
+                <h1>Download jQplot<span class="version">1.0.9-stable</span></h1>
+                <div id="node" class="install">
+                  <h2>dist library<small><a href="#browser" class="toggle">build from sources?</a></small></h2>
+                  <div class="download-banner"> 
+                    <div class="action-button"><a href="/guide/installation/#node">Download last stable release</a></div>
+                  </div>
+                </div>
+                <div class="tech-links">
+                  <a href="https://github.com/svandecappelle/jQPlot/issues" target="_blank">Issues</a>&nbsp;|&nbsp;
+                  <a href="https://github.com/svandecappelle/jQPlot" target="_blank">Fork on GitHub</a>&nbsp;|&nbsp;
+                  <a href="https://github.com/svandecappelle/jQPlot/wiki/changelog.md" target="_blank">Changelog</a>&nbsp;|&nbsp;
+                  <a href="http://groups.google.com/group/jqplot-users" target="_blank">Google Group</a>&nbsp;|&nbsp;
+                  <a href="http://travis-ci.org/#!/svandecappelle/jQPlot" target="_blank">Build Status</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="callouts">
+          <div id="guide" class="call"><a href="/guide"><span class="icon"></span>
+              <big>Getting Started</big><small>Learn how install and use jQPlot through a series of guided walkthroughs.</small></a>
+            <div style="opacity: 0;" class="bg"></div>
+          </div>
+          <div id="api" class="call"><a href="/api"><span class="icon"></span>
+              <big>API Documentation</big><small>Explore the API documentation &amp; to know all possibilities on the core and plugins charts.</small></a>
+            <div class="bg"></div>
+          </div>
+          <div id="plugins" class="call"><a href="/plugins"><span class="icon"></span>
+              <big>Plugin Directory</big><small>Extend jQPlot's with additional behaviors and renderers.</small></a>
+            <div class="bg"></div>
           </div>
         </div>
       </div>
-    </div>
-    <script type="text/javascript">
-      var plot1;
-      $(function(){
-      var line1=[['2008-09-30',4], ['2008-10-30',6.5], ['2008-11-30',5.7], ['2008-12-30',9], ['2009-01-30',8.2]];
-      plot1 = $.jqplot('chart1', [line1], {
-          title:'Fullscreen demo',
-          axes:{
-            xaxis:{
-              renderer:$.jqplot.DateAxisRenderer,
-              rendererOptions:{
-                tickRenderer:$.jqplot.CanvasAxisTickRenderer
-                      },
-              tickOptions: {
-                formatString: '%Y #%V',
-                typeFormatter: 'php',
-                fontSize:'10pt',
-                          fontFamily:'Tahoma',
-                          angle:-40
-              } 
-            }
-          },
-          series:[{lineWidth:4, markerOptions:{style:'square'}}]
-        });
-      });
+    </header>
+    <div class="content">
+      <section id="content">
+        <div id="home" class="grid_12 panels">
+          <div class="rowInside">
+            <article class="grid_12 hrline"></article>
+            <article class="grid_12 desc">
+              <h2 class="plain">jQPlot has lots of easy configurable options.</h2>
+            </article>
+            <article class="grid_4 code contrast">
+              <div class="wrap">
+                <h3 class="fancy">html tag & Call jQPlot building system</h3>
+                <div class="code-sample">
+                  <code>
+                  &lt;div id=<span class="string">"chart"</span>&gt;&lt;/div&gt;
+                  <br/>
+                  &lt;script&gt;
+<pre>
+$(<span class="keyword">function</span>(){
+  $.jqplot(<span class="string">"chart"</span>, [[1, 2, 3]]);
+});
+</pre>
+                  &lt;/script&gt;
+                  </code>
+                </div>
+                <div class="more-wrap"><a href="/guide/core/getting-started.html" class="more">Visit Getting  Started Guide<span class="arrow">→</span></a>
+                </div>
+              </div>
+            </article>
+            <article class="grid_4 code contrast">
+              <div class="wrap">
+                <h3 class="fancy">With options</h3>
+                <div class="code-sample">
+                  <code>
+                  &lt;div id=<span class="string">"chart"</span>&gt;&lt;/div&gt;
+                  <br/>
+                  &lt;script&gt;
+<pre>
+$(<span class="keyword">function</span>(){
+  $.jqplot(<span class="string">"chart"</span>, [[1, 2, 3]], {
+    title: <span class="string">'Chart title'</span>
+  });
+});
+</pre>
+                  &lt;/script&gt;
+                  </code>
+                </div>
+                <div class="more-wrap"><a href="/guide/core/index.html" class="more">Visit Core Guide<span class="arrow">→</span></a>
+                </div>
+              </div>
+            </article>
+            <article class="grid_4 code contrast">
+              <div class="wrap">
+                <h3 class="fancy">With plugins</h3>
+                <div class="code-sample" style="overflow-y:auto; max-height:130px;">
+                  <code>
+                    &lt;div id=<span class="string">"chart"</span>&gt;&lt;/div&gt;
+                    <br/>
+                    &lt;script&gt;
+<pre>
+$(<span class="keyword">function</span>(){
+  var s1 = [[<span class="string">'/home'</span>,46], [<span class="string">'/var'</span>,14], [<span class="string">'/tmp'</span>,5], [<span class="string">'/'</span>,35]];
 
-      function fullscreen(){
-        $.jqplot.toggleFullscreen("chart-resizable",plot1);
+  var plot1 = $.jqplot(<span class="string">'chart'</span>, [s1], {
+    title: <span class="string">'Disc usage'</span>,
+    seriesDefaults: {
+      renderer: $.jqplot.PieRenderer,
+      rendererOptions: {
+        showDataLabels: true,
+        labelColor: <span class="string">"red"</span>,
+        showDataCategoryOnHover : true,
+        sliceMargin: 1,
+        ringMargin: 8,
       }
-    </script>
-</div>
-
-<h4>Other demos: </h4>
-<div>
-  <ul>
-    <li>
-      <a href="demo/plugins/pie/index.html">Pie Chart</a>
-    </li>
-    <li>
-      <a href="demo/plugins/donut/index.html">Donut Chart</a>
-    </li>
-    <li>
-      <a href="demo/plugins/bar/index.html">Bar Chart</a>
-    </li>
-    <li>
-      <a href="demo/plugins/axis/index.html">Axis plugin</a>
-    </li>
-    <li>
-      <a href="demo/plugins/fullscreen/index.html">Fullscreen plugin</a>
-    </li>
-  </ul>
-</div>
-
-<h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Contribute.</h3>
-<p>Contribute by sending pull request. To clone the prject:</p>
- 
-<textarea class="code-text" style="height: 23px;">$ git clone https://github.com/svandecappelle/jQPlot.git</textarea>
-
-
-<h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Issues.</h3>
-<p>Contribute by sending reporting issues to project <a href="https://github.com/svandecappelle/jQPlot/issues">here</a>.</p>
- 
-
-<h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Documentation.</h3>
-<p>See the full documentation <a href="https://github.com/svandecappelle/jQPlot/wiki">here</a>.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>Steeve Vandecappelle: <a href="https://github.com/svandecappelle" class="user-mention">@svandecappelle</a></p>
-
-        </article>
-      </div>
+    },
+    legend: { show:true, location: <span class="string">'e'</span>}
+  });
+});
+</pre>
+                  &lt;/script&gt;
+                  </code>
+                </div>
+                <div class="more-wrap"><a href="/guide/styles/#assert" class="more">Visit Plugins Guides<span class="arrow">→</span></a>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="rowInside">
+            <article class="grid_12 hrline"></article>
+            <article class="grid_12 desc">
+              <h2 class="plain">Plugins extend jQPlot's charts renderers. Developers can build their own plugins to share with community or use the existing plugins.</h2>
+            </article>
+            <article id="plugin-featured" class="grid_6 plugin-box contrast">
+              <div class="plugin-title">
+                <h2 class="plain accent-wrap"><span class="accented">Contribute & Plugins<span class="faccentl"></span><span class="faccentr"></span></span></h2>
+                <div class="action-button"><a href="/plugins/index.html">Learn More &amp; Install<span class="arrow">→</span></a></div>
+              </div>
+              <div class="wrap">
+                <h3 class="fancy">Featured Plugin</h3>
+                <div class="plugin-desc"><p>Use hooks to create plugins see plugin creation tutorial <a href="https://npmjs.org/package/selenium-webdriver">here</a>.</p>
+                </div>
+              </div>
+            </article>
+            <article id="plugin-dir" class="grid_3 plugin-box contrast"><span class="img">
+                <div class="icon"></div></span>
+              <div class="wrap">
+                <h3 class="fancy">Custom Plugins</h3>
+                <p>Browse our plugins directory to find the your needed tools for your needs.</p>
+                <div class="more-wrap"><a href="/plugins" class="more">Browse Plugins<span class="arrow">→</span></a></div>
+              </div>
+            </article>
+            <article id="plugin-guide" class="grid_3 plugin-box contrast"><span class="img">
+                <div class="icon"></div></span>
+              <div class="wrap">
+                <h3 class="fancy">Develop Plugins</h3>
+                <p>jQPlot has an extensive utility belt for plugin developers. Learn how to build your plugins &amp; share. </p>
+                <div class="more-wrap"><a href="/guide/plugins" class="more">Plugin Guide <span class="arrow">→</span></a></div>
+              </div>
+            </article>
+          </div>
+          <div class="rowInside">
+            <article class="grid_12 hrline"></article>
+            <article class="github grid_12 contrast">
+              <div class="wrap"><span class="img">&nbsp;</span>
+                <h3 class="fancy">Powered by Open Source</h3>
+                <p>jQPlot is hosted on GitHub. Have a suggestion or found a bug? Fork this project to help make jQPlot even better.</p>
+                <div class="more-wrap"><a href="https://github.com/svandecappelle/jQPlot" target="_blank" class="more">Fork jQPlot on GitHub<span class="arrow">→</span></a></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
     </div>
     <footer>
-      <div class="owner">
-      <p><a href="https://github.com/svandecappelle" class="avatar"><img src="https://avatars2.githubusercontent.com/u/3873315?s=60" width="48" height="48"/></a> <a href="https://github.com/svandecappelle">svandecappelle</a> maintains <a href="https://github.com/svandecappelle/jQPlot">Jqplot</a></p>
-      </div>
-      <div class="creds">
-        <small>This page generated using <a href="http://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
-      </div>
+      <section id="footer">
+        <div class="branding"> 
+          <h3 class="fancy"><a href="#">jQPlot Chart Library</a></h3>
+        </div>
+        <div class="list">
+          <ul>
+            <li><a href="/guide/installation/">Installation</a></li>
+            <li><a href="/guide/plugins/">Plugins</a></li>
+          </ul>
+        </div>
+        <div class="list">
+          <ul>
+            <li><a href="/api/">API</a></li>
+            <li><a href="/api/plugins/">Plugin Utility API</a></li>
+          </ul>
+        </div>
+        <div class="list">
+          <ul>
+            <li><a href="/guide/resources/">Help</a></li>
+            <li><a href="/tests/">Test Suite</a></li>
+            <li><a href="https://github.com/svandecappelle/jQPlot/wiki/changelog.md" target="_blank">Changelog</a></li>
+          </ul>
+        </div>
+        <div class="list">
+          <ul>
+            <li><a href="https://github.com/svandecappelle/jQPlot/issues" target="_blank">Issues</a></li>
+            <li><a href="http://groups.google.com/group/jqplot-users" target="_blank">Google Group</a></li>
+            <li><a href="http://travis-ci.org/#!/svandecappelle/jQPlot" target="_blank">Build Status</a></li>
+          </ul>
+        </div>
+      </section>
     </footer>
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/svandecappelle/jQPlot/tarball/master" class="tar">tar</a><a href="https://github.com/svandecappelle/jQPlot/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
-  </div>
+  </body>
 
-  
-<script>
-
-$(".code-text").each(function(){
-  var mixedMode = {
-    name: "htmlmixed",
-    scriptTypes: [
-      {
-        mode: 'javascript'
-      },
-      {
-        mode: "js"
-      }
-    ]
-  };
-  var editor = CodeMirror.fromTextArea(this, {
-    lineNumbers: true,
-    styleActiveLine: true,
-    matchBrackets: true,
-    theme: 'twilight',
-    readOnly: true,
-    mode: 'javascript'
-  });
-  editor.setSize("100%", $(this).height());
-});
-  
-</script>
-</body>
 </html>

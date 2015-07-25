@@ -12,4 +12,5 @@ $(".coding").each(function (){
         foldGutter: true,
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
     });
+    editor.setSize($(this).width()-25, $(this).find("div").height());
 });

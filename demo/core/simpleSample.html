@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<title>Simple sample</title>
+
+		<!-- JQuery dependence -->
+		<script src="../../dist/core/jquery.min.js"></script>
+		<!-- JQplot dependence -->
+		<script src="../../dist/core/jquery.jqplot.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../dist/core/jquery.jqplot.min.css"/>
+	</head>
+	<body>
+<div class="coding">
+<div id="chart1" style="margin:20px;"></div>
+<script type="text/javascript">
+	var plot1;
+	$(function(){
+		var line1=[[1,4], [2,6.5], [3,5.7], [4,9], [5,8.2]];
+		plot1 = $.jqplot('chart1', [line1]);
+	});
+</script>
+</div>
+
+		<script src="../common/$.jqplot.demo.common.js"></script>
+	</body>
+</html>

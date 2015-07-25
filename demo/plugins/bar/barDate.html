@@ -1,0 +1,108 @@
+<html>
+	<head>
+		<title>Mixed with other elements</title>
+
+		<!-- JQuery dependence -->
+		<script src="../../../dist/core/jquery.min.js"></script>
+		<!-- JQplot dependence -->
+		<script src="../../../dist/core/jquery.jqplot.min.js"></script>
+		<script src="../../../dist/plugins/bar/jqplot.barRenderer.min.js"></script>
+
+		<!-- Axes -->
+		<script src="../../../dist/plugins/axis/jqplot.dateAxisRenderer.min.js"></script>
+		<script src="../../../dist/plugins/axis/jqplot.categoryAxisRenderer.min.js"></script>
+
+		<script src="../../../dist/plugins/axis/jqplot.canvasAxisTickRenderer.min.js"></script>
+		<script src="../../../dist/plugins/text/jqplot.canvasTextRenderer.min.js"></script>
+
+		<script src="../../../dist/plugins/themes/extendedThemes.min.js"></script>
+		<script src="../../../dist/plugins/overlay/jqplot.canvasOverlay.js"></script>
+		<script src="../../../dist/plugins/points/jqplot.pointLabels.min.js"></script>
+		<script src="../../../dist/plugins/cursor/jqplot.cursor.min.js"></script>
+
+		<!-- Export PNG -->
+		<script src="../../../dist/plugins/export/exportImg.min.js"></script>
+
+		<script src="../../../dist/plugins/fullscreener/fullscreener.min.js"></script>
+		<script src="../../../dist/plugins/highlighter/jqplot.highlighter.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="../../../dist/plugins/fullscreener/fullscreener.min.css"/>
+
+		<link type="text/css" rel="stylesheet" href="../../../dist/core/jquery.jqplot.min.css"/>
+	</head>
+	<body>
+		<div class="coding">
+			<div id="chart1" style="margin:20px;"></div>
+
+			<script type="text/javascript">
+				
+				$(function(){
+
+				var serie1=[['2008-09-01',4],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
+				var serie2=[['2008-09-01',2],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
+				var serie3=[['2008-09-01',2],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
+				var serie4=[['2008-09-01',2],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
+				var serie5=[['2008-09-01',null],['2008-09-02',10],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
+				var serie6=[['2008-09-01',null],['2008-09-02',null],['2008-09-03',1],['2008-09-04',null],['2008-09-05',null]];
+				var serie7=[['2008-09-01',null],['2008-09-02',null],['2008-09-03',null],['2008-09-04',4],['2008-09-05',null]];
+				var serie8=[['2008-09-01',null],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',1]];
+				$.jqplot.config.enablePlugins = true;
+				var plot1 = $.jqplot('chart1', [serie1,serie2,serie3, serie4, serie5,serie6, serie7, serie8], {
+						title:'A super chart',
+						axes:{
+							xaxis:{
+								renderer:$.jqplot.CategoryAxisRenderer,
+							}
+						},
+						seriesDefaults:{
+							renderer: $.jqplot.BarRenderer,
+							rendererOptions: {
+								varyBarColor: true,
+								barMargin: 30,
+							},
+							/*pointLabels: {show: true, darkColor:"black",brightColor:"orange"}*/
+						},
+						legend: {
+							show: true,
+							location: 'ne',
+							placement: 'inside'
+						},
+						series: [{label:'Lbl 1'},{label:'Lbl 2',fillGradient: true, fillGradientColor: "rgb(254,134,97)", fillGradientDelay: 0.7},{label:'Lbl 3'},{label:'Lbl 4'},{label:'Lbl 5'},{label:'Lbl 6'},{label:'Lbl 7'},{label:'Lbl 8'}],
+						canvasOverlay: {
+							show: true,
+							bellowSeries: true,
+	            			objects: [
+								{rectangle: {
+									name: 'barney',
+									xmin: [0],
+									xmax: [2.5],
+									ymin: [0],
+									ymax: [2000],
+									xOffset: 0,
+									color: 'rgba(122, 122, 122,0.5)',
+									shadow: false,
+									showTooltip: true,
+									tooltipLocation: 'ne',
+									tooltipFormatString: '<b><i><span style="color:red;">Passe</span></i></b> %.2f',
+								}}]
+						},
+						highlighter: {
+							show: true,
+							sizeAdjust: 10,
+							tooltipLocation: 'n',
+							tooltipAxes: 'y',
+							showTooltip: true,
+							tooltipFormatString: '<b><i><span style="color:red;">hello</span></i></b> %.2f',
+						},
+						cursor: {
+							show: true
+						},
+						stackSeries: true,
+					});
+					plot1.replot();
+				});
+				
+			</script>
+		</div>
+		<script src="../../common/$.jqplot.demo.common.js"></script>
+	</body>
+</html>
