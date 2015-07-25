@@ -256,7 +256,7 @@ footer section#footer .list {
 }
 body {
   font: 14px/1.5 "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #499C30;
+  background-color: #EEFAE8;
   padding-top: 75px;
 }
 body .content {
@@ -625,6 +625,12 @@ body.index header .header-wrap .callouts .call a {
   min-height: 100px;
   padding: 20px;
 }
+
+body.index header .header-wrap .callouts .call a:hover{
+  background-color: rgba(255,255,255, 0.5);
+
+}
+
 body.index header .header-wrap .callouts .call a:before,
 body.index header .header-wrap .callouts .call a:after {
   content: "";
@@ -1078,6 +1084,9 @@ nav#pages ul li a:hover {
   text-decoration: underline;
 }
 footer {
+  position: absolute;
+  left: 0px;
+  right: 0px;
   padding-top: 30px;
   padding-bottom: 30px;
   background-color: #499C30;
@@ -1751,4 +1760,10 @@ body.tests #mocha .test.fail h2:before {
 
 table.images-content tr th, table.images-content tr td{
   padding: 2px;
+}
+
+.preview-content{
+  margin-bottom: 12px;
+  max-width: 1020px;
+  overflow-x: auto;
 }
