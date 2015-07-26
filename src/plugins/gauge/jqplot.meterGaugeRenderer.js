@@ -73,6 +73,9 @@
         // padding between the meterGauge and plot edges, auto
         // calculated by default.
         this.padding = null;
+        // prop: showOuterRing
+        // true to show outer ring of the gauge.
+        this.showOuterRing = true;
         // prop: shadowOffset
         // offset of the shadow from the gauge ring and offset of 
         // each succesive stroke of the shadow from the last.
@@ -88,10 +91,17 @@
         // background color of the inside of the gauge.
         this.background = "#efefef";
         // prop: ringColor
-        // color of the outer ring, hub, and needle of the gauge.
+        // color of the outer ring of the gauge.
         this.ringColor = "#BBC6D0";
-        // needle color not implemented yet.
+        // prop: needleColor
+        // color of the needle of the gauge.
         this.needleColor = "#C3D3E5";
+        // prop: showHub
+        // true to show hub of the gauge.
+        this.showHub = true;
+        // prop: hubColor
+        // color of the hub of the gauge.
+        this.hubColor = this.ringColor;
         // prop: tickColor
         // color of the tick marks around the gauge.
         this.tickColor = "#989898";
@@ -629,50 +639,56 @@
             // draw the shadow
             // the outer ring.
             var shadowColor = 'rgba(0,0,0,'+this.shadowAlpha+')';
-            ctx.save();
-            for (var i=0; i<this.shadowDepth; i++) {
-                ctx.translate(this.shadowOffset*Math.cos(this.shadowAngle/180*Math.PI), this.shadowOffset*Math.sin(this.shadowAngle/180*Math.PI));
+            if(this.showOuterRing) {
+                ctx.save();
+                for (var i=0; i<this.shadowDepth; i++) {
+                    ctx.translate(this.shadowOffset*Math.cos(this.shadowAngle/180*Math.PI), this.shadowOffset*Math.sin(this.shadowAngle/180*Math.PI));
+                    ctx.beginPath();  
+                    ctx.strokeStyle = shadowColor;
+                    ctx.lineWidth = this.shadowWidth;
+                    ctx.arc(0 ,0, r, outersa, outerea, false);
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+                ctx.restore();
+            }
+            // the inner hub.
+            if(this.showHub) {
+                ctx.save();
+                var tempd = parseInt((this.shadowDepth+1)/2, 10);
+                for (var i=0; i<tempd; i++) {
+                    ctx.translate(this.shadowOffset*Math.cos(this.shadowAngle/180*Math.PI), this.shadowOffset*Math.sin(this.shadowAngle/180*Math.PI));
+                    ctx.beginPath();  
+                    ctx.fillStyle = shadowColor;
+                    ctx.arc(0 ,0, this.hubRadius, hubsa, hubea, false);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+            
+            // draw the outer ring.
+            if(this.showOuterRing) {
+                ctx.save();
                 ctx.beginPath();  
-                ctx.strokeStyle = shadowColor;
-                ctx.lineWidth = this.shadowWidth;
+                ctx.strokeStyle = this.ringColor;
+                ctx.lineWidth = this.ringWidth;
                 ctx.arc(0 ,0, r, outersa, outerea, false);
                 ctx.closePath();
                 ctx.stroke();
+                ctx.restore();
             }
-            ctx.restore();
-            
-            // the inner hub.
-            ctx.save();
-            var tempd = parseInt((this.shadowDepth+1)/2, 10);
-            for (var i=0; i<tempd; i++) {
-                ctx.translate(this.shadowOffset*Math.cos(this.shadowAngle/180*Math.PI), this.shadowOffset*Math.sin(this.shadowAngle/180*Math.PI));
-                ctx.beginPath();  
-                ctx.fillStyle = shadowColor;
-                ctx.arc(0 ,0, this.hubRadius, hubsa, hubea, false);
-                ctx.closePath();
-                ctx.fill();
-            }
-            ctx.restore();
-            
-            // draw the outer ring.
-            ctx.save();
-            ctx.beginPath();  
-            ctx.strokeStyle = this.ringColor;
-            ctx.lineWidth = this.ringWidth;
-            ctx.arc(0 ,0, r, outersa, outerea, false);
-            ctx.closePath();
-            ctx.stroke();
-            ctx.restore();
             
             // draw the hub
-            
-            ctx.save();
-            ctx.beginPath();  
-            ctx.fillStyle = this.ringColor;
-            ctx.arc(0 ,0, this.hubRadius,hubsa, hubea, false);
-            ctx.closePath();
-            ctx.fill();
-            ctx.restore();
+            if(this.showHub) {
+                ctx.save();
+                ctx.beginPath();  
+                ctx.fillStyle = this.ringColor;
+                ctx.arc(0 ,0, this.hubRadius,hubsa, hubea, false);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
             
             // draw the ticks
             if (this.showTicks) {
@@ -797,8 +813,8 @@
             
             ctx.save();
             ctx.beginPath();
-            ctx.fillStyle = this.ringColor;
-            ctx.strokeStyle = this.ringColor;
+            ctx.fillStyle = this.needelColor;
+            ctx.strokeStyle = this.needelColor;
             this.needleLength = (this.tickOuterRadius - this.tickLength) * 0.85;
             this.needleThickness = (this.needleThickness < 2) ? 2 : this.needleThickness;
             var endwidth = this.needleThickness * 0.4;
