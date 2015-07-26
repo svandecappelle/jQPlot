@@ -683,7 +683,7 @@
             if(this.showHub) {
                 ctx.save();
                 ctx.beginPath();  
-                ctx.fillStyle = this.ringColor;
+                ctx.fillStyle = this.hubColor;
                 ctx.arc(0 ,0, this.hubRadius,hubsa, hubea, false);
                 ctx.closePath();
                 ctx.fill();
