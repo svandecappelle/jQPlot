@@ -179,6 +179,7 @@
             var temptop = top;
             var templeft = left;
 
+            var max_tries=800;
             for (var i=0; i<wl; i++) {
                 var oldw = w;
                 w += words[i];
@@ -187,8 +188,14 @@
                     breaks.push(i);
                     w = '';
                     i--;
-                }   
+                    max_tries--;
+                }
+
+                if (max_tries<=0){
+                    break;
+                }
             }
+
             if (breaks.length === 0) {
                 // center text if necessary
                 if ($(el).css('textAlign') === 'center') {
