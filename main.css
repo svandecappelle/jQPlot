@@ -181,11 +181,11 @@ section#content {
   margin: 0 auto;
   overflow: hidden;
 }
-section#content .rowInside {
+.rowInside {
   margin: 0 -15px;
   display: inline-block;
 }
-section#content .grid_3 {
+.grid_3 {
   min-width: 225px;
   max-width: 225px;
   margin: 0 15px;
@@ -193,7 +193,7 @@ section#content .grid_3 {
   float: left;
   display: inline;
 }
-section#content .grid_4 {
+.grid_4 {
   min-width: 310px;
   max-width: 310px;
   margin: 0 15px;
@@ -201,7 +201,7 @@ section#content .grid_4 {
   float: left;
   display: inline;
 }
-section#content .grid_6 {
+.grid_6 {
   min-width: 480px;
   max-width: 480px;
   margin: 0 15px;
@@ -209,7 +209,7 @@ section#content .grid_6 {
   float: left;
   display: inline;
 }
-section#content .grid_8 {
+.grid_8 {
   min-width: 650px;
   max-width: 650px;
   margin: 0 15px;
@@ -217,7 +217,7 @@ section#content .grid_8 {
   float: left;
   display: inline;
 }
-section#content .grid_9 {
+.grid_9 {
   min-width: 735px;
   max-width: 735px;
   margin: 0 15px;
@@ -225,7 +225,7 @@ section#content .grid_9 {
   float: left;
   display: inline;
 }
-section#content .grid_12 {
+.grid_12 {
   min-width: 990px;
   max-width: 990px;
   margin: 0 15px;
@@ -1766,4 +1766,8 @@ table.images-content tr th, table.images-content tr td{
   margin-bottom: 12px;
   max-width: 1020px;
   overflow-x: auto;
+}
+
+.centered{
+  text-align: center;
 }
