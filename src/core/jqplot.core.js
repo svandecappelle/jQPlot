@@ -2849,6 +2849,13 @@
             if (this.eventCanvas && this.eventCanvas._elem) {
                 this.eventCanvas._elem.unbind();
             }
+
+            // Unbind events
+            // For example, Cursor.zoomProxy bind jqplotZoom and jqplotResetZoom to element            
+            for(var e in $._data(this.target[0], "events")) {
+                this.target.unbind(e);
+            }
+
             // Couple of posts on Stack Overflow indicate that empty() doesn't
             // always cear up the dom and release memory.  Sometimes setting
             // innerHTML property to null is needed.  Particularly on IE, may 
