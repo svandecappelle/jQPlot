@@ -634,10 +634,10 @@
                                 }
                                 rs = (pad) ? this.rowSpacing : '0';
                     
-                                td1 = $('<td class="jqplot-table-legend" style="text-align:center;padding-top:'+rs+';">'+
-                                    '<div><div class="jqplot-table-legend-swatch" style="border-color:'+color+';"></div>'+
+                                td1 = $('<td class="jqplot-table-legend jqplot-table-legend-swatch" style="text-align:center;padding-top:'+rs+';">'+
+                                    '<div class="jqplot-table-legend-swatch-outline"><div class="jqplot-table-legend-swatch" style="border-color:'+color+';"></div>'+
                                     '</div></td>');
-                                td2 = $('<td class="jqplot-table-legend" style="padding-top:'+rs+';"></td>');
+                                td2 = $('<td class="jqplot-table-legend jqplot-table-legend-label" style="padding-top:'+rs+';"></td>');
                                 if (this.escapeHtml){
                                     td2.text(lt);
                                 }
