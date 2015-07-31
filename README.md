@@ -30,8 +30,10 @@ Last builded files are generated in the build directory.
 
 # Build from sources
 ## Requirements
-* To build from sources file you need nodejs
-* Type: ```npm run dist``` to build all distribution.
+* To build from sources file you need nodejs and grunt-cli
+  * npm install -g grunt-cli
+* Type: ```npm install```
+* Type: ```grunt``` to build all distribution.
 
 # Usage:
 * Import into your web page:
