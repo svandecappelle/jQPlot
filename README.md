@@ -49,4 +49,4 @@ $(function(){
 ```
 
 # Help Wanted
-We're currently reaching out to new contributors. Feel free to participate here, through issues, pull requests and [our wiki](https://github.com/svandecappelle/jQPlot/wiki/Migrating-jQPlot-Plans). Make sure to follow us through the [jqPlot Google Group mailing list](http://groups.google.com/group/jqplot-users).
+We're currently reaching out to new contributors. Feel free to participate [here on Github](https://github.com/svandecappelle/jQPlot), through issues, pull requests and [our wiki](https://github.com/svandecappelle/jQPlot/wiki/Migrating-jQPlot-Plans). Make sure to follow us through the [jqPlot Google Group mailing list](http://groups.google.com/group/jqplot-users).
