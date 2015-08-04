@@ -61,6 +61,10 @@
         // true to toggle series with a show/hide method only and not allow fading in/out.  
         // This is to overcome poor performance of fade in some versions of IE.
         this.disableIEFading = true;
+        // prop: legendTextcolor
+        // swatch: td color will be the same as the swatch color
+        this.legendTextColor = "swatch"
+        
         $.extend(true, this, options);
         
         if (this.seriesToggle) {
@@ -154,7 +158,7 @@
 
                             td1 = $(document.createElement('td'));
                             td1.addClass('jqplot-table-legend jqplot-table-legend-swatch');
-                            td1.css({textAlign: 'center', paddingTop: rs});
+                            td1.css({textAlign: 'center', paddingTop: rs });
 
                             div0 = $(document.createElement('div'));
                             div0.addClass('jqplot-table-legend-swatch-outline');
@@ -166,7 +170,7 @@
 
                             td2 = $(document.createElement('td'));
                             td2.addClass('jqplot-table-legend jqplot-table-legend-label');
-                            td2.css('paddingTop', rs);
+                            td2.css({ paddingTop: rs, color: (legend.legendTextColor === "swatch") ? color : "inherit" });
                     
                             // td1 = $('<td class="jqplot-table-legend" style="text-align:center;padding-top:'+rs+';">'+
                             //     '<div><div class="jqplot-table-legend-swatch" style="background-color:'+color+';border-color:'+color+';"></div>'+
