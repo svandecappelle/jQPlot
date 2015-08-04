@@ -1,14 +1,13 @@
 /*rules for the plot target div.  These will be cascaded down to all plot elements according to css rules*/
+
 .jqplot-target {
     position: relative;
-    color: #666666;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    font-size: 1em;
-/*    height: 300px;
+    /*    height: 300px;
     width: 400px;*/
+    font-family: 'DINWeb-Arial', sans-serif;
 }
-
 /*rules applied to all axes*/
+
 .jqplot-axis {
     font-size: 0.75em;
 }
@@ -25,57 +24,92 @@
     margin-right: 10px;
 }
 
-.jqplot-y2axis, .jqplot-y3axis, .jqplot-y4axis, .jqplot-y5axis, .jqplot-y6axis, .jqplot-y7axis, .jqplot-y8axis, .jqplot-y9axis, .jqplot-yMidAxis {
+.jqplot-y2axis,
+.jqplot-y3axis,
+.jqplot-y4axis,
+.jqplot-y5axis,
+.jqplot-y6axis,
+.jqplot-y7axis,
+.jqplot-y8axis,
+.jqplot-y9axis,
+.jqplot-yMidAxis {
     margin-left: 10px;
     margin-right: 10px;
 }
-
 /*rules applied to all axis tick divs*/
-.jqplot-axis-tick, .jqplot-xaxis-tick, .jqplot-yaxis-tick, .jqplot-x2axis-tick, .jqplot-y2axis-tick, .jqplot-y3axis-tick, .jqplot-y4axis-tick, .jqplot-y5axis-tick, .jqplot-y6axis-tick, .jqplot-y7axis-tick, .jqplot-y8axis-tick, .jqplot-y9axis-tick, .jqplot-yMidAxis-tick {
+
+.jqplot-axis-tick,
+.jqplot-xaxis-tick,
+.jqplot-yaxis-tick,
+.jqplot-x2axis-tick,
+.jqplot-y2axis-tick,
+.jqplot-y3axis-tick,
+.jqplot-y4axis-tick,
+.jqplot-y5axis-tick,
+.jqplot-y6axis-tick,
+.jqplot-y7axis-tick,
+.jqplot-y8axis-tick,
+.jqplot-y9axis-tick,
+.jqplot-yMidAxis-tick {
     position: absolute;
     white-space: pre;
 }
 
-
 .jqplot-xaxis-tick {
     top: 0;
     /* initial position untill tick is drawn in proper place */
+    
     left: 15px;
-/*    padding-top: 10px;*/
+    /*    padding-top: 10px;*/
+    
     vertical-align: top;
 }
 
 .jqplot-x2axis-tick {
     bottom: 0;
     /* initial position untill tick is drawn in proper place */
+    
     left: 15px;
-/*    padding-bottom: 10px;*/
+    /*    padding-bottom: 10px;*/
+    
     vertical-align: bottom;
 }
 
 .jqplot-yaxis-tick {
     right: 0;
     /* initial position untill tick is drawn in proper place */
+    
     top: 15px;
-/*    padding-right: 10px;*/
+    /*    padding-right: 10px;*/
+    
     text-align: right;
 }
 
 .jqplot-yaxis-tick.jqplot-breakTick {
     right: -20px;
     margin-right: 0;
-    padding:1px 5px 1px 5px;
+    padding: 1px 5px 1px 5px;
     /*background-color: white;*/
+    
     z-index: 2;
     font-size: 1.5em;
 }
 
-.jqplot-y2axis-tick, .jqplot-y3axis-tick, .jqplot-y4axis-tick, .jqplot-y5axis-tick, .jqplot-y6axis-tick, .jqplot-y7axis-tick, .jqplot-y8axis-tick, .jqplot-y9axis-tick {
+.jqplot-y2axis-tick,
+.jqplot-y3axis-tick,
+.jqplot-y4axis-tick,
+.jqplot-y5axis-tick,
+.jqplot-y6axis-tick,
+.jqplot-y7axis-tick,
+.jqplot-y8axis-tick,
+.jqplot-y9axis-tick {
     left: 0;
     /* initial position untill tick is drawn in proper place */
+    
     top: 15px;
-/*    padding-left: 10px;*/
-/*    padding-right: 15px;*/
+    /*    padding-left: 10px;*/
+    /*    padding-right: 15px;*/
+    
     text-align: left;
 }
 
@@ -86,68 +120,63 @@
 
 .jqplot-xaxis-label {
     margin-top: 10px;
-    font-size: 11pt;
     position: absolute;
 }
 
 .jqplot-x2axis-label {
     margin-bottom: 10px;
-    font-size: 11pt;
     position: absolute;
 }
 
 .jqplot-yaxis-label {
     margin-right: 10px;
-/*    text-align: center;*/
-    font-size: 11pt;
+    /*    text-align: center;*/
+    
     position: absolute;
 }
 
 .jqplot-yMidAxis-label {
-    font-size: 11pt;
     position: absolute;
 }
 
-.jqplot-y2axis-label, .jqplot-y3axis-label, .jqplot-y4axis-label, .jqplot-y5axis-label, .jqplot-y6axis-label, .jqplot-y7axis-label, .jqplot-y8axis-label, .jqplot-y9axis-label {
-/*    text-align: center;*/
-    font-size: 11pt;
+.jqplot-y2axis-label,
+.jqplot-y3axis-label,
+.jqplot-y4axis-label,
+.jqplot-y5axis-label,
+.jqplot-y6axis-label,
+.jqplot-y7axis-label,
+.jqplot-y8axis-label,
+.jqplot-y9axis-label {
+    /*    text-align: center;*/
+    
     margin-left: 10px;
     position: absolute;
 }
 
 .jqplot-meterGauge-tick {
-    font-size: 0.75em;
-    color: #999999;
+    font-size: smaller;
 }
 
 .jqplot-meterGauge-label {
     font-size: 1em;
-    color: #999999;
 }
 
 table.jqplot-table-legend {
-    margin-top: 12px;
-    margin-bottom: 12px;
-    margin-left: 12px;
-    margin-right: 12px;
+    margin: 12px;
 }
 
-table.jqplot-table-legend, table.jqplot-cursor-legend {
-    background-color: rgba(255,255,255,0.6);
-    border: 1px solid #cccccc;
+table.jqplot-table-legend,
+table.jqplot-cursor-legend {
     position: absolute;
-    font-size: 0.75em;
 }
 
 td.jqplot-table-legend {
-    vertical-align:middle;
+    vertical-align: middle;
 }
-
 /*
 These rules could be used instead of assigning
 element styles and relying on js object properties.
 */
-
 /*
 td.jqplot-table-legend-swatch {
     padding-top: 0.5em;
@@ -159,7 +188,8 @@ tr.jqplot-table-legend:first td.jqplot-table-legend-swatch {
 }
 */
 
-td.jqplot-seriesToggle:hover, td.jqplot-seriesToggle:active {
+td.jqplot-seriesToggle:hover,
+td.jqplot-seriesToggle:active {
     cursor: pointer;
 }
 
@@ -168,13 +198,12 @@ td.jqplot-seriesToggle:hover, td.jqplot-seriesToggle:active {
 }
 
 div.jqplot-table-legend-swatch-outline {
-    border: 1px solid #cccccc;
-    padding:1px;
+    padding: 1px;
 }
 
 div.jqplot-table-legend-swatch {
-    width:0;
-    height:0;
+    width: 0;
+    height: 0;
     border-top-width: 5px;
     border-bottom-width: 5px;
     border-left-width: 6px;
@@ -189,42 +218,39 @@ div.jqplot-table-legend-swatch {
     top: 0;
     left: 0;
     padding-bottom: 0.5em;
-    font-size: 1.2em;
+    font-size: larger;
 }
 
 table.jqplot-cursor-tooltip {
-    border: 1px solid #cccccc;
-    font-size: 0.75em;
+    font-size: smaller;
 }
 
-
 .jqplot-cursor-tooltip {
-    border: 1px solid #cccccc;
-    font-size: 0.75em;
+    font-size: smaller;
     white-space: nowrap;
-    background: rgba(208,208,208,0.5);
     padding: 1px;
 }
 
-.jqplot-highlighter-tooltip, .jqplot-canvasOverlay-tooltip {
-    border: 1px solid #cccccc;
-    font-size: 0.75em;
+.jqplot-highlighter-tooltip,
+.jqplot-canvasOverlay-tooltip {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    font-size: smaller;
     white-space: nowrap;
-    background: rgba(208,208,208,0.5);
     padding: 1px;
 }
 
 .jqplot-point-label {
-    font-size: 0.75em;
+    font-size: smaller;
     z-index: 2;
 }
 
 .jqplot-point-darkColor {
-	color: #000000;
+    color: #000000;
 }
 
 .jqplot-point-brightColor {
-	color: #ffffff;
+    color: #ffffff;
 }
 
 td.jqplot-cursor-legend-swatch {
@@ -238,12 +264,12 @@ div.jqplot-cursor-legend-swatch {
 }
 
 .jqplot-error {
-/*   Styles added to the plot target container when there is an error go here.*/
+    /*   Styles added to the plot target container when there is an error go here.*/    
     text-align: center;
 }
 
 .jqplot-error-message {
-/*    Styling of the custom error message div goes here.*/
+    /*    Styling of the custom error message div goes here.*/    
     position: relative;
     top: 46%;
     display: inline-block;
@@ -251,7 +277,7 @@ div.jqplot-cursor-legend-swatch {
 
 div.jqplot-bubble-label {
     font-size: 0.8em;
-/*    background: rgba(90%, 90%, 90%, 0.15);*/
+    /*    background: rgba(90%, 90%, 90%, 0.15);*/    
     padding-left: 2px;
     padding-right: 2px;
     color: rgb(20%, 20%, 20%);
@@ -263,29 +289,31 @@ div.jqplot-bubble-label.jqplot-bubble-label-highlight {
 
 div.jqplot-noData-container {
     text-align: center;
-    background-color: rgba(18, 18, 18, 0.61);
 }
 
-div.jqplot-noData-contents>.outer-center {
+div.jqplot-noData-contents > .outer-center {
     position: relative;
     border: 1px solid transparent;
     border-width: 3px 0px 0px;
-    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.15);
     padding: 4px;
     margin-bottom: 20px;
     background-color: #fff;
     border-top-color: #C74097;
-    display:inline-block;
+    display: inline-block;
 }
+
 div.jqplot-noData-contents>.inner-center {
     position: relative;
 }
 
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover {
-  position: relative;
-  display: inline;
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover,
+span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover {
+    position: relative;
+    display: inline;
 }
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip {
+
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip,
+span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip {
     position: absolute;
     width: auto;
     min-width: 20px;
@@ -302,28 +330,37 @@ span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip, spa
     border-radius: 6px;
     box-shadow: 0 0 2px #800000;
 }
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip:after, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip:after {
+
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip:after,
+span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip:after {
     content: '';
     position: absolute;
     top: 100%;
     left: 50%;
     margin-left: -8px;
-    width: 0; height: 0;
+    width: 0;
+    height: 0;
     border-top: 8px solid #000000;
     border-right: 8px solid transparent;
     border-left: 8px solid transparent;
 }
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip {
+
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip,
+span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip {
     opacity: 0.8;
     margin: auto;
     z-index: 999;
 }
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover.hidden, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover.hidden {
+
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover.hidden,
+span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover.hidden {
     display: none;
 }
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover {
 
-}
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover, span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover{
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover,
+span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover {}
+
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover,
+span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover {
     display: block;
 }
