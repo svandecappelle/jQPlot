@@ -127,7 +127,15 @@
         
         $.extend(true, this, options);
         
-        var ropts = {fontSize:this.fontSize, fontWeight:this.fontWeight, fontStretch:this.fontStretch, fillStyle:this.textColor, angle:this.getAngleRad(), fontFamily:this.fontFamily};
+        var ropts = {
+            fontSize: this.fontSize,
+            fontWeight: this.fontWeight,
+            fontStretch: this.fontStretch,
+            fillStyle: this.textColor,
+            angle: this.getAngleRad(),
+            fontFamily: this.fontFamily
+        };
+        
         if (this.pt2px) {
             ropts.pt2px = this.pt2px;
         }
