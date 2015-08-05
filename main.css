@@ -1771,3 +1771,12 @@ table.images-content tr th, table.images-content tr td{
 .centered{
   text-align: center;
 }
+
+.screenshot{
+  overflow: hidden;
+  height: 135px;
+}
+
+.screenshot>img{
+  width: 100%; 
+}
