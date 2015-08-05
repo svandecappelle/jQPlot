@@ -14,3 +14,16 @@ $(".coding").each(function (){
     });
     editor.setSize($(this).width()-25, $(this).find("div").height());
 });
+
+// Take the code and put it into the textarea.
+$(".codemirror-container").each(function (){
+    var cm = CodeMirror.fromTextArea($(this).find('textarea')[0], {
+        lineNumbers: true,
+        matchBrackets: true,
+        eadOnly: true,
+        lineNumbers: true,
+        styleActiveLine: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+        mode: 'text/html'
+    });
+});

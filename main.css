@@ -1780,3 +1780,17 @@ table.images-content tr th, table.images-content tr td{
 .screenshot>img{
   width: 100%; 
 }
+
+.codemirror-container{
+  position: relative;
+  height: 300px;
+}
+
+.codemirror-container .CodeMirror{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  max-width: unset !important;
+  right: 0px;
+  width: 100% !important;
+}
