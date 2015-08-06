@@ -1785,6 +1785,7 @@
 
     /**
      * Sorts the series data in increasing order.
+     * @param {array} series
      */
     var sortData = function (series) {
 
@@ -1796,9 +1797,15 @@
             bat,
             n,
             dlen,
+            /**
+             *
+             */
             simplesort1 = function (a, b) {
                 return a[1] - b[1];
             },
+            /**
+             *
+             */
             simplesort0 = function (a, b) {
                 return a[0] - b[0];
             };
@@ -1832,10 +1839,12 @@
             }
 
         }
+        
     };
     
      /**
-      *
+      * @param {object} ev
+      * @return {object}
       */
      var getEventPosition = function (ev) {
             
