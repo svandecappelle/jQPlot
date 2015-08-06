@@ -448,6 +448,9 @@
         }
     };
         
+    /**
+     * Settings and configuration
+     */
     $.jqplot.config = {
         addDomReference: false,
         enablePlugins: false,
@@ -462,7 +465,7 @@
         errorFontSize: '',
         errorFontStyle: '',
         errorFontWeight: '',
-        catchErrors: false,
+        catchErrors: true,      // debug mode
         defaultTickFormatString: "%.1f",
         defaultColors: [ "#4bb2c5", "#EAA228", "#c5b47f", "#579575", "#839557", "#958c12", "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc", "#c747a3", "#cddf54", "#FBD178", "#26B4E3", "#bd70c7"],
         defaultNegativeColors: [ "#498991", "#C08840", "#9F9274", "#546D61", "#646C4A", "#6F6621", "#6E3F5F", "#4F64B0", "#A89050", "#C45923", "#187399", "#945381", "#959E5C", "#C7AF7B", "#478396", "#907294"],
@@ -3695,7 +3698,8 @@
             temps,
             tempr,
             sel,
-            _els;
+            _els,
+            title;
 
         if (this.drawIfHidden || this.target.is(':visible')) {
 
@@ -3718,7 +3722,9 @@
                 this.baseCanvas._ctx.fillRect(0, 0, this.baseCanvas._ctx.canvas.width, this.baseCanvas._ctx.canvas.height);
             }
 
-            this.target.append(this.title.draw());
+            title = this.title.draw();
+            
+            this.target.append(title);
             this.title.pack({top: 0, left: 0});
 
             // make room  for the legend between the grid and the edge.
