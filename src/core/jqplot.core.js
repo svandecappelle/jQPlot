@@ -3091,51 +3091,7 @@
                 
             };
 
-            // method: replot
-            // Does a reinitialization of the plot followed by
-            // a redraw.  Method could be used to interactively
-            // change plot characteristics and then replot.
-            //
-            // Parameters:
-            // options - Options used for replotting.
-            //
-            // Properties:
-            // clear - false to not clear (empty) the plot container before replotting (default: true).
-            // resetAxes - true to reset all axes min, max, numberTicks and tickInterval setting so axes will rescale themselves.
-            //             optionally pass in list of axes to reset (e.g. ['xaxis', 'y2axis']) (default: false).
-            this.replot = function (options) {
-                var opts =  options || {},
-                    data = opts.data || null,
-                    clear = (opts.clear === false) ? false : true,
-                    resetAxes = opts.resetAxes || false;
-                
-                delete opts.data;
-                delete opts.clear;
-                delete opts.resetAxes;
-
-                this.target.trigger('jqplotPreReplot');
-
-                if (clear) {
-                    this.destroy();
-                }
-                
-                // if have data or other options, full reinit.
-                // otherwise, quickinit.
-                if (data || !$.isEmptyObject(opts)) {
-                    this.reInitialize(data, opts);
-                } else {
-                    this.quickInit();
-                }
-
-                if (resetAxes) {
-                    this.resetAxesScale(resetAxes, opts.axes);
-                }
-                
-                this.draw();
-                
-                this.target.trigger('jqplotPostReplot');
-                
-            };
+            
 
             
 
@@ -3143,6 +3099,7 @@
 
             /**
              * @TODO: why is this declared here?
+             * @TODO: what is jqPlot here? Is it actually JqPlot?
              */
             jqPlot.prototype.doFillBetweenLines = function () {
                 
@@ -3615,6 +3572,52 @@
                 return null;
             }            
             
+    };
+    
+    // method: replot
+    // Does a reinitialization of the plot followed by
+    // a redraw.  Method could be used to interactively
+    // change plot characteristics and then replot.
+    //
+    // Parameters:
+    // options - Options used for replotting.
+    //
+    // Properties:
+    // clear - false to not clear (empty) the plot container before replotting (default: true).
+    // resetAxes - true to reset all axes min, max, numberTicks and tickInterval setting so axes will rescale themselves.
+    //             optionally pass in list of axes to reset (e.g. ['xaxis', 'y2axis']) (default: false).
+    JqPlot.prototype.replot = function (options) {
+        var opts =  options || {},
+            data = opts.data || null,
+            clear = (opts.clear === false) ? false : true,
+            resetAxes = opts.resetAxes || false;
+
+        delete opts.data;
+        delete opts.clear;
+        delete opts.resetAxes;
+
+        this.target.trigger('jqplotPreReplot');
+
+        if (clear) {
+            this.destroy();
+        }
+
+        // if have data or other options, full reinit.
+        // otherwise, quickinit.
+        if (data || !$.isEmptyObject(opts)) {
+            this.reInitialize(data, opts);
+        } else {
+            this.quickInit();
+        }
+
+        if (resetAxes) {
+            this.resetAxesScale(resetAxes, opts.axes);
+        }
+
+        this.draw();
+
+        this.target.trigger('jqplotPostReplot');
+
     };
     
     // method: redraw
@@ -4265,6 +4268,7 @@
     };
     
     /**
+     *
      */
     JqPlot.prototype.bindCustomEvents = function () {
         this.eventCanvas._elem.bind('click', {plot: this}, this.onClick);
