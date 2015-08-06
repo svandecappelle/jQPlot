@@ -230,7 +230,7 @@
             _data = _options.data;
         }
 
-        plot = new jqPlot();
+        plot = new JqPlot();
         
         // remove any error class that may be stuck on target.
         $('#' + target).removeClass('jqplot-error');
@@ -1785,7 +1785,6 @@
         this.hooks.push([ev, fn]);
     };
 
-
     var _axisNames = ['yMidAxis', 'xaxis', 'yaxis', 'x2axis', 'y2axis', 'y3axis', 'y4axis', 'y5axis', 'y6axis', 'y7axis', 'y8axis', 'y9axis'],
 
         /**
@@ -1793,9 +1792,60 @@
          * Plot object returned by call to $.jqplot.  Handles parsing user options,
          * creating sub objects (Axes, legend, title, series) and rendering the plot.
          */
-        jqPlot = function () {
+        JqPlot = function () {
          
-            var seriesColorsIndex = 0;
+            var seriesColorsIndex = 0,
+                
+                /**
+                 * Sorts the series data in increasing order.
+                 */
+                sortData = function (series) {
+
+                    var d, sd, pd, ppd, ret,
+                        i,
+                        j,
+                        l = series.length,
+                        check,
+                        bat,
+                        n,
+                        dlen,
+                        simplesort1 = function (a, b) {
+                            return a[1] - b[1];
+                        },
+                        simplesort0 = function (a, b) {
+                            return a[0] - b[0];
+                        };
+
+                    for (i = 0; i < l; i++) {
+                        bat = [series[i].data, series[i]._stackData, series[i]._plotData, series[i]._prevPlotData];
+                        for (n = 0; n < 4; n++) {
+                            check = true;
+                            d = bat[n];
+                            if (series[i]._stackAxis === 'x') {
+                                for (j = 0, dlen = d.length; j < dlen; j++) {
+                                    if (typeof (d[j][1]) !== "number") {
+                                        check = false;
+                                        break;
+                                    }
+                                }
+                                if (check) {
+                                    d.sort(simplesort1);
+                                }
+                            } else {
+                                for (j = 0, dlen = d.length; j < dlen; j++) {
+                                    if (typeof (d[j][0]) !== "number") {
+                                        check = false;
+                                        break;
+                                    }
+                                }
+                                if (check) {
+                                    d.sort(simplesort0);
+                                }
+                            }
+                        }
+
+                    }
+                };
             
             // Group: Properties
             // These properties are specified at the top of the options object
@@ -2296,6 +2346,7 @@
                     }
                 }
             };
+            
             // method: reInitialize
             // reinitialize plot for replotting.
             // not called directly.
@@ -2575,55 +2626,6 @@
 
                 this.legend._series = this.series;
             };
-
-            // sort the series data in increasing order.
-            function sortData(series) {
-                
-                var d, sd, pd, ppd, ret,
-                    i,
-                    j,
-                    l = series.length,
-                    check,
-                    bat,
-                    n,
-                    dlen,
-                    simplesort1 = function (a, b) {
-                        return a[1] - b[1];
-                    },
-                    simplesort0 = function (a, b) {
-                        return a[0] - b[0];
-                    };
-                
-                for (i = 0; i < l; i++) {
-                    bat = [series[i].data, series[i]._stackData, series[i]._plotData, series[i]._prevPlotData];
-                    for (n = 0; n < 4; n++) {
-                        check = true;
-                        d = bat[n];
-                        if (series[i]._stackAxis === 'x') {
-                            for (j = 0, dlen = d.length; j < dlen; j++) {
-                                if (typeof (d[j][1]) !== "number") {
-                                    check = false;
-                                    break;
-                                }
-                            }
-                            if (check) {
-                                d.sort(simplesort1);
-                            }
-                        } else {
-                            for (j = 0, dlen = d.length; j < dlen; j++) {
-                                if (typeof (d[j][0]) !== "number") {
-                                    check = false;
-                                    break;
-                                }
-                            }
-                            if (check) {
-                                d.sort(simplesort0);
-                            }
-                        }
-                    }
-
-                }
-            }
 
             /**
              */
