@@ -85,7 +85,7 @@
  * 
  */
 
-(function ($, undefined) {
+(function ($, window, undefined) {
     
     "use strict";
     
@@ -185,7 +185,6 @@
             
         });
     };
-
 
     /**
      * Namespace: $.jqplot
@@ -349,7 +348,6 @@
         };
         
     };
-
             
     // Convienence function that won't hang IE or FF without FireBug.
     $.jqplot.log = function () {
@@ -383,7 +381,6 @@
         pluginLocation: 'jqplot/src/plugins/'
     };
     
-    
     $.jqplot.arrayMax = function (array) {
         return Math.max.apply(Math, array);
     };
@@ -396,8 +393,7 @@
     
     // canvas related tests taken from modernizer:
     // Copyright (c) 2009 - 2010 Faruk Ates.
-    // http://www.modernizr.com
-    
+    // http://www.modernizr.com    
     $.jqplot.support_canvas = function () {
         if (typeof $.jqplot.support_canvas.result === 'undefined') {
             $.jqplot.support_canvas.result = !!document.createElement('canvas').getContext;
@@ -1578,7 +1574,6 @@
     };
     
 
-
     /**
      * Class: Grid
      * 
@@ -1787,65 +1782,66 @@
         this.hooks.push([ev, fn]);
     };
 
-        /**
-         * Class: jqPlot
-         * Plot object returned by call to $.jqplot.  Handles parsing user options,
-         * creating sub objects (Axes, legend, title, series) and rendering the plot.
-         */
-      var JqPlot = function () {
+    /**
+     * @constructor
+     * Class: jqPlot
+     * Plot object returned by call to $.jqplot.  Handles parsing user options,
+     * creating sub objects (Axes, legend, title, series) and rendering the plot.
+     */
+    function JqPlot() {
          
-            var seriesColorsIndex = 0,
-                
-                /**
-                 * Sorts the series data in increasing order.
-                 */
-                sortData = function (series) {
+        var seriesColorsIndex = 0,
 
-                    var d, sd, pd, ppd, ret,
-                        i,
-                        j,
-                        l = series.length,
-                        check,
-                        bat,
-                        n,
-                        dlen,
-                        simplesort1 = function (a, b) {
-                            return a[1] - b[1];
-                        },
-                        simplesort0 = function (a, b) {
-                            return a[0] - b[0];
-                        };
+            /**
+             * Sorts the series data in increasing order.
+             */
+            sortData = function (series) {
 
-                    for (i = 0; i < l; i++) {
-                        bat = [series[i].data, series[i]._stackData, series[i]._plotData, series[i]._prevPlotData];
-                        for (n = 0; n < 4; n++) {
-                            check = true;
-                            d = bat[n];
-                            if (series[i]._stackAxis === 'x') {
-                                for (j = 0, dlen = d.length; j < dlen; j++) {
-                                    if (typeof (d[j][1]) !== "number") {
-                                        check = false;
-                                        break;
-                                    }
-                                }
-                                if (check) {
-                                    d.sort(simplesort1);
-                                }
-                            } else {
-                                for (j = 0, dlen = d.length; j < dlen; j++) {
-                                    if (typeof (d[j][0]) !== "number") {
-                                        check = false;
-                                        break;
-                                    }
-                                }
-                                if (check) {
-                                    d.sort(simplesort0);
+                var d, sd, pd, ppd, ret,
+                    i,
+                    j,
+                    l = series.length,
+                    check,
+                    bat,
+                    n,
+                    dlen,
+                    simplesort1 = function (a, b) {
+                        return a[1] - b[1];
+                    },
+                    simplesort0 = function (a, b) {
+                        return a[0] - b[0];
+                    };
+
+                for (i = 0; i < l; i++) {
+                    bat = [series[i].data, series[i]._stackData, series[i]._plotData, series[i]._prevPlotData];
+                    for (n = 0; n < 4; n++) {
+                        check = true;
+                        d = bat[n];
+                        if (series[i]._stackAxis === 'x') {
+                            for (j = 0, dlen = d.length; j < dlen; j++) {
+                                if (typeof (d[j][1]) !== "number") {
+                                    check = false;
+                                    break;
                                 }
                             }
+                            if (check) {
+                                d.sort(simplesort1);
+                            }
+                        } else {
+                            for (j = 0, dlen = d.length; j < dlen; j++) {
+                                if (typeof (d[j][0]) !== "number") {
+                                    check = false;
+                                    break;
+                                }
+                            }
+                            if (check) {
+                                d.sort(simplesort0);
+                            }
                         }
-
                     }
-                };
+
+                }
+            };
             
             // Group: Properties
             // These properties are specified at the top of the options object
@@ -3564,7 +3560,6 @@
                 
             }
 
-
             /**
              * Checks if event location is over a area.
              * @param {object} gridpos
@@ -3968,8 +3963,6 @@
                 return null;
             }
 
-
-
             this.onClick = function (ev) {
                 // Event passed in is normalized and will have data attribute.
                 // Event passed out is unnormalized.
@@ -4239,15 +4232,15 @@
                 }
                 
             };
-
-            /**
-             */
-            this.activateTheme = function (name) {
-                this.themeEngine.activate(this, name);
-            };
             
     };
     
+    /**
+     * @param {string} name
+     */
+    JqPlot.prototype.activateTheme = function (name) {
+        this.themeEngine.activate(this, name);
+    }; 
     
     /**
      * Computes a highlight color or array of highlight colors from given colors.
@@ -4615,6 +4608,5 @@
         yellow: 'rgb(255, 255, 0)',
         yellowgreen: 'rgb(154, 205, 50)'
     };
-
     
-})(jQuery);
+}(jQuery, window));
