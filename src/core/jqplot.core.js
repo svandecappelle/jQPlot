@@ -89,6 +89,8 @@
     
     "use strict";
     
+    var _axisNames = ['yMidAxis', 'xaxis', 'yaxis', 'x2axis', 'y2axis', 'y3axis', 'y4axis', 'y5axis', 'y6axis', 'y7axis', 'y8axis', 'y9axis'];
+    
     /**
      * 
      */
@@ -1785,14 +1787,12 @@
         this.hooks.push([ev, fn]);
     };
 
-    var _axisNames = ['yMidAxis', 'xaxis', 'yaxis', 'x2axis', 'y2axis', 'y3axis', 'y4axis', 'y5axis', 'y6axis', 'y7axis', 'y8axis', 'y9axis'],
-
         /**
          * Class: jqPlot
          * Plot object returned by call to $.jqplot.  Handles parsing user options,
          * creating sub objects (Axes, legend, title, series) and rendering the plot.
          */
-        JqPlot = function () {
+      var JqPlot = function () {
          
             var seriesColorsIndex = 0,
                 
