@@ -2286,7 +2286,7 @@
      */
     function JqPlot() {
          
-        var seriesColorsIndex = 0,
+        var seriesColorsIndex = 0;
             
         // Group: Properties
         // These properties are specified at the top of the options object
@@ -4057,7 +4057,7 @@
      * Useful to put a series back where it belongs after moving
      * it to the front.
      */ 
-    JqPlot.protoype.restorePreviousSeriesOrder = function () {
+    JqPlot.prototype.restorePreviousSeriesOrder = function () {
         
         var i,
             j,
