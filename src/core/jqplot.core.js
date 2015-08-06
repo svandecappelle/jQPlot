@@ -4045,16 +4045,7 @@
                 $(this).trigger(evt, [positions.gridPos, positions.dataPos, null, p]);
             };
 
-            this.onMouseLeave = function (ev) {
-                var positions = getEventPosition(ev),
-                    p = ev.data.plot,
-                    evt = $.Event('jqplotMouseLeave');
-                evt.pageX = ev.pageX;
-                evt.pageY = ev.pageY;
-                evt.relatedTarget = ev.relatedTarget;
-                $(this).trigger(evt, [positions.gridPos, positions.dataPos, null, p]);
-            };
-                 
+            
             
     };
     
@@ -4248,6 +4239,20 @@
         }
         options = idx = i = series = ctx = l = null;
     };
+    
+    /**
+     * @param {object} ev
+     */
+    JqPlot.prototype.onMouseLeave = function (ev) {
+        var positions = getEventPosition(ev),
+            p = ev.data.plot,
+            evt = $.Event('jqplotMouseLeave');
+        evt.pageX = ev.pageX;
+        evt.pageY = ev.pageY;
+        evt.relatedTarget = ev.relatedTarget;
+        $(this).trigger(evt, [positions.gridPos, positions.dataPos, null, p]);
+    };                
+    
     
     
     /**
