@@ -560,7 +560,7 @@
 
     // A superclass holding some common properties and methods.
     $.jqplot.ElemContainer = function () {
-        this._elem = {};
+        this._elem = null;
         this._plotWidth = 0;
         this._plotHeight = 0;
         this._plotDimensions = {height: null, width: null};
