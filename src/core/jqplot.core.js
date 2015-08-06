@@ -3961,91 +3961,7 @@
                 }
 
                 return null;
-            }
-
-            this.onClick = function (ev) {
-                // Event passed in is normalized and will have data attribute.
-                // Event passed out is unnormalized.
-                var positions = getEventPosition(ev);
-                var p = ev.data.plot;
-                var neighbor = checkIntersection(positions.gridPos, p);
-                var evt = $.Event('jqplotClick');
-                evt.pageX = ev.pageX;
-                evt.pageY = ev.pageY;
-                $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
-            };
-
-            this.onDblClick = function (ev) {
-                // Event passed in is normalized and will have data attribute.
-                // Event passed out is unnormalized.
-                var positions = getEventPosition(ev);
-                var p = ev.data.plot;
-                var neighbor = checkIntersection(positions.gridPos, p);
-                var evt = $.Event('jqplotDblClick');
-                evt.pageX = ev.pageX;
-                evt.pageY = ev.pageY;
-                $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
-            };
-
-            this.onMouseDown = function (ev) {
-                var positions = getEventPosition(ev);
-                var p = ev.data.plot;
-                var neighbor = checkIntersection(positions.gridPos, p);
-                var evt = $.Event('jqplotMouseDown');
-                evt.pageX = ev.pageX;
-                evt.pageY = ev.pageY;
-                $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
-            };
-
-            this.onMouseUp = function (ev) {
-                var positions = getEventPosition(ev);
-                var evt = $.Event('jqplotMouseUp');
-                evt.pageX = ev.pageX;
-                evt.pageY = ev.pageY;
-                $(this).trigger(evt, [positions.gridPos, positions.dataPos, null, ev.data.plot]);
-            };
-
-            this.onRightClick = function (ev) {
-                var positions = getEventPosition(ev);
-                var p = ev.data.plot;
-                var neighbor = checkIntersection(positions.gridPos, p);
-                if (p.captureRightClick) {
-                    if (ev.which == 3) {
-                    var evt = $.Event('jqplotRightClick');
-                    evt.pageX = ev.pageX;
-                    evt.pageY = ev.pageY;
-                        $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
-                    }
-                    else {
-                    var evt = $.Event('jqplotMouseUp');
-                    evt.pageX = ev.pageX;
-                    evt.pageY = ev.pageY;
-                        $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
-                    }
-                }
-            };
-
-            this.onMouseMove = function (ev) {
-                var positions = getEventPosition(ev);
-                var p = ev.data.plot;
-                var neighbor = checkIntersection(positions.gridPos, p);
-                var evt = $.Event('jqplotMouseMove');
-                evt.pageX = ev.pageX;
-                evt.pageY = ev.pageY;
-                $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
-            };
-
-            this.onMouseEnter = function (ev) {
-                var positions = getEventPosition(ev);
-                var p = ev.data.plot;
-                var evt = $.Event('jqplotMouseEnter');
-                evt.pageX = ev.pageX;
-                evt.pageY = ev.pageY;
-                evt.relatedTarget = ev.relatedTarget;
-                $(this).trigger(evt, [positions.gridPos, positions.dataPos, null, p]);
-            };
-
-            
+            }            
             
     };
     
@@ -4252,6 +4168,109 @@
         evt.relatedTarget = ev.relatedTarget;
         $(this).trigger(evt, [positions.gridPos, positions.dataPos, null, p]);
     };                
+    
+    /**
+     * @param {object} ev
+     */
+    JqPlot.prototype.onClick = function (ev) {
+        // Event passed in is normalized and will have data attribute.
+        // Event passed out is unnormalized.
+        var positions = getEventPosition(ev),
+            p = ev.data.plot,
+            neighbor = checkIntersection(positions.gridPos, p),
+            evt = $.Event('jqplotClick');
+        evt.pageX = ev.pageX;
+        evt.pageY = ev.pageY;
+        $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
+    };
+
+    /**
+     * @param {object} ev
+     */
+    JqPlot.prototype.onDblClick = function (ev) {
+        // Event passed in is normalized and will have data attribute.
+        // Event passed out is unnormalized.
+        var positions = getEventPosition(ev);
+        var p = ev.data.plot;
+        var neighbor = checkIntersection(positions.gridPos, p);
+        var evt = $.Event('jqplotDblClick');
+        evt.pageX = ev.pageX;
+        evt.pageY = ev.pageY;
+        $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
+    };
+
+    /**
+     * @param {object} ev
+     */
+    JqPlot.prototype.onMouseDown = function (ev) {
+        var positions = getEventPosition(ev),
+            p = ev.data.plot,
+            neighbor = checkIntersection(positions.gridPos, p),
+            evt = $.Event('jqplotMouseDown');
+        evt.pageX = ev.pageX;
+        evt.pageY = ev.pageY;
+        $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
+    };
+
+    /**
+     * @param {object} ev
+     */
+    JqPlot.prototype.onMouseUp = function (ev) {
+        var positions = getEventPosition(ev);
+        var evt = $.Event('jqplotMouseUp');
+        evt.pageX = ev.pageX;
+        evt.pageY = ev.pageY;
+        $(this).trigger(evt, [positions.gridPos, positions.dataPos, null, ev.data.plot]);
+    };
+
+    /**
+     * @param {object} ev
+     */
+    JqPlot.prototype.onRightClick = function (ev) {
+        var positions = getEventPosition(ev),
+            p = ev.data.plot,
+            neighbor = checkIntersection(positions.gridPos, p);
+        if (p.captureRightClick) {
+            if (ev.which == 3) {
+            var evt = $.Event('jqplotRightClick');
+            evt.pageX = ev.pageX;
+            evt.pageY = ev.pageY;
+                $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
+            }
+            else {
+            var evt = $.Event('jqplotMouseUp');
+            evt.pageX = ev.pageX;
+            evt.pageY = ev.pageY;
+                $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
+            }
+        }
+    };
+
+    /**
+     * @param {object} ev
+     */
+    JqPlot.prototype.onMouseMove = function (ev) {
+        var positions = getEventPosition(ev),
+            p = ev.data.plot,
+            neighbor = checkIntersection(positions.gridPos, p),
+            evt = $.Event('jqplotMouseMove');
+        evt.pageX = ev.pageX;
+        evt.pageY = ev.pageY;
+        $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
+    };
+
+    /**
+     * @param {object} ev
+     */
+    JqPlot.prototype.onMouseEnter = function (ev) {
+        var positions = getEventPosition(ev),
+            p = ev.data.plot,
+            evt = $.Event('jqplotMouseEnter');
+        evt.pageX = ev.pageX;
+        evt.pageY = ev.pageY;
+        evt.relatedTarget = ev.relatedTarget;
+        $(this).trigger(evt, [positions.gridPos, positions.dataPos, null, p]);
+    };
     
     
     
