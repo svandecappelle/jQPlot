@@ -2725,106 +2725,11 @@
 
             };
 
-            // populate the _stackData and _plotData arrays for the plot and the series.
-            this.populatePlotData = function (series, index) {
-                
-                var plotValues = {x: [], y: []},
-                    sidx,
-                    temp,
-                    plotdata,
-                    tempx,
-                    tempy,
-                    dval,
-                    stackval,
-                    comparator,
-                    i,
-                    j,
-                    cd,
-                    l,
-                    k;
-                
-                // if a stacked chart, compute the stacked data
-                this._plotData = [];
-                this._stackData = [];
-                
-                series._stackData = [];
-                series._plotData = [];
-                
-                if (this.stackSeries && !series.disableStack) {
-                    
-                    series._stack = true;
-                    
-                    sidx = (series._stackAxis === 'x') ? 0 : 1;
-                    // var idx = sidx ? 0 : 1;
-                    // push the current data into stackData
-                    //this._stackData.push(this.series[i].data);
-                    temp = $.extend(true, [], series.data);
-                    // create the data that will be plotted for this series
-                    plotdata = $.extend(true, [], series.data);
-                    
-                    // for first series, nothing to add to stackData.
-                    for (j = 0; j < index; j++) {
-                        cd = this.series[j].data;
-                        for (k = 0, l = cd.length; k < l; k++) {
-                            dval = cd[k];
-                            tempx = (dval[0] !== null) ? dval[0] : 0;
-                            tempy = (dval[1] !== null) ? dval[1] : 0;
-                            temp[k][0] += tempx;
-                            temp[k][1] += tempy;
-                            stackval = (sidx) ? tempy : tempx;
-                            // only need to sum up the stack axis column of data
-                            // and only sum if it is of same sign.
-                            if (series.data[k][sidx] * stackval >= 0) {
-                                plotdata[k][sidx] += stackval;
-                            }
-                        }
-                    }
-                    
-                    for (i = 0, l = plotdata.length; i < l; i++) {
-                        plotValues.x.push(plotdata[i][0]);
-                        plotValues.y.push(plotdata[i][1]);
-                    }
-                    
-                    this._plotData.push(plotdata);
-                    this._stackData.push(temp);
-                    
-                    series._stackData = temp;
-                    series._plotData = plotdata;
-                    series._plotValues = plotValues;
-                    
-                } else {
-                    
-                    for (i = 0, l = series.data.length; i < l; i++) {
-                        plotValues.x.push(series.data[i][0]);
-                        plotValues.y.push(series.data[i][1]);
-                    }
-                    
-                    this._stackData.push(series.data);
-                    this.series[index]._stackData = series.data;
-                    this._plotData.push(series.data);
-                    
-                    series._plotData = series.data;
-                    series._plotValues = plotValues;
-                    
-                }
-                
-                if (index > 0) {
-                    series._prevPlotData = this.series[index - 1]._plotData;
-                }
-                
-                series._sumy = 0;
-                series._sumx = 0;
-                
-                for (i = series.data.length - 1; i > -1; i--) {
-                    series._sumy += series.data[i][1];
-                    series._sumx += series.data[i][0];
-                }
-            };
-
             /**
              * Function to safely return colors from the color array and wrap around at the end.
              * @param {object} t
              * @returns
+             * @TODO: Figure out why this function is set to run immediately?
              */
             this.getNextSeriesColor = (function (t) {
                 
@@ -2841,63 +2746,6 @@
                 };
                 
             }(this));
-
-            
-
-            
-
-            
-
-            
-
-            
-
-            /**
-             * @TODO: why is this declared here?
-             * @TODO: what is jqPlot here? Is it actually JqPlot?
-             */
-            jqPlot.prototype.doFillBetweenLines = function () {
-                
-                var fb = this.fillBetween,
-                    sid1 = fb.series1,
-                    sid2 = fb.series2,
-                // first series should always be lowest index
-                    id1 = (sid1 < sid2) ? sid1 : sid2,
-                    id2 = (sid2 >  sid1) ? sid2 : sid1,
-
-                    series1 = this.series[id1],
-                    series2 = this.series[id2],
-                    tempgd,
-                    gd,
-                    color,
-                    baseSeries,
-                    sr,
-                    opts;
-
-                if (series2.renderer.smooth) {
-                    tempgd = series2.renderer._smoothedData.slice(0).reverse();
-                } else {
-                    tempgd = series2.gridData.slice(0).reverse();
-                }
-
-                if (series1.renderer.smooth) {
-                    gd = series1.renderer._smoothedData.concat(tempgd);
-                } else {
-                    gd = series1.gridData.concat(tempgd);
-                }
-
-                color = (fb.color !== null) ? fb.color : this.series[sid1].fillColor;
-                baseSeries = (fb.baseSeries !== null) ? fb.baseSeries : id1;
-
-                // now apply a fill to the shape on the lower series shadow canvas,
-                // so it is behind both series.
-                sr = this.series[baseSeries].renderer.shapeRenderer;
-                opts = {fillStyle: color, fill: true, closePath: true};
-                
-                sr.draw(series1.shadowCanvas._ctx, gd, opts);
-                
-            };
-
 
             /**
              * @TODO: figure out why this is not a method of JqPlot
@@ -3327,6 +3175,102 @@
                 return null;
             }            
             
+    };
+    
+    // populate the _stackData and _plotData arrays for the plot and the series.
+    JqPlot.prototype.populatePlotData = function (series, index) {
+
+        var plotValues = {x: [], y: []},
+            sidx,
+            temp,
+            plotdata,
+            tempx,
+            tempy,
+            dval,
+            stackval,
+            comparator,
+            i,
+            j,
+            cd,
+            l,
+            k;
+
+        // if a stacked chart, compute the stacked data
+        this._plotData = [];
+        this._stackData = [];
+
+        series._stackData = [];
+        series._plotData = [];
+
+        if (this.stackSeries && !series.disableStack) {
+
+            series._stack = true;
+
+            sidx = (series._stackAxis === 'x') ? 0 : 1;
+            // var idx = sidx ? 0 : 1;
+            // push the current data into stackData
+            //this._stackData.push(this.series[i].data);
+            temp = $.extend(true, [], series.data);
+            // create the data that will be plotted for this series
+            plotdata = $.extend(true, [], series.data);
+
+            // for first series, nothing to add to stackData.
+            for (j = 0; j < index; j++) {
+                cd = this.series[j].data;
+                for (k = 0, l = cd.length; k < l; k++) {
+                    dval = cd[k];
+                    tempx = (dval[0] !== null) ? dval[0] : 0;
+                    tempy = (dval[1] !== null) ? dval[1] : 0;
+                    temp[k][0] += tempx;
+                    temp[k][1] += tempy;
+                    stackval = (sidx) ? tempy : tempx;
+                    // only need to sum up the stack axis column of data
+                    // and only sum if it is of same sign.
+                    if (series.data[k][sidx] * stackval >= 0) {
+                        plotdata[k][sidx] += stackval;
+                    }
+                }
+            }
+
+            for (i = 0, l = plotdata.length; i < l; i++) {
+                plotValues.x.push(plotdata[i][0]);
+                plotValues.y.push(plotdata[i][1]);
+            }
+
+            this._plotData.push(plotdata);
+            this._stackData.push(temp);
+
+            series._stackData = temp;
+            series._plotData = plotdata;
+            series._plotValues = plotValues;
+
+        } else {
+
+            for (i = 0, l = series.data.length; i < l; i++) {
+                plotValues.x.push(series.data[i][0]);
+                plotValues.y.push(series.data[i][1]);
+            }
+
+            this._stackData.push(series.data);
+            this.series[index]._stackData = series.data;
+            this._plotData.push(series.data);
+
+            series._plotData = series.data;
+            series._plotValues = plotValues;
+
+        }
+
+        if (index > 0) {
+            series._prevPlotData = this.series[index - 1]._plotData;
+        }
+
+        series._sumy = 0;
+        series._sumx = 0;
+
+        for (i = series.data.length - 1; i > -1; i--) {
+            series._sumy += series.data[i][1];
+            series._sumx += series.data[i][0];
+        }
     };
     
     /**
@@ -3962,6 +3906,51 @@
 
             this.target.trigger('jqplotPostDraw', [this]);
         }
+    };
+    
+    /**
+     *
+     */
+    JqPlot.prototype.doFillBetweenLines = function () {
+
+        var fb = this.fillBetween,
+            sid1 = fb.series1,
+            sid2 = fb.series2,
+        // first series should always be lowest index
+            id1 = (sid1 < sid2) ? sid1 : sid2,
+            id2 = (sid2 >  sid1) ? sid2 : sid1,
+
+            series1 = this.series[id1],
+            series2 = this.series[id2],
+            tempgd,
+            gd,
+            color,
+            baseSeries,
+            sr,
+            opts;
+
+        if (series2.renderer.smooth) {
+            tempgd = series2.renderer._smoothedData.slice(0).reverse();
+        } else {
+            tempgd = series2.gridData.slice(0).reverse();
+        }
+
+        if (series1.renderer.smooth) {
+            gd = series1.renderer._smoothedData.concat(tempgd);
+        } else {
+            gd = series1.gridData.concat(tempgd);
+        }
+
+        color = (fb.color !== null) ? fb.color : this.series[sid1].fillColor;
+        baseSeries = (fb.baseSeries !== null) ? fb.baseSeries : id1;
+
+        // now apply a fill to the shape on the lower series shadow canvas,
+        // so it is behind both series.
+        sr = this.series[baseSeries].renderer.shapeRenderer;
+        opts = {fillStyle: color, fill: true, closePath: true};
+
+        sr.draw(series1.shadowCanvas._ctx, gd, opts);
+
     };
     
     /**
