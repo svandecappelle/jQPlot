@@ -2079,11 +2079,13 @@
 
             this.themeEngine = new $.jqplot.ThemeEngine();
 
-            // Group: methods
-            //
-            // method: init
-            // sets the plot target, checks data and applies user
-            // options to plot.
+            /**
+             * Group: methods
+             * 
+             * method: init
+             * sets the plot target, checks data and applies user
+             * options to plot.
+             */
             this.init = function (target, data, options) {
                 
                 var i,
@@ -2779,12 +2781,14 @@
             
     };
     
-    // method: resetAxesScale
-    // Reset the specified axes min, max, numberTicks and tickInterval properties to null
-    // or reset these properties on all axes if no list of axes is provided.
-    //
-    // Parameters:
-    // axes - Boolean to reset or not reset all axes or an array or object of axis names to reset.
+    /**
+     * method: resetAxesScale
+     * Reset the specified axes min, max, numberTicks and tickInterval properties to null
+     * or reset these properties on all axes if no list of axes is provided.
+     * 
+     * Parameters:
+     * axes - Boolean to reset or not reset all axes or an array or object of axis names to reset.
+     */
     JqPlot.prototype.resetAxesScale = function (axes, options) {
         var opts = options || {},
             ax = axes || this.axes,
@@ -2809,9 +2813,11 @@
         }
     };
     
-    // method: reInitialize
-    // reinitialize plot for replotting.
-    // not called directly.
+    /**
+     * method: reInitialize
+     * reinitialize plot for replotting.
+     * not called directly.
+     */
     JqPlot.prototype.reInitialize = function (data, opts) {
 
         // Plot should be visible and have a height and width.
@@ -2982,11 +2988,13 @@
         }
     };
     
-    // method: quickInit
-    // 
-    // Quick reinitialization plot for replotting.
-    // Does not parse options ore recreate axes and series.
-    // not called directly.
+    /**
+     * method: quickInit
+     * 
+     * Quick reinitialization plot for replotting.
+     * Does not parse options ore recreate axes and series.
+     * not called directly.
+     */
     JqPlot.prototype.quickInit = function () {
 
         var n,
@@ -3192,7 +3200,9 @@
 
     };
     
-    // populate the _stackData and _plotData arrays for the plot and the series.
+    /**
+     * Populates the _stackData and _plotData arrays for the plot and the series.
+     */
     JqPlot.prototype.populatePlotData = function (series, index) {
 
         var plotValues = {x: [], y: []},
@@ -3509,8 +3519,10 @@
 
     };
     
-    // method: destroy
-    // Releases all resources occupied by the plot
+    /**
+     * method: destroy
+     * Releases all resources occupied by the plot
+     */ 
     JqPlot.prototype.destroy = function () {
 
         var e;
@@ -3537,18 +3549,20 @@
 
     };
     
-    // method: replot
-    // Does a reinitialization of the plot followed by
-    // a redraw.  Method could be used to interactively
-    // change plot characteristics and then replot.
-    //
-    // Parameters:
-    // options - Options used for replotting.
-    //
-    // Properties:
-    // clear - false to not clear (empty) the plot container before replotting (default: true).
-    // resetAxes - true to reset all axes min, max, numberTicks and tickInterval setting so axes will rescale themselves.
-    //             optionally pass in list of axes to reset (e.g. ['xaxis', 'y2axis']) (default: false).
+    /**
+     * method: replot
+     * Does a reinitialization of the plot followed by
+     * a redraw.  Method could be used to interactively
+     * change plot characteristics and then replot.
+     * 
+     * Parameters:
+     * options - Options used for replotting.
+     * 
+     * Properties:
+     * clear - false to not clear (empty) the plot container before replotting (default: true).
+     * resetAxes - true to reset all axes min, max, numberTicks and tickInterval setting so axes will rescale themselves.
+     *              optionally pass in list of axes to reset (e.g. ['xaxis', 'y2axis']) (default: false).
+    */
     JqPlot.prototype.replot = function (options) {
         var opts =  options || {},
             data = opts.data || null,
@@ -3583,17 +3597,19 @@
 
     };
     
-    // method: redraw
-    // Empties the plot target div and redraws the plot.
-    // This enables plot data and properties to be changed
-    // and then to comletely clear the plot and redraw.
-    // redraw *will not* reinitialize any plot elements.
-    // That is, axes will not be autoscaled and defaults
-    // will not be reapplied to any plot elements.  redraw
-    // is used primarily with zooming. 
-    //
-    // Parameters:
-    // clear - false to not clear (empty) the plot container before redrawing (default: true).
+    /**
+     * method: redraw
+     * Empties the plot target div and redraws the plot.
+     * This enables plot data and properties to be changed
+     * and then to comletely clear the plot and redraw.
+     * redraw *will not* reinitialize any plot elements.
+     * That is, axes will not be autoscaled and defaults
+     * will not be reapplied to any plot elements.  redraw
+     * is used primarily with zooming. 
+     * 
+     * Parameters:
+     * clear - false to not clear (empty) the plot container before redrawing (default: true).
+    */ 
     JqPlot.prototype.redraw = function (clear) {
         var i,
             ax,
@@ -3625,9 +3641,11 @@
         this.target.trigger('jqplotPostRedraw');
     };
     
-    // method: draw
-    // Draws all elements of the plot into the container.
-    // Does not clear the container before drawing.
+    /**
+     * method: draw
+     * Draws all elements of the plot into the container.
+     * Does not clear the container before drawing.
+     */
     JqPlot.prototype.draw = function () {
 
         var i,
@@ -3975,10 +3993,12 @@
         this.themeEngine.activate(this, name);
     }; 
     
-    // method: restoreOriginalSeriesOrder
-    // This method requires jQuery 1.4+
-    // Restore the series canvas order to its original order
-    // when the plot was created.
+    /**
+     * method: restoreOriginalSeriesOrder
+     * This method requires jQuery 1.4+
+     * Restore the series canvas order to its original order
+     * when the plot was created.
+     */
     JqPlot.prototype.restoreOriginalSeriesOrder = function () {
 
         var i,
@@ -4008,11 +4028,13 @@
 
     };
     
-    // method: restorePreviousSeriesOrder
-    // This method requires jQuery 1.4+
-    // Restore the series canvas order to its previous state.
-    // Useful to put a series back where it belongs after moving
-    // it to the front.
+    /**
+     * method: restorePreviousSeriesOrder
+     * This method requires jQuery 1.4+
+     * Restore the series canvas order to its previous state.
+     * Useful to put a series back where it belongs after moving
+     * it to the front.
+     */ 
     JqPlot.protoype.restorePreviousSeriesOrder = function () {
         
         var i,
@@ -4044,14 +4066,14 @@
         this.previousSeriesStack = temp;
     };
 
-    // method: moveSeriesToBack
-    // This method requires jQuery 1.4+
-    // Moves the specified series canvas behind all other series canvases.
-    //
-    // Parameters:
-    // idx - 0 based index of the series to move.  This will be the index of the series
-    // as it was first passed into the jqplot function.
     /**
+     * method: moveSeriesToBack
+     * This method requires jQuery 1.4+
+     * Moves the specified series canvas behind all other series canvases.
+     * 
+     * Parameters:
+     * idx - 0 based index of the series to move.  This will be the index of the series
+     * as it was first passed into the jqplot function.
      * @param {string} idx
      */
     JqPlot.prototype.moveSeriesToBack = function (idx) {
@@ -4080,15 +4102,17 @@
         
     };
     
-    // method: moveSeriesToFront
-    // This method requires jQuery 1.4+
-    // Moves the specified series canvas in front of all other series canvases.
-    // This effectively "draws" the specified series on top of all other series,
-    // although it is performed through DOM manipulation, no redrawing is performed.
-    //
-    // Parameters:
-    // idx - 0 based index of the series to move.  This will be the index of the series
-    // as it was first passed into the jqplot function.
+    /**
+     * method: moveSeriesToFront
+     * This method requires jQuery 1.4+
+     * Moves the specified series canvas in front of all other series canvases.
+     * This effectively "draws" the specified series on top of all other series,
+     * although it is performed through DOM manipulation, no redrawing is performed.
+     * 
+     * Parameters:
+     * idx - 0 based index of the series to move.  This will be the index of the series
+     * as it was first passed into the jqplot function.
+     */ 
     JqPlot.prototype.moveSeriesToFront = function (idx) { 
         idx = parseInt(idx, 10);
         var stackIndex = $.inArray(idx, this.seriesStack);
@@ -4110,12 +4134,14 @@
         this.seriesStack.push(idx);
     };   
     
-    // method: drawSeries
-    // Redraws all or just one series on the plot.  No axis scaling
-    // is performed and no other elements on the plot are redrawn.
-    // options is an options object to pass on to the series renderers.
-    // It can be an empty object {}.  idx is the series index
-    // to redraw if only one series is to be redrawn.
+    /**
+     * method: drawSeries
+     * Redraws all or just one series on the plot.  No axis scaling
+     * is performed and no other elements on the plot are redrawn.
+     * options is an options object to pass on to the series renderers.
+     * It can be an empty object {}.  idx is the series index
+     * to redraw if only one series is to be redrawn.
+     */
     JqPlot.prototype.drawSeries = function (options, idx){
 
         var i,
