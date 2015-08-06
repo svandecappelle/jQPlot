@@ -1866,7 +1866,20 @@
             // prop: axes
             // up to 4 axes are supported, each with its own options, 
             // See <Axis> for axis specific options.
-            this.axes = {xaxis: new Axis('xaxis'), yaxis: new Axis('yaxis'), x2axis: new Axis('x2axis'), y2axis: new Axis('y2axis'), y3axis: new Axis('y3axis'), y4axis: new Axis('y4axis'), y5axis: new Axis('y5axis'), y6axis: new Axis('y6axis'), y7axis: new Axis('y7axis'), y8axis: new Axis('y8axis'), y9axis: new Axis('y9axis'), yMidAxis: new Axis('yMidAxis')};
+            this.axes = { 
+                xaxis: new Axis('xaxis'),
+                yaxis: new Axis('yaxis'),
+                x2axis: new Axis('x2axis'),
+                y2axis: new Axis('y2axis'),
+                y3axis: new Axis('y3axis'),
+                y4axis: new Axis('y4axis'),
+                y5axis: new Axis('y5axis'),
+                y6axis: new Axis('y6axis'),
+                y7axis: new Axis('y7axis'),
+                y8axis: new Axis('y8axis'),
+                y9axis: new Axis('y9axis'),
+                yMidAxis: new Axis('yMidAxis')
+            };
             // jqplot base canvas. Lowest canvas.
             this.baseCanvas = new $.jqplot.GenericCanvas();
             // true to intercept right click events and fire a 'jqplotRightClick' event.
@@ -2037,6 +2050,7 @@
             this._gridPadding = {top: null, right: null, bottom: null, left: null};
             this._defaultGridPadding = {top: 10, right: 10, bottom: 23, left: 10};
 
+        
             this._addDomReference = $.jqplot.config.addDomReference;
 
             this.preInitHooks = new $.jqplot.HooksManager();
@@ -2312,11 +2326,6 @@
                 }
                 
             };
-
-
-            
-
-            
 
             /**
              * Function to safely return colors from the color array and wrap around at the end.
