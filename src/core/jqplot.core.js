@@ -189,7 +189,7 @@
         var i,
             elem;
         
-        for (i = 0, elem; (elem = $(this)[i]) !== null; i++) {
+        for (i = 0, elem; typeof (elem = $(this)[i]) !== "undefined"; i++) {
             
             // Remove element nodes and prevent memory leaks
             if (elem.nodeType === 1) {
@@ -3336,8 +3336,34 @@
             tempi,
             n,
             axis,
-            normalizeData,
-            colorIndex,
+            normalizeData = function (data, dir, start) {
+                // return data as an array of point arrays,
+                // in form [[x1,y1...], [x2,y2...], ...]
+                var temp = [],
+                    i,
+                    l,
+                    j;
+
+                dir = dir || 'vertical';
+
+                if (!$.isArray(data[0])) {
+                    // we have a series of scalars.  One line with just y values.
+                    // turn the scalar list of data into a data array of form:
+                    // [[1, data[0]], [2, data[1]], ...]
+                    for (i = 0, l = data.length; i < l; i++) {
+                        if (dir === 'vertical') {
+                            temp.push([start + i, data[i]]);
+                        } else {
+                            temp.push([data[i], start + i]);
+                        }
+                    }
+                } else {
+                    // we have a properly formatted data series, copy it.
+                    $.extend(true, temp, data);
+                }
+                return temp;
+            },
+            colorIndex = 0,
             sopts,
             dir = 'vertical';
 
@@ -3375,7 +3401,7 @@
             this.captureRightClick = opts.captureRightClick;
         }
 
-        this.defaultAxisStart = (options && options.defaultAxisStart !== null) ? options.defaultAxisStart : this.defaultAxisStart;
+        this.defaultAxisStart = (options && typeof options.defaultAxisStart !== "undefined") ? options.defaultAxisStart : this.defaultAxisStart;
 
         this.colorGenerator.setColors(this.seriesColors);
         this.negativeColorGenerator.setColors(this.negativeSeriesColors);
@@ -3385,7 +3411,7 @@
         // this._gridPadding = this.options.gridPadding;
         $.extend(true, this._gridPadding, opts.gridPadding);
 
-        this.sortData = (opts.sortData !== null) ? opts.sortData : this.sortData;
+        this.sortData = (typeof opts.sortData !== "undefined") ? opts.sortData : this.sortData;
 
         for (i = 0; i < 12; i++) {
             n = _axisNames[i];
@@ -3401,36 +3427,6 @@
         //         this.data.push(this.options.series.data);
         //     }    
         // }
-
-        normalizeData = function (data, dir, start) {
-            // return data as an array of point arrays,
-            // in form [[x1,y1...], [x2,y2...], ...]
-            var temp = [],
-                i,
-                l,
-                j;
-
-            dir = dir || 'vertical';
-
-            if (!$.isArray(data[0])) {
-                // we have a series of scalars.  One line with just y values.
-                // turn the scalar list of data into a data array of form:
-                // [[1, data[0]], [2, data[1]], ...]
-                for (i = 0, l = data.length; i < l; i++) {
-                    if (dir === 'vertical') {
-                        temp.push([start + i, data[i]]);
-                    } else {
-                        temp.push([data[i], start + i]);
-                    }
-                }
-            } else {
-                // we have a properly formatted data series, copy it.
-                $.extend(true, temp, data);
-            }
-            return temp;
-        };
-
-        colorIndex = 0;
 
         this.series = [];
 
