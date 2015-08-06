@@ -1,3 +1,6 @@
+/*jslint browser: true, plusplus: true, nomen: true, white: false */
+/*global $, console, jqPlot */
+
 /**
  * Title: jqPlot Charts
  * 
@@ -82,79 +85,93 @@
  * 
  */
 
-(function($) {
-    // make sure undefined is undefined
-    var undefined;
+(function ($, undefined) {
     
-    $.fn.emptyForce = function() {
-      for ( var i = 0, elem; (elem = $(this)[i]) != null; i++ ) {
-        // Remove element nodes and prevent memory leaks
-        if ( elem.nodeType === 1 ) {
-          $.cleanData( elem.getElementsByTagName("*") );
-        }
-  
-        // Remove any remaining nodes
-        if ($.jqplot.use_excanvas) {
-          elem.outerHTML = "";
-        }
-        else {
-          while ( elem.firstChild ) {
-            elem.removeChild( elem.firstChild );
-          }
+    "use strict";
+    
+    /**
+     * 
+     */
+    $.fn.emptyForce = function () {
+        
+        var i,
+            elem;
+        
+        for (i = 0, elem; (elem = $(this)[i]) !== null; i++) {
+            
+            // Remove element nodes and prevent memory leaks
+            if (elem.nodeType === 1) {
+                $.cleanData(elem.getElementsByTagName("*"));
+            }
+
+            // Remove any remaining nodes
+            if ($.jqplot.use_excanvas) {
+                elem.outerHTML = "";
+            } else {
+                while (elem.firstChild) {
+                    elem.removeChild(elem.firstChild);
+                }
+            }
+
+            elem = null;
         }
 
-        elem = null;
-      }
-  
-      return $(this);
+        return $(this);
     };
   
-    $.fn.removeChildForce = function(parent) {
-      while ( parent.firstChild ) {
-        this.removeChildForce( parent.firstChild );
-        parent.removeChild( parent.firstChild );
-      }
+    /**
+     * @param {object} parent 
+     */
+    $.fn.removeChildForce = function (parent) {
+        while (parent.firstChild) {
+            this.removeChildForce(parent.firstChild);
+            parent.removeChild(parent.firstChild);
+        }
     };
 
-    $.fn.jqplot = function() {
-        var datas = [];
-        var options = [];
+    /**
+     */
+    $.fn.jqplot = function () {
+        
+        var datas = [],
+            options = [],
+            i,
+            l;
+        
         // see how many data arrays we have
-        for (var i=0, l=arguments.length; i<l; i++) {
+        for (i = 0, l = arguments.length; i < l; i++) {
             if ($.isArray(arguments[i])) {
                 datas.push(arguments[i]);
-            }
-            else if ($.isPlainObject(arguments[i])) {
+            } else if ($.isPlainObject(arguments[i])) {
                 options.push(arguments[i]);
             }
         }
 
-        return this.each(function(index) {
-            var tid, 
-                plot, 
+        return this.each(function (index) {
+            var tid,
+                plot,
                 $this = $(this),
                 dl = datas.length,
                 ol = options.length,
-                data, 
+                data,
                 opts;
 
             if (index < dl) {
                 data = datas[index];
-            }
-            else {
-                data = dl ? datas[dl-1] : null;
+            } else {
+                data = dl ? datas[dl - 1] : null;
             }
 
             if (index < ol) {
                 opts = options[index];
-            }
-            else {
-                opts = ol ? options[ol-1] : null;
+            } else {
+                opts = ol ? options[ol - 1] : null;
             }
 
             // does el have an id?
             // if not assign it one.
             tid = $this.attr('id');
+            
             if (tid === undefined) {
                 tid = 'jqplot_target_' + $.jqplot.targetCounter++;
                 $this.attr('id', tid);
@@ -163,6 +180,7 @@
             plot = $.jqplot(tid, data, opts);
 
             $this.data('jqplot', plot);
+            
         });
     };
 
@@ -190,21 +208,20 @@
      * defaultWidth - Default height for plots where no css height specification exists.  This
      *   is a jqplot wide default.
      */
-
-    $.jqplot = function(target, data, options) {
-        var _data = null, _options = null;
+    $.jqplot = function (target, data, options) {
+        
+        var _data = null,
+            _options = null,
+            plot,
+            msg;
 
         if (arguments.length === 3) {
             _data = data;
             _options = options;
-        }
-
-        else if (arguments.length === 2) {
+        } else if (arguments.length === 2) {
             if ($.isArray(data)) {
                 _data = data;
-            }
-
-            else if ($.isPlainObject(data)) {
+            } else if ($.isPlainObject(data)) {
                 _options = data;
             }
         }
@@ -213,9 +230,10 @@
             _data = _options.data;
         }
 
-        var plot = new jqPlot();
+        plot = new jqPlot();
+        
         // remove any error class that may be stuck on target.
-        $('#'+target).removeClass('jqplot-error');
+        $('#' + target).removeClass('jqplot-error');
         
         if ($.jqplot.config.catchErrors) {
             try {
@@ -223,20 +241,21 @@
                 plot.draw();
                 plot.themeEngine.init.call(plot);
                 return plot;
+            } catch (e) {
+                msg = $.jqplot.config.errorMessage || e.message;
+                $('#' + target)
+                    .append('<div class="jqplot-error-message">' + msg + '</div>')
+                    .addClass('jqplot-error')
+                    .css({
+                        background: $.jqplot.config.errorBackground,
+                        border: $.jqplot.config.errorBorder,
+                        fontFamily: $.jqplot.config.errorFontFamily,
+                        fontSize: $.jqplot.config.errorFontSize,
+                        fontStyle: $.jqplot.config.errorFontStyle,
+                        fontWeight: $.jqplot.config.errorFontWeight
+                    });
             }
-            catch(e) {
-                var msg = $.jqplot.config.errorMessage || e.message;
-                $('#'+target).append('<div class="jqplot-error-message">'+msg+'</div>');
-                $('#'+target).addClass('jqplot-error');
-                document.getElementById(target).style.background = $.jqplot.config.errorBackground;
-                document.getElementById(target).style.border = $.jqplot.config.errorBorder;
-                document.getElementById(target).style.fontFamily = $.jqplot.config.errorFontFamily;
-                document.getElementById(target).style.fontSize = $.jqplot.config.errorFontSize;
-                document.getElementById(target).style.fontStyle = $.jqplot.config.errorFontStyle;
-                document.getElementById(target).style.fontWeight = $.jqplot.config.errorFontWeight;
-            }
-        }
-        else {        
+        } else {
             plot.init(target, _data, _options);
             plot.draw();
             plot.themeEngine.init.call(plot);
@@ -252,22 +271,24 @@
     // canvas manager to reuse canvases on the plot.
     // Should help solve problem of canvases not being freed and
     // problem of waiting forever for firefox to decide to free memory.
-    $.jqplot.CanvasManager = function() {
+    $.jqplot.CanvasManager = function () {
         // canvases are managed globally so that they can be reused
         // across plots after they have been freed
-        if (typeof $.jqplot.CanvasManager.canvases == 'undefined') {
+        if (typeof $.jqplot.CanvasManager.canvases === 'undefined') {
             $.jqplot.CanvasManager.canvases = [];
             $.jqplot.CanvasManager.free = [];
         }
         
         var myCanvases = [];
         
-        this.getCanvas = function() {
-            var canvas;
-            var makeNew = true;
+        this.getCanvas = function () {
+            var canvas,
+                makeNew = true,
+                i,
+                l;
             
             if (!$.jqplot.use_excanvas) {
-                for (var i = 0, l = $.jqplot.CanvasManager.canvases.length; i < l; i++) {
+                for (i = 0, l = $.jqplot.CanvasManager.canvases.length; i < l; i++) {
                     if ($.jqplot.CanvasManager.free[i] === true) {
                         makeNew = false;
                         canvas = $.jqplot.CanvasManager.canvases[i];
@@ -284,34 +305,34 @@
                 myCanvases.push($.jqplot.CanvasManager.canvases.length);
                 $.jqplot.CanvasManager.canvases.push(canvas);
                 $.jqplot.CanvasManager.free.push(false);
-            }   
+            }
             
             return canvas;
         };
         
         // this method has to be used after settings the dimesions
         // on the element returned by getCanvas()
-        this.initCanvas = function(canvas) {
+        this.initCanvas = function (canvas) {
             if ($.jqplot.use_excanvas) {
                 return window.G_vmlCanvasManager.initElement(canvas);
             }
             return canvas;
         };
 
-        this.freeAllCanvases = function() {
-            for (var i = 0, l=myCanvases.length; i < l; i++) {
+        this.freeAllCanvases = function () {
+            var i, l;
+            for (i = 0, l = myCanvases.length; i < l; i++) {
                 this.freeCanvas(myCanvases[i]);
             }
             myCanvases = [];
         };
 
-        this.freeCanvas = function(idx) {
+        this.freeCanvas = function (idx) {
             if ($.jqplot.use_excanvas && window.G_vmlCanvasManager.uninitElement !== undefined) {
                 // excanvas can't be reused, but properly unset
                 window.G_vmlCanvasManager.uninitElement($.jqplot.CanvasManager.canvases[idx]);
                 $.jqplot.CanvasManager.canvases[idx] = null;
-            } 
-            else {
+            } else {
                 var canvas = $.jqplot.CanvasManager.canvases[idx];
                 canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
                 $(canvas).unbind().removeAttr('class').removeAttr('style');
@@ -329,7 +350,7 @@
 
             
     // Convienence function that won't hang IE or FF without FireBug.
-    $.jqplot.log = function() {
+    $.jqplot.log = function () {
         if (window.console) {
             window.console.log.apply(window.console, arguments);
         }
@@ -337,10 +358,10 @@
         
     $.jqplot.config = {
         addDomReference: false,
-        enablePlugins:false,
-        defaultHeight:300,
-        defaultWidth:400,
-        UTCAdjust:false,
+        enablePlugins: false,
+        defaultHeight: 300,
+        defaultWidth: 400,
+        UTCAdjust: false,
         timezoneOffset: new Date(new Date().getTimezoneOffset() * 60000),
         errorMessage: '',
         errorBackground: '',
@@ -361,12 +382,12 @@
     };
     
     
-    $.jqplot.arrayMax = function( array ){
-        return Math.max.apply( Math, array );
+    $.jqplot.arrayMax = function (array) {
+        return Math.max.apply(Math, array);
     };
     
-    $.jqplot.arrayMin = function( array ){
-        return Math.min.apply( Math, array );
+    $.jqplot.arrayMin = function (array) {
+        return Math.min.apply(Math, array);
     };
     
     $.jqplot.enablePlugins = $.jqplot.config.enablePlugins;
@@ -375,27 +396,26 @@
     // Copyright (c) 2009 - 2010 Faruk Ates.
     // http://www.modernizr.com
     
-    $.jqplot.support_canvas = function() {
-        if (typeof $.jqplot.support_canvas.result == 'undefined') {
-            $.jqplot.support_canvas.result = !!document.createElement('canvas').getContext; 
+    $.jqplot.support_canvas = function () {
+        if (typeof $.jqplot.support_canvas.result === 'undefined') {
+            $.jqplot.support_canvas.result = !!document.createElement('canvas').getContext;
         }
         return $.jqplot.support_canvas.result;
     };
             
-    $.jqplot.support_canvas_text = function() {
-        if (typeof $.jqplot.support_canvas_text.result == 'undefined') {
+    $.jqplot.support_canvas_text = function () {
+        if (typeof $.jqplot.support_canvas_text.result === 'undefined') {
             if (window.G_vmlCanvasManager !== undefined && window.G_vmlCanvasManager._version > 887) {
                 $.jqplot.support_canvas_text.result = true;
-            }
-            else {
-                $.jqplot.support_canvas_text.result = !!(document.createElement('canvas').getContext && typeof document.createElement('canvas').getContext('2d').fillText == 'function');
+            } else {
+                $.jqplot.support_canvas_text.result = !!(document.createElement('canvas').getContext && typeof document.createElement('canvas').getContext('2d').fillText === 'function');
             }
              
         }
         return $.jqplot.support_canvas_text.result;
     };
     
-    $.jqplot.use_excanvas = ((!$.support.boxModel || !$.support.objectAll || !$support.leadingWhitespace) && !$.jqplot.support_canvas()) ? true : false;
+    $.jqplot.use_excanvas = ((!$.support.boxModel || !$.support.objectAll || !$.support.leadingWhitespace) && !$.jqplot.support_canvas()) ? true : false;
     
     /**
      * 
@@ -446,7 +466,7 @@
     $.jqplot.postDrawSeriesShadowHooks = [];
 
     // A superclass holding some common properties and methods.
-    $.jqplot.ElemContainer = function() {
+    $.jqplot.ElemContainer = function () {
         this._elem;
         this._plotWidth;
         this._plotHeight;
