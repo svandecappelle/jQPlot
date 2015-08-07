@@ -725,6 +725,44 @@
         };
     }
 
+     function drawZoomBox() {
+        
+        var start = this._zoom.start,
+            end = this._zoom.end,
+            ctx = this.zoomCanvas._ctx,
+            l,
+            t,
+            h,
+            w;
+        
+        if (end[0] > start[0]) {
+            l = start[0];
+            w = end[0] - start[0];
+        } else {
+            l = end[0];
+            w = start[0] - end[0];
+        }
+        
+        if (end[1] > start[1]) {
+            t = start[1];
+            h = end[1] - start[1];
+        } else {
+            t = end[1];
+            h = start[1] - end[1];
+        }
+        
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+        ctx.strokeStyle = '#999999';
+        ctx.lineWidth = 1.0;
+        ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
+        ctx.fillRect(0,0,ctx.canvas.width, ctx.canvas.height);
+        ctx.clearRect(l, t, w, h);
+        // IE won't show transparent fill rect, so stroke a rect also.
+        ctx.strokeRect(l, t, w, h);
+        ctx = null;
+    }
+    
+    
     function handleZoomMove(ev) {
         
         var plot = ev.data.plot,
@@ -906,43 +944,7 @@
 
     }
 
-    function drawZoomBox() {
-        
-        var start = this._zoom.start,
-            end = this._zoom.end,
-            ctx = this.zoomCanvas._ctx,
-            l,
-            t,
-            h,
-            w;
-        
-        if (end[0] > start[0]) {
-            l = start[0];
-            w = end[0] - start[0];
-        } else {
-            l = end[0];
-            w = start[0] - end[0];
-        }
-        
-        if (end[1] > start[1]) {
-            t = start[1];
-            h = end[1] - start[1];
-        } else {
-            t = end[1];
-            h = start[1] - end[1];
-        }
-        
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-        ctx.strokeStyle = '#999999';
-        ctx.lineWidth = 1.0;
-        ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
-        ctx.fillRect(0,0,ctx.canvas.width, ctx.canvas.height);
-        ctx.clearRect(l, t, w, h);
-        // IE won't show transparent fill rect, so stroke a rect also.
-        ctx.strokeRect(l, t, w, h);
-        ctx = null;
-    }
-    
+   
     /**
      * Class: $.jqplot.Cursor
      * Plugin class representing the cursor as displayed on the plot.
