@@ -765,9 +765,9 @@
                 }
             }
             
-            if (c.constrainZoomTo == 'x') {
+            if (c.constrainZoomTo === 'x') {
                 c._zoom.end = [xpos, height];
-            } else if (c.constrainZoomTo == 'y') {
+            } else if (c.constrainZoomTo === 'y') {
                 c._zoom.end = [width, ypos];
             } else {
                 c._zoom.end = [xpos, ypos];
