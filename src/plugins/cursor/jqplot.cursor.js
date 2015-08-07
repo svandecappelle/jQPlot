@@ -913,17 +913,17 @@
             $(document).one('mouseup.jqplot_cursor', {plot: plot}, handleMouseUp);
         }
         
-        if (document.onselectstart != undefined) {
+        if (document.onselectstart) {
             c._oldHandlers.onselectstart = document.onselectstart;
             document.onselectstart = function () { return false; };
         }
         
-        if (document.ondrag != undefined) {
+        if (document.ondrag) {
             c._oldHandlers.ondrag = document.ondrag;
             document.ondrag = function () { return false; };
         }
         
-        if (document.onmousedown != undefined) {
+        if (document.onmousedown) {
             c._oldHandlers.onmousedown = document.onmousedown;
             document.onmousedown = function () { return false; };
         }
@@ -931,12 +931,12 @@
         if (c.zoom) {
             if (!c.zoomProxy) {
                 ctx = c.zoomCanvas._ctx;
-                ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
+                ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
                 ctx = null;
             }
-            if (c.constrainZoomTo == 'x') {
+            if (c.constrainZoomTo === 'x') {
                 c._zoom.start = [gridpos.x, 0];
-            } else if (c.constrainZoomTo == 'y') {
+            } else if (c.constrainZoomTo === 'y') {
                 c._zoom.start = [0, gridpos.y];
             } else {
                 c._zoom.start = [gridpos.x, gridpos.y];
@@ -1341,12 +1341,12 @@
             ax;
         
         // don't zoom if zoom area is too small (in pixels)
-        if ((c.constrainZoomTo == 'none' && Math.abs(gridpos.x - c._zoom.start[0]) > 6 && Math.abs(gridpos.y - c._zoom.start[1]) > 6) || (c.constrainZoomTo == 'x' && Math.abs(gridpos.x - c._zoom.start[0]) > 6) ||  (c.constrainZoomTo == 'y' && Math.abs(gridpos.y - c._zoom.start[1]) > 6)) {
+        if ((c.constrainZoomTo === 'none' && Math.abs(gridpos.x - c._zoom.start[0]) > 6 && Math.abs(gridpos.y - c._zoom.start[1]) > 6) || (c.constrainZoomTo === 'x' && Math.abs(gridpos.x - c._zoom.start[0]) > 6) ||  (c.constrainZoomTo === 'y' && Math.abs(gridpos.y - c._zoom.start[1]) > 6)) {
             if (!plot.plugins.cursor.zoomProxy) {
 
                 for (ax in datapos) {
                     // make a copy of the original axes to revert back.
-                    if (c._zoom.axes[ax] == undefined) {
+                    if (typeof c._zoom.axes[ax] === "undefined") {
                         c._zoom.axes[ax] = {};
                         c._zoom.axes[ax].numberTicks = axes[ax].numberTicks;
                         c._zoom.axes[ax].tickInterval = axes[ax].tickInterval;
@@ -1354,14 +1354,14 @@
                         c._zoom.axes[ax].daTickInterval = axes[ax].daTickInterval;
                         c._zoom.axes[ax].min = axes[ax].min;
                         c._zoom.axes[ax].max = axes[ax].max;
-                        c._zoom.axes[ax].tickFormatString = (axes[ax].tickOptions != null) ? axes[ax].tickOptions.formatString :  '';
+                        c._zoom.axes[ax].tickFormatString = (axes[ax].tickOptions !== null) ? axes[ax].tickOptions.formatString :  '';
                     }
 
-                    if ((c.constrainZoomTo == 'none') || (c.constrainZoomTo == 'x' && ax.charAt(0) == 'x') || (c.constrainZoomTo == 'y' && ax.charAt(0) == 'y')) {
+                    if ((c.constrainZoomTo === 'none') || (c.constrainZoomTo === 'x' && ax.charAt(0) === 'x') || (c.constrainZoomTo === 'y' && ax.charAt(0) === 'y')) {
                         
                         dp = datapos[ax];
                         
-                        if (dp != null) {
+                        if (dp !== null) {
                             
                             if (dp > start[ax]) {
                                 newmin = start[ax];
@@ -1459,7 +1459,7 @@
         startEv = {
             pageX: posStart.x,
             pageY: posStart.y,
-            preventDefault: function() { console.log("prevent"); },
+            preventDefault: function () { console.log("prevent"); },
             data: {
                 plot: plot
             }
@@ -1468,7 +1468,7 @@
         stopEv = {
             pageX: posStop.x,
             pageY: posStop.y,
-            preventDefault: function() { console.log("prevent"); },
+            preventDefault: function () { console.log("prevent"); },
             data: {
                 plot: plot
             }
@@ -1508,7 +1508,7 @@
     $.jqplot.preInitHooks.push($.jqplot.Cursor.init);
     $.jqplot.postDrawHooks.push($.jqplot.Cursor.postDraw);
     
-    $.jqplot.CursorLegendRenderer = function(options) {
+    $.jqplot.CursorLegendRenderer = function (options) {
         $.jqplot.TableLegendRenderer.call(this, options);
         this.formatString = '%s';
     };
@@ -1518,7 +1518,7 @@
     $.jqplot.CursorLegendRenderer.prototype.constructor = $.jqplot.CursorLegendRenderer;
 
     // called in context of a Legend
-    $.jqplot.CursorLegendRenderer.prototype.draw = function() {
+    $.jqplot.CursorLegendRenderer.prototype.draw = function () {
         
         var series,
             elem,
@@ -1544,9 +1544,9 @@
 
                 tr.data('seriesIndex', idx);
 
-                $('<td class="jqplot-legend jqplot-cursor-legend-swatch" style="padding-top:' + rs +';">'+
-                    '<div style="border:1px solid #cccccc;padding:0.2em;">'+
-                    '<div class="jqplot-cursor-legend-swatch" style="background-color:' + color +';"></div>'+
+                $('<td class="jqplot-legend jqplot-cursor-legend-swatch" style="padding-top:' + rs + ';">' +
+                    '<div style="border:1px solid #cccccc;padding:0.2em;">' +
+                    '<div class="jqplot-cursor-legend-swatch" style="background-color:' + color + ';"></div>' +
                     '</div></td>').appendTo(tr);
 
                 td = $('<td class="jqplot-legend jqplot-cursor-legend-label" style="vertical-align:middle;padding-top:' + rs + ';"></td>');
@@ -1570,7 +1570,7 @@
         
         if (this.show) {
             
-            series = this._series, s;
+            series = this._series;
             
             // make a table.  one line label per row.
             elem = document.createElement('table');
@@ -1624,4 +1624,4 @@
         
     };
 
-})(jQuery, window);
+}(jQuery, window));
