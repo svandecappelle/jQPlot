@@ -1,5 +1,5 @@
 /*jslint browser: true, plusplus: true, nomen: true, white: false */
-/*global $, console, jqPlot */
+/*global jQuery, console, jqPlot */
 
 /**
  * Title: jqPlot Charts
@@ -85,7 +85,7 @@
  * 
  */
 
-(function ($, window, undefined) {
+(function ($, window) {
     
     "use strict";
     
@@ -666,7 +666,7 @@
                                         }
                                     }
 
-                                } else if (p[0] != null && p[1] !== null) {
+                                } else if (p[0] !== null && p[1] !== null) {
                                     d = Math.sqrt((x - p[0]) * (x - p[0]) + (y - p[1]) * (y - p[1]));
                                     if (d <= threshold && (d <= d0 || d0 === null)) {
                                         d0 = d;
@@ -810,7 +810,7 @@
             // if not assign it one.
             tid = $this.attr('id');
             
-            if (tid === undefined) {
+            if (typeof tid === "undefined") {
                 tid = 'jqplot_target_' + $.jqplot.targetCounter++;
                 $this.attr('id', tid);
             }
@@ -966,7 +966,7 @@
         };
 
         this.freeCanvas = function (idx) {
-            if ($.jqplot.use_excanvas && window.G_vmlCanvasManager.uninitElement !== undefined) {
+            if ($.jqplot.use_excanvas && typeof window.G_vmlCanvasManager.uninitElement !== "undefined") {
                 // excanvas can't be reused, but properly unset
                 window.G_vmlCanvasManager.uninitElement($.jqplot.CanvasManager.canvases[idx]);
                 $.jqplot.CanvasManager.canvases[idx] = null;
@@ -1043,7 +1043,7 @@
             
     $.jqplot.support_canvas_text = function () {
         if (typeof $.jqplot.support_canvas_text.result === 'undefined') {
-            if (window.G_vmlCanvasManager !== undefined && window.G_vmlCanvasManager._version > 887) {
+            if (window.G_vmlCanvasManager && window.G_vmlCanvasManager._version > 887) {
                 $.jqplot.support_canvas_text.result = true;
             } else {
                 $.jqplot.support_canvas_text.result = !!(document.createElement('canvas').getContext && typeof document.createElement('canvas').getContext('2d').fillText === 'function');
@@ -2357,7 +2357,7 @@
     $.jqplot.GenericCanvas.prototype.resetCanvas = function () {
         
         if (this._elem) {
-            if ($.jqplot.use_excanvas && window.G_vmlCanvasManager.uninitElement !== undefined) {
+            if ($.jqplot.use_excanvas && window.G_vmlCanvasManager.uninitElement) {
                 window.G_vmlCanvasManager.uninitElement(this._elem.get(0));
             }
 
@@ -3040,7 +3040,7 @@
                 el = t[j]._elem;
                 if (el) {
                     // if canvas renderer
-                    if ($.jqplot.use_excanvas && window.G_vmlCanvasManager.uninitElement !== undefined) {
+                    if ($.jqplot.use_excanvas && window.G_vmlCanvasManager.uninitElement) {
                         window.G_vmlCanvasManager.uninitElement(el.get(0));
                     }
                     el.emptyForce();
@@ -3248,7 +3248,7 @@
                 el = t[i]._elem;
                 if (el) {
                     // if canvas renderer
-                    if ($.jqplot.use_excanvas && window.G_vmlCanvasManager.uninitElement !== undefined) {
+                    if ($.jqplot.use_excanvas && window.G_vmlCanvasManager.uninitElement) {
                         window.G_vmlCanvasManager.uninitElement(el.get(0));
                     }
                     el.emptyForce();
@@ -4261,7 +4261,7 @@
             shadelem;
 
         // if already in back, return
-        if (stackIndex == 0 || stackIndex == -1) {
+        if (stackIndex === 0 || stackIndex === -1) {
             return;
         }
 
@@ -4289,19 +4289,23 @@
      * as it was first passed into the jqplot function.
      */
     JqPlot.prototype.moveSeriesToFront = function (idx) {
+        var stackIndex,
+            opidx,
+            serelem,
+            shadelem;
         idx = parseInt(idx, 10);
-        var stackIndex = $.inArray(idx, this.seriesStack);
+        stackIndex = $.inArray(idx, this.seriesStack);
         // if already in front, return
-        if (stackIndex == -1) {
+        if (stackIndex === -1) {
             return;
         }
-        if (stackIndex == this.seriesStack.length - 1) {
+        if (stackIndex === this.seriesStack.length - 1) {
             this.previousSeriesStack = this.seriesStack.slice(0);
             return;
         }
-        var opidx = this.seriesStack[this.seriesStack.length - 1];
-        var serelem = this.series[idx].canvas._elem.detach();
-        var shadelem = this.series[idx].shadowCanvas._elem.detach();
+        opidx = this.seriesStack[this.seriesStack.length - 1];
+        serelem = this.series[idx].canvas._elem.detach();
+        shadelem = this.series[idx].shadowCanvas._elem.detach();
         this.series[opidx].shadowCanvas._elem.after(shadelem);
         this.series[opidx].canvas._elem.after(serelem);
         this.previousSeriesStack = this.seriesStack.slice(0);
@@ -4317,7 +4321,7 @@
      * It can be an empty object {}.  idx is the series index
      * to redraw if only one series is to be redrawn.
      */
-    JqPlot.prototype.drawSeries = function (options, idx){
+    JqPlot.prototype.drawSeries = function (options, idx) {
 
         var i,
             l,
@@ -4325,8 +4329,8 @@
             ctx;
 
         // if only one argument passed in and it is a number, use it ad idx.
-        idx = (typeof(options) === "number" && idx == null) ? options : idx;
-        options = (typeof(options) === "object") ? options : {};
+        idx = (typeof (options) === "number" && idx === null) ? options : idx;
+        options = (typeof (options) === "object") ? options : {};
 
         // draw specified series
         if (typeof idx !== "undefined") {
@@ -4339,7 +4343,7 @@
             series.draw(ctx, options, this);
             if (series.renderer.constructor === $.jqplot.BezierCurveRenderer) {
                 if (idx < this.series.length - 1) {
-                    this.drawSeries(idx + 1); 
+                    this.drawSeries(idx + 1);
                 }
             }
         } else {
@@ -4371,7 +4375,7 @@
         evt.pageY = ev.pageY;
         evt.relatedTarget = ev.relatedTarget;
         $(this).trigger(evt, [positions.gridPos, positions.dataPos, null, p]);
-    };                
+    };
     
     /**
      * @param {object} ev
@@ -4394,10 +4398,10 @@
     JqPlot.prototype.onDblClick = function (ev) {
         // Event passed in is normalized and will have data attribute.
         // Event passed out is unnormalized.
-        var positions = getEventPosition(ev);
-        var p = ev.data.plot;
-        var neighbor = checkIntersection(positions.gridPos, p);
-        var evt = $.Event('jqplotDblClick');
+        var positions = getEventPosition(ev),
+            p = ev.data.plot,
+            neighbor = checkIntersection(positions.gridPos, p),
+            evt = $.Event('jqplotDblClick');
         evt.pageX = ev.pageX;
         evt.pageY = ev.pageY;
         $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
@@ -4420,8 +4424,8 @@
      * @param {object} ev
      */
     JqPlot.prototype.onMouseUp = function (ev) {
-        var positions = getEventPosition(ev);
-        var evt = $.Event('jqplotMouseUp');
+        var positions = getEventPosition(ev),
+            evt = $.Event('jqplotMouseUp');
         evt.pageX = ev.pageX;
         evt.pageY = ev.pageY;
         $(this).trigger(evt, [positions.gridPos, positions.dataPos, null, ev.data.plot]);
@@ -4433,18 +4437,18 @@
     JqPlot.prototype.onRightClick = function (ev) {
         var positions = getEventPosition(ev),
             p = ev.data.plot,
-            neighbor = checkIntersection(positions.gridPos, p);
+            neighbor = checkIntersection(positions.gridPos, p),
+            evt;
         if (p.captureRightClick) {
-            if (ev.which == 3) {
-            var evt = $.Event('jqplotRightClick');
-            evt.pageX = ev.pageX;
-            evt.pageY = ev.pageY;
+            if (ev.which === 3) {
+                evt = $.Event('jqplotRightClick');
+                evt.pageX = ev.pageX;
+                evt.pageY = ev.pageY;
                 $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
-            }
-            else {
-            var evt = $.Event('jqplotMouseUp');
-            evt.pageX = ev.pageX;
-            evt.pageY = ev.pageY;
+            } else {
+                evt = $.Event('jqplotMouseUp');
+                evt.pageX = ev.pageX;
+                evt.pageY = ev.pageY;
                 $(this).trigger(evt, [positions.gridPos, positions.dataPos, neighbor, p]);
             }
         }
@@ -4494,8 +4498,8 @@
         } else {
             this.eventCanvas._elem.bind('mouseup', {plot: this}, this.onMouseUp);
         }
-    };    
-    
+    };
+
     
     
     /**
@@ -4503,14 +4507,20 @@
      * @param {array} colors
      */
     $.jqplot.computeHighlightColors  = function (colors) {
-        var ret;
+        var ret,
+            i,
+            rgba,
+            newrgb,
+            sum,
+            j,
+            l;
         if ($.isArray(colors)) {
             ret = [];
-            for (var i=0; i<colors.length; i++){
-                var rgba = $.jqplot.getColorComponents(colors[i]);
-                var newrgb = [rgba[0], rgba[1], rgba[2]];
-                var sum = newrgb[0] + newrgb[1] + newrgb[2];
-                for (var j=0; j<3; j++) {
+            for (i = 0, l = colors.length; i < l; i++) {
+                rgba = $.jqplot.getColorComponents(colors[i]);
+                newrgb = [rgba[0], rgba[1], rgba[2]];
+                sum = newrgb[0] + newrgb[1] + newrgb[2];
+                for (j = 0; j < 3; j++) {
                     // when darkening, lowest color component can be is 60.
                     newrgb[j] = (sum > 660) ?  newrgb[j] * 0.85 : 0.73 * newrgb[j] + 90;
                     newrgb[j] = parseInt(newrgb[j], 10);
@@ -4519,14 +4529,13 @@
                 // newrgb[3] = (rgba[3] > 0.4) ? rgba[3] * 0.4 : rgba[3] * 1.5;
                 // newrgb[3] = (rgba[3] > 0.5) ? 0.8 * rgba[3] - .1 : rgba[3] + 0.2;
                 newrgb[3] = 0.3 + 0.35 * rgba[3];
-                ret.push('rgba('+newrgb[0]+','+newrgb[1]+','+newrgb[2]+','+newrgb[3]+')');
+                ret.push('rgba(' + newrgb[0] + ',' + newrgb[1] + ',' + newrgb[2] + ',' + newrgb[3] + ')');
             }
-        }
-        else {
-            var rgba = $.jqplot.getColorComponents(colors);
-            var newrgb = [rgba[0], rgba[1], rgba[2]];
-            var sum = newrgb[0] + newrgb[1] + newrgb[2];
-            for (var j=0; j<3; j++) {
+        } else {
+            rgba = $.jqplot.getColorComponents(colors);
+            newrgb = [rgba[0], rgba[1], rgba[2]];
+            sum = newrgb[0] + newrgb[1] + newrgb[2];
+            for (j = 0; j < 3; j++) {
                 // when darkening, lowest color component can be is 60.
                 // newrgb[j] = (sum > 570) ?  newrgb[j] * 0.8 : newrgb[j] + 0.3 * (255 - newrgb[j]);
                 // newrgb[j] = parseInt(newrgb[j], 10);
@@ -4537,7 +4546,7 @@
             // newrgb[3] = (rgba[3] > 0.4) ? rgba[3] * 0.4 : rgba[3] * 1.5;
             // newrgb[3] = (rgba[3] > 0.5) ? 0.8 * rgba[3] - .1 : rgba[3] + 0.2;
             newrgb[3] = 0.3 + 0.35 * rgba[3];
-            ret = 'rgba('+newrgb[0]+','+newrgb[1]+','+newrgb[2]+','+newrgb[3]+')';
+            ret = 'rgba(' + newrgb[0] + ',' + newrgb[1] + ',' + newrgb[2] + ',' + newrgb[3] + ')';
         }
         return ret;
     };
@@ -4545,51 +4554,49 @@
     /**
      * @param {array} colors
      */
-    $.jqplot.ColorGenerator = function(colors) {
+    $.jqplot.ColorGenerator = function (colors) {
         
         colors = colors || $.jqplot.config.defaultColors;
         
         var idx = 0;
         
-        this.next = function () { 
+        this.next = function () {
             if (idx < colors.length) {
                 return colors[idx++];
-            }
-            else {
+            } else {
                 idx = 0;
                 return colors[idx++];
             }
         };
         
-        this.previous = function () { 
+        this.previous = function () {
             if (idx > 0) {
                 return colors[idx--];
-            }
-            else {
+            } else {
                 idx = colors.length - 1;
                 return colors[idx];
             }
         };
         
         // get a color by index without advancing pointer.
-        this.get = function(i) {
+        this.get = function (i) {
             var idx = i - colors.length * Math.floor(i / colors.length);
             return colors[idx];
         };
         
-        this.setColors = function(c) {
+        this.setColors = function (c) {
             colors = c;
         };
         
-        this.reset = function() {
+        this.reset = function () {
             idx = 0;
         };
 
-        this.getIndex = function() {
+        this.getIndex = function () {
             return idx;
         };
 
-        this.setIndex = function(index) {
+        this.setIndex = function (index) {
             idx = index;
         };
     };
@@ -4597,20 +4604,20 @@
     // convert a hex color string to rgb string.
     // h - 3 or 6 character hex string, with or without leading #
     // a - optional alpha
-    $.jqplot.hex2rgb = function(h, a) {
+    $.jqplot.hex2rgb = function (h, a) {
         
         var rgb;
         
         h = h.replace('#', '');
         
-        if (h.length == 3) {
+        if (h.length === 3) {
             h = h.charAt(0) + h.charAt(0) + h.charAt(1) + h.charAt(1) + h.charAt(2) + h.charAt(2);
         }
         
         rgb = 'rgba(' + parseInt(h.slice(0, 2), 16) + ', ' + parseInt(h.slice(2, 4), 16) + ', ' + parseInt(h.slice(4, 6), 16);
         
         if (a) {
-            rgb += ', '+a;
+            rgb += ', ' + a;
         }
         
         rgb += ')';
@@ -4627,15 +4634,15 @@
             temp;
         
         for (i = 1; i < 4; i++) {
-            if (m[i].search(/%/) != -1) {
-                temp = parseInt(255*m[i]/100, 10).toString(16);
-                if (temp.length == 1) {
-                    temp = '0'+temp;
+            if (m[i].search(/%/) !== -1) {
+                temp = parseInt(255 * m[i] / 100, 10).toString(16);
+                if (temp.length === 1) {
+                    temp = '0' + temp;
                 }
             } else {
                 temp = parseInt(m[i], 10).toString(16);
-                if (temp.length == 1) {
-                    temp = '0'+temp;
+                if (temp.length === 1) {
+                    temp = '0' + temp;
                 }
             }
             h += temp;
@@ -4645,9 +4652,9 @@
     
     // given a css color spec, return an rgb css color spec
     $.jqplot.normalize2rgb = function (s, a) {
-        if (s.search(/^ *rgba?\(/) != -1) {
-            return s; 
-        } else if (s.search(/^ *#?[0-9a-fA-F]?[0-9a-fA-F]/) != -1) {
+        if (s.search(/^ *rgba?\(/) !== -1) {
+            return s;
+        } else if (s.search(/^ *#?[0-9a-fA-F]?[0-9a-fA-F]/) !== -1) {
             return $.jqplot.hex2rgb(s, a);
         } else {
             throw new Error('Invalid color spec');
@@ -4667,18 +4674,18 @@
             i;
         
         for (i = 1; i < 4; i++) {
-            if (m[i].search(/%/) != -1) {
-                ret[i-1] = parseInt(255*m[i]/100, 10);
+            if (m[i].search(/%/) !== -1) {
+                ret[i - 1] = parseInt(255 * m[i] / 100, 10);
             } else {
-                ret[i-1] = parseInt(m[i], 10);
+                ret[i - 1] = parseInt(m[i], 10);
             }
         }
-        ret[3] = parseFloat(m[4]) ? parseFloat(m[4]) : 1.0;
+        ret[3] = parseFloat(m[4]) || 1.0;
         return ret;
     };
 
     // know if a color is dark or not
-    $.jqplot.isDarkColor = function (color){
+    $.jqplot.isDarkColor = function (color) {
         var L = 0,
             rgba = this.getColorRGB(color);
         if (rgba !== null) {
@@ -4687,30 +4694,32 @@
         return L < 0.45;
     };
 
-    $.jqplot.getColorRGB = function (color){
+    $.jqplot.getColorRGB = function (color) {
         var rgbError = [0, 0, 0],
-            red, green, blue,
+            red,
+            green,
+            blue,
             rgbString,
             rgb;
-        if (typeof color !== "undefined" && color.lastIndexOf("rgb") != -1) {
+        if (typeof color !== "undefined" && color.lastIndexOf("rgb") !== -1) {
             color = color.replace("rgba", "");
             color = color.replace("rgb", "");
             color = color.replace("\\(", "");
             color = color.replace("\\)", "");
             color = color.replace(" ", "");
             rgbString = color.split(",");
-            red = parseInt(rgbString[0]);
-            green = parseInt(rgbString[1]);
-            blue = parseInt(rgbString[2]);
+            red = parseInt(rgbString[0], 10);
+            green = parseInt(rgbString[1], 10);
+            blue = parseInt(rgbString[2], 10);
             rgb = [red, green, blue];
             return rgb;
-        } else if (typeof color !== "undefined" && color.lastIndexOf("#") != -1) {
+        } else if (typeof color !== "undefined" && color.lastIndexOf("#") !== -1) {
             red = parseInt(color.substring(1, 3), 16);
             green = parseInt(color.substring(3, 5), 16);
             blue = parseInt(color.substring(5), 16);
             rgb = [red, green, blue];
             return rgb;
-        }else{
+        } else {
             return null;
         }
     };
