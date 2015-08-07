@@ -600,7 +600,7 @@
                                     vertex1 = [s._areaPoints[ii][0], s._areaPoints[ii][1]];
                                     vertex2 = [s._areaPoints[j][0], s._areaPoints[j][1]];
 
-                                    if (vertex1[1] < y && vertex2[1] >= y || vertex2[1] < y && vertex1[1] >= y) {
+                                    if ((vertex1[1] < y && vertex2[1] >= y) || (vertex2[1] < y && vertex1[1] >= y)) {
                                         if (vertex1[0] + (y - vertex1[1]) / (vertex2[1] - vertex1[1]) * (vertex2[0] - vertex1[0]) < x) {
                                             inside = !inside;
                                         }
@@ -1796,7 +1796,6 @@
         this.renderer.pack.call(this);
     };
 
-
     /**
      * Class: Series
      * An individual data series object.  Cannot be instantiated directly, but created
@@ -2213,7 +2212,6 @@
         }
     };
     
-
     /**
      * Class: Grid
      * 
@@ -3697,7 +3695,8 @@
      */
     JqPlot.prototype.destroy = function () {
 
-        var e;
+        var e,
+            events;
 
         this.canvasManager.freeAllCanvases();
 
@@ -3705,10 +3704,14 @@
             this.eventCanvas._elem.unbind();
         }
 
+        events = $._data(this.target[0], "events");
+        
         // Unbind events
         // For example, Cursor.zoomProxy bind jqplotZoom and jqplotResetZoom to element            
-        for (e in $._data(this.target[0], "events")) {
-            this.target.unbind(e);
+        for (e in events) {
+            if (events.hasOwnProperty(e)) {
+                this.target.unbind(e);
+            }
         }
 
         // Couple of posts on Stack Overflow indicate that empty() doesn't
@@ -3797,7 +3800,9 @@
             this.target.empty();
         }
         for (ax in this.axes) {
-            this.axes[ax]._ticks = [];
+            if (this.axes.hasOwnProperty(ax)) {
+                this.axes[ax]._ticks = [];
+            }
         }
         this.computePlotData();
         // for (var i=0; i<this.series.length; i++) {
@@ -4499,8 +4504,6 @@
             this.eventCanvas._elem.bind('mouseup', {plot: this}, this.onMouseUp);
         }
     };
-
-    
     
     /**
      * Computes a highlight color or array of highlight colors from given colors.
@@ -4524,7 +4527,7 @@
                     // when darkening, lowest color component can be is 60.
                     newrgb[j] = (sum > 660) ?  newrgb[j] * 0.85 : 0.73 * newrgb[j] + 90;
                     newrgb[j] = parseInt(newrgb[j], 10);
-                    (newrgb[j] > 255) ? 255 : newrgb[j];
+                    newrgb[j] = (newrgb[j] > 255) ? 255 : newrgb[j];
                 }
                 // newrgb[3] = (rgba[3] > 0.4) ? rgba[3] * 0.4 : rgba[3] * 1.5;
                 // newrgb[3] = (rgba[3] > 0.5) ? 0.8 * rgba[3] - .1 : rgba[3] + 0.2;
@@ -4539,9 +4542,9 @@
                 // when darkening, lowest color component can be is 60.
                 // newrgb[j] = (sum > 570) ?  newrgb[j] * 0.8 : newrgb[j] + 0.3 * (255 - newrgb[j]);
                 // newrgb[j] = parseInt(newrgb[j], 10);
-                newrgb[j] = (sum > 660) ?  newrgb[j] * 0.85 : 0.73 * newrgb[j] + 90;
+                newrgb[j] = (sum > 660) ? newrgb[j] * 0.85 : 0.73 * newrgb[j] + 90;
                 newrgb[j] = parseInt(newrgb[j], 10);
-                (newrgb[j] > 255) ? 255 : newrgb[j];
+                newrgb[j] = (newrgb[j] > 255) ? 255 : newrgb[j];
             }
             // newrgb[3] = (rgba[3] > 0.4) ? rgba[3] * 0.4 : rgba[3] * 1.5;
             // newrgb[3] = (rgba[3] > 0.5) ? 0.8 * rgba[3] - .1 : rgba[3] + 0.2;
