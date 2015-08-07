@@ -725,7 +725,7 @@
         };
     }
 
-     function drawZoomBox() {
+    function drawZoomBox() {
         
         var start = this._zoom.start,
             end = this._zoom.end,
@@ -734,7 +734,7 @@
             t,
             h,
             w;
-        
+
         if (end[0] > start[0]) {
             l = start[0];
             w = end[0] - start[0];
@@ -742,7 +742,7 @@
             l = end[0];
             w = start[0] - end[0];
         }
-        
+
         if (end[1] > start[1]) {
             t = start[1];
             h = end[1] - start[1];
@@ -750,18 +750,17 @@
             t = end[1];
             h = start[1] - end[1];
         }
-        
+
         ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
         ctx.strokeStyle = '#999999';
         ctx.lineWidth = 1.0;
-        ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
-        ctx.fillRect(0,0,ctx.canvas.width, ctx.canvas.height);
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         ctx.clearRect(l, t, w, h);
         // IE won't show transparent fill rect, so stroke a rect also.
         ctx.strokeRect(l, t, w, h);
         ctx = null;
     }
-    
     
     function handleZoomMove(ev) {
         
@@ -824,6 +823,83 @@
         }
     }
 
+    function handleMouseUp(ev) {
+        
+        var plot = ev.data.plot,
+            c = plot.plugins.cursor,
+            xpos,
+            ypos,
+            datapos,
+            height,
+            width,
+            axes,
+            axis;
+        
+        if (c.zoom && c._zoom.zooming && !c.zoomTarget) {
+            
+            xpos = c._zoom.gridpos.x;
+            ypos = c._zoom.gridpos.y;
+            datapos = c._zoom.datapos;
+            height = c.zoomCanvas._ctx.canvas.height;
+            width = c.zoomCanvas._ctx.canvas.width;
+            axes = plot.axes;
+
+            if (c.constrainOutsideZoom && !c.onGrid) {
+                if (xpos < 0) {
+                    xpos = 0;
+                } else if (xpos > width) {
+                    xpos = width;
+                }
+                
+                if (ypos < 0) {
+                    ypos = 0;
+                } else if (ypos > height) {
+                    ypos = height;
+                }
+
+                for (axis in datapos) {
+                    if (datapos[axis]) {
+                        if (axis.charAt(0) === 'x') {
+                            datapos[axis] = axes[axis].series_p2u(xpos);
+                        } else {
+                            datapos[axis] = axes[axis].series_p2u(ypos);
+                        }
+                    }
+                }
+            }
+
+            if (c.constrainZoomTo === 'x') {
+                ypos = height;
+            } else if (c.constrainZoomTo === 'y') {
+                xpos = width;
+            }
+            
+            c._zoom.end = [xpos, ypos];
+            c._zoom.gridpos = {x: xpos, y: ypos};
+            
+            c.doZoom(c._zoom.gridpos, datapos, plot, c);
+        }
+        
+        c._zoom.started = false;
+        c._zoom.zooming = false;
+
+        $(document).unbind('mousemove.jqplotCursor', handleZoomMove);
+
+        if (document.onselectstart && c._oldHandlers.onselectstart !== null) {
+            document.onselectstart = c._oldHandlers.onselectstart;
+            c._oldHandlers.onselectstart = null;
+        }
+        if (document.ondrag && c._oldHandlers.ondrag !== null) {
+            document.ondrag = c._oldHandlers.ondrag;
+            c._oldHandlers.ondrag = null;
+        }
+        if (document.onmousedown && c._oldHandlers.onmousedown !== null) {
+            document.onmousedown = c._oldHandlers.onmousedown;
+            c._oldHandlers.onmousedown = null;
+        }
+
+    }
+    
     function handleMouseDown(ev, gridpos, datapos, neighbor, plot) {
         
         var c = plot.plugins.cursor,
@@ -880,68 +956,6 @@
             }
 
         }
-    }
-
-    function handleMouseUp(ev) {
-        
-        var plot = ev.data.plot,
-            c = plot.plugins.cursor;
-        
-        if (c.zoom && c._zoom.zooming && !c.zoomTarget) {
-            
-            var xpos = c._zoom.gridpos.x;
-            var ypos = c._zoom.gridpos.y;
-            var datapos = c._zoom.datapos;
-            var height = c.zoomCanvas._ctx.canvas.height;
-            var width = c.zoomCanvas._ctx.canvas.width;
-            var axes = plot.axes;
-
-            if (c.constrainOutsideZoom && !c.onGrid) {
-                if (xpos < 0) { xpos = 0; }
-                else if (xpos > width) { xpos = width; }
-                if (ypos < 0) { ypos = 0; }
-                else if (ypos > height) { ypos = height; }
-
-                for (var axis in datapos) {
-                    if (datapos[axis]) {
-                        if (axis.charAt(0) == 'x') {
-                            datapos[axis] = axes[axis].series_p2u(xpos);
-                        }
-                        else {
-                            datapos[axis] = axes[axis].series_p2u(ypos);
-                        }
-                    }
-                }
-            }
-
-            if (c.constrainZoomTo == 'x') {
-                ypos = height;
-            }
-            else if (c.constrainZoomTo == 'y') {
-                xpos = width;
-            }
-            c._zoom.end = [xpos, ypos];
-            c._zoom.gridpos = {x:xpos, y:ypos};
-            c.doZoom(c._zoom.gridpos, datapos, plot, c);
-        }
-        c._zoom.started = false;
-        c._zoom.zooming = false;
-
-        $(document).unbind('mousemove.jqplotCursor', handleZoomMove);
-
-        if (document.onselectstart != undefined && c._oldHandlers.onselectstart != null){
-            document.onselectstart = c._oldHandlers.onselectstart;
-            c._oldHandlers.onselectstart = null;
-        }
-        if (document.ondrag != undefined && c._oldHandlers.ondrag != null){
-            document.ondrag = c._oldHandlers.ondrag;
-            c._oldHandlers.ondrag = null;
-        }
-        if (document.onmousedown != undefined && c._oldHandlers.onmousedown != null){
-            document.onmousedown = c._oldHandlers.onmousedown;
-            c._oldHandlers.onmousedown = null;
-        }
-
     }
 
    
