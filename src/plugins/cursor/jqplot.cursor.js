@@ -38,8 +38,11 @@
     function updateTooltip(gridpos, datapos, plot) {
         
         var c = plot.plugins.cursor,
+            series = plot.series,
+            seriesLen = series.length,
             s = '',
             addbr = false,
+            data,
             g,
             i,
             j,
@@ -50,10 +53,17 @@
             yaxisStr,
             xaxisStr,
             sx,
+            sy,
             yfstr,
-            xfstr;
+            xfstr,
+            ret,
+            idx,
+            label,
+            cellid,
+            ystr,
+            xstr;
         
-        // @TODO series and data ?
+        // @TODO Where is series and data supposed to come from?
         
         if (c.showTooltipGridPosition) {
             s = gridpos.x + ', ' + gridpos.y;
@@ -115,20 +125,7 @@
 
         if (c.showTooltipDataPosition) {
             
-            var series = plot.series,
-                ret = getIntersectingPoints(plot, gridpos.x, gridpos.y),
-                addbr = false,
-                i,
-                seriesLen = series.length,
-                serieIndex,
-                idx,
-                label,
-                cellid,
-                sx,
-                sy,
-                data,
-                yfstr,
-                xfstr;
+            ret = getIntersectingPoints(plot, gridpos.x, gridpos.y);
 
             for (i = 0; i < seriesLen; i++) {
                 
@@ -144,10 +141,10 @@
                     }
 
                     cellid = $.inArray(idx, ret.indices);
-                    sx = undefined;
-                    sy = undefined;
+                    sx = null;
+                    sy = null;
                     
-                    if (cellid != -1) {
+                    if (cellid !== -1) {
                         
                         data = ret.data[cellid].data;
                         
@@ -234,64 +231,86 @@
             ctx = c.cursorCanvas._ctx,
             ret,
             cells,
-            i;
+            i,
+            optionsVertical,
+            optionsHorizontal,
+            idx,
+            series,
+            label,
+            data,
+            cellid,
+            sx,
+            sy,
+            yfstr,
+            xfstr,
+            xf,
+            yf;
         
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         
         if (c.showVerticalLine) {
-            var optionsVertical = convertToShapeOption(c.verticalLine);
+            optionsVertical = convertToShapeOption(c.verticalLine);
             c.shapeRenderer.draw(ctx, [[gridpos.x, 0], [gridpos.x, ctx.canvas.height]], optionsVertical);
         }
         
         if (c.showHorizontalLine) {
-            var optionsHorizontal = convertToShapeOption(c.horizontalLine);
+            optionsHorizontal = convertToShapeOption(c.horizontalLine);
             c.shapeRenderer.draw(ctx, [[0, gridpos.y], [ctx.canvas.width, gridpos.y]], optionsHorizontal);
         }
         
         ret = getIntersectingPoints(plot, gridpos.x, gridpos.y);
         
         if (c.showCursorLegend) {
+            
             cells = $(plot.targetId + ' td.jqplot-cursor-legend-label');
+            
             for (i = 0; i < cells.length; i++) {
-                var idx = $(cells[i]).data('seriesIndex');
-                var series = plot.series[idx];
-                var label = series.label.toString();
-                var cellid = $.inArray(idx, ret.indices);
-                var sx = undefined;
-                var sy = undefined;
-                if (cellid != -1) {
-                    var data = ret.data[cellid].data;
+                
+                idx = $(cells[i]).data('seriesIndex');
+                series = plot.series[idx];
+                label = series.label.toString();
+                cellid = $.inArray(idx, ret.indices);
+                sx = null;
+                sy = null;
+                
+                if (cellid !== -1) {
+                    
+                    data = ret.data[cellid].data;
+                    
                     if (c.yaxis || c.xaxis) {
                         if (c.yaxis && c.yaxis.formatter) {
                             sy = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, data[1], idx);
                         } else {
-                            var yfstr = series._yaxis._ticks[0].formatString;
+                            yfstr = series._yaxis._ticks[0].formatString;
                             sy = series._yaxis._ticks[0].formatter(yfstr, data[1], idx);
                         }
 
                         if (c.xaxis && c.xaxis.formatter) {
                             sx = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, data[0], idx);
                         } else {
-                            var xfstr = series._xaxis._ticks[0].formatString;
+                            xfstr = series._xaxis._ticks[0].formatString;
                             sx = series._xaxis._ticks[0].formatter(xfstr, data[0], idx);
                         }
 
                     } else if (c.useAxesFormatters) {
-                        var xf = series._xaxis._ticks[0].formatter;
-                        var yf = series._yaxis._ticks[0].formatter;
-                        var xfstr = series._xaxis._ticks[0].formatString;
-                        var yfstr = series._yaxis._ticks[0].formatString;
+                        
+                        xf = series._xaxis._ticks[0].formatter;
+                        yf = series._yaxis._ticks[0].formatter;
+                        xfstr = series._xaxis._ticks[0].formatString;
+                        yfstr = series._yaxis._ticks[0].formatString;
+                        
                         sx = xf(xfstr, data[0], idx);
                         sy = yf(yfstr, data[1], idx);
+                        
                     } else {
                         sx = data[0];
                         sy = data[1];
                     }
                 }
+                
                 if (plot.legend.escapeHtml) {
                     $(cells[i]).text($.jqplot.sprintf(c.cursorLegendFormatString, label, sx, sy));
-                }
-                else {
+                } else {
                     $(cells[i]).html($.jqplot.sprintf(c.cursorLegendFormatString, label, sx, sy));
                 }
             }
@@ -300,26 +319,45 @@
     }
 
     function getIntersectingPoints(plot, x, y) {
-        var ret = {indices: [], data: []},
-            s, i, d0, d, j, r, p,
+        
+        var ret = {
+                indices: [],
+                data: []
+            },
+            s,
+            i,
+            d0,
+            d,
+            j,
+            r,
+            p,
             threshold,
             c = plot.plugins.cursor,
             i,
             j,
             seriesLen = plot.series.length,
-            gridDataLen = 0
+            gridDataLen = 0;
+        
         for (i = 0; i < seriesLen; i++) {
+            
             s = plot.series[i];
             r = s.renderer;
+            
             if (s.show) {
+                
                 threshold = c.intersectionThreshold;
+                
                 if (s.showMarker) {
-                    threshold += s.markerRenderer.size/2;
+                    threshold += s.markerRenderer.size / 2;
                 }
+                
                 gridDataLen = s.gridData.length;
+                
                 for (j = 0; j < gridDataLen; j++) {
+                    
                     p = s.gridData[j];
                     // check vertical line
+                    
                     if (c.showVerticalLine) {
                         if (Math.abs(x - p[0]) <= threshold) {
                             ret.indices.push(i);
@@ -348,42 +386,42 @@
             yPosition;
         
         switch (c.tooltipLocation) {
-            case 'nw':
-                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
-                break;
-            case 'n':
-                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
-                y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
-                break;
-            case 'ne':
-                x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
-                break;
-            case 'e':
-                x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
-                break;
-            case 'se':
-                x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-                break;
-            case 's':
-                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
-                y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-                break;
-            case 'sw':
-                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-                break;
-            case 'w':
-                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
-                break;
-            default:
-                x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-                break;
+        case 'nw':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+            break;
+        case 'n':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
+            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+            break;
+        case 'ne':
+            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+            break;
+        case 'e':
+            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
+            break;
+        case 'se':
+            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+            break;
+        case 's':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
+            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+            break;
+        case 'sw':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+            break;
+        case 'w':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
+            break;
+        default:
+            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+            break;
         }
 
         if (c.constrainTooltipToScreen && typeof ev !== "undefined") {
@@ -396,7 +434,7 @@
             
             if (yPosition === 'n' && (ev.pageY - c.tooltipOffset - elem.outerHeight(true)) <= 0) {
                 fallbackTooltipLocation = 's';
-            } else if (yPosition === 's' && ((ev.pageY + elem.outerHeight(true) + c.tooltipOffset) >= document.body.clientHeight)){
+            } else if (yPosition === 's' && ((ev.pageY + elem.outerHeight(true) + c.tooltipOffset) >= document.body.clientHeight)) {
                 fallbackTooltipLocation = 'n';
             } else if (yPosition === 'n' || yPosition === 's') {
                 fallbackTooltipLocation = yPosition;
@@ -416,53 +454,55 @@
             }
         }
         
-        elem.css({'left': x, 'top': y});        
+        elem.css({'left': x, 'top': y});
         elem = null;
 
     }
 
     function setTooltipPosition(location, gridpos, plot) {
+        
         var c = plot.plugins.cursor,
             elem = c._tooltipElem,
             x,
             y;
+        
         switch (location) {
-            case 'nw':
-                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
-                break;
-            case 'n':
-                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true)/2;
-                y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
-                break;
-            case 'ne':
-                x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
-                break;
-            case 'e':
-                x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true)/2;
-                break;
-            case 'se':
-                x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-                break;
-            case 's':
-                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true)/2;
-                y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-                break;
-            case 'sw':
-                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-                break;
-            case 'w':
-                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true)/2;
-                break;
-            default:
-                x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-                y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-                break;
+        case 'nw':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+            break;
+        case 'n':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
+            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+            break;
+        case 'ne':
+            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+            break;
+        case 'e':
+            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
+            break;
+        case 'se':
+            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+            break;
+        case 's':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
+            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+            break;
+        case 'sw':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+            break;
+        case 'w':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
+            break;
+        default:
+            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+            break;
         }
 
         elem.css({'left': x, 'top': y});
@@ -477,51 +517,51 @@
             a,
             b;
         switch (c.tooltipLocation) {
-            case 'nw':
-                a = grid.left + c.tooltipOffset;
-                b = grid.top + c.tooltipOffset;
-                elem.css({'left': a, 'top': b});
-                break;
-            case 'n':
-                a = (grid.left + (plot._plotDimensions.width - grid.right)) / 2 - elem.outerWidth(true) / 2;
-                b = grid.top + c.tooltipOffset;
-                elem.css({'left': a, 'top': b});
-                break;
-            case 'ne':
-                a = grid.right + c.tooltipOffset;
-                b = grid.top + c.tooltipOffset;
-                elem.css({right: a, top: b});
-                break;
-            case 'e':
-                a = grid.right + c.tooltipOffset;
-                b = (grid.top + (plot._plotDimensions.height - grid.bottom)) / 2 - elem.outerHeight(true) / 2;
-                elem.css({right: a, top: b});
-                break;
-            case 'se':
-                a = grid.right + c.tooltipOffset;
-                b = grid.bottom + c.tooltipOffset;
-                elem.css({right: a, bottom: b});
-                break;
-            case 's':
-                a = (grid.left + (plot._plotDimensions.width - grid.right))/2 - elem.outerWidth(true)/2;
-                b = grid.bottom + c.tooltipOffset;
-                elem.css({left: a, bottom: b});
-                break;
-            case 'sw':
-                a = grid.left + c.tooltipOffset;
-                b = grid.bottom + c.tooltipOffset;
-                elem.css({left:a, bottom:b});
-                break;
-            case 'w':
-                a = grid.left + c.tooltipOffset;
-                b = (grid.top + (plot._plotDimensions.height - grid.bottom)) / 2 - elem.outerHeight(true) / 2;
-                elem.css({left: a, top: b});
-                break;
-            default:  // same as 'se'
-                a = grid.right - c.tooltipOffset;
-                b = grid.bottom + c.tooltipOffset;
-                elem.css({right: a, bottom: b});
-                break;
+        case 'nw':
+            a = grid.left + c.tooltipOffset;
+            b = grid.top + c.tooltipOffset;
+            elem.css({'left': a, 'top': b});
+            break;
+        case 'n':
+            a = (grid.left + (plot._plotDimensions.width - grid.right)) / 2 - elem.outerWidth(true) / 2;
+            b = grid.top + c.tooltipOffset;
+            elem.css({'left': a, 'top': b});
+            break;
+        case 'ne':
+            a = grid.right + c.tooltipOffset;
+            b = grid.top + c.tooltipOffset;
+            elem.css({right: a, top: b});
+            break;
+        case 'e':
+            a = grid.right + c.tooltipOffset;
+            b = (grid.top + (plot._plotDimensions.height - grid.bottom)) / 2 - elem.outerHeight(true) / 2;
+            elem.css({right: a, top: b});
+            break;
+        case 'se':
+            a = grid.right + c.tooltipOffset;
+            b = grid.bottom + c.tooltipOffset;
+            elem.css({right: a, bottom: b});
+            break;
+        case 's':
+            a = (grid.left + (plot._plotDimensions.width - grid.right)) / 2 - elem.outerWidth(true) / 2;
+            b = grid.bottom + c.tooltipOffset;
+            elem.css({left: a, bottom: b});
+            break;
+        case 'sw':
+            a = grid.left + c.tooltipOffset;
+            b = grid.bottom + c.tooltipOffset;
+            elem.css({left: a, bottom: b});
+            break;
+        case 'w':
+            a = grid.left + c.tooltipOffset;
+            b = (grid.top + (plot._plotDimensions.height - grid.bottom)) / 2 - elem.outerHeight(true) / 2;
+            elem.css({left: a, top: b});
+            break;
+        default:  // same as 'se'
+            a = grid.right - c.tooltipOffset;
+            b = grid.bottom + c.tooltipOffset;
+            elem.css({right: a, bottom: b});
+            break;
         }
         elem = null;
     }
@@ -656,24 +696,35 @@
     }
 
     function getEventPosition(ev) {
+        
         var plot = ev.data.plot,
             go = plot.eventCanvas._elem.offset(),
-            gridPos = {x: ev.pageX - go.left, y: ev.pageY - go.top};
+            gridPos = {x: ev.pageX - go.left, y: ev.pageY - go.top},
+            dataPos,
+            an,
+            ax,
+            n,
+            axis;
+        
         //////
         // TO DO: handle yMidAxis
         //////
-        var dataPos = {xaxis:null, yaxis:null, x2axis:null, y2axis:null, y3axis:null, y4axis:null, y5axis:null, y6axis:null, y7axis:null, y8axis:null, y9axis:null, yMidAxis:null};
-        var an = ['xaxis', 'yaxis', 'x2axis', 'y2axis', 'y3axis', 'y4axis', 'y5axis', 'y6axis', 'y7axis', 'y8axis', 'y9axis', 'yMidAxis'];
-        var ax = plot.axes;
-        var n, axis;
-        for (n=11; n>0; n--) {
-            axis = an[n-1];
+        dataPos = {xaxis: null, yaxis: null, x2axis: null, y2axis: null, y3axis: null, y4axis: null, y5axis: null, y6axis: null, y7axis: null, y8axis: null, y9axis: null, yMidAxis: null};
+        an = ['xaxis', 'yaxis', 'x2axis', 'y2axis', 'y3axis', 'y4axis', 'y5axis', 'y6axis', 'y7axis', 'y8axis', 'y9axis', 'yMidAxis'];
+        ax = plot.axes;
+        
+        for (n = 11; n > 0; n--) {
+            axis = an[n - 1];
             if (ax[axis].show) {
                 dataPos[axis] = ax[axis].series_p2u(gridPos[axis.charAt(0)]);
             }
         }
 
-        return {offsets:go, gridPos:gridPos, dataPos:dataPos};
+        return {
+            offsets: go,
+            gridPos: gridPos,
+            dataPos: dataPos
+        };
     }
 
     function handleZoomMove(ev) {
