@@ -35,6 +35,111 @@
     
     "use strict";
 
+    function setTooltipPosition(location, gridpos, plot) {
+        
+        var c = plot.plugins.cursor,
+            elem = c._tooltipElem,
+            x,
+            y;
+        
+        switch (location) {
+        case 'nw':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+            break;
+        case 'n':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
+            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+            break;
+        case 'ne':
+            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+            break;
+        case 'e':
+            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
+            break;
+        case 'se':
+            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+            break;
+        case 's':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
+            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+            break;
+        case 'sw':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+            break;
+        case 'w':
+            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
+            break;
+        default:
+            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+            break;
+        }
+
+        elem.css({'left': x, 'top': y});
+        elem = null;
+    }
+    
+    function getIntersectingPoints(plot, x, y) {
+        
+        var ret = {
+                indices: [],
+                data: []
+            },
+            s,
+            i,
+            d0,
+            d,
+            j,
+            r,
+            p,
+            threshold,
+            c = plot.plugins.cursor,
+            seriesLen = plot.series.length,
+            gridDataLen = 0;
+        
+        for (i = 0; i < seriesLen; i++) {
+            
+            s = plot.series[i];
+            r = s.renderer;
+            
+            if (s.show) {
+                
+                threshold = c.intersectionThreshold;
+                
+                if (s.showMarker) {
+                    threshold += s.markerRenderer.size / 2;
+                }
+                
+                gridDataLen = s.gridData.length;
+                
+                for (j = 0; j < gridDataLen; j++) {
+                    
+                    p = s.gridData[j];
+                    // check vertical line
+                    
+                    if (c.showVerticalLine) {
+                        if (Math.abs(x - p[0]) <= threshold) {
+                            ret.indices.push(i);
+                            ret.data.push({
+                                seriesIndex: i,
+                                pointIndex: j,
+                                gridData: p,
+                                data: s.data[j]
+                            });
+                        }
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+    
     function updateTooltip(gridpos, datapos, plot) {
         
         var c = plot.plugins.cursor,
@@ -318,63 +423,6 @@
         ctx = null;
     }
 
-    function getIntersectingPoints(plot, x, y) {
-        
-        var ret = {
-                indices: [],
-                data: []
-            },
-            s,
-            i,
-            d0,
-            d,
-            j,
-            r,
-            p,
-            threshold,
-            c = plot.plugins.cursor,
-            i,
-            j,
-            seriesLen = plot.series.length,
-            gridDataLen = 0;
-        
-        for (i = 0; i < seriesLen; i++) {
-            
-            s = plot.series[i];
-            r = s.renderer;
-            
-            if (s.show) {
-                
-                threshold = c.intersectionThreshold;
-                
-                if (s.showMarker) {
-                    threshold += s.markerRenderer.size / 2;
-                }
-                
-                gridDataLen = s.gridData.length;
-                
-                for (j = 0; j < gridDataLen; j++) {
-                    
-                    p = s.gridData[j];
-                    // check vertical line
-                    
-                    if (c.showVerticalLine) {
-                        if (Math.abs(x - p[0]) <= threshold) {
-                            ret.indices.push(i);
-                            ret.data.push({
-                                seriesIndex: i,
-                                pointIndex: j,
-                                gridData: p,
-                                data: s.data[j]
-                            });
-                        }
-                    }
-                }
-            }
-        }
-        return ret;
-    }
-
     function moveTooltip(gridpos, plot, ev) {
         
         var c = plot.plugins.cursor,
@@ -459,56 +507,6 @@
 
     }
 
-    function setTooltipPosition(location, gridpos, plot) {
-        
-        var c = plot.plugins.cursor,
-            elem = c._tooltipElem,
-            x,
-            y;
-        
-        switch (location) {
-        case 'nw':
-            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
-            break;
-        case 'n':
-            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
-            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
-            break;
-        case 'ne':
-            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
-            break;
-        case 'e':
-            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
-            break;
-        case 'se':
-            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-            break;
-        case 's':
-            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
-            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-            break;
-        case 'sw':
-            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-            break;
-        case 'w':
-            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
-            break;
-        default:
-            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-            break;
-        }
-
-        elem.css({'left': x, 'top': y});
-        elem = null;
-    }
-
     function positionTooltip(plot) {
         // fake a grid for positioning
         var grid = plot._gridPadding,
@@ -566,7 +564,7 @@
         elem = null;
     }
 
-    function handleClick (ev, gridpos, datapos, neighbor, plot) {
+    function handleClick(ev, gridpos, datapos, neighbor, plot) {
         
         ev.preventDefault();
         ev.stopImmediatePropagation();
@@ -590,7 +588,7 @@
         
     }
 
-    function handleDblClick (ev, gridpos, datapos, neighbor, plot) {
+    function handleDblClick(ev, gridpos, datapos, neighbor, plot) {
         
         ev.preventDefault();
         ev.stopImmediatePropagation();
