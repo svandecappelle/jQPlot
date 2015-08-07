@@ -2568,6 +2568,7 @@
         var i,
             j,
             l,
+            seriesLen,
             h,
             w,
             ax,
@@ -2737,7 +2738,7 @@
         this._sumx = 0;
         this.computePlotData();
 
-        for (i = 0, l = this.series.length; i < l; i++) {
+        for (i = 0, seriesLen = this.series.length; i < seriesLen; i++) {
 
             // set default stacking order for series canvases
             this.seriesStack.push(i);
@@ -2855,6 +2856,7 @@
             tdata = (data === null) ? this.data : data,
             i,
             l,
+            seriesLen,
             name,
             t,
             j,
@@ -2953,27 +2955,34 @@
 
         this.computePlotData();
 
-        for (i = 0, l = this.series.length; i < l; i++) {
+        for (i = 0, seriesLen = this.series.length; i < seriesLen; i++) {
+            
             // set default stacking order for series canvases
             this.seriesStack.push(i);
             this.previousSeriesStack.push(i);
             this.series[i].shadowCanvas._plotDimensions = this._plotDimensions;
             this.series[i].canvas._plotDimensions = this._plotDimensions;
+            
             for (j = 0, l = $.jqplot.preSeriesInitHooks.length; j < l; j++) {
                 $.jqplot.preSeriesInitHooks[j].call(this.series[i], target, this.data, this.options.seriesDefaults, this.options.series[i], this);
             }
+            
             for (j = 0, l = this.preSeriesInitHooks.hooks.length; j < l; j++) {
                 this.preSeriesInitHooks.hooks[j].call(this.series[i], target, this.data, this.options.seriesDefaults, this.options.series[i], this);
             }
+            
             // this.populatePlotData(this.series[i], i);
             this.series[i]._plotDimensions = this._plotDimensions;
             this.series[i].init(i, this.grid.borderWidth, this);
+            
             for (j = 0, l = $.jqplot.postSeriesInitHooks.length; j < l; j++) {
                 $.jqplot.postSeriesInitHooks[j].call(this.series[i], target, this.data, this.options.seriesDefaults, this.options.series[i], this);
             }
+            
             for (j = 0, l = this.postSeriesInitHooks.hooks.length; j < l; j++) {
                 this.postSeriesInitHooks.hooks[j].call(this.series[i], target, this.data, this.options.seriesDefaults, this.options.series[i], this);
             }
+            
             this._sumy += this.series[i]._sumy;
             this._sumx += this.series[i]._sumx;
         }
@@ -3331,6 +3340,7 @@
         var i = 0,
             j = 0,
             l = 0,
+            dataLen = 0,
             opts,
             temp = ['series1', 'series2', 'color', 'baseSeries', 'fill'],
             tempi,
@@ -3430,7 +3440,7 @@
 
         this.series = [];
 
-        for (i = 0, l = this.data.length; i < l; i++) {
+        for (i = 0, dataLen = this.data.length; i < dataLen; i++) {
 
             sopts = $.extend(true, {index: i}, { seriesColors: this.seriesColors, negativeSeriesColors: this.negativeSeriesColors}, this.options.seriesDefaults, this.options.series[i], {rendererOptions: {animation: {show:  this.animate}}});
             // pass in options in case something needs set prior to initialization.
@@ -3868,7 +3878,7 @@
             seriesLength = series.length;
 
             // put the shadow canvases behind the series canvases so shadows don't overlap on stacked bars.
-            for (i = 0, l = seriesLength; i < l; i++) {
+            for (i = 0; i < seriesLength; i++) {
                 // draw series in order of stacking.  This affects only
                 // order in which canvases are added to dom.
                 j = this.seriesStack[i];
@@ -3877,7 +3887,7 @@
                 series[j].shadowCanvas._elem.data('seriesIndex', j);
             }
 
-            for (i = 0, l = seriesLength; i < l; i++) {
+            for (i = 0; i < seriesLength; i++) {
                 // draw series in order of stacking.  This affects only
                 // order in which canvases are added to dom.
                 j = this.seriesStack[i];
@@ -3945,7 +3955,7 @@
             }
 
             // ughh.  ideally would hide all series then show them.
-            for (i = 0, l = seriesLength; i < l; i++) {
+            for (i = 0; i < seriesLength; i++) {
                 temps = series[i];
                 tempr = temps.renderer;
                 sel = '.jqplot-point-label.jqplot-series-' + i;
@@ -4144,11 +4154,11 @@
         if (stackIndex == -1) {
             return;
         }
-        if (stackIndex == this.seriesStack.length -1) {
+        if (stackIndex == this.seriesStack.length - 1) {
             this.previousSeriesStack = this.seriesStack.slice(0);
             return;
         }
-        var opidx = this.seriesStack[this.seriesStack.length -1];
+        var opidx = this.seriesStack[this.seriesStack.length - 1];
         var serelem = this.series[idx].canvas._elem.detach();
         var shadelem = this.series[idx].shadowCanvas._elem.detach();
         this.series[opidx].shadowCanvas._elem.after(shadelem);
@@ -4195,7 +4205,7 @@
             // if call series drawShadow method first, in case all series shadows
             // should be drawn before any series.  This will ensure, like for 
             // stacked bar plots, that shadows don't overlap series.
-            for (i = 0, l = this.series.length; i < l; i++) {
+            for (i = 0; i < this.series.length; i++) {
                 // first clear the canvas
                 series = this.series[i];
                 ctx = series.shadowCanvas._ctx;
