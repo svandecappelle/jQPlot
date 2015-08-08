@@ -1,0 +1,26 @@
+---
+layout: demoexamples
+title: Stairs renderer
+---
+
+<script class="code" type="text/javascript">
+	var plot1;
+	$(function(){
+		//var line1=[4, 3, 5, 8.2, null, 12, 4, 5];
+		var line1=[4, 3, 5, 8, null, 12, 1, 5];
+
+		
+		plot1 = $.jqplot('chart1', [[4, 3, 5, 6, 8, 12, 1, 5]], {
+			title:'Stairs chart',
+			seriesDefaults: {
+				renderer: $.jqplot.StairsRenderer
+			}
+		});
+	});
+</script>
+
+
+<div class="code prettyprint">
+	<pre class="code prettyprint brush: js"></pre>
+</div>
+<div id="chart1" style="height:300px; width:500px;"></div>

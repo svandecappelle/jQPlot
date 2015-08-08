@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+{% include demoexamples_head.html %}
+
+<body class="index">
+
+{% include navigation.html %}
+
+
+
+<header>
+    <div class="content">
+        <section id="content">
+            <div class="rowInside">
+                <article class="grid_12">
+                    <h1>Demo: {{ page.title }}</h1>
+
+                </article>
+            </div>
+
+
+            <div class="rowInside">
+
+                <div class="grid_1">
+                    <b>Core demos</b> <br />
+                    {% loop_directory directory:demo/core iterator:fil filter:*.html sort:ascending %}
+                    <a href="{{ fil }}.html">{{ fil }}</a> <br />
+                    {% endloop_directory %}
+                    <br /> <b>Plugin demos</b><br />
+                    {% loop_directory directory:demo/plugins iterator:fil filter:*.html sort:ascending %}
+                    <a href="{{ fil }}.html">{{ fil }}</a> <br />
+                    {% endloop_directory %}
+                </div>
+
+                <div class="grid_8">
+
+                    {{ content }}
+
+                    <div class="code prettyprint">
+                        <pre class="code prettyprint brush: js"></pre>
+                    </div>
+                    <div id="chart1" style="height:300px; width:500px;"></div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+    </div>
+</header>
+
+
+
+{% include footer.html %}

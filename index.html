@@ -1,99 +1,82 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Jqplot</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" media="all" href="main.css"/>
-  </head>
+---
+layout: frontpage
+---
 
-  <body class="index">
-    <nav id="primary">
-      <div class="nav-wrap">
-        <div class="logo">
-          <h1><a href="index.html">jQPlot Chart Library</a></h1>
-        </div>
-        <div class="navlist">
-          <ul>
-            <li><a href="demo/index.html">Demo</a></li>
-            <li><a href="guide/index.html">Guide</a></li>
-            <li><a href="api/index.html" class="">API</a></li>
-            <li><a href="plugins/index.html">Plugins</a></li>
-            <li><a href="tests/index.html">Unit tests</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+
+
+
+
     <header>
       <div class="header-wrap">
-        <div class="grid_12 panels">
-          <div class="rowInside">
-            <article class="grid_4 code contrast">
-              <div class="wrap">
-                <h3 class="fancy">Numerous <b>line style options</b> with 6 built in marker styles!</h3>
-                <div class="code-sample centered">
-                  <img src="public/img/linestyles2.jpeg" alt="linestyles2" height="148" width="149">
-                </div>
-              </div>
-            </article>
-            <article class="grid_4 code contrast">
-              <div class="wrap">
-                <h3 class="fancy">Horizontal and vertical <b>Bar charts</b>!</h3>
-                <div class="code-sample centered">
-                  <img src="public/img/barchart.jpeg" alt="barchart" height="149" width="149">
-                </div>
-              </div>
-            </article>
-            <article class="grid_4 code contrast">
-              <div class="wrap">
-                <h3 class="fancy"><b>Shadow</b> control on lines, markers, the grid, everything!</h3>
-                <div class="code-sample centered">
-                  <img src="public/img/shadow2.jpeg" alt="shadow2" height="149" width="148">
-                </div>
-              </div>
-            </article>
 
-            <article class="grid_4 code contrast">
-              <div class="wrap">
-                <h3 class="fancy"><b>Drag and drop</b> points with auto updating of data!</h3>
-                <div class="code-sample centered">
-                  <img src="public/img/dragdrop2.jpeg" alt="dragdrop2" height="149" width="149">
-                </div>
-              </div>
-            </article>
-            <article class="grid_4 code contrast">
-              <div class="wrap">
-                <h3 class="fancy"><b>Log Axes</b> with flexible tick marks!</h3>
-                <div class="code-sample centered">
-                  <img src="public/img/logaxes2.jpeg" alt="logaxes2" height="149" width="148">
-                </div>
-              </div>
-            </article>
-            <article class="grid_4 code contrast">
-              <div class="wrap">
-                <h3 class="fancy"><b>Trend lines</b> computed automatically!</h3>
-                <div class="code-sample centered">
-                  <img src="public/img/trendline2.jpeg" alt="trendline2" height="149" width="148">
-                </div>
-              </div>
-            </article>
-          </div>
+
+
+
+        <div class="grid_12 panels">
+            <!-- Quick introduction -->
+            <h2 class="plain">
+                jQplot is a UI chart jquery library to build complex charts using canvas
+            </h2>
+            <div class="rowInside">
+                <article class="grid_6 desc">
+                    <h4 class="plain">jQplot is a plotting and charting plugin for the jQuery Javascript framework.</h4>
+                </article>
+
+                <article class="grid_6 desc">
+                       <h4 class="plain">jQplot produces beautiful line, bar and pie charts with many features</h4>
+                </article>
+            </div>
+
+
+            <div class="rowInside">
+
+                {% assign blurb="Numerous <b>line style options</b> with 6 built in marker styles!" %}
+                {% assign blurbimage="linestyles2.jpeg" %}
+                {% include front_advert.html  %}
+
+                {% assign blurb="Horizontal and vertical <b>Bar charts</b>!"  %}
+                {% assign blurbimage="barchart.jpeg"  %}
+                {% include front_advert.html  %}
+
+                {% assign blurb="<b>Shadow</b> control on lines, markers, the grid, everything!"  %}
+                {% assign blurbimage="shadow2.jpeg"  %}
+                {% include front_advert.html  %}
+
+                {% assign blurb="<b>Drag and drop</b> points with auto updating of data!"  %}
+                {% assign blurbimage="dragdrop2.jpeg"  %}
+                {% include front_advert.html  %}
+
+                {% assign blurb="<b>Log Axes</b> with flexible tick marks!"  %}
+                {% assign blurbimage="logaxes2.jpeg"  %}
+                {% include front_advert.html  %}
+
+                {% assign blurb="<b>Trend lines</b> computed automatically!"  %}
+                {% assign blurbimage="trendline2.jpeg"  %}
+                {% include front_advert.html  %}
+
+            </div>
         </div>
+
         <div class="installation">
-          <div class="site-description"><p>Jqplot is a UI chart jquery library to build complexe charts using canvas.</p>
-          </div>
           <div class="card-wrap">
             <div class="card">
               <div class="card-inner">
-                <h1>Download jQplot<span class="version">1.0.9-stable</span></h1>
+                <h2 class="plain">Download jQplot <span class="version">{{ site.stable_version }}</span> distribution</h2>
                 <div id="node" class="install">
-                  <h2>dist library<small><a href="https://github.com/svandecappelle/jQPlot#build-from-sources" class="toggle">build from sources?</a></small></h2>
-                  <div class="download-banner"> 
-                    <div class="action-button"><a href="https://github.com/svandecappelle/jQPlot/archive/1.0.9.zip">Download last stable release</a></div>
-                  </div>
+                  <div class="download-banner">
+                    <div class="action-button"><a href="https://github.com/svandecappelle/jQPlot/archive/{{ site.stable_version_zip }}">Download last stable release
+                        - {{ site.stable_version_zip }}</a></div>
+                    </div>
+                    <br /><a href="https://github.com/svandecappelle/jQPlot#build-from-sources" class="toggle">Or you can build from sources</a>
+                    <!--
+                    <br />Current build:  <a href="http://travis-ci.org/#!/svandecappelle/jQPlot" target="_blank"><img src="https://travis-ci.org/svandecappelle/jQPlot.svg?branch=master" /></a>
+                   -->
                 </div>
+
                 <div class="tech-links">
                   <a href="https://github.com/svandecappelle/jQPlot/issues" target="_blank">Issues</a>&nbsp;|&nbsp;
                   <a href="https://github.com/svandecappelle/jQPlot" target="_blank">Fork on GitHub</a>&nbsp;|&nbsp;
+                  <a href="https://gitter.im/svandecappelle/jQPlot" target="_blank">Chatroom</a>&nbsp;|&nbsp;
                   <a href="https://github.com/svandecappelle/jQPlot/wiki/changelog.md" target="_blank">Changelog</a>&nbsp;|&nbsp;
                   <a href="http://groups.google.com/group/jqplot-users" target="_blank">Google Group</a>&nbsp;|&nbsp;
                   <a href="http://travis-ci.org/#!/svandecappelle/jQPlot" target="_blank">Build Status</a>
@@ -102,6 +85,7 @@
             </div>
           </div>
         </div>
+
         <div class="callouts">
           <div id="guide" class="call"><a href="guide/index.html#GettingStarted"><span class="icon"></span>
               <big>Getting Started</big><small>Learn how install and use jQPlot through a series of guided walkthroughs.</small></a>
@@ -118,6 +102,10 @@
         </div>
       </div>
     </header>
+
+
+
+
     <div class="content">
       <section id="content">
         <div id="home" class="grid_12 panels">
@@ -247,39 +235,4 @@ $(<span class="keyword">function</span>(){
         </div>
       </section>
     </div>
-    <footer>
-      <section id="footer">
-        <div class="branding"> 
-          <h3 class="fancy"><a href="#">jQPlot Chart Library</a></h3>
-        </div>
-        <div class="list">
-          <ul>
-            <li><a href="guide/installation.html">Installation</a></li>
-            <li><a href="guide/plugins/index.html">Plugins</a></li>
-          </ul>
-        </div>
-        <div class="list">
-          <ul>
-            <li><a href="api/index.html">API</a></li>
-            <li><a href="api/plugins/index.html">Plugin Utility API</a></li>
-          </ul>
-        </div>
-        <div class="list">
-          <ul>
-            <li><a href="guide/resources/index.html">Help</a></li>
-            <li><a href="tests/index.html">Test Suite</a></li>
-            <li><a href="https://github.com/svandecappelle/jQPlot/wiki/changelog.md" target="_blank">Changelog</a></li>
-          </ul>
-        </div>
-        <div class="list">
-          <ul>
-            <li><a href="https://github.com/svandecappelle/jQPlot/issues" target="_blank">Issues</a></li>
-            <li><a href="http://groups.google.com/group/jqplot-users" target="_blank">Google Group</a></li>
-            <li><a href="http://travis-ci.org/#!/svandecappelle/jQPlot" target="_blank">Build Status</a></li>
-          </ul>
-        </div>
-      </section>
-    </footer>
-  </body>
 
-</html>

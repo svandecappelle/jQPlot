@@ -1,0 +1,23 @@
+# Site settings
+title: jQPlot Chart Library
+email: https://groups.google.com/forum/#!forum/jqplot-users
+description: > # this means to ignore newlines until "baseurl:"
+  jqPlot is a versatile and expandable plotting and charting plugin for the jQuery Javascript framework. 
+  jqPlot produces beautiful line, bar and pie charts with many features.
+baseurl: "/jQPlot" # the subpath of your site, e.g. /blog/
+url: "http://svandecappelle.github.io" # the base hostname & protocol for your site
+twitter_username: jQplot
+github_username:  svandecappelle
+
+
+# Stable version
+stable_version: 1.0.9-stable
+stable_version_zip: 1.0.9.zip
+
+
+exclude: [ _jsdocs, jekserve ]
+
+array: []
+
+# Build settings
+markdown: kramdown

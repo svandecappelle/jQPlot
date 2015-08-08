@@ -1,0 +1,13 @@
+
+<article class="grid_4 code contrast">
+    <div class="wrap">
+        <h3 class="fancy">{{ blurb }}</h3>
+        <div class="code-sample screenshot">
+            <img src="{{ "/demo/screenshots/" | prepend: site.baseurl }}{{ blurbimage }}"
+            alt="{{ blurbimage }}">
+        </div>
+        <div class="more-wrap"><a href="{{ destination }}"
+                                  class="more">Show<span class="arrow">→</span></a>
+        </div>
+    </div>
+</article>
