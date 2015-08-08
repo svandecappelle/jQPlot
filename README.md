@@ -1,6 +1,8 @@
 jQPlot
 ======
 
+[![Join the chat at https://gitter.im/svandecappelle/jQPlot](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/svandecappelle/jQPlot?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/svandecappelle/jQPlot.svg?branch=master)](https://travis-ci.org/svandecappelle/jQPlot)
 
 jqPlot is a plotting and charting plugin for the jQuery Javascript framework. jqPlot produces beautiful line, bar and pie charts with many features:
