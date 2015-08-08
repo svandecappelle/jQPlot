@@ -1,8 +1,9 @@
 jQPlot
 ======
 
-[![Build Status](https://travis-ci.org/svandecappelle/jQPlot.svg?branch=master)](https://travis-ci.org/svandecappelle/jQPlot)
+[![Join the chat at https://gitter.im/svandecappelle/jQPlot](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/svandecappelle/jQPlot?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+[![Build Status](https://travis-ci.org/svandecappelle/jQPlot.svg?branch=master)](https://travis-ci.org/svandecappelle/jQPlot)
 
 jqPlot is a plotting and charting plugin for the jQuery Javascript framework. jqPlot produces beautiful line, bar and pie charts with many features:
 
@@ -17,21 +18,23 @@ jqPlot is a plotting and charting plugin for the jQuery Javascript framework. jq
 
 | View  | Desc |
 | ----- | ---- |
-| ![LineStyles](http://www.jqplot.com/images/linestyles2.jpg) | Numerous line style options with 6 built in marker styles! |
-| ![Renderers](http://www.jqplot.com/images/barchart.jpg) | Lots of renderers |
-| ![shadows](http://www.jqplot.com/images/shadow2.jpg) | Shadow control on lines, markers, the grid, everything! |
-| ![drag&drop](http://www.jqplot.com/images/dragdrop2.jpg) | Drag and drop points with auto updating of data! |
-| ![logaxis](http://www.jqplot.com/images/logaxes2.jpg) | Log Axes with flexible tick marks! |
-| ![Trendlines](http://www.jqplot.com/images/trendline2.jpg) | Trend lines computed automatically! |
+| ![LineStyles](http://svandecappelle.github.io/jQPlot/public/img/linestyles2.jpeg) | Numerous line style options with 6 built in marker styles! |
+| ![Renderers](http://svandecappelle.github.io/jQPlot/public/img/barchart.jpeg) | Lots of renderers |
+| ![shadows](http://svandecappelle.github.io/jQPlot/public/img/shadow2.jpeg) | Shadow control on lines, markers, the grid, everything! |
+| ![drag&drop](http://svandecappelle.github.io/jQPlot/public/img/dragdrop2.jpeg) | Drag and drop points with auto updating of data! |
+| ![logaxis](http://svandecappelle.github.io/jQPlot/public/img/logaxes2.jpeg) | Log Axes with flexible tick marks! |
+| ![Trendlines](http://svandecappelle.github.io/jQPlot/public/img/trendline2.jpeg) | Trend lines computed automatically! |
 |  |  |
 
 # Distribution
-Last builded files are generated in the build directory.  
+You can find the freshly compiled files in the ``/dist`` build directory.
 
 # Build from sources
 ## Requirements
-* To build from sources file you need nodejs
-* Type: ```npm run dist``` to build all distribution.
+* To build from sources file you need nodejs and grunt-cli
+  * npm install -g grunt-cli
+* Type: ```npm install```
+* Type: ```grunt``` to build all distribution.
 
 # Usage:
 * Import into your web page:
@@ -46,3 +49,6 @@ $(function(){
   $.jqplot(<ID_HTML>, <DATAS>, <OPTIONS>);
 });
 ```
+
+# Help Wanted
+We're currently reaching out to new contributors. Feel free to participate [here on Github](https://github.com/svandecappelle/jQPlot), through issues, pull requests and [our wiki](https://github.com/svandecappelle/jQPlot/wiki/Migrating-jQPlot-Plans). Make sure to follow us through the [jqPlot Google Group mailing list](http://groups.google.com/group/jqplot-users).

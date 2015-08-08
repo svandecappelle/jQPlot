@@ -238,7 +238,7 @@
 
         if (opts.useAxesFormatters) {
             var yf = series._yaxis._ticks[0].formatter;
-            if (opts.yaxis.formatter){
+            if (opts.yaxis && opts.yaxis.formatter) {
                 yf = opts.yaxis.formatter;
             }
             var yfstr = series._yaxis._ticks[0].formatString;
