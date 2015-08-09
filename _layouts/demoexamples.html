@@ -25,17 +25,16 @@
                 <div class="grid_1">
                     <b>Core demos</b> <br />
 
-                    <a href="Basic graph.html">Basic graph</a> <br />
+                    {% for files in site.data.democore %}
+                      <a href="{{ site.baseurl }}/demo/core/{{ files.filename }}.html">{{ files.filename }}</a> <br />
+                    {% endfor %}
 
-                    <a href="Modify chart.html">Modify chart</a> <br />
-
-                    <a href="No data.html">No data</a> <br />
-
-                    <a href="Splitted line chart.html">Splitted line chart</a> <br />
-
-                    <a href="Stairs renderer.html">Stairs renderer</a> <br />
 
                     <br /> <b>Plugin demos</b><br />
+
+                    {% for files in site.data.demoplugins %}
+                      <a href="{{ site.baseurl }}/demo/plugins/{{ files.filename }}.html">{{ files.filename }}</a> <br />
+                    {% endfor %}
 
                 </div>
 
@@ -43,10 +42,14 @@
 
                     {{ content }}
 
+                    {% if page.mutiplecharts == null %}
+
                     <div class="code prettyprint">
                         <pre class="code prettyprint brush: js"></pre>
                     </div>
-                    <div id="chart1" style="height:300px; width:500px;"></div>
+                    <div id="chart1" style="height:300px; width:650px;"></div>
+
+                    {% endif %}
 
                 </div>
 

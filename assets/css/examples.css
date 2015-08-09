@@ -201,8 +201,11 @@ div.example-plot {
     height: 300px;
 }
 
-.jqplot-table-legend-label {
+
+.jqplot-table-legend  {
     white-space: nowrap;
+    padding: 5px;
+    margin: 0px;
 }
 
 div.syntaxhighlighter {

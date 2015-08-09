@@ -1,5 +1,18 @@
 ---
 layout: frontpage
+blurbs:
+   - text: Numerous <b>line style options</b> with 6 built in marker styles!
+     blurbimage: linestyles2.jpeg
+   - text: Horizontal and vertical <b>Bar charts</b>!
+     blurbimage: barchart.jpeg
+   - text: <b>Shadow</b> control on lines, markers, the grid, everything!
+     blurbimage: shadow2.jpeg
+   - text: <b>Drag and drop</b> points with auto updating of data!
+     blurbimage: dragdrop2.jpeg
+   - text: <b>Log Axes</b> with flexible tick marks!
+     blurbimage: logaxes2.jpeg
+   - text: <b>Trend lines</b> computed automatically!
+     blurbimage: trendline2.jpeg
 ---
 
 
@@ -28,31 +41,13 @@ layout: frontpage
             </div>
 
 
+
             <div class="rowInside">
-
-                {% assign blurb="Numerous <b>line style options</b> with 6 built in marker styles!" %}
-                {% assign blurbimage="linestyles2.jpeg" %}
-                {% include front_advert.html  %}
-
-                {% assign blurb="Horizontal and vertical <b>Bar charts</b>!"  %}
-                {% assign blurbimage="barchart.jpeg"  %}
-                {% include front_advert.html  %}
-
-                {% assign blurb="<b>Shadow</b> control on lines, markers, the grid, everything!"  %}
-                {% assign blurbimage="shadow2.jpeg"  %}
-                {% include front_advert.html  %}
-
-                {% assign blurb="<b>Drag and drop</b> points with auto updating of data!"  %}
-                {% assign blurbimage="dragdrop2.jpeg"  %}
-                {% include front_advert.html  %}
-
-                {% assign blurb="<b>Log Axes</b> with flexible tick marks!"  %}
-                {% assign blurbimage="logaxes2.jpeg"  %}
-                {% include front_advert.html  %}
-
-                {% assign blurb="<b>Trend lines</b> computed automatically!"  %}
-                {% assign blurbimage="trendline2.jpeg"  %}
-                {% include front_advert.html  %}
+                {% for item in page.blurbs %}
+                    {% assign blurb={{ item.text }} %}
+                    {% assign blurbimage={{ item.blurbimage }} %}
+                    {% include front_advert.html  %}
+                {% endfor %}
 
             </div>
         </div>

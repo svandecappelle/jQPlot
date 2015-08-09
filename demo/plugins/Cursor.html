@@ -1,31 +1,11 @@
-<html>
-	<head>
-		<title>Cursor</title>
+---
+layout: demoexamples
+title: Cursor
 
-		<!-- JQuery dependence -->
-		<script src="../../../dist/core/jquery.min.js"></script>
-		<script src="../../../dist/core/jquery.jqplot.min.js"></script>
+---
 
-		<!-- Axes -->
-		<script src="../../../dist/plugins/axis/jqplot.dateAxisRenderer.min.js"></script>
-		<script src="../../../dist/plugins/axis/jqplot.canvasAxisTickRenderer.min.js"></script>
-		<script src="../../../dist/plugins/text/jqplot.canvasTextRenderer.min.js"></script>
 
-		<!-- Customization theme -->
-		<script src="../../../dist/plugins/themes/extendedThemes.min.js"></script>
 
-		<!-- Export PNG -->
-		<script src="../../../dist/plugins/export/exportImg.min.js"></script>
-
-		<script src="../../../dist/plugins/fullscreener/fullscreener.min.js"></script>
-		<script src="../../../dist/plugins/legend/jqplot.enhancedLegendRenderer.min.js"></script>
-
-		<script src="../../../dist/plugins/cursor/jqplot.cursor.min.js"></script>
-
-		<link type="text/css" rel="stylesheet" href="../../../dist/plugins/fullscreener/fullscreener.min.css"/>
-		<link type="text/css" rel="stylesheet" href="../../../dist/core/jquery.jqplot.min.css"/>
-	</head>
-	<body>
 		<style>
 			.jqplot-cursor-highlighter-head{
 				border: 1px solid #343434;
@@ -37,9 +17,9 @@
 			}
 
 		</style>
-		<div class="coding">
-		<div id="chart2" style="margin:20px;"></div>
-		<script type="text/javascript">
+
+
+		<script class="code" type="text/javascript">
 			$(function(){
 				var date = new $.jsDate();
 				date.set({syntax: "php"});
@@ -55,7 +35,7 @@
 				var serie6=[['2008-09-01',null],['2008-09-02',null],['2008-09-03',1],['2008-09-04',null],['2008-09-05',null]];
 				var serie7=[['2008-09-01',null],['2008-09-02',null],['2008-09-03',null],['2008-09-04',4],['2008-09-05',null]];
 				var serie8=[['2008-09-01',null],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',1]];
-				var plot1 = $.jqplot('chart2', [serie1,serie2,serie3, serie4, serie5,serie6, serie7, serie8], {
+				var plot1 = $.jqplot('chart1', [serie1,serie2,serie3, serie4, serie5,serie6, serie7, serie8], {
 						title:'Cursor',
 						axes:{
 							xaxis:{
@@ -105,7 +85,3 @@
 					plot1.replot();
 				});
 			</script>
-		</div>
-		<script src="../../common/$.jqplot.demo.common.js"></script>
-	</body>
-</html>

@@ -1,43 +1,15 @@
-<html>
-	<head>
-		<title>Canvas overlay date axis</title>
+---
+layout: demoexamples
+title: Overlay chart
+---
 
-		<!-- JQuery dependence -->
-		<script src="../../../dist/core/jquery.min.js"></script>
-		<script src="../../../dist/core/jquery.jqplot.min.js"></script>
-
-		<!-- Axes -->
-		<script src="../../../dist/plugins/axis/jqplot.dateAxisRenderer.min.js"></script>
-		<script src="../../../dist/plugins/axis/jqplot.canvasAxisTickRenderer.min.js"></script>
-		<script src="../../../dist/plugins/text/jqplot.canvasTextRenderer.min.js"></script>
-
-		<!-- Customization theme -->
-		<script src="../../../dist/plugins/themes/extendedThemes.min.js"></script>
-
-		<!-- Export PNG -->
-		<script src="../../../dist/plugins/export/exportImg.min.js"></script>
-
-		<script src="../../../dist/plugins/fullscreener/fullscreener.min.js"></script>
-		<script src="../../../dist/plugins/legend/jqplot.enhancedLegendRenderer.min.js"></script>
-
-
-		<script src="../../../dist/plugins/overlay/jqplot.canvasOverlay.min.js"></script>
-
-		<link type="text/css" rel="stylesheet" href="../../../dist/plugins/fullscreener/fullscreener.min.css"/>
-		<link type="text/css" rel="stylesheet" href="../../../dist/core/jquery.jqplot.min.css"/>
-	</head>
-	<body>
-
-		<div class="coding">
-		<div id="chart1" style="margin:20px;"></div>
-
-			<script type="text/javascript">
+			<script class="code" type="text/javascript">
 				$(function(){
 
 				var serie1=[['2008-09-01',4],['2008-09-02',7],['2008-09-03',null],['2008-09-04',-3],['2008-09-05',10]];
 				$.jqplot.config.enablePlugins = true;
 				var plot1 = $.jqplot('chart1', [serie1], {
-						title:'A super chart',
+						title:'{{ page.title }}',
 						axes:{
 							xaxis:{
 								renderer:$.jqplot.DateAxisRenderer,
@@ -142,7 +114,3 @@
 					plot1.replot();
 				});
 			</script>
-
-		<script src="../../common/$.jqplot.demo.common.js"></script>
-	</body>
-</html>

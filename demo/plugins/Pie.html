@@ -1,0 +1,27 @@
+---
+layout: demoexamples
+title: Pie chart
+---
+			<script class="code" type="text/javascript">
+				$(function(){
+
+					var s1 = [['/home',46], ['/var',14], ['/tmp',5], ['/',35]];
+
+					var plot1 = $.jqplot('chart1', [s1], {
+						title:'Disc usage',
+						seriesDefaults: {
+							renderer: $.jqplot.PieRenderer,
+							rendererOptions: {
+								showDataLabels: true,
+								labelColor: "red",
+								showDataCategoryOnHover : true,
+								sliceMargin: 1,
+								ringMargin: 8,
+							}
+						},
+						legend: { show:true, location: 'e'}
+					});
+					//plot1.themeEngine.newTheme('bluealpha_pie', new VklThemes().get('bluealpha_pie', plot1));
+					//plot1.activateTheme('bluealpha_pie');
+				});
+			</script>
