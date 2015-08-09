@@ -1804,3 +1804,5 @@ table.images-content tr th, table.images-content tr td{
   right: 0px;
   width: 100% !important;
 }
+
+.jqplot-table-legend { width: auto; }
