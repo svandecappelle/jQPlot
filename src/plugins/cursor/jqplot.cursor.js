@@ -35,7 +35,12 @@
     
     "use strict";
 
-    function setTooltipPosition(location, gridpos, plot) {
+        /**
+         * @param {string} location
+         * @param {object} gridpos
+         * @param {object} plot
+         */
+    var setTooltipPosition = function (location, gridpos, plot) {
         
         var c = plot.plugins.cursor,
             elem = c._tooltipElem,
@@ -83,886 +88,999 @@
 
         elem.css({'left': x, 'top': y});
         elem = null;
-    }
+    },
     
-    function getIntersectingPoints(plot, x, y) {
-        
-        var ret = {
-                indices: [],
-                data: []
-            },
-            s,
-            i,
-            d0,
-            d,
-            j,
-            r,
-            p,
-            threshold,
-            c = plot.plugins.cursor,
-            seriesLen = plot.series.length,
-            gridDataLen = 0;
-        
-        for (i = 0; i < seriesLen; i++) {
-            
-            s = plot.series[i];
-            r = s.renderer;
-            
-            if (s.show) {
-                
-                threshold = c.intersectionThreshold;
-                
-                if (s.showMarker) {
-                    threshold += s.markerRenderer.size / 2;
-                }
-                
-                gridDataLen = s.gridData.length;
-                
-                for (j = 0; j < gridDataLen; j++) {
-                    
-                    p = s.gridData[j];
-                    // check vertical line
-                    
-                    if (c.showVerticalLine) {
-                        if (Math.abs(x - p[0]) <= threshold) {
-                            ret.indices.push(i);
-                            ret.data.push({
-                                seriesIndex: i,
-                                pointIndex: j,
-                                gridData: p,
-                                data: s.data[j]
-                            });
-                        }
-                    }
-                }
-            }
-        }
-        return ret;
-    }
-    
-    function updateTooltip(gridpos, datapos, plot) {
-        
-        var c = plot.plugins.cursor,
-            series = plot.series,
-            seriesLen = series.length,
-            s = '',
-            addbr = false,
-            data,
-            g,
-            i,
-            j,
-            tooltipAxisGroupLen,
-            serieIndex,
-            af,
-            afstr,
-            yaxisStr,
-            xaxisStr,
-            sx,
-            sy,
-            yfstr,
-            xfstr,
-            ret,
-            idx,
-            label,
-            cellid,
-            ystr,
-            xstr;
-        
-        // @TODO Where is series and data supposed to come from?
-        
-        if (c.showTooltipGridPosition) {
-            s = gridpos.x + ', ' + gridpos.y;
-            addbr = true;
-        }
-        
-        if (c.showTooltipUnitPosition) {
+        /**
+         * @param   {Object}   plot
+         * @param   {integer} x 
+         * @param   {integer} y 
+         * @returns {object}
+         */
+        getIntersectingPoints = function (plot, x, y) {
 
-            for (i = 0, tooltipAxisGroupLen = c.tooltipAxisGroups.length; i < tooltipAxisGroupLen; i++) {
-                
-                serieIndex = i;
-                g = c.tooltipAxisGroups[i];
-                
-                if (addbr) {
-                    s += '<br />';
-                } else {
-                    af = plot.axes[g[j]]._ticks[0].formatter;
-                    afstr = plot.axes[g[j]]._ticks[0].formatString;
-                    s += af(afstr, datapos[g[j]]);
-                }
-                
-                if (c.yaxis || c.xaxis) {
-                    
-                    if (c.yaxis && c.yaxis.formatter) {
-                        yaxisStr = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, datapos[g[1]], serieIndex);
-                    } else {
-                        yfstr = g._yaxis._ticks[0].formatString;
-                        sx = g._yaxis._ticks[0].formatter(yfstr, data[1], serieIndex);
-                    }
-
-                    if (c.xaxis && c.xaxis.formatter) {
-                        xaxisStr = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, datapos[g[0]], serieIndex);
-                    } else {
-                        xfstr = g._xaxis._ticks[0].formatString;
-                        sx = g._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
-                    }
-
-                    s += $.jqplot.sprintf(c.tooltipFormatString, xaxisStr, yaxisStr);
-                    
-                } else if (c.useAxesFormatters) {
-                    
-                    for (j = 0; j < g.length; j++) {
-                        if (j) {
-                            s += ', ';
-                        }
-                        af = plot.axes[g[j]]._ticks[0].formatter;
-                        afstr = plot.axes[g[j]]._ticks[0].formatString;
-                        s += af(afstr, datapos[g[j]], serieIndex);
-                    }
-                    
-                } else {
-                    s += $.jqplot.sprintf(c.tooltipFormatString, datapos[g[0]], datapos[g[1]]);
-                }
-                
-                addbr = true;
-                
-            }
-        }
-
-        if (c.showTooltipDataPosition) {
-            
-            ret = getIntersectingPoints(plot, gridpos.x, gridpos.y);
+            var ret = {
+                    indices: [],
+                    data: []
+                },
+                s,
+                i,
+                d0,
+                d,
+                j,
+                r,
+                p,
+                threshold,
+                c = plot.plugins.cursor,
+                seriesLen = plot.series.length,
+                gridDataLen = 0;
 
             for (i = 0; i < seriesLen; i++) {
-                
-                serieIndex = i;
-                
-                if (series[i].show) {
-                    
-                    idx = series[i].index;
-                    label = series[i].label.toString();
 
-                    if (c.useSeriesColor) {
-                        label = $.jqplot.sprintf("<span style=\"color:%s\">%s</span>", series[i].color, label);
+                s = plot.series[i];
+                r = s.renderer;
+
+                if (s.show) {
+
+                    threshold = c.intersectionThreshold;
+
+                    if (s.showMarker) {
+                        threshold += s.markerRenderer.size / 2;
                     }
 
+                    gridDataLen = s.gridData.length;
+
+                    for (j = 0; j < gridDataLen; j++) {
+
+                        p = s.gridData[j];
+                        // check vertical line
+
+                        if (c.showVerticalLine) {
+                            if (Math.abs(x - p[0]) <= threshold) {
+                                ret.indices.push(i);
+                                ret.data.push({
+                                    seriesIndex: i,
+                                    pointIndex: j,
+                                    gridData: p,
+                                    data: s.data[j]
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            return ret;
+        },
+
+        /**
+         * @param {Object} gridpos 
+         * @param {Number} datapos 
+         * @param {Object} plot    
+         */
+        updateTooltip = function (gridpos, datapos, plot) {
+
+            var c = plot.plugins.cursor,
+                serie,
+                series = plot.series,
+                seriesLen = series.length,
+                s = '',
+                addbr = false,
+                data,
+                g,
+                i,
+                j,
+                tooltipAxisGroupLen,
+                serieIndex,
+                af,
+                afstr,
+                yaxisStr,
+                xaxisStr,
+                sx,
+                sy,
+                yfstr,
+                xfstr,
+                ret,
+                idx,
+                label,
+                cellid,
+                ystr,
+                xstr;
+
+            if (c.showTooltipGridPosition) {
+                s = gridpos.x + ', ' + gridpos.y;
+                addbr = true;
+            }
+
+            if (c.showTooltipUnitPosition) {
+
+                for (i = 0, tooltipAxisGroupLen = c.tooltipAxisGroups.length; i < tooltipAxisGroupLen; i++) {
+
+                    serieIndex = i;
+                    
+                    g = c.tooltipAxisGroups[i];
+
+                    if (addbr) {
+                        s += '<br />';
+                    } else {
+                        
+                        for (j = 0; j < g.length; j++) {
+                            if (j) {
+                                s += ', ';
+                            }
+                            af = plot.axes[g[j]]._ticks[0].formatter;
+                            afstr = plot.axes[g[j]]._ticks[0].formatString;
+                            s += af(afstr, datapos[g[j]]);
+                        }
+                        
+                    }
+
+                    if (c.yaxis || c.xaxis) {
+
+                        if (c.yaxis && c.yaxis.formatter) {
+                            yaxisStr = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, datapos[g[1]], serieIndex);
+                        } else {
+                            yfstr = g._yaxis._ticks[0].formatString;
+                            sx = g._yaxis._ticks[0].formatter(yfstr, data[1], serieIndex);
+                        }
+
+                        if (c.xaxis && c.xaxis.formatter) {
+                            xaxisStr = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, datapos[g[0]], serieIndex);
+                        } else {
+                            xfstr = g._xaxis._ticks[0].formatString;
+                            sx = g._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
+                        }
+
+                        s += $.jqplot.sprintf(c.tooltipFormatString, xaxisStr, yaxisStr);
+
+                    } else if (c.useAxesFormatters) {
+
+                        for (j = 0; j < g.length; j++) {
+                            if (j) {
+                                s += ', ';
+                            }
+                            af = plot.axes[g[j]]._ticks[0].formatter;
+                            afstr = plot.axes[g[j]]._ticks[0].formatString;
+                            s += af(afstr, datapos[g[j]], serieIndex);
+                        }
+
+                    } else {
+                        s += $.jqplot.sprintf(c.tooltipFormatString, datapos[g[0]], datapos[g[1]]);
+                    }
+
+                    addbr = true;
+
+                }
+            }
+
+            if (c.showTooltipDataPosition) {
+
+                ret = getIntersectingPoints(plot, gridpos.x, gridpos.y);
+
+                for (i = 0; i < seriesLen; i++) {
+
+                    serieIndex = i;
+                    serie = series[i];
+
+                    if (serie.show) {
+
+                        idx = serie.index;
+                        label = serie.label.toString();
+
+                        if (c.useSeriesColor) {
+                            label = $.jqplot.sprintf("<span style=\"color:%s\">%s</span>", serie.color, label);
+                        }
+
+                        cellid = $.inArray(idx, ret.indices);
+                        
+                        sx = null;
+                        sy = null;
+
+                        if (cellid !== -1) {
+
+                            data = ret.data[cellid].data;
+
+                            if (c.yaxis || c.xaxis) {
+
+                                if (c.yaxis && c.yaxis.formatter) {
+                                    sy = c.yaxis.formatter(serie._yaxis._ticks[0].formatString, data[1], serieIndex);
+                                } else {
+                                    yfstr = serie._yaxis._ticks[0].formatString;
+                                    sy = serie._yaxis._ticks[0].formatter(yfstr, data[1], serieIndex);
+                                }
+
+                                if (c.xaxis && c.xaxis.formatter) {
+                                    sx = c.xaxis.formatter(serie._xaxis._ticks[0].formatString, data[0], serieIndex);
+                                } else {
+                                    xfstr = serie._xaxis._ticks[0].formatString;
+                                    sx = serie._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
+                                }
+
+                                if (!addbr && c.insertHead) {
+                                    s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
+                                    s += '<br />';
+                                }
+
+                            } else if (c.useAxesFormatters) {
+                                
+                                xfstr = serie._xaxis._ticks[0].formatString;
+                                yfstr = serie._yaxis._ticks[0].formatString;
+                                sx = serie._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
+                                sy = serie._yaxis._ticks[0].formatter(yfstr, data[1], serieIndex);
+                                
+                                if (!addbr && c.insertHead) {
+                                    s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
+                                    s += '<br />';
+                                }
+                                
+                            } else {
+                                sx = data[0];
+                                sy = data[1];
+                            }
+                            
+                            if (addbr) {
+                                s += '<br />';
+                            }
+                            
+                            s += $.jqplot.sprintf(c.tooltipFormatString, label, sx, sy);
+                            
+                            addbr = true;
+                            
+                        }
+                    }
+                }
+
+            }
+
+            if (s === "") {
+                c._tooltipElem.css({display: 'none'});
+            } else {
+                c._tooltipElem.css({display: 'block'});
+            }
+
+            c._tooltipElem.html(s);
+            
+        },
+
+        /**
+         * @param   {Object}   option
+         * @returns {object}
+*/
+        convertToShapeOption = function (option) {
+            if (option) {
+                var output = {};
+
+                if (option.color) {
+                    output.strokeStyle = option.color;
+                }
+
+                if (option.style) {
+                    output.linePattern = option.style;
+                }
+
+                if (option.lineWidth) {
+                    output.lineWidth = option.lineWidth;
+                }
+
+                return output;
+
+            } else {
+                return option;
+            }
+        },
+
+        /**
+         * @param {Object} gridp
+         * @param {Object} plot     
+         */
+        moveLine = function (gridpos, plot) {
+
+            var c = plot.plugins.cursor,
+                ctx = c.cursorCanvas._ctx,
+                ret,
+                cells,
+                i,
+                optionsVertical,
+                optionsHorizontal,
+                idx,
+                serie,
+                series,
+                label,
+                data,
+                cellid,
+                sx,
+                sy,
+                yfstr,
+                xfstr,
+                xf,
+                yf;
+
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+            if (c.showVerticalLine) {
+                optionsVertical = convertToShapeOption(c.verticalLine);
+                c.shapeRenderer.draw(ctx, [[gridpos.x, 0], [gridpos.x, ctx.canvas.height]], optionsVertical);
+            }
+
+            if (c.showHorizontalLine) {
+                optionsHorizontal = convertToShapeOption(c.horizontalLine);
+                c.shapeRenderer.draw(ctx, [[0, gridpos.y], [ctx.canvas.width, gridpos.y]], optionsHorizontal);
+            }
+
+            ret = getIntersectingPoints(plot, gridpos.x, gridpos.y);
+
+            if (c.showCursorLegend) {
+
+                cells = $(plot.targetId + ' td.jqplot-cursor-legend-label');
+
+                for (i = 0; i < cells.length; i++) {
+
+                    serie = series[i];
+                    idx = $(cells[i]).data('seriesIndex');
+                    series = plot.series[idx];
+                    label = series.label.toString();
                     cellid = $.inArray(idx, ret.indices);
                     sx = null;
                     sy = null;
-                    
+
                     if (cellid !== -1) {
-                        
+
                         data = ret.data[cellid].data;
-                        
+
                         if (c.yaxis || c.xaxis) {
-                            
                             if (c.yaxis && c.yaxis.formatter) {
-                                sy = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, data[1], serieIndex);
+                                sy = c.yaxis.formatter(serie._yaxis._ticks[0].formatString, data[1], idx);
                             } else {
-                                yfstr = series[i]._yaxis._ticks[0].formatString;
-                                sy = series[i]._yaxis._ticks[0].formatter(yfstr, data[1], serieIndex);
+                                yfstr = series._yaxis._ticks[0].formatString;
+                                sy = series._yaxis._ticks[0].formatter(yfstr, data[1], idx);
                             }
 
                             if (c.xaxis && c.xaxis.formatter) {
-                                sx = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, data[0], serieIndex);
+                                sx = c.xaxis.formatter(serie._xaxis._ticks[0].formatString, data[0], idx);
                             } else {
-                                xfstr = series[i]._xaxis._ticks[0].formatString;
-                                sx = series[i]._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
+                                xfstr = series._xaxis._ticks[0].formatString;
+                                sx = series._xaxis._ticks[0].formatter(xfstr, data[0], idx);
                             }
-                            
-                            if (!addbr && c.insertHead) {
-                                s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
-                                s += '<br />';
-                            }
-                            
+
                         } else if (c.useAxesFormatters) {
-                            xfstr = series[i]._xaxis._ticks[0].formatString;
-                            yfstr = series[i]._yaxis._ticks[0].formatString;
-                            sx = series[i]._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
-                            sy = series[i]._yaxis._ticks[0].formatter(yfstr, data[1], serieIndex);
-                            if (!addbr && c.insertHead) {
-                                s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
-                                s += '<br />';
-                            }
+
+                            xf = series._xaxis._ticks[0].formatter;
+                            yf = series._yaxis._ticks[0].formatter;
+                            xfstr = series._xaxis._ticks[0].formatString;
+                            yfstr = series._yaxis._ticks[0].formatString;
+
+                            sx = xf(xfstr, data[0], idx);
+                            sy = yf(yfstr, data[1], idx);
+
                         } else {
                             sx = data[0];
                             sy = data[1];
                         }
-                        if (addbr) {
-                            s += '<br />';
-                        }
-                        s += $.jqplot.sprintf(c.tooltipFormatString, label, sx, sy);
-                        addbr = true;
                     }
-                }
-            }
 
-        }
-
-        if (s === "") {
-            c._tooltipElem.css({display: 'none'});
-        } else {
-            c._tooltipElem.css({display: 'block'});
-        }
-
-        c._tooltipElem.html(s);
-    }
-
-    function convertToShapeOption(option) {
-        if (option) {
-            var output = {};
-
-            if (option.color) {
-                output.strokeStyle = option.color;
-            }
-
-            if (option.style) {
-                output.linePattern = option.style;
-            }
-
-            if (option.lineWidth) {
-                output.lineWidth = option.lineWidth;
-            }
-
-            return output;
-
-        } else {
-            return option;
-        }
-    }
-
-    function moveLine(gridpos, plot) {
-        
-        var c = plot.plugins.cursor,
-            ctx = c.cursorCanvas._ctx,
-            ret,
-            cells,
-            i,
-            optionsVertical,
-            optionsHorizontal,
-            idx,
-            series,
-            label,
-            data,
-            cellid,
-            sx,
-            sy,
-            yfstr,
-            xfstr,
-            xf,
-            yf;
-        
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        
-        if (c.showVerticalLine) {
-            optionsVertical = convertToShapeOption(c.verticalLine);
-            c.shapeRenderer.draw(ctx, [[gridpos.x, 0], [gridpos.x, ctx.canvas.height]], optionsVertical);
-        }
-        
-        if (c.showHorizontalLine) {
-            optionsHorizontal = convertToShapeOption(c.horizontalLine);
-            c.shapeRenderer.draw(ctx, [[0, gridpos.y], [ctx.canvas.width, gridpos.y]], optionsHorizontal);
-        }
-        
-        ret = getIntersectingPoints(plot, gridpos.x, gridpos.y);
-        
-        if (c.showCursorLegend) {
-            
-            cells = $(plot.targetId + ' td.jqplot-cursor-legend-label');
-            
-            for (i = 0; i < cells.length; i++) {
-                
-                idx = $(cells[i]).data('seriesIndex');
-                series = plot.series[idx];
-                label = series.label.toString();
-                cellid = $.inArray(idx, ret.indices);
-                sx = null;
-                sy = null;
-                
-                if (cellid !== -1) {
-                    
-                    data = ret.data[cellid].data;
-                    
-                    if (c.yaxis || c.xaxis) {
-                        if (c.yaxis && c.yaxis.formatter) {
-                            sy = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, data[1], idx);
-                        } else {
-                            yfstr = series._yaxis._ticks[0].formatString;
-                            sy = series._yaxis._ticks[0].formatter(yfstr, data[1], idx);
-                        }
-
-                        if (c.xaxis && c.xaxis.formatter) {
-                            sx = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, data[0], idx);
-                        } else {
-                            xfstr = series._xaxis._ticks[0].formatString;
-                            sx = series._xaxis._ticks[0].formatter(xfstr, data[0], idx);
-                        }
-
-                    } else if (c.useAxesFormatters) {
-                        
-                        xf = series._xaxis._ticks[0].formatter;
-                        yf = series._yaxis._ticks[0].formatter;
-                        xfstr = series._xaxis._ticks[0].formatString;
-                        yfstr = series._yaxis._ticks[0].formatString;
-                        
-                        sx = xf(xfstr, data[0], idx);
-                        sy = yf(yfstr, data[1], idx);
-                        
-                    } else {
-                        sx = data[0];
-                        sy = data[1];
-                    }
-                }
-                
-                if (plot.legend.escapeHtml) {
-                    $(cells[i]).text($.jqplot.sprintf(c.cursorLegendFormatString, label, sx, sy));
-                } else {
-                    $(cells[i]).html($.jqplot.sprintf(c.cursorLegendFormatString, label, sx, sy));
-                }
-            }
-        }
-        ctx = null;
-    }
-
-    function moveTooltip(gridpos, plot, ev) {
-        
-        var c = plot.plugins.cursor,
-            elem = c._tooltipElem,
-            fallbackTooltipLocation = null,
-            x,
-            y,
-            xPosition,
-            yPosition;
-        
-        switch (c.tooltipLocation) {
-        case 'nw':
-            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
-            break;
-        case 'n':
-            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
-            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
-            break;
-        case 'ne':
-            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
-            break;
-        case 'e':
-            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
-            break;
-        case 'se':
-            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-            break;
-        case 's':
-            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
-            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-            break;
-        case 'sw':
-            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-            break;
-        case 'w':
-            x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
-            break;
-        default:
-            x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
-            y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
-            break;
-        }
-
-        if (c.constrainTooltipToScreen && typeof ev !== "undefined") {
-            
-            xPosition = "";
-            yPosition = "";
-
-            yPosition += c.tooltipLocation[0];
-            xPosition += c.tooltipLocation.length > 1 ? c.tooltipLocation[1] : c.tooltipLocation[0];
-            
-            if (yPosition === 'n' && (ev.pageY - c.tooltipOffset - elem.outerHeight(true)) <= 0) {
-                fallbackTooltipLocation = 's';
-            } else if (yPosition === 's' && ((ev.pageY + elem.outerHeight(true) + c.tooltipOffset) >= document.body.clientHeight)) {
-                fallbackTooltipLocation = 'n';
-            } else if (yPosition === 'n' || yPosition === 's') {
-                fallbackTooltipLocation = yPosition;
-            }
-
-            if (xPosition === 'w' && (ev.pageX - elem.outerWidth(true)) <= 0) {
-                fallbackTooltipLocation += 'e';
-            } else if (xPosition === 'e' && ((ev.pageX + elem.outerWidth(true)) >= document.body.clientWidth)) {
-                fallbackTooltipLocation += 'w';
-            } else if (xPosition === 'e' || xPosition === 'w') {
-                fallbackTooltipLocation += xPosition;
-            }
-
-            if (fallbackTooltipLocation !== null) {
-                setTooltipPosition(fallbackTooltipLocation, gridpos, plot);
-                return;
-            }
-        }
-        
-        elem.css({'left': x, 'top': y});
-        elem = null;
-
-    }
-
-    function positionTooltip(plot) {
-        // fake a grid for positioning
-        var grid = plot._gridPadding,
-            c = plot.plugins.cursor,
-            elem = c._tooltipElem,
-            a,
-            b;
-        switch (c.tooltipLocation) {
-        case 'nw':
-            a = grid.left + c.tooltipOffset;
-            b = grid.top + c.tooltipOffset;
-            elem.css({'left': a, 'top': b});
-            break;
-        case 'n':
-            a = (grid.left + (plot._plotDimensions.width - grid.right)) / 2 - elem.outerWidth(true) / 2;
-            b = grid.top + c.tooltipOffset;
-            elem.css({'left': a, 'top': b});
-            break;
-        case 'ne':
-            a = grid.right + c.tooltipOffset;
-            b = grid.top + c.tooltipOffset;
-            elem.css({right: a, top: b});
-            break;
-        case 'e':
-            a = grid.right + c.tooltipOffset;
-            b = (grid.top + (plot._plotDimensions.height - grid.bottom)) / 2 - elem.outerHeight(true) / 2;
-            elem.css({right: a, top: b});
-            break;
-        case 'se':
-            a = grid.right + c.tooltipOffset;
-            b = grid.bottom + c.tooltipOffset;
-            elem.css({right: a, bottom: b});
-            break;
-        case 's':
-            a = (grid.left + (plot._plotDimensions.width - grid.right)) / 2 - elem.outerWidth(true) / 2;
-            b = grid.bottom + c.tooltipOffset;
-            elem.css({left: a, bottom: b});
-            break;
-        case 'sw':
-            a = grid.left + c.tooltipOffset;
-            b = grid.bottom + c.tooltipOffset;
-            elem.css({left: a, bottom: b});
-            break;
-        case 'w':
-            a = grid.left + c.tooltipOffset;
-            b = (grid.top + (plot._plotDimensions.height - grid.bottom)) / 2 - elem.outerHeight(true) / 2;
-            elem.css({left: a, top: b});
-            break;
-        default:  // same as 'se'
-            a = grid.right - c.tooltipOffset;
-            b = grid.bottom + c.tooltipOffset;
-            elem.css({right: a, bottom: b});
-            break;
-        }
-        elem = null;
-    }
-
-    function handleClick(ev, gridpos, datapos, neighbor, plot) {
-        
-        ev.preventDefault();
-        ev.stopImmediatePropagation();
-        
-        var c = plot.plugins.cursor,
-            sel;
-        
-        if (c.clickReset) {
-            c.resetZoom(plot, c);
-        }
-        
-        sel = window.getSelection;
-        
-        if (document.selection && document.selection.empty) {
-            document.selection.empty();
-        } else if (sel && !sel().isCollapsed) {
-            sel().collapse();
-        }
-        
-        return false;
-        
-    }
-
-    function handleDblClick(ev, gridpos, datapos, neighbor, plot) {
-        
-        ev.preventDefault();
-        ev.stopImmediatePropagation();
-        
-        var c = plot.plugins.cursor,
-            sel;
-        
-        if (c.dblClickReset) {
-            c.resetZoom(plot, c);
-        }
-        
-        sel = window.getSelection;
-        
-        if (document.selection && document.selection.empty) {
-            document.selection.empty();
-        } else if (sel && !sel().isCollapsed) {
-            sel().collapse();
-        }
-        
-        return false;
-        
-    }
-
-    function handleMouseLeave(ev, gridpos, datapos, neighbor, plot) {
-        
-        var c = plot.plugins.cursor,
-            cells,
-            i,
-            idx,
-            ctx,
-            series,
-            label;
-        
-        c.onGrid = false;
-        
-        if (c.show) {
-            $(ev.target).css('cursor', c.previousCursor);
-            if (c.showTooltip && !(c._zoom.zooming && c.showTooltipOutsideZoom && !c.constrainOutsideZoom)) {
-                c._tooltipElem.empty();
-                c._tooltipElem.hide();
-            }
-            if (c.zoom) {
-                c._zoom.gridpos = gridpos;
-                c._zoom.datapos = datapos;
-            }
-            if (c.showVerticalLine || c.showHorizontalLine) {
-                ctx = c.cursorCanvas._ctx;
-                ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-                ctx = null;
-            }
-            if (c.showCursorLegend) {
-                cells = $(plot.targetId + ' td.jqplot-cursor-legend-label');
-                for (i = 0; i < cells.length; i++) {
-                    idx = $(cells[i]).data('seriesIndex');
-                    series = plot.series[idx];
-                    label = series.label.toString();
                     if (plot.legend.escapeHtml) {
-                        $(cells[i]).text($.jqplot.sprintf(c.cursorLegendFormatString, label, undefined, undefined));
+                        $(cells[i]).text($.jqplot.sprintf(c.cursorLegendFormatString, label, sx, sy));
                     } else {
-                        $(cells[i]).html($.jqplot.sprintf(c.cursorLegendFormatString, label, undefined, undefined));
+                        $(cells[i]).html($.jqplot.sprintf(c.cursorLegendFormatString, label, sx, sy));
                     }
-
                 }
             }
-        }
-    }
+            ctx = null;
+        },
 
-    function handleMouseEnter(ev, gridpos, datapos, neighbor, plot) {
-        var c = plot.plugins.cursor;
-        c.onGrid = true;
-        if (c.show) {
-            c.previousCursor = ev.target.style.cursor;
-            ev.target.style.cursor = c.style;
-            if (c.showTooltip) {
-                updateTooltip(gridpos, datapos, plot);
-                if (c.followMouse) {
-                    moveTooltip(gridpos, plot, ev);
-                } else {
-                    positionTooltip(plot);
+        /**
+         * 
+         * @param {Object} gridpos 
+         * @param {Object} plot    
+         * @param {Object} ev      
+         */
+        moveTooltip = function (gridpos, plot, ev) {
+
+            var c = plot.plugins.cursor,
+                elem = c._tooltipElem,
+                fallbackTooltipLocation = null,
+                x,
+                y,
+                xPosition,
+                yPosition;
+
+            switch (c.tooltipLocation) {
+            case 'nw':
+                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+                y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+                break;
+            case 'n':
+                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
+                y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+                break;
+            case 'ne':
+                x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+                y = gridpos.y + plot._gridPadding.top - c.tooltipOffset - elem.outerHeight(true);
+                break;
+            case 'e':
+                x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+                y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
+                break;
+            case 'se':
+                x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+                y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+                break;
+            case 's':
+                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) / 2;
+                y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+                break;
+            case 'sw':
+                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+                y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+                break;
+            case 'w':
+                x = gridpos.x + plot._gridPadding.left - elem.outerWidth(true) - c.tooltipOffset;
+                y = gridpos.y + plot._gridPadding.top - elem.outerHeight(true) / 2;
+                break;
+            default:
+                x = gridpos.x + plot._gridPadding.left + c.tooltipOffset;
+                y = gridpos.y + plot._gridPadding.top + c.tooltipOffset;
+                break;
+            }
+
+            if (c.constrainTooltipToScreen && typeof ev !== "undefined") {
+
+                xPosition = "";
+                yPosition = "";
+
+                yPosition += c.tooltipLocation[0];
+                xPosition += c.tooltipLocation.length > 1 ? c.tooltipLocation[1] : c.tooltipLocation[0];
+
+                if (yPosition === 'n' && (ev.pageY - c.tooltipOffset - elem.outerHeight(true)) <= 0) {
+                    fallbackTooltipLocation = 's';
+                } else if (yPosition === 's' && ((ev.pageY + elem.outerHeight(true) + c.tooltipOffset) >= document.body.clientHeight)) {
+                    fallbackTooltipLocation = 'n';
+                } else if (yPosition === 'n' || yPosition === 's') {
+                    fallbackTooltipLocation = yPosition;
                 }
-                c._tooltipElem.show();
-            }
-            if (c.showVerticalLine || c.showHorizontalLine) {
-                moveLine(gridpos, plot);
-            }
-        }
 
-    }
+                if (xPosition === 'w' && (ev.pageX - elem.outerWidth(true)) <= 0) {
+                    fallbackTooltipLocation += 'e';
+                } else if (xPosition === 'e' && ((ev.pageX + elem.outerWidth(true)) >= document.body.clientWidth)) {
+                    fallbackTooltipLocation += 'w';
+                } else if (xPosition === 'e' || xPosition === 'w') {
+                    fallbackTooltipLocation += xPosition;
+                }
 
-    function handleMouseMove(ev, gridpos, datapos, neighbor, plot) {
-        var c = plot.plugins.cursor;
-        if (c.show) {
-            if (c.showTooltip) {
-                updateTooltip(gridpos, datapos, plot);
-                if (c.followMouse) {
-                    moveTooltip(gridpos, plot, ev);
+                if (fallbackTooltipLocation !== null) {
+                    setTooltipPosition(fallbackTooltipLocation, gridpos, plot);
+                    return;
                 }
             }
-            if (c.showVerticalLine || c.showHorizontalLine) {
-                moveLine(gridpos, plot);
+
+            elem.css({'left': x, 'top': y});
+            elem = null;
+
+        },
+
+        /**
+         * 
+         * @param {Object} plot 
+         */
+        positionTooltip = function (plot) {
+            // fake a grid for positioning
+            var grid = plot._gridPadding,
+                c = plot.plugins.cursor,
+                elem = c._tooltipElem,
+                a,
+                b;
+            switch (c.tooltipLocation) {
+            case 'nw':
+                a = grid.left + c.tooltipOffset;
+                b = grid.top + c.tooltipOffset;
+                elem.css({'left': a, 'top': b});
+                break;
+            case 'n':
+                a = (grid.left + (plot._plotDimensions.width - grid.right)) / 2 - elem.outerWidth(true) / 2;
+                b = grid.top + c.tooltipOffset;
+                elem.css({'left': a, 'top': b});
+                break;
+            case 'ne':
+                a = grid.right + c.tooltipOffset;
+                b = grid.top + c.tooltipOffset;
+                elem.css({right: a, top: b});
+                break;
+            case 'e':
+                a = grid.right + c.tooltipOffset;
+                b = (grid.top + (plot._plotDimensions.height - grid.bottom)) / 2 - elem.outerHeight(true) / 2;
+                elem.css({right: a, top: b});
+                break;
+            case 'se':
+                a = grid.right + c.tooltipOffset;
+                b = grid.bottom + c.tooltipOffset;
+                elem.css({right: a, bottom: b});
+                break;
+            case 's':
+                a = (grid.left + (plot._plotDimensions.width - grid.right)) / 2 - elem.outerWidth(true) / 2;
+                b = grid.bottom + c.tooltipOffset;
+                elem.css({left: a, bottom: b});
+                break;
+            case 'sw':
+                a = grid.left + c.tooltipOffset;
+                b = grid.bottom + c.tooltipOffset;
+                elem.css({left: a, bottom: b});
+                break;
+            case 'w':
+                a = grid.left + c.tooltipOffset;
+                b = (grid.top + (plot._plotDimensions.height - grid.bottom)) / 2 - elem.outerHeight(true) / 2;
+                elem.css({left: a, top: b});
+                break;
+            default:  // same as 'se'
+                a = grid.right - c.tooltipOffset;
+                b = grid.bottom + c.tooltipOffset;
+                elem.css({right: a, bottom: b});
+                break;
             }
-        }
-    }
+            elem = null;
+        },
 
-    function getEventPosition(ev) {
-        
-        var plot = ev.data.plot,
-            go = plot.eventCanvas._elem.offset(),
-            gridPos = {x: ev.pageX - go.left, y: ev.pageY - go.top},
-            dataPos,
-            an,
-            ax,
-            n,
-            axis;
-        
-        //////
-        // TO DO: handle yMidAxis
-        //////
-        dataPos = {xaxis: null, yaxis: null, x2axis: null, y2axis: null, y3axis: null, y4axis: null, y5axis: null, y6axis: null, y7axis: null, y8axis: null, y9axis: null, yMidAxis: null};
-        an = ['xaxis', 'yaxis', 'x2axis', 'y2axis', 'y3axis', 'y4axis', 'y5axis', 'y6axis', 'y7axis', 'y8axis', 'y9axis', 'yMidAxis'];
-        ax = plot.axes;
-        
-        for (n = 11; n > 0; n--) {
-            axis = an[n - 1];
-            if (ax[axis].show) {
-                dataPos[axis] = ax[axis].series_p2u(gridPos[axis.charAt(0)]);
-            }
-        }
+        /**
+         * 
+         * @param {object} ev       
+         * @param {number} gridpos  
+         * @param {number} datapos  
+         * @param {object} neighbor 
+         * @param {Object}   plot     
+         */
+        handleClick = function (ev, gridpos, datapos, neighbor, plot) {
 
-        return {
-            offsets: go,
-            gridPos: gridPos,
-            dataPos: dataPos
-        };
-    }
-
-    function drawZoomBox() {
-        
-        var start,
-            end,
-            ctx,
-            l,
-            t,
-            h,
-            w;
-
-        // @TODO What does `this` stand for here?
-        start = this._zoom.start;
-        end = this._zoom.end;
-        ctx = this.zoomCanvas._ctx;
-        
-        if (end[0] > start[0]) {
-            l = start[0];
-            w = end[0] - start[0];
-        } else {
-            l = end[0];
-            w = start[0] - end[0];
-        }
-
-        if (end[1] > start[1]) {
-            t = start[1];
-            h = end[1] - start[1];
-        } else {
-            t = end[1];
-            h = start[1] - end[1];
-        }
-
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-        ctx.strokeStyle = '#999999';
-        ctx.lineWidth = 1.0;
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        ctx.clearRect(l, t, w, h);
-        // IE won't show transparent fill rect, so stroke a rect also.
-        ctx.strokeRect(l, t, w, h);
-        ctx = null;
-        
-    }
-    
-    function handleZoomMove(ev) {
-        
-        var plot = ev.data.plot,
-            c = plot.plugins.cursor,
-            ctx,
-            positions,
-            gridpos,
-            datapos,
-            xpos,
-            ypos,
-            height,
-            width,
-            sel;
-        
-        // don't do anything if not on grid.
-        if (c.show && c.zoom && c._zoom.started && !c.zoomTarget) {
-            
             ev.preventDefault();
-            
-            ctx = c.zoomCanvas._ctx;
-            positions = getEventPosition(ev);
-            gridpos = positions.gridPos;
-            datapos = positions.dataPos;
-            
-            c._zoom.gridpos = gridpos;
-            c._zoom.datapos = datapos;
-            c._zoom.zooming = true;
-            
-            xpos = gridpos.x;
-            ypos = gridpos.y;
-            height = ctx.canvas.height;
-            width = ctx.canvas.width;
-            
-            if (c.showTooltip && !c.onGrid && c.showTooltipOutsideZoom) {
-                updateTooltip(gridpos, datapos, plot);
-                if (c.followMouse) {
-                    moveTooltip(gridpos, plot, ev);
-                }
+            ev.stopImmediatePropagation();
+
+            var c = plot.plugins.cursor,
+                sel;
+
+            if (c.clickReset) {
+                c.resetZoom(plot, c);
             }
-            
-            if (c.constrainZoomTo === 'x') {
-                c._zoom.end = [xpos, height];
-            } else if (c.constrainZoomTo === 'y') {
-                c._zoom.end = [width, ypos];
-            } else {
-                c._zoom.end = [xpos, ypos];
-            }
-            
+
             sel = window.getSelection;
-            
+
             if (document.selection && document.selection.empty) {
                 document.selection.empty();
             } else if (sel && !sel().isCollapsed) {
                 sel().collapse();
             }
-            
-            drawZoomBox.call(c);
-            ctx = null;
-        }
-    }
 
-    function handleMouseUp(ev) {
-        
-        var plot = ev.data.plot,
-            c = plot.plugins.cursor,
-            xpos,
-            ypos,
-            datapos,
-            height,
-            width,
-            axes,
-            axis;
-        
-        if (c.zoom && c._zoom.zooming && !c.zoomTarget) {
-            
-            xpos = c._zoom.gridpos.x;
-            ypos = c._zoom.gridpos.y;
-            datapos = c._zoom.datapos;
-            height = c.zoomCanvas._ctx.canvas.height;
-            width = c.zoomCanvas._ctx.canvas.width;
-            axes = plot.axes;
+            return false;
 
-            if (c.constrainOutsideZoom && !c.onGrid) {
-                if (xpos < 0) {
-                    xpos = 0;
-                } else if (xpos > width) {
-                    xpos = width;
+        },
+
+        /**
+         * 
+         * @param {object} ev       
+         * @param {number} gridpos  
+         * @param {number} datapos  
+         * @param {object} neighbor 
+         * @param {Object}   plot     
+         */
+        handleDblClick = function (ev, gridpos, datapos, neighbor, plot) {
+
+            ev.preventDefault();
+            ev.stopImmediatePropagation();
+
+            var c = plot.plugins.cursor,
+                sel;
+
+            if (c.dblClickReset) {
+                c.resetZoom(plot, c);
+            }
+
+            sel = window.getSelection;
+
+            if (document.selection && document.selection.empty) {
+                document.selection.empty();
+            } else if (sel && !sel().isCollapsed) {
+                sel().collapse();
+            }
+
+            return false;
+
+        },
+
+        /**
+         * 
+         * @param {object} ev       
+         * @param {number} gridpos  
+         * @param {number} datapos  
+         * @param {object} neighbor 
+         * @param {Object}   plot     
+         */
+        handleMouseLeave = function (ev, gridpos, datapos, neighbor, plot) {
+
+            var c = plot.plugins.cursor,
+                cells,
+                i,
+                idx,
+                ctx,
+                series,
+                label;
+
+            c.onGrid = false;
+
+            if (c.show) {
+                $(ev.target).css('cursor', c.previousCursor);
+                if (c.showTooltip && !(c._zoom.zooming && c.showTooltipOutsideZoom && !c.constrainOutsideZoom)) {
+                    c._tooltipElem.empty();
+                    c._tooltipElem.hide();
                 }
-                
-                if (ypos < 0) {
-                    ypos = 0;
-                } else if (ypos > height) {
-                    ypos = height;
+                if (c.zoom) {
+                    c._zoom.gridpos = gridpos;
+                    c._zoom.datapos = datapos;
                 }
-
-                for (axis in datapos) {
-                    if (datapos[axis]) {
-                        if (axis.charAt(0) === 'x') {
-                            datapos[axis] = axes[axis].series_p2u(xpos);
+                if (c.showVerticalLine || c.showHorizontalLine) {
+                    ctx = c.cursorCanvas._ctx;
+                    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                    ctx = null;
+                }
+                if (c.showCursorLegend) {
+                    cells = $(plot.targetId + ' td.jqplot-cursor-legend-label');
+                    for (i = 0; i < cells.length; i++) {
+                        idx = $(cells[i]).data('seriesIndex');
+                        series = plot.series[idx];
+                        label = series.label.toString();
+                        if (plot.legend.escapeHtml) {
+                            $(cells[i]).text($.jqplot.sprintf(c.cursorLegendFormatString, label, undefined, undefined));
                         } else {
-                            datapos[axis] = axes[axis].series_p2u(ypos);
+                            $(cells[i]).html($.jqplot.sprintf(c.cursorLegendFormatString, label, undefined, undefined));
                         }
+
                     }
                 }
             }
+        },
 
-            if (c.constrainZoomTo === 'x') {
-                ypos = height;
-            } else if (c.constrainZoomTo === 'y') {
-                xpos = width;
+        /**
+         * 
+         * @param {object} ev       
+         * @param {number} gridpos  
+         * @param {number} datapos  
+         * @param {object} neighbor 
+         * @param {Object}   plot     
+         */
+        handleMouseEnter = function (ev, gridpos, datapos, neighbor, plot) {
+            var c = plot.plugins.cursor;
+            c.onGrid = true;
+            if (c.show) {
+                c.previousCursor = ev.target.style.cursor;
+                ev.target.style.cursor = c.style;
+                if (c.showTooltip) {
+                    updateTooltip(gridpos, datapos, plot);
+                    if (c.followMouse) {
+                        moveTooltip(gridpos, plot, ev);
+                    } else {
+                        positionTooltip(plot);
+                    }
+                    c._tooltipElem.show();
+                }
+                if (c.showVerticalLine || c.showHorizontalLine) {
+                    moveLine(gridpos, plot);
+                }
             }
-            
-            c._zoom.end = [xpos, ypos];
-            c._zoom.gridpos = {x: xpos, y: ypos};
-            
-            c.doZoom(c._zoom.gridpos, datapos, plot, c);
-        }
-        
-        c._zoom.started = false;
-        c._zoom.zooming = false;
 
-        $(document).unbind('mousemove.jqplotCursor', handleZoomMove);
+        },
 
-        if (document.onselectstart && c._oldHandlers.onselectstart !== null) {
-            document.onselectstart = c._oldHandlers.onselectstart;
-            c._oldHandlers.onselectstart = null;
-        }
-        if (document.ondrag && c._oldHandlers.ondrag !== null) {
-            document.ondrag = c._oldHandlers.ondrag;
-            c._oldHandlers.ondrag = null;
-        }
-        if (document.onmousedown && c._oldHandlers.onmousedown !== null) {
-            document.onmousedown = c._oldHandlers.onmousedown;
-            c._oldHandlers.onmousedown = null;
-        }
+        /**
+         * 
+         * @param {object} ev       
+         * @param {number} gridpos  
+         * @param {number} datapos  
+         * @param {object} neighbor 
+         * @param {Object}   plot     
+         */
+        handleMouseMove = function (ev, gridpos, datapos, neighbor, plot) {
+            var c = plot.plugins.cursor;
+            if (c.show) {
+                if (c.showTooltip) {
+                    updateTooltip(gridpos, datapos, plot);
+                    if (c.followMouse) {
+                        moveTooltip(gridpos, plot, ev);
+                    }
+                }
+                if (c.showVerticalLine || c.showHorizontalLine) {
+                    moveLine(gridpos, plot);
+                }
+            }
+        },
 
-    }
-    
-    function handleMouseDown(ev, gridpos, datapos, neighbor, plot) {
-        
-        var c = plot.plugins.cursor,
-            axes = plot.axes,
-            ctx,
-            ax;
-        
-        if (plot.plugins.mobile) {
-            $(document).one('vmouseup.jqplot_cursor', {plot: plot}, handleMouseUp);
-        } else {
-            $(document).one('mouseup.jqplot_cursor', {plot: plot}, handleMouseUp);
-        }
-        
-        if (document.onselectstart) {
-            c._oldHandlers.onselectstart = document.onselectstart;
-            document.onselectstart = function () { return false; };
-        }
-        
-        if (document.ondrag) {
-            c._oldHandlers.ondrag = document.ondrag;
-            document.ondrag = function () { return false; };
-        }
-        
-        if (document.onmousedown) {
-            c._oldHandlers.onmousedown = document.onmousedown;
-            document.onmousedown = function () { return false; };
-        }
-        
-        if (c.zoom) {
-            if (!c.zoomProxy) {
+        /**
+         * 
+         * @param   {Object} ev 
+         * @returns {Object} 
+         */
+        getEventPosition = function (ev) {
+
+            var plot = ev.data.plot,
+                go = plot.eventCanvas._elem.offset(),
+                gridPos = {x: ev.pageX - go.left, y: ev.pageY - go.top},
+                dataPos,
+                an,
+                ax,
+                n,
+                axis;
+
+            //////
+            // TO DO: handle yMidAxis
+            //////
+            dataPos = {xaxis: null, yaxis: null, x2axis: null, y2axis: null, y3axis: null, y4axis: null, y5axis: null, y6axis: null, y7axis: null, y8axis: null, y9axis: null, yMidAxis: null};
+            an = ['xaxis', 'yaxis', 'x2axis', 'y2axis', 'y3axis', 'y4axis', 'y5axis', 'y6axis', 'y7axis', 'y8axis', 'y9axis', 'yMidAxis'];
+            ax = plot.axes;
+
+            for (n = 11; n > 0; n--) {
+                axis = an[n - 1];
+                if (ax[axis].show) {
+                    dataPos[axis] = ax[axis].series_p2u(gridPos[axis.charAt(0)]);
+                }
+            }
+
+            return {
+                offsets: go,
+                gridPos: gridPos,
+                dataPos: dataPos
+            };
+        },
+
+        /**
+         * 
+         */
+        drawZoomBox = function () {
+
+            var start,
+                end,
+                ctx,
+                l,
+                t,
+                h,
+                w;
+
+            // @TODO What does `this` stand for here?
+            start = this._zoom.start;
+            end = this._zoom.end;
+            ctx = this.zoomCanvas._ctx;
+
+            if (end[0] > start[0]) {
+                l = start[0];
+                w = end[0] - start[0];
+            } else {
+                l = end[0];
+                w = start[0] - end[0];
+            }
+
+            if (end[1] > start[1]) {
+                t = start[1];
+                h = end[1] - start[1];
+            } else {
+                t = end[1];
+                h = start[1] - end[1];
+            }
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.strokeStyle = '#999999';
+            ctx.lineWidth = 1.0;
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.clearRect(l, t, w, h);
+            // IE won't show transparent fill rect, so stroke a rect also.
+            ctx.strokeRect(l, t, w, h);
+            ctx = null;
+
+        },
+
+        /**
+         * 
+         * @param {Object} ev 
+         */
+        handleZoomMove = function (ev) {
+
+            var plot = ev.data.plot,
+                c = plot.plugins.cursor,
+                ctx,
+                positions,
+                gridpos,
+                datapos,
+                xpos,
+                ypos,
+                height,
+                width,
+                sel;
+
+            // don't do anything if not on grid.
+            if (c.show && c.zoom && c._zoom.started && !c.zoomTarget) {
+
+                ev.preventDefault();
+
                 ctx = c.zoomCanvas._ctx;
-                ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                positions = getEventPosition(ev);
+                gridpos = positions.gridPos;
+                datapos = positions.dataPos;
+
+                c._zoom.gridpos = gridpos;
+                c._zoom.datapos = datapos;
+                c._zoom.zooming = true;
+
+                xpos = gridpos.x;
+                ypos = gridpos.y;
+                height = ctx.canvas.height;
+                width = ctx.canvas.width;
+
+                if (c.showTooltip && !c.onGrid && c.showTooltipOutsideZoom) {
+                    updateTooltip(gridpos, datapos, plot);
+                    if (c.followMouse) {
+                        moveTooltip(gridpos, plot, ev);
+                    }
+                }
+
+                if (c.constrainZoomTo === 'x') {
+                    c._zoom.end = [xpos, height];
+                } else if (c.constrainZoomTo === 'y') {
+                    c._zoom.end = [width, ypos];
+                } else {
+                    c._zoom.end = [xpos, ypos];
+                }
+
+                sel = window.getSelection;
+
+                if (document.selection && document.selection.empty) {
+                    document.selection.empty();
+                } else if (sel && !sel().isCollapsed) {
+                    sel().collapse();
+                }
+
+                drawZoomBox.call(c);
                 ctx = null;
             }
-            if (c.constrainZoomTo === 'x') {
-                c._zoom.start = [gridpos.x, 0];
-            } else if (c.constrainZoomTo === 'y') {
-                c._zoom.start = [0, gridpos.y];
-            } else {
-                c._zoom.start = [gridpos.x, gridpos.y];
-            }
-            
-            c._zoom.started = true;
-            
-            for (ax in datapos) {
-                // get zoom starting position.
-                c._zoom.axes.start[ax] = datapos[ax];
-            }
-            
-            if (plot.plugins.mobile) {
-                $(document).bind('vmousemove.jqplotCursor', {plot: plot}, handleZoomMove);
-            } else {
-                $(document).bind('mousemove.jqplotCursor', {plot: plot}, handleZoomMove);
+        },
+
+        /**
+         * 
+         * @param {Object} ev 
+         */
+        handleMouseUp = function (ev) {
+
+            var plot = ev.data.plot,
+                c = plot.plugins.cursor,
+                xpos,
+                ypos,
+                datapos,
+                height,
+                width,
+                axes,
+                axis;
+
+            if (c.zoom && c._zoom.zooming && !c.zoomTarget) {
+
+                xpos = c._zoom.gridpos.x;
+                ypos = c._zoom.gridpos.y;
+                datapos = c._zoom.datapos;
+                height = c.zoomCanvas._ctx.canvas.height;
+                width = c.zoomCanvas._ctx.canvas.width;
+                axes = plot.axes;
+
+                if (c.constrainOutsideZoom && !c.onGrid) {
+                    if (xpos < 0) {
+                        xpos = 0;
+                    } else if (xpos > width) {
+                        xpos = width;
+                    }
+
+                    if (ypos < 0) {
+                        ypos = 0;
+                    } else if (ypos > height) {
+                        ypos = height;
+                    }
+
+                    for (axis in datapos) {
+                        if (datapos[axis]) {
+                            if (axis.charAt(0) === 'x') {
+                                datapos[axis] = axes[axis].series_p2u(xpos);
+                            } else {
+                                datapos[axis] = axes[axis].series_p2u(ypos);
+                            }
+                        }
+                    }
+                }
+
+                if (c.constrainZoomTo === 'x') {
+                    ypos = height;
+                } else if (c.constrainZoomTo === 'y') {
+                    xpos = width;
+                }
+
+                c._zoom.end = [xpos, ypos];
+                c._zoom.gridpos = {x: xpos, y: ypos};
+
+                c.doZoom(c._zoom.gridpos, datapos, plot, c);
             }
 
-        }
-    }
+            c._zoom.started = false;
+            c._zoom.zooming = false;
+
+            $(document).unbind('mousemove.jqplotCursor', handleZoomMove);
+
+            if (document.onselectstart && c._oldHandlers.onselectstart !== null) {
+                document.onselectstart = c._oldHandlers.onselectstart;
+                c._oldHandlers.onselectstart = null;
+            }
+            if (document.ondrag && c._oldHandlers.ondrag !== null) {
+                document.ondrag = c._oldHandlers.ondrag;
+                c._oldHandlers.ondrag = null;
+            }
+            if (document.onmousedown && c._oldHandlers.onmousedown !== null) {
+                document.onmousedown = c._oldHandlers.onmousedown;
+                c._oldHandlers.onmousedown = null;
+            }
+
+        },
+
+        /**
+         * 
+         * @param   {[[Type]]} ev       
+         * @param   {Object}   gridpos  
+         * @param   {[[Type]]} datapos  
+         * @param   {[[Type]]} neighbor 
+         * @param   {Object}   plot     
+         * @returns {Boolean}  
+         */
+        handleMouseDown = function (ev, gridpos, datapos, neighbor, plot) {
+
+            var c = plot.plugins.cursor,
+                axes = plot.axes,
+                ctx,
+                ax;
+
+            if (plot.plugins.mobile) {
+                $(document).one('vmouseup.jqplot_cursor', {plot: plot}, handleMouseUp);
+            } else {
+                $(document).one('mouseup.jqplot_cursor', {plot: plot}, handleMouseUp);
+            }
+
+            if (document.onselectstart) {
+                c._oldHandlers.onselectstart = document.onselectstart;
+                document.onselectstart = function () { return false; };
+            }
+
+            if (document.ondrag) {
+                c._oldHandlers.ondrag = document.ondrag;
+                document.ondrag = function () { return false; };
+            }
+
+            if (document.onmousedown) {
+                c._oldHandlers.onmousedown = document.onmousedown;
+                document.onmousedown = function () { return false; };
+            }
+
+            if (c.zoom) {
+                if (!c.zoomProxy) {
+                    ctx = c.zoomCanvas._ctx;
+                    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                    ctx = null;
+                }
+                if (c.constrainZoomTo === 'x') {
+                    c._zoom.start = [gridpos.x, 0];
+                } else if (c.constrainZoomTo === 'y') {
+                    c._zoom.start = [0, gridpos.y];
+                } else {
+                    c._zoom.start = [gridpos.x, gridpos.y];
+                }
+
+                c._zoom.started = true;
+
+                for (ax in datapos) {
+                    // get zoom starting position.
+                    c._zoom.axes.start[ax] = datapos[ax];
+                }
+
+                if (plot.plugins.mobile) {
+                    $(document).bind('vmousemove.jqplotCursor', {plot: plot}, handleZoomMove);
+                } else {
+                    $(document).bind('mousemove.jqplotCursor', {plot: plot}, handleZoomMove);
+                }
+
+            }
+        };
 
    
     /**
