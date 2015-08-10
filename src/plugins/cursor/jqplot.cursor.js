@@ -727,14 +727,19 @@
 
     function drawZoomBox() {
         
-        var start = this._zoom.start,
-            end = this._zoom.end,
-            ctx = this.zoomCanvas._ctx,
+        var start,
+            end,
+            ctx,
             l,
             t,
             h,
             w;
 
+        // @TODO What does `this` stand for here?
+        start = this._zoom.start;
+        end = this._zoom.end;
+        ctx = this.zoomCanvas._ctx;
+        
         if (end[0] > start[0]) {
             l = start[0];
             w = end[0] - start[0];
@@ -760,6 +765,7 @@
         // IE won't show transparent fill rect, so stroke a rect also.
         ctx.strokeRect(l, t, w, h);
         ctx = null;
+        
     }
     
     function handleZoomMove(ev) {
@@ -1142,6 +1148,10 @@
                 }
             }
 
+            /**
+             * Add resetZoom method to the plot instance
+             * plot1.resetZoom()
+             */
             this.resetZoom = function () {
                 var axes = this.axes,
                     ax,
