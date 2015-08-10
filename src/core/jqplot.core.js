@@ -1338,7 +1338,7 @@
         if (typeof this.tickOptions.showTickMarks === "undefined") {
             this.tickOptions.showTickMarks = this.showTickMarks;
         }
-        if (typeof this.tickOptions.showLabel === "undefine") {
+        if (typeof this.tickOptions.showLabel === "undefined") {
             this.tickOptions.showLabel = this.showTicks;
         }
         
