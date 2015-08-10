@@ -1,0 +1,87 @@
+---
+layout: demoexamples
+title: Cursor
+
+---
+
+
+
+		<style>
+			.jqplot-cursor-highlighter-head{
+				border: 1px solid #343434;
+				font-size: 12pt;
+			}
+
+			.jqplot-cursor-highlighter{
+
+			}
+
+		</style>
+
+
+		<script class="code" type="text/javascript">
+			$(function(){
+				var date = new $.jsDate();
+				date.set({syntax: "php"});
+				date.add(4, "day");
+				console.log(date);
+				console.log(date.strftime("%V"));
+
+				var serie1=[['2008-09-01',4],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
+				var serie2=[['2008-09-01',2],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
+				var serie3=[['2008-09-01',2],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
+				var serie4=[['2008-09-01',2],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
+				var serie5=[['2008-09-01',null],['2008-09-02',10],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
+				var serie6=[['2008-09-01',null],['2008-09-02',null],['2008-09-03',1],['2008-09-04',null],['2008-09-05',null]];
+				var serie7=[['2008-09-01',null],['2008-09-02',null],['2008-09-03',null],['2008-09-04',4],['2008-09-05',null]];
+				var serie8=[['2008-09-01',null],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',1]];
+				var plot1 = $.jqplot('chart1', [serie1,serie2,serie3, serie4, serie5,serie6, serie7, serie8], {
+						title:'Cursor',
+						axes:{
+							xaxis:{
+								renderer:$.jqplot.DateAxisRenderer,
+								tickOptions: {
+									 formatString: '%Y #%U',
+									 typeFormatter: 'php'
+								}
+							}
+						},
+						seriesDefaults:{
+							renderer: $.jqplot.BarRenderer,
+							rendererOptions: {
+								varyBarColor: true,
+								barMargin: 30,
+							},
+							pointLabels: {show: true, darkColor:"black",brightColor:"orange"}
+						},
+						legend: {
+							show: true,
+							location: 'ne',
+							placement: 'outsideGrid'
+						},
+						cursor: {
+							followMouse: true,
+							show: true,
+							showTooltipDataPosition: true,
+							showVerticalLine: true,
+							showHorizontalLine: true,
+							horizontalLine: {
+								color: "#ff0000",
+								style: "dotted"
+							},
+							tooltipLocation: "nw",
+							tooltipFormatString: "<div class=\"jqplot-cursor-highlight\">%s%n: %s</div>",
+							insertHead: true,
+							headTooltipFormatString: "<div class=\"jqplot-cursor-highlighter-head\">%s</div>",
+							constrainTooltipToScreen: true,
+							yaxis: {
+								formatter: function(formatString, ydata, serieIndex){
+									return (ydata!=null?ydata:"n/a") + " - Serie number: " + (serieIndex + 1);
+								}
+							}
+						},
+						stackSeries: true,
+					});
+					plot1.replot();
+				});
+			</script>

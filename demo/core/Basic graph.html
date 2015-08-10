@@ -1,0 +1,21 @@
+---
+layout: demoexamples
+title: Basic line graph
+---
+
+
+<h2 class="plain">The most basic line graph</h2>
+
+<p>The most basic jqPlot chart takes a series of data and plots a line.  No options need to be supplied.
+	Data is passed in as an array of series.  A series can be either an array of y values or an array of [x,y] data pairs.
+	If y values only, x values are assigned like 1, 2, 3, ...  Note, for this plot you don't need any plugins.</p>
+
+<script class="code" type="text/javascript">
+	$(document).ready(function(){
+		var plot1 = $.jqplot ('chart1', [[3,7,9,1,4,6,8,2,5]]);
+	});
+</script>
+
+
+
+

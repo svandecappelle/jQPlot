@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+{% include demoexamples_head.html %}
+
+<body class="index">
+
+{% include navigation.html %}
+
+
+
+<header>
+    <div class="content">
+        <section id="content">
+            <div class="rowInside">
+                <article class="grid_12">
+                    <h1>{{ page.title }}</h1>
+
+                </article>
+            </div>
+
+
+
+                    {{ content }}
+
+
+
+
+        </section>
+    </div>
+</header>
+
+
+
+{% include footer.html %}

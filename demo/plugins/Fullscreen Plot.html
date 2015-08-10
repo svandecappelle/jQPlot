@@ -1,0 +1,50 @@
+---
+layout: demoexamples
+title: Full screen plot
+mutiplecharts: true
+---
+
+<div class="code prettyprint">
+    <pre class="code prettyprint brush: js"></pre>
+</div>
+
+<div id="chart-resizable">
+	<input onClick="fullscreen()" type="button" value="Fullscreen"/>
+	<div class="overlay">
+	</div>
+	<div class="popup">
+		<div class="resizable">
+			<div id="chart1" class="chart" style="margin:20px;">
+			</div>
+		</div>
+	</div>
+</div>
+<script class="code" type="text/javascript">
+	var plot1;
+	$(function(){
+	var line1=[['2008-09-30',4], ['2008-10-30',6.5], ['2008-11-30',5.7], ['2008-12-30',9], ['2009-01-30',8.2]];
+	plot1 = $.jqplot('chart1', [line1], {
+			title:'{{ page.title }}',
+			axes:{
+				xaxis:{
+					renderer:$.jqplot.DateAxisRenderer,
+					rendererOptions:{
+						tickRenderer:$.jqplot.CanvasAxisTickRenderer
+        			},
+					tickOptions: {
+						formatString: '%Y #%V',
+						typeFormatter: 'php',
+						fontSize:'10pt',
+            			fontFamily:'Tahoma',
+            			angle:-40
+					} 
+				}
+			},
+			series:[{lineWidth:4, markerOptions:{style:'square'}}]
+		});
+	});
+
+	function fullscreen(){
+		$.jqplot.toggleFullscreen("chart-resizable",plot1);
+	}
+</script>
