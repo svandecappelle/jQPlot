@@ -1332,17 +1332,17 @@
         this.tickOptions.axis = this.name;
         // if showMark or showLabel tick options not specified, use value of axis option.
         // showTicks overrides showTickMarks.
-        if (this.tickOptions.showMark === null) {
+        if (typeof this.tickOptions.showMark === "undefined") {
             this.tickOptions.showMark = this.showTicks;
         }
-        if (this.tickOptions.showMark === null) {
+        if (typeof this.tickOptions.showMark === "undefined") {
             this.tickOptions.showMark = this.showTickMarks;
         }
-        if (this.tickOptions.showLabel === null) {
+        if (typeof this.tickOptions.showLabel === "undefine") {
             this.tickOptions.showLabel = this.showTicks;
         }
         
-        if (this.label === null || this.label === '') {
+        if (typeof this.label === "undefined" || this.label === null || this.label === '') {
             this.showLabel = false;
         } else {
             this.labelOptions.label = this.label;
