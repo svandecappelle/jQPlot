@@ -514,6 +514,8 @@
     
     /**
      * called with scope of axis
+     * @param {object} pos
+     * @param {object} offsets
      */ 
     $.jqplot.CategoryAxisRenderer.prototype.pack = function (pos, offsets) {
         
@@ -774,8 +776,10 @@
                 // draw the group labels, position top here, do left after label position.
                 step = parseInt(this._ticks.length / this.groups, 10) + 1; // step is one more than before as we don't want to have overlaps in loops
                 for (i = 0; i < this._groupLabels.length; i++) {
+                    
                     mid = 0;
                     count = 0;
+                    
                     for (j = i * step; j < (i + 1) * step; j++) { // j must never reach (i+1)*step as we don't want to have overlap between loops
                         if (j >= this._ticks.length - 1) {
                             continue; // the last tick does not exist as there is no other group in order to have an empty one.
