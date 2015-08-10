@@ -668,7 +668,7 @@
 
                                 } else if (p[0] !== null && p[1] !== null) {
                                     d = Math.sqrt((x - p[0]) * (x - p[0]) + (y - p[1]) * (y - p[1]));
-                                    if (d <= threshold && (d <= d0 || d0 === null)) {
+                                    if (d <= threshold && (d <= d0 || typeof d0 === "undefined")) {
                                         d0 = d;
                                         return {
                                             seriesIndex: i,
