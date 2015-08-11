@@ -108,17 +108,17 @@
             d = s.data;
             for (j = 0; j < d.length; j++) {
                 if (this.name === 'xaxis' || this.name === 'x2axis') {
-                    if (d[j][0] < db.min || db.min == null) {
+                    if (db.min === null || d[j][0] < db.min) {
                         db.min = d[j][0];
                     }
-                    if (d[j][0] > db.max || db.max == null) {
+                    if (db.max === null || d[j][0] > db.max) {
                         db.max = d[j][0];
                     }
                 } else {
-                    if (d[j][1] < db.min || db.min == null) {
+                    if (db.min === null || d[j][1] < db.min) {
                         db.min = d[j][1];
                     }
-                    if (d[j][1] > db.max || db.max == null) {
+                    if (db.max === null || d[j][1] > db.max) {
                         db.max = d[j][1];
                     }
                 }
@@ -221,15 +221,13 @@
                 dim = this._plotDimensions.height;
             }
             
-            // @TODO null == undefined ?
             // if min, max and number of ticks specified, user can't specify interval.
-            if (this.min != null && this.max != null && this.numberTicks != null) {
+            if (this.min !== null && this.max !== null && this.numberTicks !== null) {
                 this.tickInterval = null;
             }
             
-            // @TODO null == undefined ?
             // if max, min, and interval specified and interval won't fit, ignore interval.
-            if (this.min != null && this.max != null && this.tickInterval != null) {
+            if (this.min !== null && this.max !== null && this.tickInterval !== null) {
                 if (parseInt((this.max - this.min) / this.tickInterval, 10) !== (this.max - this.min) / this.tickInterval) {
                     this.tickInterval = null;
                 }
@@ -252,7 +250,7 @@
                     } else {
                         val = s.data[j][1];
                     }
-                    if ($.inArray(val, labels) == -1) {
+                    if ($.inArray(val, labels) === -1) {
                         isMerged = true;
                         numcats += 1;
                         labels.push(val);
@@ -306,7 +304,7 @@
         
             max = numcats + 0.5;
             
-            if (this.numberTicks == null) {
+            if (this.numberTicks === null) {
                 this.numberTicks = 2 * numcats + 1;
             }
 
@@ -331,7 +329,7 @@
                 if (i / 2 === parseInt(i / 2, 10)) {
                     console.log("rendering divider");
                     t.showLabel = false;
-                    t.showMark = true;
+                    t.showMark = this.tickOptions.showMark;
                 } else {
                     if (skip > 0 && track < skip) {
                         t.showLabel = false;
