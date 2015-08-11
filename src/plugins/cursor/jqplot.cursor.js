@@ -89,6 +89,23 @@
         elem.css({'left': x, 'top': y});
         elem = null;
     },
+        
+        /**
+         * Resets the selection
+         */
+        resetSelection = function () {
+            var sel;
+            if (window.getSelection) {
+                sel = window.getSelection();
+                if (sel.empty) {  // Chrome
+                    sel.empty();
+                } else if (sel.removeAllRanges) {  // Firefox
+                    sel.removeAllRanges();
+                }
+            } else if (document.selection) {  // IE?
+                document.selection.empty();
+            }
+        },
     
         /**
          * @param   {Object}   plot
@@ -618,7 +635,6 @@
         },
 
         /**
-         * 
          * @param {object} ev       
          * @param {number} gridpos  
          * @param {number} datapos  
@@ -630,20 +646,14 @@
             ev.preventDefault();
             ev.stopImmediatePropagation();
 
-            var c = plot.plugins.cursor,
-                sel;
+            var c = plot.plugins.cursor;
 
             if (c.clickReset) {
                 c.resetZoom(plot, c);
             }
 
-            sel = window.getSelection;
-
-            if (document.selection && document.selection.empty) {
-                document.selection.empty();
-            } else if (sel && !sel().isCollapsed) {
-                sel().collapse();
-            }
+            // Reset selection
+            resetSelection();
 
             return false;
 
@@ -663,19 +673,14 @@
             ev.stopImmediatePropagation();
 
             var c = plot.plugins.cursor,
-                sel;
+                sel;    // object
 
             if (c.dblClickReset) {
                 c.resetZoom(plot, c);
             }
 
-            sel = window.getSelection;
-
-            if (document.selection && document.selection.empty) {
-                document.selection.empty();
-            } else if (sel && !sel().isCollapsed) {
-                sel().collapse();
-            }
+            // Reset selection
+            resetSelection();
 
             return false;
 
@@ -884,8 +889,7 @@
                 xpos,
                 ypos,
                 height,
-                width,
-                sel;
+                width;
 
             // don't do anything if not on grid.
             if (c.show && c.zoom && c._zoom.started && !c.zoomTarget) {
@@ -921,13 +925,8 @@
                     c._zoom.end = [xpos, ypos];
                 }
 
-                sel = window.getSelection;
-
-                if (document.selection && document.selection.empty) {
-                    document.selection.empty();
-                } else if (sel && !sel().isCollapsed) {
-                    sel().collapse();
-                }
+                // Reset selection
+                resetSelection();
 
                 drawZoomBox.call(c);
                 ctx = null;
