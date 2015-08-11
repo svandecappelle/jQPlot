@@ -7,7 +7,7 @@
         "charting",
         "graphing"
       ],
-    "version": "1.0.10-dev",
+    "version": "1.0.10-dev-ernie",
     "author": {
         "name": "Chris Leonello",
         "url": "http://http://www.jqplot.com/info.php"
@@ -17,6 +17,11 @@
             "name": "Steeve Vandecappelle",
             "email": "steeve.vandecappelle@gmail.com",
             "url": "https://github.com/svandecappelle/"
+    },
+        {
+            "name": "Johan Bové",
+            "email": "johan.bove@gmail.com",
+            "url": "https://github.com/johanbove/"
     }
   ],
     "licenses": [
