@@ -327,7 +327,7 @@
                 t = new this.tickRenderer(this.tickOptions);
                 // if even tick, it isn't a category, it's a divider
                 if (i / 2 === parseInt(i / 2, 10)) {
-                    console.log("rendering divider");
+                    //console.log("rendering divider");
                     t.showLabel = false;
                     t.showMark = this.tickOptions.showMark;
                 } else {
