@@ -1,24 +1,26 @@
 module.exports = function (grunt) {
 
-    // Project configuration.
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        uglify: {
-            min: {
-                files: grunt.file.expandMapping(['src/core/*.js', 'src/plugins/**/*.js'], 'dist/', {
-                    rename: function (destBase, destPath) {
-                        return destBase + destPath.replace("src/", "").replace('.js', '.min.js');
-                    }
-                })
-            }
+  // Project configuration.
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    uglify: {
+        min: {
+            files: grunt.file.expandMapping(['src/core/*.js', 'src/plugins/**/*.js'], 'dist/', {
+                rename: function(destBase, destPath) {
+                    return destBase + destPath.replace("src/", "").replace('.js', '.min.js');
+                }
+            })
         },
-        cssmin: {
-            target: {
-                files: grunt.file.expandMapping(['src/core/*.css', 'src/plugins/**/*.css'], 'dist/', {
-                    rename: function (destBase, destPath) {
-                        return destBase + destPath.replace("src/", "").replace('.css', '.min.css');
-                    }
-                })
+        dev: {
+            files: grunt.file.expandMapping(['src/core/*.js', 'src/plugins/**/*.js'], 'dist/', {
+                rename: function(destBase, destPath) {
+                    return destBase + destPath.replace("src/", "").replace('.js', '.min.js');
+                }
+            }),
+            options: {
+                beautify: true,
+                mangle: false,
+                sourceMap: true
             }
         }
     });
@@ -28,9 +30,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // Default task(s).
-    grunt.registerTask('default', [
-        'uglify',
-        'cssmin'
-    ]);
+    grunt.registerTask('default', ['uglify:min', 'cssmin']);
+    grunt.registerTask('dev', ['uglify:dev']);
 
 };

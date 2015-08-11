@@ -29,8 +29,12 @@
         "dist": "node build/minify.js --core --all-plugins",
         "core": "node build/minify.js --core",
         "plugins": "node build/minify.js --all-plugins",
-        "plugin": "node build/minify.js"
+        "plugin": "node build/minify.js",
+        "test": "mocha"
     },
+    "dependencies": {
+        "jquery": "1.11.3"
+    }, 
     "bugs": "https://github.com/svandecappelle/jQPlot/issues/",
     "homepage": "https://github.com/svandecappelle/jQPlot/",
     "docs": "https://github.com/svandecappelle/jQPlot/wiki/",
