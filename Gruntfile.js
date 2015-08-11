@@ -7,9 +7,21 @@ module.exports = function(grunt) {
         min: {
             files: grunt.file.expandMapping(['src/core/*.js', 'src/plugins/**/*.js'], 'dist/', {
                 rename: function(destBase, destPath) {
-                    return destBase+destPath.replace("src/", "").replace('.js', '.min.js');
+                    return destBase + destPath.replace("src/", "").replace('.js', '.min.js');
                 }
             })
+        },
+        dev: {
+            files: grunt.file.expandMapping(['src/core/*.js', 'src/plugins/**/*.js'], 'dist/', {
+                rename: function(destBase, destPath) {
+                    return destBase + destPath.replace("src/", "").replace('.js', '.min.js');
+                }
+            }),
+            options: {
+                beautify: true,
+                mangle: false,
+                sourceMap: true
+            }
         }
     },
     cssmin: {
@@ -28,6 +40,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify', 'cssmin']);
+  grunt.registerTask('default', ['uglify:min', 'cssmin']);
+  grunt.registerTask('dev', ['uglify:dev']);
 
 };

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JqPlot Category Axis Bar Renderer demo</title>
+
+    <!-- JQuery dependence -->
+    <script src="../../../dist/core/jquery.min.js"></script>
+    <!-- JQplot dependence -->
+    <!--<script src="../../src/core/jquery.jqplot.js"></script>-->
+    <script src="../../../src/core/jquery.jqplot.js"></script>
+    <script src="../../../src/plugins/cursor/jqplot.cursor.js"></script>
+    <script src="../../../src/plugins/axis/jqplot.dateAxisRenderer.js"></script>
+    <script src="../../../src/plugins/axis/jqplot.categoryAxisRenderer.js"></script>
+    <script src="../../../src/plugins/bar/jqplot.barRenderer.js"></script>
+    <script src="../../../src/plugins/points/jqplot.pointLabels.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../../../dist/core/jquery.jqplot.min.css"/>
+    
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>JqPlot Category Axis Bar Renderer demo</h1>
+    
+    <h2>Plot 1</h2>
+    
+    <div id="chart1" style="height:300px; width:500px;"></div>
+    
+    <h2>Plot 2</h2>
+    
+    <div id="chart2" style="height:300px; width:500px;"></div>
+
+    <script>
+
+        $(function () {
+            
+            var plot1,
+                plot2,
+                dataSeries = [],
+                chartOptions = {
+                    seriesDefaults:{
+                        renderer: $.jqplot.BarRenderer,
+                        rendererOptions: {
+                            shadow: false,
+                            barDirection: 'horizontal',
+                            varyBarColor: true,
+                            barWidth: 50
+                        },
+                        pointLabels:{
+                            show: true,
+                            formatString: '%.2f kWh',
+                            edgeTolerance: -20
+                        }
+                    },
+                    axes:{
+                        yaxis:{
+                            renderer: $.jqplot.CategoryAxisRenderer,
+                            tickOptions: {
+                                showMark: false
+                            }
+                        },
+                        xaxis: {
+                            rendererOptions: {
+                                drawBaseline: false
+                            },
+                            min: 0,
+                            max: 100
+                            //showTicks: false,
+                            //tickOptions: {
+                            //    showMark: false
+                            //}
+                        }
+                    },
+                    grid: {
+                        drawGridlines: false,
+                        background: "#fff",
+                        borderWidth: 0,
+                        shadow: false
+                    }
+                };
+            
+            /*
+            
+            axes:{
+                xaxis:{
+                    renderer: $.jqplot.DateAxisRenderer,
+                    tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                    tickOptions: {}
+                },
+                yaxis:{
+                    min: 0,
+                    label: 'Watt'
+                },
+                y2axis:{
+                    min: 0,
+                    max: 100,
+                    label: '%',
+                    numberTicks: 5,
+                    tickOptions: {
+                        showGridline: false
+                    }
+                }
+            },
+            legend: {
+                renderer: $.jqplot.EnhancedLegendRenderer,
+                rendererOptions: {
+                    numberColumns: 4
+                },
+                location: 's',
+                placement: 'outsideGrid',
+                show: true
+            },
+            cursor: {
+              show: true,
+              zoom: true,
+              showTooltip: false,
+              constrainZoomTo: 'x'
+            },
+            seriesDefaults: {
+                breakOnNull: true,
+                showMarker: false,
+                markerOptions: {
+                    show: false
+                }
+            },
+            grid: {
+                shadow: false,
+                background: "#fff",
+                borderWidth: 0
+            }
+            
+            */
+            
+            chartOptions.axes.yaxis.ticks = ["Tick A", "Tick B", "Tick C"];
+            
+            plot1 = $.jqplot('chart1', [[50.5, 87.6, 2.5]], chartOptions);
+            
+            chartOptions.axes.yaxis.ticks = undefined;
+            
+            plot2 = $.jqplot('chart2', [[[50.5, "Cat A"], [87.6, "Cat B"], [2.5, "Cat C"]]], chartOptions);
+            
+        });
+    </script>
+</body>
+</html>
