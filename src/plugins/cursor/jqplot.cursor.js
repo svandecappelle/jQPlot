@@ -973,7 +973,7 @@
                     }
 
                     for (axis in datapos) {
-                        if (datapos[axis]) {
+                        if (datapos.hasOwnProperty(axis) && datapos[axis]) {
                             if (axis.charAt(0) === 'x') {
                                 datapos[axis] = axes[axis].series_p2u(xpos);
                             } else {
@@ -1069,8 +1069,10 @@
                 c._zoom.started = true;
 
                 for (ax in datapos) {
-                    // get zoom starting position.
-                    c._zoom.axes.start[ax] = datapos[ax];
+                    if (datapos.hasOwnProperty(ax)) {
+                        // get zoom starting position.
+                        c._zoom.axes.start[ax] = datapos[ax];
+                    }
                 }
 
                 if (plot.plugins.mobile) {
@@ -1271,17 +1273,19 @@
              * plot1.resetZoom()
              */
             this.resetZoom = function () {
-                var axes = this.axes,
+                var axes = this.axes,   // object
                     ax,
                     ctx;
                 if (!c.zoomProxy) {
                     for (ax in axes) {
-                        axes[ax].reset();
-                        axes[ax]._ticks = [];
-                        // fake out tick creation algorithm to make sure original auto
-                        // computed format string is used if _overrideFormatString is true
-                        if (c._zoom.axes[ax] !== undefined) {
-                            axes[ax]._autoFormatString = c._zoom.axes[ax].tickFormatString;
+                        if (axes.hasOwnProperty(ax)) {
+                            axes[ax].reset();
+                            axes[ax]._ticks = [];
+                            // fake out tick creation algorithm to make sure original auto
+                            // computed format string is used if _overrideFormatString is true
+                            if (c._zoom.axes[ax] !== undefined) {
+                                axes[ax]._autoFormatString = c._zoom.axes[ax].tickFormatString;
+                            }
                         }
                     }
                     this.redraw();
@@ -1416,24 +1420,26 @@
      *
      */
     $.jqplot.Cursor.prototype.resetZoom = function (plot, cursor) {
-        var axes = plot.axes,
+        var axes = plot.axes,   // object
             cax = cursor._zoom.axes,
             ax,
             ctx;
         if (!plot.plugins.cursor.zoomProxy && cursor._zoom.isZoomed) {
             for (ax in axes) {
-                // axes[ax]._ticks = [];
-                // axes[ax].min = cax[ax].min;
-                // axes[ax].max = cax[ax].max;
-                // axes[ax].numberTicks = cax[ax].numberTicks;
-                // axes[ax].tickInterval = cax[ax].tickInterval;
-                // // for date axes
-                // axes[ax].daTickInterval = cax[ax].daTickInterval;
-                axes[ax].reset();
-                axes[ax]._ticks = [];
-                // fake out tick creation algorithm to make sure original auto
-                // computed format string is used if _overrideFormatString is true
-                axes[ax]._autoFormatString = cax[ax].tickFormatString;
+                if (axes.hasOwnProperty(ax)) {
+                    // axes[ax]._ticks = [];
+                    // axes[ax].min = cax[ax].min;
+                    // axes[ax].max = cax[ax].max;
+                    // axes[ax].numberTicks = cax[ax].numberTicks;
+                    // axes[ax].tickInterval = cax[ax].tickInterval;
+                    // // for date axes
+                    // axes[ax].daTickInterval = cax[ax].daTickInterval;
+                    axes[ax].reset();
+                    axes[ax]._ticks = [];
+                    // fake out tick creation algorithm to make sure original auto
+                    // computed format string is used if _overrideFormatString is true
+                    axes[ax]._autoFormatString = cax[ax].tickFormatString;
+                }
             }
             plot.redraw();
             cursor._zoom.isZoomed = false;
@@ -1473,99 +1479,106 @@
             if (!plot.plugins.cursor.zoomProxy) {
 
                 for (ax in datapos) {
-                    // make a copy of the original axes to revert back.
-                    if (typeof c._zoom.axes[ax] === "undefined") {
-                        c._zoom.axes[ax] = {};
-                        c._zoom.axes[ax].numberTicks = axes[ax].numberTicks;
-                        c._zoom.axes[ax].tickInterval = axes[ax].tickInterval;
-                        // for date axes...
-                        c._zoom.axes[ax].daTickInterval = axes[ax].daTickInterval;
-                        c._zoom.axes[ax].min = axes[ax].min;
-                        c._zoom.axes[ax].max = axes[ax].max;
-                        c._zoom.axes[ax].tickFormatString = (axes[ax].tickOptions !== null) ? axes[ax].tickOptions.formatString :  '';
-                    }
-
-                    if ((c.constrainZoomTo === 'none') || (c.constrainZoomTo === 'x' && ax.charAt(0) === 'x') || (c.constrainZoomTo === 'y' && ax.charAt(0) === 'y')) {
-                        
-                        dp = datapos[ax];
-                        
-                        if (dp !== null) {
-                            
-                            if (dp > start[ax]) {
-                                newmin = start[ax];
-                                newmax = dp;
-                            } else {
-                                span = start[ax] - dp;
-                                newmin = dp;
-                                newmax = start[ax];
-                            }
-
-                            curax = axes[ax];
-                            _numberTicks = null;
-
-                            // if aligning this axis, use number of ticks from previous axis.
-                            // Do I need to reset somehow if alignTicks is changed and then graph is replotted??
-                            if (curax.alignTicks) {
-                                if (curax.name === 'x2axis' && plot.axes.xaxis.show) {
-                                    _numberTicks = plot.axes.xaxis.numberTicks;
-                                } else if (curax.name.charAt(0) === 'y' && curax.name !== 'yaxis' && curax.name !== 'yMidAxis' && plot.axes.yaxis.show) {
-                                    _numberTicks = plot.axes.yaxis.numberTicks;
-                                }
-                            }
-
-                            if (this.looseZoom && (axes[ax].renderer.constructor === $.jqplot.LinearAxisRenderer || axes[ax].renderer.constructor === $.jqplot.LogAxisRenderer)) { //} || axes[ax].renderer.constructor === $.jqplot.DateAxisRenderer)) {
-
-                                ret = $.jqplot.LinearTickGenerator(newmin, newmax, curax._scalefact, _numberTicks);
-
-                                // if new minimum is less than "true" minimum of axis display, adjust it
-                                if (axes[ax].tickInset && ret[0] < axes[ax].min + axes[ax].tickInset * axes[ax].tickInterval) {
-                                    ret[0] += ret[4];
-                                    ret[2] -= 1;
-                                }
-
-                                // if new maximum is greater than "true" max of axis display, adjust it
-                                if (axes[ax].tickInset && ret[1] > axes[ax].max - axes[ax].tickInset * axes[ax].tickInterval) {
-                                    ret[1] -= ret[4];
-                                    ret[2] -= 1;
-                                }
-
-                                // for log axes, don't fall below current minimum, this will look bad and can't have 0 in range anyway.
-                                if (axes[ax].renderer.constructor === $.jqplot.LogAxisRenderer && ret[0] < axes[ax].min) {
-                                    // remove a tick and shift min up
-                                    ret[0] += ret[4];
-                                    ret[2] -= 1;
-                                }
-
-                                axes[ax].min = ret[0];
-                                axes[ax].max = ret[1];
-                                axes[ax]._autoFormatString = ret[3];
-                                axes[ax].numberTicks = ret[2];
-                                axes[ax].tickInterval = ret[4];
-                                // for date axes...
-                                axes[ax].daTickInterval = [ret[4] / 1000, 'seconds'];
-                                
-                            } else {
-                                
-                                axes[ax].min = newmin;
-                                axes[ax].max = newmax;
-                                axes[ax].tickInterval = null;
-                                axes[ax].numberTicks = null;
-                                // for date axes...
-                                axes[ax].daTickInterval = null;
-                            }
-
-                            axes[ax]._ticks = [];
+                    
+                    if (datapos.hasOwnProperty(ax)) {
+                    
+                        // make a copy of the original axes to revert back.
+                        if (typeof c._zoom.axes[ax] === "undefined") {
+                            c._zoom.axes[ax] = {};
+                            c._zoom.axes[ax].numberTicks = axes[ax].numberTicks;
+                            c._zoom.axes[ax].tickInterval = axes[ax].tickInterval;
+                            // for date axes...
+                            c._zoom.axes[ax].daTickInterval = axes[ax].daTickInterval;
+                            c._zoom.axes[ax].min = axes[ax].min;
+                            c._zoom.axes[ax].max = axes[ax].max;
+                            c._zoom.axes[ax].tickFormatString = (axes[ax].tickOptions !== null) ? axes[ax].tickOptions.formatString :  '';
                         }
-                    }
 
-                    // if ((c.constrainZoomTo == 'x' && ax.charAt(0) == 'y' && c.autoscaleConstraint) || (c.constrainZoomTo == 'y' && ax.charAt(0) == 'x' && c.autoscaleConstraint)) {
-                    //     dp = datapos[ax];
-                    //     if (dp != null) {
-                    //         axes[ax].max == null;
-                    //         axes[ax].min = null;
-                    //     }
-                    // }
+                        if ((c.constrainZoomTo === 'none') || (c.constrainZoomTo === 'x' && ax.charAt(0) === 'x') || (c.constrainZoomTo === 'y' && ax.charAt(0) === 'y')) {
+
+                            dp = datapos[ax];
+
+                            if (dp !== null) {
+
+                                if (dp > start[ax]) {
+                                    newmin = start[ax];
+                                    newmax = dp;
+                                } else {
+                                    span = start[ax] - dp;
+                                    newmin = dp;
+                                    newmax = start[ax];
+                                }
+
+                                curax = axes[ax];
+                                _numberTicks = null;
+
+                                // if aligning this axis, use number of ticks from previous axis.
+                                // Do I need to reset somehow if alignTicks is changed and then graph is replotted??
+                                if (curax.alignTicks) {
+                                    if (curax.name === 'x2axis' && plot.axes.xaxis.show) {
+                                        _numberTicks = plot.axes.xaxis.numberTicks;
+                                    } else if (curax.name.charAt(0) === 'y' && curax.name !== 'yaxis' && curax.name !== 'yMidAxis' && plot.axes.yaxis.show) {
+                                        _numberTicks = plot.axes.yaxis.numberTicks;
+                                    }
+                                }
+
+                                if (this.looseZoom && (axes[ax].renderer.constructor === $.jqplot.LinearAxisRenderer || axes[ax].renderer.constructor === $.jqplot.LogAxisRenderer)) { //} || axes[ax].renderer.constructor === $.jqplot.DateAxisRenderer)) {
+
+                                    ret = $.jqplot.LinearTickGenerator(newmin, newmax, curax._scalefact, _numberTicks);
+
+                                    // if new minimum is less than "true" minimum of axis display, adjust it
+                                    if (axes[ax].tickInset && ret[0] < axes[ax].min + axes[ax].tickInset * axes[ax].tickInterval) {
+                                        ret[0] += ret[4];
+                                        ret[2] -= 1;
+                                    }
+
+                                    // if new maximum is greater than "true" max of axis display, adjust it
+                                    if (axes[ax].tickInset && ret[1] > axes[ax].max - axes[ax].tickInset * axes[ax].tickInterval) {
+                                        ret[1] -= ret[4];
+                                        ret[2] -= 1;
+                                    }
+
+                                    // for log axes, don't fall below current minimum, this will look bad and can't have 0 in range anyway.
+                                    if (axes[ax].renderer.constructor === $.jqplot.LogAxisRenderer && ret[0] < axes[ax].min) {
+                                        // remove a tick and shift min up
+                                        ret[0] += ret[4];
+                                        ret[2] -= 1;
+                                    }
+
+                                    axes[ax].min = ret[0];
+                                    axes[ax].max = ret[1];
+                                    axes[ax]._autoFormatString = ret[3];
+                                    axes[ax].numberTicks = ret[2];
+                                    axes[ax].tickInterval = ret[4];
+                                    // for date axes...
+                                    axes[ax].daTickInterval = [ret[4] / 1000, 'seconds'];
+
+                                } else {
+
+                                    axes[ax].min = newmin;
+                                    axes[ax].max = newmax;
+                                    axes[ax].tickInterval = null;
+                                    axes[ax].numberTicks = null;
+                                    // for date axes...
+                                    axes[ax].daTickInterval = null;
+                                }
+
+                                axes[ax]._ticks = [];
+                            }
+                        }
+
+                        // if ((c.constrainZoomTo == 'x' && ax.charAt(0) == 'y' && c.autoscaleConstraint) || (c.constrainZoomTo == 'y' && ax.charAt(0) == 'x' && c.autoscaleConstraint)) {
+                        //     dp = datapos[ax];
+                        //     if (dp != null) {
+                        //         axes[ax].max == null;
+                        //         axes[ax].min = null;
+                        //     }
+                        // }
+                        
+                    }
+                        
                 }
+                
                 ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
                 plot.redraw();
                 c._zoom.isZoomed = true;
@@ -1617,8 +1630,10 @@
         c._zoom.started = true;
         
         for (ax in datapos) {
-            // get zoom starting position.
-            c._zoom.axes.start[ax] = datapos[ax];
+            if (datapos.hasOwnProperty(ax)) {
+                // get zoom starting position.
+                c._zoom.axes.start[ax] = datapos[ax];
+            }
         }
         
         if (plot.plugins.mobile) {
