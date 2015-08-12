@@ -216,7 +216,6 @@
                 xOffset: '6px', // number or string. Number interpreted as units, string as pixels.
                 xminOffset: null,
                 xmaxOffset: null,
-                
                 ymin: null,
                 ymax: null,
                 yOffset: '6px', // number or string. Number interpreted as units, string as pixels.
