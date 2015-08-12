@@ -93,6 +93,9 @@
                         case 'rectangle':
                             this.addRectangle(obj[element]);
                             break;
+                        case 'workitem':
+                            this.addWorkItem(obj[element]);
+                            break;
                         default:
                             break;
                         }
@@ -198,30 +201,53 @@
     }
     
     /**
+     * @class WorkItem
+     * @classdesc A workitem which can be scheduled
+     * @param {object} options
+     */
+    function WorkItem(options) {
+        LineBase.call(this);
+        this.type = "workitem";
+        var opts = {
+            // x value for the start of the line, null to scale to axis min.
+            xmin: null,
+            // x value for the end of the line, null to scale to axis max.
+            xmax: null,
+            ymin: null,
+            ymax: null
+        };
+        $.extend(true, this.options, opts, options);
+    }
+    
+    WorkItem.prototype = new LineBase();
+    WorkItem.prototype.constructor = WorkItem;
+    
+    /**
      * @class Rectangle
-     * @param {Object} options
+     * @classdesc A rectangle.
+     * @param {object} options
      */
     function Rectangle(options) {
         LineBase.call(this);
         this.type = 'rectangle';
         var opts = {
-         // prop: xmin
-                // x value for the start of the line, null to scale to axis min.
-                xmin: null,
-                // prop: xmax
-                // x value for the end of the line, null to scale to axis max.
-                xmax: null,
-                // prop xOffset
-                // offset ends of the line inside the grid. Number
-                xOffset: '6px', // number or string. Number interpreted as units, string as pixels.
-                xminOffset: null,
-                xmaxOffset: null,
-                ymin: null,
-                ymax: null,
-                yOffset: '6px', // number or string. Number interpreted as units, string as pixels.
-                yminOffset: null,
-                ymaxOffset: null
-            };
+            // prop: xmin
+            // x value for the start of the line, null to scale to axis min.
+            xmin: null,
+            // prop: xmax
+            // x value for the end of the line, null to scale to axis max.
+            xmax: null,
+            // prop xOffset
+            // offset ends of the line inside the grid. Number
+            xOffset: '6px', // number or string. Number interpreted as units, string as pixels.
+            xminOffset: null,
+            xmaxOffset: null,
+            ymin: null,
+            ymax: null,
+            yOffset: '6px', // number or string. Number interpreted as units, string as pixels.
+            yminOffset: null,
+            ymaxOffset: null
+        };
         $.extend(true, this.options, opts, options);
 
         if (this.options.showTooltipPrecision < 0.01) {
@@ -231,7 +257,6 @@
 
     Rectangle.prototype = new LineBase();
     Rectangle.prototype.constructor = Rectangle;
-
     
     /**
      * @class Line
@@ -257,7 +282,6 @@
 
     Line.prototype = new LineBase();
     Line.prototype.constructor = Line;
-
 
     /**
      * @class HorizontalLine
@@ -291,7 +315,6 @@
 
     HorizontalLine.prototype = new LineBase();
     HorizontalLine.prototype.constructor = HorizontalLine;
-    
 
     /**
      * @class DashedHorizontalLine
@@ -322,7 +345,6 @@
 
     DashedHorizontalLine.prototype = new LineBase();
     DashedHorizontalLine.prototype.constructor = DashedHorizontalLine;
-    
 
     /**
      * @class VerticalLine
@@ -386,10 +408,10 @@
      * @param {object} opts
      */
     $.jqplot.CanvasOverlay.prototype.addLine = function (opts) {
-        var line = new Line(opts);
-        line.uid = objCounter++;
-        this.objects.push(line);
-        this.objectNames.push(line.options.name);
+        var obj = new Line(opts);
+        obj.uid = objCounter++;
+        this.objects.push(obj);
+        this.objectNames.push(obj.options.name);
     };
     
     /**
@@ -397,10 +419,10 @@
      * @param {object} opts
      */
     $.jqplot.CanvasOverlay.prototype.addHorizontalLine = function (opts) {
-        var line = new HorizontalLine(opts);
-        line.uid = objCounter++;
-        this.objects.push(line);
-        this.objectNames.push(line.options.name);
+        var obj = new HorizontalLine(opts);
+        obj.uid = objCounter++;
+        this.objects.push(obj);
+        this.objectNames.push(obj.options.name);
     };
     
     /**
@@ -408,10 +430,10 @@
      * @param {object} opts
      */
     $.jqplot.CanvasOverlay.prototype.addDashedHorizontalLine = function (opts) {
-        var line = new DashedHorizontalLine(opts);
-        line.uid = objCounter++;
-        this.objects.push(line);
-        this.objectNames.push(line.options.name);
+        var obj = new DashedHorizontalLine(opts);
+        obj.uid = objCounter++;
+        this.objects.push(obj);
+        this.objectNames.push(obj.options.name);
     };
     
     /**
@@ -419,10 +441,10 @@
      * @param {object} opts
      */
     $.jqplot.CanvasOverlay.prototype.addVerticalLine = function (opts) {
-        var line = new VerticalLine(opts);
-        line.uid = objCounter++;
-        this.objects.push(line);
-        this.objectNames.push(line.options.name);
+        var obj = new VerticalLine(opts);
+        obj.uid = objCounter++;
+        this.objects.push(obj);
+        this.objectNames.push(obj.options.name);
     };
    
     /**
@@ -430,21 +452,32 @@
      * @param {object} opts
      */
     $.jqplot.CanvasOverlay.prototype.addDashedVerticalLine = function (opts) {
-        var line = new DashedVerticalLine(opts);
-        line.uid = objCounter++;
-        this.objects.push(line);
-        this.objectNames.push(line.options.name);
+        var obj = new DashedVerticalLine(opts);
+        obj.uid = objCounter++;
+        this.objects.push(obj);
+        this.objectNames.push(obj.options.name);
     };
     
     /**
      * Creates a rectangle object
-     * @param {object} opts [[Description]]
+     * @param {object} opts
      */
     $.jqplot.CanvasOverlay.prototype.addRectangle = function (opts) {
-        var line = new Rectangle(opts);
-        line.uid = objCounter++;
-        this.objects.push(line);
-        this.objectNames.push(line.options.name);
+        var obj = new Rectangle(opts);
+        obj.uid = objCounter++;
+        this.objects.push(obj);
+        this.objectNames.push(obj.options.name);
+    };
+    
+    /**
+     * Creates a workitem object
+     * @param {object} opts
+     */
+    $.jqplot.CanvasOverlay.prototype.addWorkItem = function (opts) {
+        var obj = new WorkItem(opts);
+        obj.uid = objCounter++;
+        this.objects.push(obj);
+        this.objectNames.push(obj.options.name);
     };
     
     /**
@@ -504,7 +537,10 @@
      */
     $.jqplot.CanvasOverlay.prototype.draw = function (plot) {
         
-        var canvas = this.canvas,
+        plot.objectCounter = {};
+        
+        var self = this,
+            canvas = this.canvas,
             obj,
             objs = this.objects,
             objslen = objs.length,
@@ -978,11 +1014,11 @@
             rendererRectangle = function (mr, opts, obj, plot) {
             
                 var xaxis,
-                    xstart,
-                    xstop,
+                    xstart = null,
+                    xstop = null,
                     yaxis,
-                    ystart,
-                    ystop,
+                    ystart = null,
+                    ystop = null,
                     y,
                     x,
                     xminoff,
@@ -1084,6 +1120,99 @@
                     canvas._ctx.fillRect(xstart, ystart, xstop - xstart, ystop - ystart);
                 }
                 
+            },
+            
+            /**
+             * Draws a WorkItem
+             * @param {object} mr   [[Description]]
+             * @param {object} opts [[Description]]
+             * @param {Object}   obj  [[Description]]
+             * @param {object} plot [[Description]]
+             */
+            rendererWorkItem = function (mr, opts, obj, plot) {
+            
+                var maxWorkItems = 5,
+                    xaxis,
+                    yaxis,
+                    xstart = null,
+                    ystart = null,
+                    xstop = null,
+                    ystop = null,
+                    workItemHeight = 0,
+                    maxHeight = 0,
+                    maxWidth = 0,
+                    nrOfWorkItems = plot.objectCounter.workitem.total, // obj.type
+                    currentWorkItem = plot.objectCounter.workitem.current;  // integer
+                
+                // style and shadow properties should be set before
+                // every draw of marker renderer.
+                mr.style = 'line';
+                opts.closePath = true;
+                
+                xaxis = plot.axes[obj.options.xaxis];
+                yaxis = plot.axes[obj.options.yaxis];
+                
+                maxHeight = plot.grid._height || canvas._plotDimensions.height;
+                maxWidth = plot.grid._width || canvas._plotDimensions.width;
+                
+                // Find the time on the xaxis based upon the given xmin
+                
+                //xstart = xaxis.series_u2p(obj.options.xmin);
+                //xstop = xaxis.series_u2p(xaxis.max);
+                
+                if (obj.options.xmin !== null) {
+                    if (obj.options.xformat && obj.options.xformat.type === "date") {
+                        if (obj.options.xformat.format) {
+                            xstart = xaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.xmin, obj.options.xformat.format)).getTime());
+                        } else {
+                            xstart = xaxis.series_u2p($.jsDate.createDate(obj.options.xmin).getTime());
+                        }
+                    } else {
+                        xstart = xaxis.series_u2p(obj.options.xmin);
+                    }
+                }
+                
+                if (obj.options.xmax !== null) {
+                    if (obj.options.xformat && obj.options.xformat.type === "date") {
+                        if (obj.options.xformat.format) {
+                            xstop = xaxis.series_u2p($.jsDate.createDate($.jsDate.strftime(obj.options.xmax, obj.options.xformat.format)).getTime());
+                        } else {
+                            xstop = xaxis.series_u2p($.jsDate.createDate(obj.options.xmax).getTime());
+                        }
+                    } else {
+                        xstop = xaxis.series_u2p(obj.options.xmax);
+                    }
+                }
+                
+                // Calculated where on the yaxis the element will be displayed
+                
+                // Fill the whole plot with the work items
+                //workItemHeight = maxHeight / nrOfWorkItems;
+                //ystart = -(workItemHeight - currentWorkItem * workItemHeight);
+                //ystop = workItemHeight * currentWorkItem;
+                
+                workItemHeight = maxHeight / maxWorkItems;
+                
+                ystart = -(workItemHeight - currentWorkItem * workItemHeight);
+                ystop = workItemHeight;
+                
+                //console.log("objectCounter", obj.type, nrOfWorkItems, currentWorkItem);
+                
+                if (xstop !== null && xstart !== null && ystop !== null && ystart !== null) {
+                    
+                    obj.gridStart = [xstart, ystart];
+                    obj.gridStop = [xstop, ystop];
+                    
+                    canvas._ctx.fillStyle = obj.options.color;
+                    
+                    //console.log("workitem", xstart, ystart, xstop - xstart, ystop - ystart);
+                    
+                    // x, y, width, height 
+                    //canvas._ctx.fillRect(0, 0, 100, 100);
+                    canvas._ctx.fillRect(xstart, ystart, xstop - xstart, ystop);
+                    
+                }
+                
             };
         
         
@@ -1094,6 +1223,29 @@
         // @TODO here if I want to have z-index different on all overlay; 
         this.canvas._ctx.clearRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
 
+        // Count how many objects for each type we have to render
+        for (k = 0; k < objslen; k++) {
+            
+            obj = objs[k];
+            opts = $.extend(true, {}, obj.options);
+
+            // Skip parsing if the obj should not be shown
+            if (!obj.options.show) {
+                continue;
+            }
+            
+            if (!plot.objectCounter[obj.type]) {
+                plot.objectCounter[obj.type] = {
+                    total: 1,
+                    current: 0
+                };
+            } else {
+                plot.objectCounter[obj.type].total++;
+            }
+            
+        }
+        
+        // Do the actual rendering of each object
         for (k = 0; k < objslen; k++) {
 
             obj = objs[k];
@@ -1102,6 +1254,12 @@
             // Skip parsing if the obj should not be shown
             if (!obj.options.show) {
                 continue;
+            }
+            
+            if (!plot.objectCounter[obj.type]) {
+                plot.objectCounter[obj.type].current = 1;
+            } else {
+                plot.objectCounter[obj.type].current++;
             }
 
             // style and shadow properties should be set before
@@ -1134,6 +1292,10 @@
 
             case 'rectangle':
                 rendererRectangle(mr, opts, obj, plot);
+                break;
+                    
+            case 'workitem':
+                rendererWorkItem(mr, opts, obj, plot);
                 break;
 
             default:
