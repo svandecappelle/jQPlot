@@ -38,7 +38,7 @@
     var objCounter = 0;
     
     /**
-     * @constructor $.jqplot.CanvasOverlay
+     * @class $.jqplot.CanvasOverlay
      * @param {object} opts
      */
     $.jqplot.CanvasOverlay = function (opts) {
@@ -107,7 +107,7 @@
     };
     
     /**
-     * called with scope of a plot object
+     * Called with scope of a plot object
      * @param {object} target 
      * @param {object} data   
      * @param {object} opts   
@@ -119,7 +119,7 @@
     };
 
     /**
-     * [[Description]]
+     * @class
      */
     function LineBase() {
         this.uid = null;
@@ -198,8 +198,8 @@
     }
     
     /**
-     * [[Description]]
-     * @param {Object} options [[Description]]
+     * @class Rectangle
+     * @param {Object} options
      */
     function Rectangle(options) {
         LineBase.call(this);
@@ -235,8 +235,8 @@
 
     
     /**
-     * Class: Line
-     * A straight line.
+     * @class Line
+     * @classdesc A straight line.
      */
     function Line(options) {
         LineBase.call(this);
@@ -261,8 +261,8 @@
 
 
     /**
-     * Class: HorizontalLine
-     * A straight horizontal line.
+     * @class HorizontalLine
+     * @classdesc A straight horizontal line.
      */
     function HorizontalLine(options) {
         LineBase.call(this);
@@ -295,8 +295,8 @@
     
 
     /**
-     * Class: DashedHorizontalLine
-     * A straight dashed horizontal line.
+     * @class DashedHorizontalLine
+     * @classdesc A straight dashed horizontal line.
      */
     function DashedHorizontalLine(options) {
         LineBase.call(this);
@@ -326,8 +326,8 @@
     
 
     /**
-     * Class: VerticalLine
-     * A straight vertical line.
+     * @class VerticalLine
+     * @classdesc A straight vertical line.
      */
     function VerticalLine(options) {
         LineBase.call(this);
@@ -350,10 +350,9 @@
     VerticalLine.prototype = new LineBase();
     VerticalLine.prototype.constructor = VerticalLine;
     
-
     /**
-     * Class: DashedVerticalLine
-     * A straight dashed vertical line.
+     * @class DashedVerticalLine
+     * @classdesc A straight dashed vertical line.
      */
     function DashedVerticalLine(options) {
         LineBase.call(this);
@@ -1189,11 +1188,11 @@
     };
 
     /**
-     * [[Description]]
-     * @param {Object}   plot    [[Description]]
-     * @param {Object}   obj     [[Description]]
-     * @param {[[Type]]} gridpos [[Description]]
-     * @param {[[Type]]} datapos [[Description]]
+     * Displays tooltip
+     * @param {Object}   plot
+     * @param {Object}   obj
+     * @param {array} gridpos
+     * @param {array} datapos
      */
     function showTooltip(plot, obj, gridpos, datapos) {
         
@@ -1256,11 +1255,11 @@
     }
 
     /**
-     * [[Description]]
-     * @param   {[[Type]]} point  [[Description]]
-     * @param   {[[Type]]} lstart [[Description]]
-     * @param   {[[Type]]} lstop  [[Description]]
-     * @param   {[[Type]]} width  [[Description]]
+     * Used in handleMove
+     * @param   {array} point  [[Description]]
+     * @param   {array} lstart [[Description]]
+     * @param   {array} lstop  [[Description]]
+     * @param   {number} width  [[Description]]
      * @returns {boolean} is near a line
      */
     function isNearLine(point, lstart, lstop, width) {
@@ -1295,11 +1294,11 @@
     }
     
     /**
-     * [[Description]]
-     * @param   {[[Type]]} point  [[Description]]
-     * @param   {[[Type]]} lstart [[Description]]
-     * @param   {[[Type]]} lstop  [[Description]]
-     * @param   {[[Type]]} width  [[Description]]
+     * Used in handleMove 
+     * @param   {array} point  [[Description]]
+     * @param   {array} lstart [[Description]]
+     * @param   {array} lstop  [[Description]]
+     * @param   {number} width  [[Description]]
      * @returns {boolean} is near a rectangle
      */
     function isNearRectangle(point, lstart, lstop, width) {
@@ -1330,11 +1329,11 @@
     }
 
     /**
-     * [[Description]]
+     * Handles displaying tooltip at correct place 
      * @param {Object}   ev       [[Description]]
      * @param {Object}   gridpos  [[Description]]
-     * @param {[[Type]]} datapos  [[Description]]
-     * @param {[[Type]]} neighbor [[Description]]
+     * @param {array} datapos  [[Description]]
+     * @param {array} neighbor [[Description]]
      * @param {Object}   plot     [[Description]]
      */
     function handleMove(ev, gridpos, datapos, neighbor, plot) {
