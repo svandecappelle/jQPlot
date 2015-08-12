@@ -5,7 +5,7 @@
 
 		<!-- JQuery dependence -->
 		<script src="../../../dist/core/jquery.min.js"></script>
-		<script src="../../../dist/core/jquery.jqplot.min.js"></script>
+		<script src="../../../src/core/jquery.jqplot.js"></script>
 
 		<!-- Axes -->
 		<script src="../../../dist/plugins/axis/jqplot.dateAxisRenderer.min.js"></script>
@@ -36,12 +36,14 @@
 				$(function(){
 
 				var serie1=[['2008-09-01',4],['2008-09-02',7],['2008-09-03',null],['2008-09-04',-3],['2008-09-05',10]];
+                    
 				$.jqplot.config.enablePlugins = true;
+                    
 				var plot1 = $.jqplot('chart1', [serie1], {
 						title:'A super chart',
 						axes:{
 							xaxis:{
-								renderer:$.jqplot.DateAxisRenderer,
+								renderer: $.jqplot.DateAxisRenderer,
 							}
 						},
 						seriesDefaults:{
@@ -50,14 +52,14 @@
 								varyBarColor: true,
 								barMargin: 30,
 							},
-							pointLabels: {show: true, darkColor:"black",brightColor:"orange"}
+							pointLabels: { show: true, darkColor: "black", brightColor: "orange"}
 						},
 						legend: {
 							show: true,
 							location: 'ne',
 							placement: 'inside'
 						},
-						series: [{label:'Lbl 1'},{label:'Lbl 2'},{label:'Lbl 3'},{label:'Lbl 4'},{label:'Lbl 5'},{label:'Lbl 6'},{label:'Lbl 7'},{label:'Lbl 8'}],
+						series: [{label: 'Lbl 1'}, {label: 'Lbl 2'}, {label: 'Lbl 3'}, {label: 'Lbl 4'},{ label: 'Lbl 5'}, {label: 'Lbl 6'},{label: 'Lbl 7'}, {label: 'Lbl 8'}],
 						canvasOverlay: {
 							show: true,
 							bellowSeries: true,
@@ -94,7 +96,24 @@
 									lineCap: 'butt',
 									showTooltip: true,
 									tooltipLocation: 'ne',
-									tooltipFormatString: '<b><i><span style="color:red;">Test2</span></i></b> %.2f',
+									tooltipFormatString: '<b><i><span style="color:red;">horizontalLine</span></i></b> %.2f',
+								}},
+								 {dashedHorizontalLine: {
+									name: 'Calimero',
+									xformat: {
+										type: 'date',
+										format: '%Y-%m-%d %H:%M:%S'
+									},
+									y: -2,
+									xmin: '2008-09-02 00:00:00',
+									xmax: '2008-09-04 01:00:00',
+									lineWidth: 3,
+									color: 'steelblue',
+									shadow: true,
+									lineCap: 'butt',
+									showTooltip: true,
+									tooltipLocation: 'ne',
+									tooltipFormatString: '<b><i><span style="color:red;">dashedHorizontalLine</span></i></b> %.2f',
 								}},
 								{verticalLine: {
 									name: 'tutu',
@@ -112,7 +131,25 @@
 									yOffset: -3,
 									showTooltip: true,
 									tooltipLocation: 'ne',
-									tooltipFormatString: '<b><i><span style="color:red;">Test</span></i></b> %.2f',
+									tooltipFormatString: '<b><i><span style="color:red;">verticalLine</span></i></b> %.2f',
+								}},
+								{dashedVerticalLine: {
+									name: 'Elli',
+									xformat: {
+										type: 'date',
+										format: '%Y-%m-%d %H:%M:%S'
+									},
+									ymin: 1,
+									ymax: 3,
+									x: '2008-09-02 00:00:00',
+									lineWidth: 3,
+									color: 'rgb(100, 55, 124)',
+									shadow: true,
+									lineCap: 'butt',
+									yOffset: -3,
+									showTooltip: true,
+									tooltipLocation: 'ne',
+									tooltipFormatString: '<b><i><span style="color:red;">dashedVerticalLine</span></i></b> %.2f',
 								}},
 								{line: {
 									name: 'toto',
