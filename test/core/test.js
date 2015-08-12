@@ -125,7 +125,7 @@ $(function () {
             it("Checking chart.plotData", function () {
                 should.exist(chart);
                 expect(chart._plotData).to.be.an('array');
-                expect(chart._plotData[0][0][0] >= 0).to.be.true;
+                //expect(chart._plotData[0][0][0] >= 0).to.be.true; // true is a reserved word 
                 console.log(chart._plotData[0][0][0]);
             });
             
@@ -134,10 +134,10 @@ $(function () {
         describe("Redraw", function () {
         
             beforeEach(function () {
-                chart = $.jqplot('chart', [[[1, 2],[3,5.12],[5,13.1],[7,33.6],[9,85.9],[11,219.9]]]);
+                chart = $.jqplot('chart', [[[1, 2], [3, 5.12], [5, 13.1], [7, 33.6], [9, 85.9], [11, 219.9]]]);
             });
             
-             it("Should redraw", function () {
+            it("Should redraw", function () {
                 chart.redraw();
                 should.exist(chart);
             });
@@ -147,10 +147,10 @@ $(function () {
         describe("Replot", function () {
         
             beforeEach(function () {
-                chart = $.jqplot('chart', [[[1, 2],[3,5.12],[5,13.1],[7,33.6],[9,85.9],[11,219.9]]]);
+                chart = $.jqplot('chart', [[[1, 2], [3, 5.12], [5, 13.1], [7, 33.6], [9, 85.9], [11, 219.9]]]);
             });
             
-             it("Should replot", function () {
+            it("Should replot", function () {
                 chart.replot();
                 should.exist(chart);
             });
@@ -217,7 +217,7 @@ $(function () {
                     
                     chartOptions = defaultChartOptions;
                     
-                    chartOptions.axes.xaxis.renderer = $.jqplot.CategoryAxisRenderer;                    
+                    chartOptions.axes.xaxis.renderer = $.jqplot.CategoryAxisRenderer;
                     chartOptions.axes.xaxis.ticks = ["Cat A", "Cat B", "Cat C", "Cat D"];
                     
                     dataSeries.push([100, 0, -20, 53.5]);
@@ -259,7 +259,7 @@ $(function () {
                             show: false
                         },
                         shadow: false
-                    }
+                    };
                     
                     chartOptions.axes.xaxis.renderer = $.jqplot.DateAxisRenderer;
                     chartOptions.axes.xaxis.ticks = undefined;
@@ -283,7 +283,7 @@ $(function () {
                                 shadow: false,
                                 showTooltip: true,
                                 tooltipLocation: 'ne',
-                                tooltipFormatString: 'Recti1: %.2f',
+                                tooltipFormatString: 'Recti1: %.2f'
                             }
                         }]
                     };
@@ -294,12 +294,12 @@ $(function () {
                         tooltipLocation: 'n',
                         tooltipAxes: 'y',
                         showTooltip: true,
-                        tooltipFormatString: 'Hello %.2f',
+                        tooltipFormatString: 'Hello %.2f'
                     };
                     
                     chartOptions.cursor = {
                         show: true
-                    }
+                    };
                     
                     chart = $.jqplot('chart', [dataSeries], chartOptions);
 
