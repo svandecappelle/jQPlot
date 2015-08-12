@@ -18,12 +18,12 @@ jqPlot is a plotting and charting plugin for the jQuery Javascript framework. jq
 
 | View  | Desc |
 | ----- | ---- |
-| ![LineStyles](http://svandecappelle.github.io/jQPlot/public/img/linestyles2.jpeg) | Numerous line style options with 6 built in marker styles! |
-| ![Renderers](http://svandecappelle.github.io/jQPlot/public/img/barchart.jpeg) | Lots of renderers |
-| ![shadows](http://svandecappelle.github.io/jQPlot/public/img/shadow2.jpeg) | Shadow control on lines, markers, the grid, everything! |
-| ![drag&drop](http://svandecappelle.github.io/jQPlot/public/img/dragdrop2.jpeg) | Drag and drop points with auto updating of data! |
-| ![logaxis](http://svandecappelle.github.io/jQPlot/public/img/logaxes2.jpeg) | Log Axes with flexible tick marks! |
-| ![Trendlines](http://svandecappelle.github.io/jQPlot/public/img/trendline2.jpeg) | Trend lines computed automatically! |
+| ![LineStyles](http://svandecappelle.github.io/jQPlot/assets/img/linestyles2.jpeg) | Numerous line style options with 6 built in marker styles! |
+| ![Renderers](http://svandecappelle.github.io/jQPlot/assets/img/barchart.jpeg) | Lots of renderers |
+| ![shadows](http://svandecappelle.github.io/jQPlot/assets/img/shadow2.jpeg) | Shadow control on lines, markers, the grid, everything! |
+| ![drag&drop](http://svandecappelle.github.io/jQPlot/assets/img/dragdrop2.jpeg) | Drag and drop points with auto updating of data! |
+| ![logaxis](http://svandecappelle.github.io/jQPlot/assets/img/logaxes2.jpeg) | Log Axes with flexible tick marks! |
+| ![Trendlines](http://svandecappelle.github.io/jQPlot/assets/img/trendline2.jpeg) | Trend lines computed automatically! |
 |  |  |
 
 # Distribution
