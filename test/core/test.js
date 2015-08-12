@@ -19,7 +19,8 @@ $(function () {
             },
             axes: {
                 xaxis: {
-                    //renderer: $.jqplot.DateAxisRenderer,
+                    renderer: undefined,
+                    ticks: undefined,
                     //tickRenderer: $.jqplot.CanvasAxisTickRenderer,
                     //numberTicks: 6,
                     //tickOptions: {}
@@ -88,6 +89,8 @@ $(function () {
                 }
             }*/
         },
+        
+        defaultChartOptions = chartOptions,
         
         dataSeries = [];
         
@@ -212,6 +215,8 @@ $(function () {
                 
                     dataSeries = [];
                     
+                    chartOptions = defaultChartOptions;
+                    
                     chartOptions.axes.xaxis.renderer = $.jqplot.CategoryAxisRenderer;                    
                     chartOptions.axes.xaxis.ticks = ["Cat A", "Cat B", "Cat C", "Cat D"];
                     
@@ -229,7 +234,86 @@ $(function () {
             });
             
         });
-    
+        
+        describe("Overlay", function () {
+        
+            describe("canvasOverlay", function () {
+            
+                var chart;
+                
+                beforeEach(function () {
+                
+                    chart = null;
+                    
+                    dataSeries = [];
+                    
+                    chartOptions = defaultChartOptions;
+                    
+                    dataSeries = [['00:00', 1], ['06:00', 2], ['12:00', 3], ['18:00', 4], ['24:00', 5]];
+                    
+                    chartOptions.series = undefined;
+                    chartOptions.seriesDefaults = undefined;
+                    
+                    chartOptions.seriesDefaults = {
+                        markerOptions: {
+                            show: false
+                        },
+                        shadow: false
+                    }
+                    
+                    chartOptions.axes.xaxis.renderer = $.jqplot.DateAxisRenderer;
+                    chartOptions.axes.xaxis.ticks = undefined;
+                    
+                    chartOptions.canvasOverlay = {
+                        show: true,
+                        bellowSeries: true,
+                        objects: [{
+                            rectangle: {
+                                xformat: {
+                                    type: 'date',
+                                    format: '%Y-%m-%d %H:%M'
+                                },
+                                name: 'recti1',
+                                xmin: '02:00',
+                                xmax: '05:00',
+                                ymin: [0],
+                                ymax: [2],
+                                xOffset: 0,
+                                color: 'rgba(255, 153, 0, 0.95)',
+                                shadow: false,
+                                showTooltip: true,
+                                tooltipLocation: 'ne',
+                                tooltipFormatString: 'Recti1: %.2f',
+                            }
+                        }]
+                    };
+                    
+                    chartOptions.highlighter = {
+                        show: true,
+                        sizeAdjust: 10,
+                        tooltipLocation: 'n',
+                        tooltipAxes: 'y',
+                        showTooltip: true,
+                        tooltipFormatString: 'Hello %.2f',
+                    };
+                    
+                    chartOptions.cursor = {
+                        show: true
+                    }
+                    
+                    chart = $.jqplot('chart', [dataSeries], chartOptions);
+
+                });
+
+                it("Simple construction", function () {
+                    should.exist(chart);
+                    console.log(chart);
+                });
+                
+            });
+            
+        });
+        
     });
     
 });
