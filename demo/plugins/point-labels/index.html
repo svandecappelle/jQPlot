@@ -4,11 +4,11 @@
 
 		<!-- JQuery dependence -->
 		<script src="../../../dist/core/jquery.min.js"></script>
-		<script src="../../../dist/core/jquery.jqplot.min.js"></script>
+		<script src="../../../src/core/jquery.jqplot.js"></script>
 
 		<!-- Axes -->
-		<script src="../../../dist/plugins/axis/jqplot.categoryAxisRenderer.min.js"></script>
-		<script src="../../../dist/plugins/bar/jqplot.barRenderer.min.js"></script>
+		<script src="../../../src/plugins/axis/jqplot.categoryAxisRenderer.js"></script>
+		<script src="../../../src/plugins/bar/jqplot.barRenderer.js"></script>
 
 		<script src="../../../src/plugins/points/jqplot.pointLabels.js"></script>
 
@@ -18,11 +18,11 @@
 		<!-- Export PNG -->
 		<script src="../../../dist/plugins/export/exportImg.min.js"></script>
 
-		<script src="../../../dist/plugins/legend/jqplot.enhancedLegendRenderer.min.js"></script>
+		<script src="../../../src/plugins/legend/jqplot.enhancedLegendRenderer.js"></script>
 		<link type="text/css" rel="stylesheet" href="../../../dist/core/jquery.jqplot.min.css"/>
 	</head>
 	<body>
-
+  
 		<div class="coding">
 			<div id="chart1"></div>
 			<script type="text/javascript">
@@ -38,6 +38,7 @@
 				});
 			</script>
 		</div>
+        
 		<div class="coding">
 			<div id="chart2"></div>
 			<script type="text/javascript">
@@ -54,7 +55,6 @@
 				});
 			</script>
 		</div>
-
 
 		<div class="coding">
 			<div id="chart3"></div>
@@ -80,7 +80,6 @@
 				});
 			</script>
 		</div>
-
 
 		<div class="coding">
 			<div id="chart4"></div>
@@ -133,7 +132,129 @@
 				});
 			</script>
 		</div>
+       
+        <div class="coding">
+			<div id="chart6"></div>
+			<script type="text/javascript">
+				$(function(){
+                    
+                    var chartOptions = {
+                        title: 'Another Bar Chart with Point Labels',
+                        seriesDefaults:{
+                            showMarker: false,
+                            renderer: $.jqplot.BarRenderer,
+                            rendererOptions: {
+                                shadow: false,
+                                barDirection: 'horizontal',
+                                varyBarColor: true,
+                                barWidth: 22
+                            },
+                            pointLabels:{
+                                show: true,
+                                formatString: '%.2f kWh',
+                                edgeTolerance: 5
+                            }
+                        },
+                        axesDefaults: {
+                            tickOptions: {
+                                showMark: false
+                            },
+                            showTickMarks: false
+                        },
+                        axes:{
+                            yaxis:{
+                                renderer: $.jqplot.CategoryAxisRenderer,
+                                tickOptions: {
+                                    showMark: false
+                                }
+                            },
+                            xaxis: {
+                                min: 3
+                                /*
+                                rendererOptions: {
+                                    drawBaseline: false
+                                },
+                                showTicks: false
+                                */
+                            }
+                        },
+                        grid: {
+                            drawGridlines: false,
+                            background: "#fff",
+                            borderWidth: 0,
+                            shadow: false
+                        }
+                    }
+                    
+					var line1 = [14, 32, 41, 44, 40, 47, 53, 67];
+                    
+					var plot6 = $.jqplot('chart6', [line1], chartOptions);
+				});
+			</script>
+		</div>
 
-		<script src="../../common/$.jqplot.demo.common.js"></script>
+        <div class="coding">
+			<div id="chart7"></div>
+			<script type="text/javascript">
+				$(function(){
+                    
+                    var chartOptions = {
+                        title: 'Bar Chart with Point Labels inside and color check',
+                        // @TODO with seriesColors, the labels disappear
+                        seriesColors: ["#000", "purple"],
+                        seriesDefaults:{
+                            showMarker: false,
+                            renderer: $.jqplot.BarRenderer,
+                            rendererOptions: {
+                                shadow: false,
+                                barDirection: 'horizontal',
+                                varyBarColor: true,
+                                barWidth: 22
+                            },
+                            pointLabels:{
+                                show: true,
+                                formatString: '%.1f \%',
+                                edgeTolerance: 5,
+                                checkColorBrightnessLevel: true,
+                                location: "w"
+                            }
+                        },
+                        axesDefaults: {
+                            tickOptions: {
+                                showMark: false
+                            },
+                            showTickMarks: false
+                        },
+                        axes:{
+                            yaxis:{
+                                renderer: $.jqplot.CategoryAxisRenderer,
+                                ticks: ["Health", "Stamina"],
+                                tickOptions: {
+                                    showMark: false
+                                }
+                            },
+                            xaxis: {
+                                min: 0,
+                                max: 200,
+                                showTicks: false
+                            }
+                        },
+                        grid: {
+                            drawGridlines: false,
+                            background: "#fff",
+                            borderWidth: 0,
+                            shadow: false
+                        }
+                    }
+                    
+					var line1 = [50, 150];
+                    
+					var plot7 = $.jqplot('chart7', [line1], chartOptions);
+				});
+			</script>
+		</div>
+        
+<!--		<script src="../../common/$.jqplot.demo.common.js"></script>-->
+        
 	</body>
 </html>
