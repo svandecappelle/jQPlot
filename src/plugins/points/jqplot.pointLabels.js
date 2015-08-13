@@ -135,6 +135,13 @@
         // true to not show a label for a value which is 0.
         this.hideZeros = false;
         this._elems = [];
+        // prop: darkColor
+        this.darkColor = "#000";
+        // prop: brightColor
+        this.brightColor = "#EEE";
+        // prop: checkColorBrightnessLevel
+        // true to check the color value levels
+        this.checkColorBrightnessLevel = false;
         
         $.extend(true, this, options);
     };
@@ -326,7 +333,8 @@
             sct,
             scr,
             scb,
-            barPoint;
+            barPoint,
+            serieColor;
 
         // set labels again in case they have changed.
         p.setLabels.call(this);
@@ -371,17 +379,23 @@
                     .addClass('jqplot-point-label jqplot-series-' + this.index + ' jqplot-point-' + i)
                     .css('position', 'absolute');
                 
-                if (!$.jqplot.isDarkColor(this.color)) {
-                    if (typeof p.darkColor !== "undefined") {
-                        elem.css('color', p.darkColor);
-                    } else {
-	                    elem.addClass('jqplot-point-darkColor');
-                    }
-                } else {
-                    if (typeof p.brightColor !== "undefined") {
-                        elem.css('color', p.brightColor);
+                serieColor = (this._dataColors && this._dataColors[i]) ? this._dataColors[i] : this.color;
+                
+                //console.log("checking color", serieColor);
+                
+                // Set the color of the label element when it matters
+                // @TODO: check contrast between background and foreground colors
+                if ((this.barDirection === "horizontal" && p.location === "w") || p.checkColorBrightnessLevel) {
+                    if (!$.jqplot.isDarkColor(serieColor)) {
+                        elem.addClass('jqplot-point-darkColor');
+                        if (p.darkColor !== null) {
+                            elem.css('color', p.darkColor);
+                        }
                     } else {
                         elem.addClass('jqplot-point-brightColor');
+                        if (p.brightColor !== null) {
+                            elem.css('color', p.brightColor);
+                        }
                     }
                 }
 
