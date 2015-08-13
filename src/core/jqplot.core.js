@@ -4666,7 +4666,11 @@
         }
     };
     
-    // extract the r, g, b, a color components out of a css color spec.
+    /**
+     * Extracts the r, g, b, a color components out of a css color spec.
+     * @param   {string} s [[Description]]
+     * @returns {string} [[Description]]
+     */
     $.jqplot.getColorComponents = function (s) {
         
         // check to see if a color keyword.
@@ -4689,44 +4693,89 @@
         return ret;
     };
 
-    // know if a color is dark or not
+    /**
+     * know if a color is dark or not
+     * @param   {string} color
+     * @returns {boolean}
+     */
     $.jqplot.isDarkColor = function (color) {
+        
         var L = 0,
             rgba = this.getColorRGB(color);
+        
         if (rgba !== null) {
-            L = 0.300 * (rgba[0] / 255) + 0.590 * (rgba[1] / 255) + 0.110 * (rgba[2] / 255);
+            color = rgba;
+        } else {
+            color = $.jqplot.getColorComponents(color);
         }
-        return L < 0.45;
+        
+        if (color !== null) {
+            L = 0.300 * (color[0] / 255) + 0.590 * (color[1] / 255) + 0.110 * (color[2] / 255);
+        }
+        
+        return (L < 0.45);
+        
     };
 
+    /**
+     * Gets the RGB color value for a given color
+     * @param   {String}   color [[Description]]
+     * @returns {[[Type]]} [[Description]]
+     */
     $.jqplot.getColorRGB = function (color) {
+        
         var rgbError = [0, 0, 0],
             red,
             green,
             blue,
             rgbString,
-            rgb;
-        if (typeof color !== "undefined" && color.lastIndexOf("rgb") !== -1) {
+            rgb,
+            strLen = color.length;
+        
+        if (strLen && color.lastIndexOf("rgb") !== -1) {
+            
             color = color.replace("rgba", "");
             color = color.replace("rgb", "");
             color = color.replace("\\(", "");
             color = color.replace("\\)", "");
             color = color.replace(" ", "");
+            
             rgbString = color.split(",");
+            
             red = parseInt(rgbString[0], 10);
             green = parseInt(rgbString[1], 10);
             blue = parseInt(rgbString[2], 10);
+            
             rgb = [red, green, blue];
+            
             return rgb;
-        } else if (typeof color !== "undefined" && color.lastIndexOf("#") !== -1) {
-            red = parseInt(color.substring(1, 3), 16);
-            green = parseInt(color.substring(3, 5), 16);
-            blue = parseInt(color.substring(5), 16);
+            
+        } else if (strLen && color.indexOf("#") === 0) {
+            
+            // eg. #F90
+            if (strLen === 4) {
+                red = color.substr(1, 1);
+                green = color.substr(2, 1);
+                blue = color.substr(3, 1);
+            // eg. #FF9900    
+            } else {
+                red = color.substr(1, 2);
+                green = color.substr(3, 2);
+                blue = color.substr(5, 2);
+            }
+            
+            red = parseInt(red, 16);
+            green = parseInt(green, 16);
+            blue = parseInt(blue, 16);
+            
             rgb = [red, green, blue];
+            
             return rgb;
+            
         } else {
             return null;
         }
+        
     };
     
     $.jqplot.colorKeywordMap = {
