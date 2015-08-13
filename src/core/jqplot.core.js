@@ -3887,7 +3887,7 @@
 
             gridPadding = {top: 0, left: 0, bottom: 0, right: 0};
 
-            if (this.legend.placement === "outsideGrid") {
+            if (legendElem && this.legend.placement === "outsideGrid") {
                 // temporarily append the legend to get dimensions
                 this.target.append(legendElem);
                 switch (this.legend.location) {
