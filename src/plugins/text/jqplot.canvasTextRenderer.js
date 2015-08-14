@@ -67,20 +67,82 @@
     // This code is released to the public domain by Jim Studt, 2007.
     // He may keep some sort of up to date copy at http://www.federated.com/~jim/canvastext/
     //
+
+    /**
+    * Canvas text renderer jQplot plugin. Converts text html into canvas widgets.
+    * @class $.jqplot.CanvasTextRenderer
+    * @param {object} options - all plugin options properties.
+    */
     $.jqplot.CanvasTextRenderer = function (options) {
+        /**
+        * Text font style
+        * @default 'normal'
+        * @todo implement oblique.
+        */
         this.fontStyle = 'normal';  // normal, italic, oblique [not implemented]
+        /**
+        * Text font style variant. Authorized values: ['normal']
+        * @default 'normal'
+        * @todo implements small caps.
+        */
         this.fontVariant = 'normal';    // normal, small caps [not implemented]
+        /**
+        * Text font weight. Authorized values: ['normal', 'bold', 'bolder', 'lighter', '100 - 900']
+        * @default 'normal'
+        */
         this.fontWeight = 'normal'; // normal, bold, bolder, lighter, 100 - 900
+        /**
+        * Text font size in css style.
+        * @default '10px'
+        */
         this.fontSize = '10px';
+        /**
+        * Text font family.
+        * @default 'sans-serif'
+        */
         this.fontFamily = 'sans-serif';
+        /**
+        * fontStretch
+        * @default 1.0
+        */
         this.fontStretch = 1.0;
+        /**
+        * Text canvas draw style: colors.
+        * @default '#666666'
+        */
         this.fillStyle = '#666666';
+        /**
+        * Text rotation angle.
+        * @default 0
+        */
         this.angle = 0;
+        /**
+        * Text alignment.
+        * @default 'start'
+        */
         this.textAlign = 'start';
+        /**
+        * Text base line.
+        * @default 'alphabetic'
+        */
         this.textBaseline = 'alphabetic';
+        /**
+        * Text to display
+        * @default value: null
+        */
         this.text = null;
+        /**
+        * Width
+        */
         this.width = null;
+        /**
+        * Height
+        */
         this.height = null;
+        /**
+        * Pt to px constant
+        * @constant 1.28
+        */
         this.pt2px = 1.28;
 
         $.extend(true, this, options);
@@ -88,14 +150,21 @@
         this.setHeight();
     };
 
+    /**
+    * Initialize canvas text rendering using options.
+    * @param {object} options - object of all rendering canvas text options.
+    */
     $.jqplot.CanvasTextRenderer.prototype.init = function (options) {
         $.extend(true, this, options);
         this.normalizedFontSize = this.normalizeFontSize(this.fontSize);
         this.setHeight();
     };
 
-    // convert css spec into point size
-    // returns float
+    /**
+    * convert css spec into point size.
+    * @param {String} sz - string text in the css form: 'size(px|em|%|pt)'. 
+    * @returns {float} - font size in px / pt / em / % depending on the String font definition.
+    */
     $.jqplot.CanvasTextRenderer.prototype.normalizeFontSize = function (sz) {
         sz = String(sz);
         var n = parseFloat(sz);
@@ -119,6 +188,10 @@
         return n / this.pt2px;
     };
 
+    /**
+    * @param {Number} w - fontWeight option. Authorized values: ['normal', 'bold', 'bolder', 'lighter', 100, 200, 300, 400, 500, 600, 700, 800, 900]
+    * @returns {float} values adjusted for Hershey font.
+    */
     $.jqplot.CanvasTextRenderer.prototype.fontWeight2Float = function (w) {
         // w = normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
         // return values adjusted for Hershey font.
@@ -140,20 +213,39 @@
         }
     };
 
+    /**
+    * Get canvas text.
+    * @returns this.text value.
+    */
     $.jqplot.CanvasTextRenderer.prototype.getText = function () {
         return this.text;
     };
 
+    /**
+    * Set canvas text value.
+    * @param {String} t - Text.
+    * @param {object} ctx - Canvas context.
+    */
     $.jqplot.CanvasTextRenderer.prototype.setText = function (t, ctx) {
         this.text = t;
         this.setWidth(ctx);
         return this;
     };
 
+    /**
+    * Get width.
+    * @param {object} ctx - Canvas context.
+    * @returns this.width.
+    */
     $.jqplot.CanvasTextRenderer.prototype.getWidth = function (ctx) {
         return this.width;
     };
 
+    /**
+    * Set width.
+    * @param {object} ctx - Canvas context.
+    * @param {String} w - Width.
+    */
     $.jqplot.CanvasTextRenderer.prototype.setWidth = function (ctx, w) {
         if (!w) {
             this.width = this.measure(ctx, this.text);
@@ -163,13 +255,18 @@
         return this;
     };
 
-    // return height in pixels.
+    /**
+    * return height in pixels.
+    * @param {object} ctx - Canvas context.
+    */
     $.jqplot.CanvasTextRenderer.prototype.getHeight = function (ctx) {
         return this.height;
     };
 
-    // w - height in pt
-    // set heigh in px
+    /**
+    * Set height.
+    * @param {String} w - height in pt.
+    */
     $.jqplot.CanvasTextRenderer.prototype.setHeight = function (w) {
         if (!w) {
             //height = this.fontSize /0.75;
@@ -180,6 +277,11 @@
         return this;
     };
 
+    /**
+    * Convert a character into canvas object.
+    * @param {object} ch - Get canvas letter.
+    * @returns canvas definition letter.
+    */
     $.jqplot.CanvasTextRenderer.prototype.letter = function (ch) {
         return this.letters[ch];
     };
@@ -192,6 +294,11 @@
         return 7.0 * this.normalizedFontSize / 25.0;
     };
 
+    /**
+    * Measure the canvas text width for font size.
+    * @param {object} ctx - Canvas context.
+    * @param {String} str - Text.
+    */
     $.jqplot.CanvasTextRenderer.prototype.measure = function (ctx, str) {
         var total = 0,
             len = str.length,
@@ -207,6 +314,11 @@
         return total;
     };
 
+    /**
+    * Draw canvas text.
+    * @param {object} ctx - Canvas context.
+    * @param {String} str - Text to convert into canvas.
+    */
     $.jqplot.CanvasTextRenderer.prototype.draw = function (ctx, str) {
         var x = 0,
             // leave room at bottom for descenders.
@@ -282,6 +394,9 @@
         return total;
     };
 
+    /**
+    * Define constants letters representation into canvas.
+    */
     $.jqplot.CanvasTextRenderer.prototype.letters = {
         ' ': { width: 16, points: [] },
         '!': { width: 10, points: [[5, 21], [5, 7], [-1, -1], [5, 2], [4, 1], [5, 0], [6, 1], [5, 2]] },
@@ -380,6 +495,11 @@
         '~': { width: 24, points: [[3, 6], [3, 8], [4, 11], [6, 12], [8, 12], [10, 11], [14, 8], [16, 7], [18, 7], [20, 8], [21, 10], [-1, -1], [3, 8], [4, 10], [6, 11], [8, 11], [10, 10], [14, 7], [16, 6], [18, 6], [20, 7], [21, 10], [21, 12]] }
     };
 
+    /**
+    * Canvas font renderer plugin.
+    * @class $.jqplot.CanvasFontRenderer
+    * @param {object} options - Font renderer options.
+    */
     $.jqplot.CanvasFontRenderer = function (options) {
         options = options || {};
         if (!options.pt2px) {
@@ -388,9 +508,17 @@
         $.jqplot.CanvasTextRenderer.call(this, options);
     };
 
+    /**
+    * Constructor of canvasTextRenderer using canvasFontRenderer.
+    */
     $.jqplot.CanvasFontRenderer.prototype = new $.jqplot.CanvasTextRenderer({});
     $.jqplot.CanvasFontRenderer.prototype.constructor = $.jqplot.CanvasFontRenderer;
 
+    /**
+    * Measure the text width for the canvas.
+    * @param {object} ctx - Canvas context.
+    * @param {String} str - String text.
+    */
     $.jqplot.CanvasFontRenderer.prototype.measure = function (ctx, str) {
         // var fstyle = this.fontStyle+' '+this.fontVariant+' '+this.fontWeight+' '+this.fontSize+' '+this.fontFamily;
         var fstyle = this.fontSize + ' ' + this.fontFamily,
@@ -402,6 +530,11 @@
         return w;
     };
 
+    /**
+    * Draw the text using font renderer.
+    * @param {object} ctx - Canvas context.
+    * @param {String} str - String text to draw.
+    */
     $.jqplot.CanvasFontRenderer.prototype.draw = function (ctx, str) {
         var x = 0,
             // leave room at bottom for descenders.
