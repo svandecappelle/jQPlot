@@ -220,6 +220,65 @@
             
         </div>
 
+        <div class="coding">
+        
+            <div id="chart3" style="margin:20px;"></div>
+            
+            <script>
+               
+				$(function(){
+        
+                var line3 = [['2008-09-30', 4], ['2008-10-30', 6.5], ['2008-11-30', 5.7], ['2008-12-30', 9], ['2009-01-30', 8.2]];
+                    
+				var plot3 = $.jqplot('chart3', [line3], {
+						title:'Date axis with ticks',
+						axesDefaults : {
+							rendererOptions: {
+								tickRenderer: $.jqplot.CanvasAxisTickRenderer
+	                		},
+							tickOptions: {
+								fontSize: '10pt',
+	                			fontFamily: 'Tahoma',
+							}
+						},
+						legend:{
+							renderer: $.jqplot.EnhancedLegendRenderer,
+							show: true,
+							placement: "outsideGrid",
+							location: "ne",
+							rowSpacing: "0px",
+							rendererOptions: {
+								// set to true to replot when toggling series on/off
+								// set to an options object to pass in replot options.
+								seriesToggle: 'normal',
+								seriesToggleReplot: {resetAxes: true}
+							}
+						},
+						axes:{
+							xaxis:{
+								renderer: $.jqplot.DateAxisRenderer, 
+								rendererOptions: {
+									tickRenderer: $.jqplot.CanvasAxisTickRenderer
+	                			},
+                                ticks: [['2008-09-30', "September"], ['2008-10-30', "October"], ['2008-11-30', "November"], ['2008-12-30', "December"], ['2009-01-30', "January"]],
+	                			tickOptions: {
+									//formatString: '%Y #%V',
+									//typeFormatter: 'php',
+									angle:-40
+								}
+							}
+						},
+						series:[{lineWidth: 4, markerOptions: {style: 'square'}}]
+					});
+
+					$('#chart3').bind('jqplotLegendToggleSerie', function (ev) {
+						console.log(ev.name);
+					})
+				});
+            </script>
+            
+        </div>
+        
 		<script src="../../common/$.jqplot.demo.common.js"></script>
 	</body>
 </html>
