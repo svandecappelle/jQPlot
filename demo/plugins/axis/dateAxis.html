@@ -4,10 +4,10 @@
 
 		<!-- JQuery dependence -->
 		<script src="../../../dist/core/jquery.min.js"></script>
-		<script src="../../../dist/core/jquery.jqplot.min.js"></script>
+		<script src="../../../src/core/jquery.jqplot.js"></script>
 
 		<!-- Axes -->
-		<script src="../../../dist/plugins/axis/jqplot.dateAxisRenderer.min.js"></script>
+		<script src="../../../src/plugins/axis/jqplot.dateAxisRenderer.js"></script>
 		<script src="../../../dist/plugins/axis/jqplot.canvasAxisTickRenderer.min.js"></script>
 		<script src="../../../dist/plugins/text/jqplot.canvasTextRenderer.min.js"></script>
 
@@ -29,26 +29,29 @@
 	<body>
 
 		<div class="coding">
-		<div id="chart1"></div>
-		<div id="chart2" style="margin:20px;"></div>
-
-			<script type="text/javascript">
+		
+            <div id="chart1" style="margin:20px;"></div>
+            
+            <script>
+               
 				$(function(){
-				var line1=[['2008-09-30',4], ['2008-10-30',6.5], ['2008-11-30',5.7], ['2008-12-30',9], ['2009-01-30',8.2]];
+                    
+				var line1=[['2008-09-30', 4], ['2008-10-30', 6.5], ['2008-11-30', 5.7], ['2008-12-30', 9], ['2009-01-30', 8.2]];
+                    
 				var plot1 = $.jqplot('chart1', [line1], {
 						title:'Date axis (PHP mode)',
 						axesDefaults : {
-							rendererOptions:{
+							rendererOptions: {
 								tickRenderer: $.jqplot.CanvasAxisTickRenderer
 	                		},
 							tickOptions: {
-								fontSize:'10pt',
-	                			fontFamily:'Tahoma',
+								fontSize: '10pt',
+	                			fontFamily: 'Tahoma',
 							}
 						},
 						legend:{
 							renderer: $.jqplot.EnhancedLegendRenderer,
-							show:true,
+							show: true,
 							placement: "outsideGrid",
 							location: "ne",
 							rowSpacing: "0px",
@@ -61,9 +64,9 @@
 						},
 						axes:{
 							xaxis:{
-								renderer:$.jqplot.DateAxisRenderer, 
-								rendererOptions:{
-									tickRenderer:$.jqplot.CanvasAxisTickRenderer
+								renderer: $.jqplot.DateAxisRenderer, 
+								rendererOptions: {
+									tickRenderer: $.jqplot.CanvasAxisTickRenderer
 	                			},
 	                			tickOptions: {
 									formatString: '%Y #%V',
@@ -72,50 +75,59 @@
 								}
 							}
 						},
-						series:[{lineWidth:4, markerOptions:{style:'square'}}]
+						series:[{lineWidth: 4, markerOptions: {style: 'square'}}]
 					});
 
 					$('#chart1').bind('jqplotLegendToggleSerie', function (ev) {
 						console.log(ev.name);
 					})
 				});
+            </script>
+            
+        </div>
+            
+        <div class="coding">
+        
+		  <div id="chart2" style="margin:20px;"></div>
 
-
-
+			<script>
 
 				$(function(){
-				console.log($.jsDate.createDate('2008-09-01 05:00:00').getTime());
+                    
+                    console.log($.jsDate.createDate('2008-09-01 05:00:00').getTime());
 
-				var serie1=[['2008-09-01',4],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
-				var serie2=[['2008-09-01',2],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
-				var serie3=[['2008-09-01',2],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
-				var serie4=[['2008-09-01',2],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
-				var serie5=[['2008-09-01',null],['2008-09-02',10],['2008-09-03',null],['2008-09-04',null],['2008-09-05',null]];
-				var serie6=[['2008-09-01',null],['2008-09-02',null],['2008-09-03',1],['2008-09-04',null],['2008-09-05',null]];
-				var serie7=[['2008-09-01',null],['2008-09-02',null],['2008-09-03',null],['2008-09-04',4],['2008-09-05',null]];
-				var serie8=[['2008-09-01',null],['2008-09-02',null],['2008-09-03',null],['2008-09-04',null],['2008-09-05',1]];
-				$.jqplot.config.enablePlugins = true;
-				var plot1 = $.jqplot('chart2', [serie1,serie2,serie3, serie4, serie5,serie6, serie7, serie8], {
+                    var serie1 = [['2008-09-01', 4], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
+                    var serie2 = [['2008-09-01', 2], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
+                    var serie3 = [['2008-09-01', 2], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
+                    var serie4 = [['2008-09-01', 2], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
+                    var serie5 = [['2008-09-01', null], ['2008-09-02', 10], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
+                    var serie6 = [['2008-09-01', null], ['2008-09-02', null], ['2008-09-03', 1], ['2008-09-04', null], ['2008-09-05', null]];
+                    var serie7 = [['2008-09-01', null], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', 4], ['2008-09-05', null]];
+                    var serie8 = [['2008-09-01', null], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', 1]];
+
+                    $.jqplot.config.enablePlugins = true;
+
+                    var plot2 = $.jqplot('chart2', [serie1, serie2, serie3, serie4, serie5, serie6, serie7, serie8], {
 						title:'A super chart',
 						axes:{
-							xaxis:{
-								renderer:$.jqplot.DateAxisRenderer,
+							xaxis: {
+								renderer: $.jqplot.DateAxisRenderer,
 							}
 						},
-						seriesDefaults:{
+						seriesDefaults: {
 							renderer: $.jqplot.BarRenderer,
 							rendererOptions: {
 								varyBarColor: true,
 								barMargin: 30,
 							},
-							pointLabels: {show: true, darkColor:"black",brightColor:"orange"}
+							pointLabels: {show: true, darkColor: "black", brightColor: "orange"}
 						},
 						legend: {
 							show: true,
 							location: 'ne',
 							placement: 'inside'
 						},
-						series: [{label:'Lbl 1'},{label:'Lbl 2'},{label:'Lbl 3'},{label:'Lbl 4'},{label:'Lbl 5'},{label:'Lbl 6'},{label:'Lbl 7'},{label:'Lbl 8'}],
+						series: [{label: 'Lbl 1'}, {label: 'Lbl 2'}, {label: 'Lbl 3'}, {label: 'Lbl 4'}, {label: 'Lbl 5'}, {label: 'Lbl 6'},{label: 'Lbl 7'}, {label: 'Lbl 8'}],
 						canvasOverlay: {
 							show: true,
 							bellowSeries: true,
@@ -135,7 +147,7 @@
 									shadow: false,
 									showTooltip: true,
 									tooltipLocation: 'ne',
-									tooltipFormatString: '<b><i><span style="color:red;">Passe</span></i></b> %.2f',
+									tooltipFormatString: '<b><i><span style="color:red;">Passe</span></i></b> %.2f'
 								}},
 								 {horizontalLine: {
 									name: 'pebbles',
@@ -152,7 +164,7 @@
 									lineCap: 'butt',
 									showTooltip: true,
 									tooltipLocation: 'ne',
-									tooltipFormatString: '<b><i><span style="color:red;">Test2</span></i></b> %.2f',
+									tooltipFormatString: '<b><i><span style="color:red;">Test2</span></i></b> %.2f'
 								}},
 								{verticalLine: {
 									name: 'tutu',
@@ -170,7 +182,7 @@
 									yOffset: -3,
 									showTooltip: true,
 									tooltipLocation: 'ne',
-									tooltipFormatString: '<b><i><span style="color:red;">Test</span></i></b> %.2f',
+									tooltipFormatString: '<b><i><span style="color:red;">Test</span></i></b> %.2f'
 								}},
 								{line: {
 									name: 'toto',
@@ -191,16 +203,22 @@
 							tooltipLocation: 'n',
 							tooltipAxes: 'y',
 							showTooltip: true,
-							tooltipFormatString: '<b><i><span style="color:red;">hello</span></i></b> %.2f',
+							tooltipFormatString: '<b><i><span style="color:red;">hello</span></i></b> %.2f'
 						},
 						cursor: {
 							show: true
 						},
-						stackSeries: true,
+						stackSeries: true
+                        
 					});
-					plot1.replot();
-				});
+                    
+					//plot2.replot();
+				
+                });
+                
 			</script>
+            
+        </div>
 
 		<script src="../../common/$.jqplot.demo.common.js"></script>
 	</body>
