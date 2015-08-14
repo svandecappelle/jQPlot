@@ -6,6 +6,9 @@
     <link rel="stylesheet" media="all" href="vendor/mocha.css" />
     <link rel="stylesheet" media="all" href="../dist/core/jquery.jqplot.min.css" />
     <style>
+        body {
+            font-family: sans-serif;
+        }
         #mocha-stats {
             background: white;
         }        
@@ -29,8 +32,7 @@
         <div id="chart" style="margin-top: 50px; margin-left: 10px; margin-right:10px;"></div>
     </div>
     <div id="mocha">
-        <p><a href=".">Jqplot Core Tests</a>
-        </p>
+        <p><a href=".">Jqplot Core Tests</a></p>
     </div>
     <div id="messages"></div>
     <div id="fixtures"></div>
@@ -50,6 +52,7 @@
     <script src="../dist/plugins/legend/jqplot.enhancedLegendRenderer.min.js"></script>
     <script src="../dist/plugins/highlighter/jqplot.highlighter.min.js"></script>
     <script src="../dist/plugins/cursor/jqplot.cursor.min.js"></script>
+    <script src="../dist/plugins/overlay/jqplot.canvasOverlay.min.js"></script>
     <script src="../dist/plugins/mobile/jqplot.mobile.min.js"></script>
 
     <script src="../node_modules/mocha/mocha.js"></script>

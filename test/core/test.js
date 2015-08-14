@@ -19,7 +19,8 @@ $(function () {
             },
             axes: {
                 xaxis: {
-                    //renderer: $.jqplot.DateAxisRenderer,
+                    renderer: undefined,
+                    ticks: undefined,
                     //tickRenderer: $.jqplot.CanvasAxisTickRenderer,
                     //numberTicks: 6,
                     //tickOptions: {}
@@ -89,6 +90,8 @@ $(function () {
             }*/
         },
         
+        defaultChartOptions = chartOptions,
+        
         dataSeries = [];
         
 
@@ -122,7 +125,7 @@ $(function () {
             it("Checking chart.plotData", function () {
                 should.exist(chart);
                 expect(chart._plotData).to.be.an('array');
-                expect(chart._plotData[0][0][0] >= 0).to.be.true;
+                //expect(chart._plotData[0][0][0] >= 0).to.be.true; // true is a reserved word 
                 console.log(chart._plotData[0][0][0]);
             });
             
@@ -131,10 +134,10 @@ $(function () {
         describe("Redraw", function () {
         
             beforeEach(function () {
-                chart = $.jqplot('chart', [[[1, 2],[3,5.12],[5,13.1],[7,33.6],[9,85.9],[11,219.9]]]);
+                chart = $.jqplot('chart', [[[1, 2], [3, 5.12], [5, 13.1], [7, 33.6], [9, 85.9], [11, 219.9]]]);
             });
             
-             it("Should redraw", function () {
+            it("Should redraw", function () {
                 chart.redraw();
                 should.exist(chart);
             });
@@ -144,10 +147,10 @@ $(function () {
         describe("Replot", function () {
         
             beforeEach(function () {
-                chart = $.jqplot('chart', [[[1, 2],[3,5.12],[5,13.1],[7,33.6],[9,85.9],[11,219.9]]]);
+                chart = $.jqplot('chart', [[[1, 2], [3, 5.12], [5, 13.1], [7, 33.6], [9, 85.9], [11, 219.9]]]);
             });
             
-             it("Should replot", function () {
+            it("Should replot", function () {
                 chart.replot();
                 should.exist(chart);
             });
@@ -212,7 +215,9 @@ $(function () {
                 
                     dataSeries = [];
                     
-                    chartOptions.axes.xaxis.renderer = $.jqplot.CategoryAxisRenderer;                    
+                    chartOptions = defaultChartOptions;
+                    
+                    chartOptions.axes.xaxis.renderer = $.jqplot.CategoryAxisRenderer;
                     chartOptions.axes.xaxis.ticks = ["Cat A", "Cat B", "Cat C", "Cat D"];
                     
                     dataSeries.push([100, 0, -20, 53.5]);
@@ -229,7 +234,206 @@ $(function () {
             });
             
         });
-    
+        
+        describe("Overlay", function () {
+        
+            describe("Basic canvasOverlay", function () {
+            
+                var chart;
+                
+                beforeEach(function () {
+                
+                    chart = null;
+                    
+                    dataSeries = [];
+                    
+                    $.jqplot.config.enablePlugins = true;
+                    
+                    chartOptions = defaultChartOptions;
+                    
+                    dataSeries = [['00:00', 5], ['06:00', 5], ['12:00', 5], ['18:00', 1], ['24:00', 0]];
+                    
+                    chartOptions.series = undefined;
+                    chartOptions.seriesDefaults = undefined;
+                    
+                    chartOptions.seriesDefaults = {
+                        markerOptions: {
+                            show: false
+                        },
+                        shadow: false
+                    };
+                    
+                    chartOptions.axes.yaxis.min = 0;
+                    chartOptions.axes.yaxis.max = 10;
+                    chartOptions.axes.xaxis.renderer = $.jqplot.DateAxisRenderer;
+                    chartOptions.axes.xaxis.ticks = undefined;
+                    
+                    chartOptions.canvasOverlay = {
+                        show: true,
+                        bellowSeries: true,
+                        objects: [{
+                            rectangle: {
+                                xformat: {
+                                    type: 'date',
+                                    format: '%H:%M'
+                                },
+                                name: 'recti1',
+                                xmin: '02:00',
+                                xmax: '05:00',
+                                ymin: [0],
+                                ymax: [2],
+                                xOffset: 0,
+                                color: 'rgba(255, 153, 0, 0.95)',
+                                shadow: false,
+                                showTooltip: true,
+                                tooltipLocation: 'ne',
+                                tooltipFormatString: 'Recti1: %.2f'
+                            }
+                        },
+                            {
+                                rectangle: {
+                                    xformat: {
+                                        type: 'date',
+                                        format: '%H:%M'
+                                    },
+                                    name: 'recti2',
+                                    xmin: '10:00',
+                                    xmax: '15:00',
+                                    ymin: [0],
+                                    ymax: [4],
+                                    xOffset: 0,
+                                    color: 'rgba(255, 153, 0, 0.95)',
+                                    shadow: false,
+                                    showTooltip: true,
+                                    tooltipLocation: 'ne',
+                                    tooltipFormatString: 'Recti2: %.2f'
+                                }
+                            }]
+                    };
+                    
+                    chartOptions.highlighter = {
+                        show: true,
+                        sizeAdjust: 10,
+                        tooltipLocation: 'n',
+                        tooltipAxes: 'y',
+                        showTooltip: true,
+                        tooltipFormatString: 'Hello %.2f'
+                    };
+                    
+                    chartOptions.cursor = {
+                        show: true,
+                        showTooltip: true
+                    };
+                    
+                    chart = $.jqplot('chart', [dataSeries], chartOptions);
+
+                });
+
+                it("Simple construction", function () {
+                    should.exist(chart);
+                    console.log(chart);
+                });
+                
+            });
+            
+            describe("canvasOverlay with rectangles", function () {
+            
+                var chart;
+                
+                beforeEach(function () {
+                
+                    chart = null;
+                    
+                    dataSeries = [];
+                    
+                    $.jqplot.config.enablePlugins = true;
+                    
+                    chartOptions = defaultChartOptions;
+                    
+                    dataSeries = [['00:00', 0], ['06:00', 500], ['12:00', 1000], ['18:00', 500], ['24:00', 0]];
+                    
+                    chartOptions.series = undefined;
+                    chartOptions.seriesDefaults = undefined;
+                    
+                    chartOptions.seriesDefaults = {
+                        markerOptions: {
+                            show: false
+                        },
+                        shadow: false
+                    };
+                    
+                    chartOptions.axes.yaxis.min = 0;
+                    chartOptions.axes.yaxis.max = 1000;
+                    chartOptions.axes.xaxis.renderer = $.jqplot.DateAxisRenderer;
+                    chartOptions.axes.xaxis.ticks = undefined;
+                    
+                    chartOptions.canvasOverlay = {
+                        show: true,
+                        bellowSeries: true,
+                        objects: [{
+                            rectangle: {
+                                xformat: {
+                                    type: 'date',
+                                    format: '%H:%M'
+                                },
+                                name: 'Item 1',
+                                xmin: '11:00',
+                                xmax: '14:00',
+                                ymin: [500],    // 500
+                                ymax: [1000],
+                                xOffset: 0,
+                                color: 'rgba(255, 153, 0, 0.95)',
+                                shadow: false
+                            }
+                        },
+                            {
+                                rectangle: {
+                                    xformat: {
+                                        type: 'date',
+                                        format: '%H:%M'
+                                    },
+                                    name: 'recti2',
+                                    xmin: '11:00',
+                                    xmax: '16:00',
+                                    ymin: [250],
+                                    ymax: [750],
+                                    xOffset: 0,
+                                    color: 'rgba(255, 153, 0, 0.95)',
+                                    shadow: false,
+                                    showTooltip: true,
+                                    tooltipLocation: 'ne',
+                                    tooltipFormatString: 'Recti2: %.2f'
+                                }
+                            }]
+                    };
+                    
+                    chartOptions.highlighter = {
+                        show: true,
+                        sizeAdjust: 10,
+                        tooltipLocation: 'n',
+                        tooltipAxes: 'y',
+                        showTooltip: true,
+                        tooltipFormatString: 'Hello %.2f'
+                    };
+                    
+                    chartOptions.cursor = {
+                        show: true,
+                        showTooltip: true
+                    };
+                    
+                    chart = $.jqplot('chart', [dataSeries], chartOptions);
+
+                });
+
+                it("Simple construction", function () {
+                    should.exist(chart);
+                    console.log(chart);
+                });
+                
+            });
+            
+        });
+        
     });
     
 });

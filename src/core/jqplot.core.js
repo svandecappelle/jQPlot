@@ -1,4 +1,4 @@
-/*jslint browser: true, plusplus: true, nomen: true, white: false */
+/*jslint browser: true, plusplus: true, nomen: true, white: false, continue: true */
 /*global jQuery, console, jqPlot */
 
 /**
@@ -631,7 +631,7 @@
                                 p = s.gridData[j];
                                 // neighbor looks different to OHLC chart.
                                 
-                                if (r.constructor == $.jqplot.OHLCRenderer) {
+                                if (r.constructor === $.jqplot.OHLCRenderer) {
                                     if (r.candleStick) {
                                         yp = s._yaxis.series_u2p;
                                         if (x >= p[0] - r._bodyWidth / 2 && x <= p[0] + r._bodyWidth / 2 && y >= yp(s.data[j][2]) && y <= yp(s.data[j][3])) {
@@ -3170,7 +3170,7 @@
      */
     JqPlot.prototype.quickInit = function () {
 
-        var n,
+        var ax,
             name,
             i,
             j,
@@ -3198,9 +3198,11 @@
         this.eventCanvas._plotDimensions = this._plotDimensions;
         this.legend._plotDimensions = this._plotDimensions;
 
-        for (n in this.axes) {
-            this.axes[n]._plotWidth = this._width;
-            this.axes[n]._plotHeight = this._height;
+        for (ax in this.axes) {
+            if (this.axes.hasOwnProperty(ax)) {
+                this.axes[ax]._plotWidth = this._width;
+                this.axes[ax]._plotHeight = this._height;
+            }
         }
 
         this.title._plotWidth = this._width;
