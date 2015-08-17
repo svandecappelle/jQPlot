@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JqPlot Enhanced Legend Renderer demo</title>
+
+    <!-- JQuery dependence -->
+    <script src="../../../dist/core/jquery.min.js"></script>
+    <!-- JQplot dependence -->
+    <!--<script src="../../src/core/jquery.jqplot.js"></script>-->
+    <script src="../../../src/core/jquery.jqplot.js"></script>
+    <script src="../../../src/plugins/cursor/jqplot.cursor.js"></script>
+    <script src="../../../src/plugins/axis/jqplot.dateAxisRenderer.js"></script>
+    <script src="../../../src/plugins/axis/jqplot.categoryAxisRenderer.js"></script>
+    <script src="../../../src/plugins/bar/jqplot.barRenderer.js"></script>
+    <script src="../../../src/plugins/legend/jqplot.enhancedLegendRenderer.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../../../dist/core/jquery.jqplot.min.css"/>
+    
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>JqPlot Enhanced Legend Renderer demo</h1>
+    
+    <h2>Plot 1</h2>
+    
+    <div id="chart1" style="height:300px; width:500px;"></div>
+    
+    <h2>Plot 2</h2>
+    
+    <div id="chart2" style="height:300px; width:500px;"></div>
+    
+    <script>
+
+        $(function () {
+            
+            var plot1,
+                dataSeries = [],
+                chartOptions = {
+                    axes: {
+                        yaxis: {
+                            min: -10
+                        },
+                        xaxis: {
+                            min: 1
+                        }
+                    },
+                    legend: {
+                        renderer: $.jqplot.EnhancedLegendRenderer,
+                        rendererOptions: {
+                            numberColumns: 2
+                        },
+                        location: 'ne',
+                        placement: 'outsideGrid',
+                        show: true  // needs to be explicitly set
+                    }
+                };
+            
+            plot1 = $.jqplot('chart1', [[50.5, 87.6, 2.5], [25, 50, 100], [0, 0, 0], [123.5, 75.12, 0]], chartOptions);
+            
+            chartOptions.legend.rendererOptions.numberColumns = 4;
+            chartOptions.legend.rendererOptions.legendTextColor = "inherit";
+            chartOptions.legend.placement = "insideGrid";
+            
+            plot2 = $.jqplot('chart2', [[50.5, 87.6, 2.5], [25, 50, 100], [0, 0, 0], [123.5, 75.12, 0]], chartOptions);
+            
+        });
+    </script>
+</body>
+</html>
