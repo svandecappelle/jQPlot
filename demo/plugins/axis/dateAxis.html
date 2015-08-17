@@ -1,43 +1,38 @@
 <html>
-	<head>
-		<title>Date Axis</title>
+    <head>
+        <title>Date Axis</title>
 
-		<!-- JQuery dependence -->
-		<script src="../../../dist/core/jquery.min.js"></script>
-		<script src="../../../src/core/jquery.jqplot.js"></script>
+        <!-- JQuery dependence -->
+        <script src="../../../dist/core/jquery.min.js"></script>
+        <script src="../../../dist/core/jquery.jqplot.min.js"></script>
 
-		<!-- Axes -->
-		<script src="../../../src/plugins/axis/jqplot.dateAxisRenderer.js"></script>
-		<script src="../../../dist/plugins/axis/jqplot.canvasAxisTickRenderer.min.js"></script>
-		<script src="../../../dist/plugins/text/jqplot.canvasTextRenderer.min.js"></script>
+        <!-- Axes -->
+        <script src="../../../dist/plugins/axis/jqplot.dateAxisRenderer.min.js"></script>
+        <script src="../../../dist/plugins/axis/jqplot.canvasAxisTickRenderer.min.js"></script>
+        <script src="../../../dist/plugins/text/jqplot.canvasTextRenderer.min.js"></script>
 
-		<!-- Customization theme -->
-		<script src="../../../dist/plugins/themes/extendedThemes.min.js"></script>
+        <!-- Customization theme -->
+        <script src="../../../dist/plugins/themes/extendedThemes.min.js"></script>
 
-		<!-- Export PNG -->
-		<script src="../../../dist/plugins/export/exportImg.min.js"></script>
+        <!-- Export PNG -->
+        <script src="../../../dist/plugins/export/exportImg.min.js"></script>
 
-		<script src="../../../dist/plugins/fullscreener/fullscreener.min.js"></script>
-		<script src="../../../dist/plugins/legend/jqplot.enhancedLegendRenderer.min.js"></script>
+        <script src="../../../dist/plugins/fullscreener/fullscreener.min.js"></script>
+        <script src="../../../dist/plugins/legend/jqplot.enhancedLegendRenderer.min.js"></script>
 
 
-		<script src="../../../src/plugins/overlay/jqplot.canvasOverlay.js"></script>
+        <script src="../../../src/plugins/overlay/jqplot.canvasOverlay.js"></script>
 
-		<link type="text/css" rel="stylesheet" href="../../../dist/plugins/fullscreener/fullscreener.min.css"/>
-		<link type="text/css" rel="stylesheet" href="../../../dist/core/jquery.jqplot.min.css"/>
-	</head>
-	<body>
+        <link type="text/css" rel="stylesheet" href="../../../dist/plugins/fullscreener/fullscreener.min.css"/>
+        <link type="text/css" rel="stylesheet" href="../../../dist/core/jquery.jqplot.min.css"/>
+    </head>
+    <body>
 
-		<div class="coding">
-		
-            <div id="chart1" style="margin:20px;"></div>
-            
-            <script>
-               
-				$(function(){
-                    
-				var line1=[['2008-09-30', 4], ['2008-10-30', 6.5], ['2008-11-30', 5.7], ['2008-12-30', 9], ['2009-01-30', 8.2]];
-                    
+        <div class="coding">		
+            <div id="chart1" style="margin:20px;"></div>            
+            <script>               
+				$(function(){                    
+				var line1=[['2008-09-30', 4], ['2008-10-30', 6.5], ['2008-11-30', 5.7], ['2008-12-30', 9], ['2009-01-30', 8.2]];                    
 				var plot1 = $.jqplot('chart1', [line1], {
 						title:'Date axis (PHP mode)',
 						axesDefaults : {
@@ -85,141 +80,134 @@
             </script>
             
         </div>
-            
         <div class="coding">
-        
-		  <div id="chart2" style="margin:20px;"></div>
+            <div id="chart2" style="margin:20px;"></div>
+            <script type="text/javascript">
 
-			<script>
+                $(function(){
+                console.log($.jsDate.createDate('2008-09-01 05:00:00').getTime());
 
-				$(function(){
+                var serie1 = [['2008-09-01', 4], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
+                var serie2 = [['2008-09-01', 2], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
+                var serie3 = [['2008-09-01', 2], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
+                var serie4 = [['2008-09-01', 2], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
+                var serie5 = [['2008-09-01', null], ['2008-09-02', 10], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
+                var serie6 = [['2008-09-01', null], ['2008-09-02', null], ['2008-09-03', 1], ['2008-09-04', null], ['2008-09-05', null]];
+                var serie7 = [['2008-09-01', null], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', 4], ['2008-09-05', null]];
+                var serie8 = [['2008-09-01', null], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', 1]];
                     
-                    console.log($.jsDate.createDate('2008-09-01 05:00:00').getTime());
-
-                    var serie1 = [['2008-09-01', 4], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
-                    var serie2 = [['2008-09-01', 2], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
-                    var serie3 = [['2008-09-01', 2], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
-                    var serie4 = [['2008-09-01', 2], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
-                    var serie5 = [['2008-09-01', null], ['2008-09-02', 10], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', null]];
-                    var serie6 = [['2008-09-01', null], ['2008-09-02', null], ['2008-09-03', 1], ['2008-09-04', null], ['2008-09-05', null]];
-                    var serie7 = [['2008-09-01', null], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', 4], ['2008-09-05', null]];
-                    var serie8 = [['2008-09-01', null], ['2008-09-02', null], ['2008-09-03', null], ['2008-09-04', null], ['2008-09-05', 1]];
-
-                    $.jqplot.config.enablePlugins = true;
-
-                    var plot2 = $.jqplot('chart2', [serie1, serie2, serie3, serie4, serie5, serie6, serie7, serie8], {
-						title:'A super chart',
-						axes:{
-							xaxis: {
-								renderer: $.jqplot.DateAxisRenderer,
-							}
-						},
-						seriesDefaults: {
-							renderer: $.jqplot.BarRenderer,
-							rendererOptions: {
-								varyBarColor: true,
-								barMargin: 30,
-							},
-							pointLabels: {show: true, darkColor: "black", brightColor: "orange"}
-						},
-						legend: {
-							show: true,
-							location: 'ne',
-							placement: 'inside'
-						},
-						series: [{label: 'Lbl 1'}, {label: 'Lbl 2'}, {label: 'Lbl 3'}, {label: 'Lbl 4'}, {label: 'Lbl 5'}, {label: 'Lbl 6'},{label: 'Lbl 7'}, {label: 'Lbl 8'}],
-						canvasOverlay: {
-							show: true,
-							bellowSeries: true,
-	            			objects: [
-								{rectangle: {
-									name: 'barney',
-									xformat: {
-										type: 'date',
-										format: '%Y-%m-%d %H:%M:%S'
-									},
-									xmin: '2008-09-01 05:00:00',
-									xmax: '2008-09-04 05:00:00',
-									ymin: [0],
-									ymax: [2000],
-									xOffset: 0,
-									color: 'rgba(122, 122, 122,0.5)',
-									shadow: false,
-									showTooltip: true,
-									tooltipLocation: 'ne',
-									tooltipFormatString: '<b><i><span style="color:red;">Passe</span></i></b> %.2f'
-								}},
-								 {horizontalLine: {
-									name: 'pebbles',
-									xformat: {
-										type: 'date',
-										format: '%Y-%m-%d %H:%M:%S'
-									},
-									y: -1,
-									xmin: '2008-09-02 15:00:00',
-									xmax: '2008-09-03 01:00:00',
-									lineWidth: 3,
-									color: 'lime',
-									shadow: true,
-									lineCap: 'butt',
-									showTooltip: true,
-									tooltipLocation: 'ne',
-									tooltipFormatString: '<b><i><span style="color:red;">Test2</span></i></b> %.2f'
-								}},
-								{verticalLine: {
-									name: 'tutu',
-									xformat: {
-										type: 'date',
-										format: '%Y-%m-%d %H:%M:%S'
-									},
-									ymin: 1,
-									ymax: 3,
-									x: '2008-09-02 15:00:00',
-									lineWidth: 3,
-									color: 'rgb(100, 55, 124)',
-									shadow: true,
-									lineCap: 'butt',
-									yOffset: -3,
-									showTooltip: true,
-									tooltipLocation: 'ne',
-									tooltipFormatString: '<b><i><span style="color:red;">Test</span></i></b> %.2f'
-								}},
-								{line: {
-									name: 'toto',
-									xformat: {
-										type: "date",
-										format: '%d/%m/%Y'
-									},
-									start: ['02/09/2008 15:00:00', 3],
-									stop: ['04/09/2008 15:00:00', 7],
-									lineWidth: 3,
-									color: 'rgb(255, 55, 124)',
-									shadow: true
-								}}]
-						},
-						highlighter: {
-							show: true,
-							sizeAdjust: 10,
-							tooltipLocation: 'n',
-							tooltipAxes: 'y',
-							showTooltip: true,
-							tooltipFormatString: '<b><i><span style="color:red;">hello</span></i></b> %.2f'
-						},
-						cursor: {
-							show: true
-						},
-						stackSeries: true
-                        
-					});
+                $.jqplot.config.enablePlugins = true;
                     
-					//plot2.replot();
-				
+                var plot2 = $.jqplot('chart2', [serie1, serie2, serie3, serie4, serie5, serie6, serie7, serie8], {
+                        title:'A super chart',
+                        axes:{
+                            xaxis:{
+                                renderer: $.jqplot.DateAxisRenderer,
+                                rendererOptions:{
+                                    tickRenderer: $.jqplot.CanvasAxisTickRenderer
+                                }
+                            }
+                        },
+                        seriesDefaults:{
+                            renderer: $.jqplot.BarRenderer,
+                            rendererOptions: {
+                                varyBarColor: true,
+                                barMargin: 30,
+                            },
+                            pointLabels: {show: true, darkColor: "black", brightColor: "orange"}
+                        },
+                        legend: {
+                            show: true,
+                            location: 'ne',
+                            placement: 'inside'
+                        },
+                        series: [{label: 'Lbl 1'}, {label: 'Lbl 2'}, {label: 'Lbl 3'}, {label: 'Lbl 4'}, {label: 'Lbl 5'}, {label: 'Lbl 6'},{label: 'Lbl 7'}, {label: 'Lbl 8'}],
+                        canvasOverlay: {
+                            show: true,
+                            bellowSeries: true,
+                            objects: [
+                                {rectangle: {
+                                    name: 'barney',
+                                    xformat: {
+                                        type: 'date',
+                                        format: '%Y-%m-%d %H:%M:%S'
+                                    },
+                                    xmin: '2008-09-01 05:00:00',
+                                    xmax: '2008-09-04 05:00:00',
+                                    ymin: [0],
+                                    ymax: [2000],
+                                    xOffset: 0,
+                                    color: 'rgba(122, 122, 122,0.5)',
+                                    shadow: false,
+                                    showTooltip: true,
+                                    tooltipLocation: 'ne',
+                                    tooltipFormatString: '<b><i><span style="color:red;">Passe</span></i></b> %.2f',
+                                }},
+                                 {horizontalLine: {
+                                    name: 'pebbles',
+                                    xformat: {
+                                        type: 'date',
+                                        format: '%Y-%m-%d %H:%M:%S'
+                                    },
+                                    y: -1,
+                                    xmin: '2008-09-02 15:00:00',
+                                    xmax: '2008-09-03 01:00:00',
+                                    lineWidth: 3,
+                                    color: 'lime',
+                                    shadow: true,
+                                    lineCap: 'butt',
+                                    showTooltip: true,
+                                    tooltipLocation: 'ne',
+                                    tooltipFormatString: '<b><i><span style="color:red;">Test2</span></i></b> %.2f',
+                                }},
+                                {verticalLine: {
+                                    name: 'tutu',
+                                    xformat: {
+                                        type: 'date',
+                                        format: '%Y-%m-%d %H:%M:%S'
+                                    },
+                                    ymin: 1,
+                                    ymax: 3,
+                                    x: '2008-09-02 15:00:00',
+                                    lineWidth: 3,
+                                    color: 'rgb(100, 55, 124)',
+                                    shadow: true,
+                                    lineCap: 'butt',
+                                    yOffset: -3,
+                                    showTooltip: true,
+                                    tooltipLocation: 'ne',
+                                    tooltipFormatString: '<b><i><span style="color:red;">Test</span></i></b> %.2f',
+                                }},
+                                {line: {
+                                    name: 'toto',
+                                    xformat: {
+                                        type: "date",
+                                        format: '%d/%m/%Y'
+                                    },
+                                    start: ['02/09/2008 15:00:00', 3],
+                                    stop: ['04/09/2008 15:00:00', 7],
+                                    lineWidth: 3,
+                                    color: 'rgb(255, 55, 124)',
+                                    shadow: true
+                                }}]
+                        },
+                        highlighter: {
+                            show: true,
+                            sizeAdjust: 10,
+                            tooltipLocation: 'n',
+                            tooltipAxes: 'y',
+                            showTooltip: true,
+                            tooltipFormatString: '<b><i><span style="color:red;">hello</span></i></b> %.2f',
+                        },
+                        cursor: {
+                            show: true
+                        },
+                        stackSeries: true,
+                    });
+                    plot2.replot();
                 });
-                
-			</script>
-            
-        </div>
-
+            </script>
+        </div>        
         <div class="coding">
         
             <div id="chart3" style="margin:20px;"></div>
@@ -278,7 +266,7 @@
             </script>
             
         </div>
-        
-		<script src="../../common/$.jqplot.demo.common.js"></script>
-	</body>
+
+        <script src="../../common/$.jqplot.demo.common.js"></script>
+    </body>
 </html>
