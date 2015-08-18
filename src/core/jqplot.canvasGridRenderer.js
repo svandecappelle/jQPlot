@@ -34,14 +34,19 @@
     
     "use strict";
     
-    // Class: $.jqplot.CanvasGridRenderer
-    // The default jqPlot grid renderer, creating a grid on a canvas element.
-    // The renderer has no additional options beyond the <Grid> class.
+    /**
+     * @class: $.jqplot.CanvasGridRenderer
+     * The default jqPlot grid renderer, creating a grid on a canvas element.
+     * The renderer has no additional options beyond the <Grid> class.
+     */
     $.jqplot.CanvasGridRenderer = function () {
         this.shadowRenderer = new $.jqplot.ShadowRenderer();
     };
     
-    // called with context of Grid object
+    /**
+     * called with context of Grid object
+     * @param {[[Type]]} options [[Description]]
+     */
     $.jqplot.CanvasGridRenderer.prototype.init = function (options) {
         this._ctx = null;
         $.extend(true, this, options);
@@ -95,23 +100,20 @@
     };
     
     /**
-     * [[Description]]
+     * Draws out the lines
      */
     $.jqplot.CanvasGridRenderer.prototype.draw = function () {
         
         var ctx,
             axes,
-            b,
-            e,
-            s,
-            m,
             ax,
             i,
             name,
             axis,
             ticks,
             numticks,
-            drawLine;
+            drawLine,
+            points;
         
         this._ctx = this._elem.get(0).getContext("2d");
         
@@ -161,12 +163,16 @@
          * @param   {[[Type]]} numticks [[Description]]
          * @returns {[[Type]]} [[Description]]
          */
-        this.drawMainAxices = function (name, axis, ticks, numticks) {
+        this.drawXaxices = function (name, axis, ticks, numticks) {
             
             var bopts = {},
                 j,
                 t,
-                pos;
+                pos,
+                s,
+                m,
+                b,
+                e;
             
             if (!axis.show) {
                 axis = null;
@@ -402,6 +408,97 @@
             
         };
         
+        /**
+         * [[Description]]
+         * @param {Object}   axis  [[Description]]
+         * @param {[[Type]]} ticks [[Description]]
+         */
+        this.drawYaxices = function (axis, ticks) {
+        
+            var tn,
+                t0,
+                left,
+                points,
+                t,
+                j,
+                pos,
+                s,
+                m,
+                b,
+                e;
+            
+            if (!axis.show) {
+                axis = null;
+                ticks =  null;
+                return;
+            }
+                
+            tn = ticks[axis.numberTicks - 1];
+            t0 = ticks[0];
+            left = axis.getLeft();
+            points = [[left, tn.getTop() + tn.getHeight() / 2], [left, t0.getTop() + t0.getHeight() / 2 + 1.0]];
+
+            // draw the shadow
+            if (this.shadow) {
+                this.renderer.shadowRenderer.draw(ctx, points, {lineCap: 'butt', fill: false, closePath: false});
+            }
+
+            // draw the line
+            drawLine(points[0][0], points[0][1], points[1][0], points[1][1], {lineCap: 'butt', strokeStyle: axis.borderColor, lineWidth: axis.borderWidth});
+
+            // draw the tick marks
+            for (j = ticks.length; j > 0; j--) {
+
+                t = ticks[j - 1];
+
+                s = t.markSize;
+                m = t.mark;
+
+                pos = Math.round(axis.u2p(t.value)) + 0.5;
+
+                if (t.showMark && t.mark) {
+                    
+                    switch (m) {
+                    case 'outside':
+                        b = left;
+                        e = left + s;
+                        break;
+                    case 'inside':
+                        b = left - s;
+                        e = left;
+                        break;
+                    case 'cross':
+                        b = left - s;
+                        e = left + s;
+                        break;
+                    default:
+                        b = left;
+                        e = left + s;
+                        break;
+                    }
+                    
+                    points = [[b, pos], [e, pos]];
+                    
+                    // draw the shadow
+                    if (this.shadow) {
+                        this.renderer.shadowRenderer.draw(ctx, points, {lineCap: 'butt', lineWidth: this.gridLineWidth * 1.5, offset: this.gridLineWidth * 0.75, fill: false, closePath: false});
+                    }
+                    
+                    // draw the line
+                    drawLine(b, pos, e, pos, {strokeStyle: axis.borderColor});
+                    
+                }
+                
+                t = null;
+                
+            }
+            t0 = null;
+            
+            axis = null;
+            ticks =  null;
+        
+        };
+        
         // Draw initial 4 axises
         for (i = 4; i > 0; i--) {
             
@@ -410,7 +507,7 @@
             ticks = axis._ticks;
             numticks = ticks.length;
             
-            this.drawMainAxices(name, axis, ticks, numticks);
+            this.drawXaxices(name, axis, ticks, numticks);
             
         }
         
@@ -420,85 +517,29 @@
         //////
         ax = ['y3axis', 'y4axis', 'y5axis', 'y6axis', 'y7axis', 'y8axis', 'y9axis', 'yMidAxis'];
         
-        for (var i = 7; i > 0; i--) {
+        for (i = 7; i > 0; i--) {
             
-            var axis = axes[ax[i - 1]];
-            var ticks = axis._ticks;
+            axis = axes[ax[i - 1]];
+            ticks = axis._ticks;
             
-            if (axis.show) {
-                
-                var tn = ticks[axis.numberTicks - 1];
-                var t0 = ticks[0];
-                var left = axis.getLeft();
-                var points = [[left, tn.getTop() + tn.getHeight() / 2], [left, t0.getTop() + t0.getHeight() / 2 + 1.0]];
-                
-                // draw the shadow
-                if (this.shadow) {
-                    this.renderer.shadowRenderer.draw(ctx, points, {lineCap: 'butt', fill: false, closePath: false});
-                }
-                
-                // draw the line
-                drawLine(points[0][0], points[0][1], points[1][0], points[1][1], {lineCap: 'butt', strokeStyle: axis.borderColor, lineWidth: axis.borderWidth});
-                
-                // draw the tick marks
-                for (var j = ticks.length; j > 0; j--) {
-                    
-                    var t = ticks[j - 1];
-                    
-                    s = t.markSize;
-                    m = t.mark;
-                    
-                    var pos = Math.round(axis.u2p(t.value)) + 0.5;
-                    
-                    if (t.showMark && t.mark) {
-                        switch (m) {
-                        case 'outside':
-                            b = left;
-                            e = left + s;
-                            break;
-                        case 'inside':
-                            b = left - s;
-                            e = left;
-                            break;
-                        case 'cross':
-                            b = left - s;
-                            e = left + s;
-                            break;
-                        default:
-                            b = left;
-                            e = left + s;
-                            break;
-                        }
-                        points = [[b,pos], [e,pos]];
-                        // draw the shadow
-                        if (this.shadow) {
-                            this.renderer.shadowRenderer.draw(ctx, points, {lineCap: 'butt', lineWidth: this.gridLineWidth * 1.5, offset: this.gridLineWidth * 0.75, fill: false, closePath: false});
-                        }
-                        // draw the line
-                        drawLine(b, pos, e, pos, {strokeStyle: axis.borderColor});
-                    }
-                    t = null;
-                }
-                t0 = null;
-            }
-            axis = null;
-            ticks =  null;
+            this.drawYaxices(axis, ticks);
+            
         }
         
         ctx.restore();
         
         if (this.shadow) {
-            var points = [[this._left, this._bottom], [this._right, this._bottom], [this._right, this._top]];
+            points = [[this._left, this._bottom], [this._right, this._bottom], [this._right, this._top]];
             this.renderer.shadowRenderer.draw(ctx, points);
         }
         
         // Now draw border around grid.  Use axis border definitions. start at
         // upper left and go clockwise.
         if (this.borderWidth !== 0 && this.drawBorder) {
-            drawLine(this._left, this._top, this._right, this._top, {lineCap: 'round', strokeStyle: axes.x2axis.borderColor, lineWidth:axes.x2axis.borderWidth});
-            drawLine(this._right, this._top, this._right, this._bottom, {lineCap: 'round', strokeStyle: axes.y2axis.borderColor, lineWidth:axes.y2axis.borderWidth});
-            drawLine(this._right, this._bottom, this._left, this._bottom, {lineCap: 'round', strokeStyle: axes.xaxis.borderColor, lineWidth:axes.xaxis.borderWidth});
-            drawLine(this._left, this._bottom, this._left, this._top, {lineCap: 'round', strokeStyle: axes.yaxis.borderColor, lineWidth:axes.yaxis.borderWidth});
+            drawLine(this._left, this._top, this._right, this._top, {lineCap: 'round', strokeStyle: axes.x2axis.borderColor, lineWidth: axes.x2axis.borderWidth});
+            drawLine(this._right, this._top, this._right, this._bottom, {lineCap: 'round', strokeStyle: axes.y2axis.borderColor, lineWidth: axes.y2axis.borderWidth});
+            drawLine(this._right, this._bottom, this._left, this._bottom, {lineCap: 'round', strokeStyle: axes.xaxis.borderColor, lineWidth: axes.xaxis.borderWidth});
+            drawLine(this._left, this._bottom, this._left, this._top, {lineCap: 'round', strokeStyle: axes.yaxis.borderColor, lineWidth: axes.yaxis.borderWidth});
         }
         
         // ctx.lineWidth = this.borderWidth;
@@ -506,9 +547,10 @@
         // ctx.strokeRect(this._left, this._top, this._width, this._height);
         
         ctx.restore();
+        
         ctx =  null;
         axes = null;
         
     };
     
-}(jQuery)); 
+}(jQuery));
