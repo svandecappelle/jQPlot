@@ -156,6 +156,231 @@
         };
         
         /**
+             * Renders the X axis
+             * @param {Object}   t    [[Description]]
+             * @param {[[Type]]} pos  [[Description]]
+             * @param {Object}   axis [[Description]]
+             */
+        this.renderXaxis = function (t, pos, axis) {
+            
+            var s,
+                m,
+                e,
+                b;
+
+            // draw the grid line if we should
+            if (t.showGridline && this.drawGridlines && ((!t.isMinorTick && axis.drawMajorGridlines) || (t.isMinorTick && axis.drawMinorGridlines))) {
+                drawLine(pos, this._top, pos, this._bottom);
+            }
+
+            // draw the mark
+            if (t.showMark && t.mark && ((!t.isMinorTick && axis.drawMajorTickMarks) || (t.isMinorTick && axis.drawMinorTickMarks))) {
+
+                s = t.markSize;
+                m = t.mark;
+
+                pos = Math.round(axis.u2p(t.value)) + 0.5;
+
+                switch (m) {
+                case 'outside':
+                    b = this._bottom;
+                    e = this._bottom + s;
+                    break;
+                case 'inside':
+                    b = this._bottom - s;
+                    e = this._bottom;
+                    break;
+                case 'cross':
+                    b = this._bottom - s;
+                    e = this._bottom + s;
+                    break;
+                default:
+                    b = this._bottom;
+                    e = this._bottom + s;
+                    break;
+                }
+
+                // draw the shadow
+                if (this.shadow) {
+                    this.renderer.shadowRenderer.draw(ctx, [[pos, b], [pos, e]], {lineCap: 'butt', lineWidth: this.gridLineWidth, offset: this.gridLineWidth * 0.75, depth: 2, fill: false, closePath: false});
+                }
+
+                // draw the line
+                drawLine(pos, b, pos, e);
+
+            }
+
+        };
+        
+        /**
+             * Renders the Y axis
+             * @param {Object}   t    [[Description]]
+             * @param {[[Type]]} pos  [[Description]]
+             * @param {Object}   axis [[Description]]
+             */
+        this.renderYaxis = function (t, pos, axis) {
+
+            var s,
+                m,
+                e,
+                b;
+
+            // draw the grid line
+            if (t.showGridline && this.drawGridlines && ((!t.isMinorTick && axis.drawMajorGridlines) || (t.isMinorTick && axis.drawMinorGridlines))) {
+                drawLine(this._right, pos, this._left, pos);
+            }
+
+            // draw the mark
+            if (t.showMark && t.mark && ((!t.isMinorTick && axis.drawMajorTickMarks) || (t.isMinorTick && axis.drawMinorTickMarks))) {
+
+                s = t.markSize;
+                m = t.mark;
+
+                pos = Math.round(axis.u2p(t.value)) + 0.5;
+
+                switch (m) {
+                case 'outside':
+                    b = this._left - s;
+                    e = this._left;
+                    break;
+                case 'inside':
+                    b = this._left;
+                    e = this._left + s;
+                    break;
+                case 'cross':
+                    b = this._left - s;
+                    e = this._left + s;
+                    break;
+                default:
+                    b = this._left - s;
+                    e = this._left;
+                    break;
+                }
+
+                // draw the shadow
+                if (this.shadow) {
+                    this.renderer.shadowRenderer.draw(ctx, [[b, pos], [e, pos]], {lineCap: 'butt', lineWidth: this.gridLineWidth * 1.5, offset: this.gridLineWidth * 0.75, fill: false, closePath: false});
+                }
+
+                drawLine(b, pos, e, pos, {strokeStyle: axis.borderColor});
+
+            }
+
+        };
+            
+            /**
+             * Renders the X2 axis
+             * @param {Object}   t    [[Description]]
+             * @param {[[Type]]} pos  [[Description]]
+             * @param {Object}   axis [[Description]]
+             */
+        this.renderX2axis = function (t, pos, axis) {
+
+            var s,
+                m,
+                b,
+                e;
+
+            // draw the grid line
+            if (t.showGridline && this.drawGridlines && ((!t.isMinorTick && axis.drawMajorGridlines) || (t.isMinorTick && axis.drawMinorGridlines))) {
+                drawLine(pos, this._bottom, pos, this._top);
+            }
+
+            // draw the mark
+            if (t.showMark && t.mark && ((!t.isMinorTick && axis.drawMajorTickMarks) || (t.isMinorTick && axis.drawMinorTickMarks))) {
+
+                s = t.markSize;
+                m = t.mark;
+
+                pos = Math.round(axis.u2p(t.value)) + 0.5;
+
+                switch (m) {
+                case 'outside':
+                    b = this._top - s;
+                    e = this._top;
+                    break;
+                case 'inside':
+                    b = this._top;
+                    e = this._top + s;
+                    break;
+                case 'cross':
+                    b = this._top - s;
+                    e = this._top + s;
+                    break;
+                default:
+                    b = this._top - s;
+                    e = this._top;
+                    break;
+                }
+
+                // draw the shadow
+                if (this.shadow) {
+                    this.renderer.shadowRenderer.draw(ctx, [[pos, b], [pos, e]], {lineCap: 'butt', lineWidth: this.gridLineWidth, offset: this.gridLineWidth * 0.75, depth: 2, fill: false, closePath: false});
+                }
+
+                drawLine(pos, b, pos, e);
+
+            }
+
+        };
+            
+            /**
+             * Renders the Y2 axis
+             * @param {Object}   t    [[Description]]
+             * @param {[[Type]]} pos  [[Description]]
+             * @param {Object}   axis [[Description]]
+             */
+        this.renderY2axis = function (t, pos, axis) {
+
+            var s,
+                m,
+                b,
+                e;
+
+            // draw the grid line
+            if (t.showGridline && this.drawGridlines && ((!t.isMinorTick && axis.drawMajorGridlines) || (t.isMinorTick && axis.drawMinorGridlines))) {
+                drawLine(this._left, pos, this._right, pos);
+            }
+
+            // draw the mark
+            if (t.showMark && t.mark && ((!t.isMinorTick && axis.drawMajorTickMarks) || (t.isMinorTick && axis.drawMinorTickMarks))) {
+
+                s = t.markSize;
+                m = t.mark;
+
+                pos = Math.round(axis.u2p(t.value)) + 0.5;
+
+                switch (m) {
+                case 'outside':
+                    b = this._right;
+                    e = this._right + s;
+                    break;
+                case 'inside':
+                    b = this._right - s;
+                    e = this._right;
+                    break;
+                case 'cross':
+                    b = this._right - s;
+                    e = this._right + s;
+                    break;
+                default:
+                    b = this._right;
+                    e = this._right + s;
+                    break;
+                }
+
+                // draw the shadow
+                if (this.shadow) {
+                    this.renderer.shadowRenderer.draw(ctx, [[b, pos], [e, pos]], {lineCap: 'butt', lineWidth: this.gridLineWidth * 1.5, offset: this.gridLineWidth * 0.75, fill: false, closePath: false});
+                }
+
+                drawLine(b, pos, e, pos, {strokeStyle: axis.borderColor});
+
+            }
+
+        };
+        
+        /**
          * [[Description]]
          * @param   {[[Type]]} name     [[Description]]
          * @param   {Object}   axis     [[Description]]
@@ -168,11 +393,7 @@
             var bopts = {},
                 j,
                 t,
-                pos,
-                s,
-                m,
-                b,
-                e;
+                pos;
             
             if (!axis.show) {
                 axis = null;
@@ -206,7 +427,9 @@
                 }
 
             }
-
+            
+            // RENDER AXICES
+            
             for (j = numticks; j > 0; j--) {
 
                 t = ticks[j - 1];
@@ -216,182 +439,17 @@
                     pos = Math.round(axis.u2p(t.value)) + 0.5;
 
                     switch (name) {
-
                     case 'xaxis':
-
-                        // draw the grid line if we should
-                        if (t.showGridline && this.drawGridlines && ((!t.isMinorTick && axis.drawMajorGridlines) || (t.isMinorTick && axis.drawMinorGridlines))) {
-                            drawLine(pos, this._top, pos, this._bottom);
-                        }
-
-                        // draw the mark
-                        if (t.showMark && t.mark && ((!t.isMinorTick && axis.drawMajorTickMarks) || (t.isMinorTick && axis.drawMinorTickMarks))) {
-
-                            s = t.markSize;
-                            m = t.mark;
-
-                            pos = Math.round(axis.u2p(t.value)) + 0.5;
-
-                            switch (m) {
-                            case 'outside':
-                                b = this._bottom;
-                                e = this._bottom + s;
-                                break;
-                            case 'inside':
-                                b = this._bottom - s;
-                                e = this._bottom;
-                                break;
-                            case 'cross':
-                                b = this._bottom - s;
-                                e = this._bottom + s;
-                                break;
-                            default:
-                                b = this._bottom;
-                                e = this._bottom + s;
-                                break;
-                            }
-
-                            // draw the shadow
-                            if (this.shadow) {
-                                this.renderer.shadowRenderer.draw(ctx, [[pos, b], [pos, e]], {lineCap: 'butt', lineWidth: this.gridLineWidth, offset: this.gridLineWidth * 0.75, depth: 2, fill: false, closePath: false});
-                            }
-
-                            // draw the line
-                            drawLine(pos, b, pos, e);
-
-                        }
+                        this.renderXaxis(t, pos, axis);
                         break;
-
                     case 'yaxis':
-
-                        // draw the grid line
-                        if (t.showGridline && this.drawGridlines && ((!t.isMinorTick && axis.drawMajorGridlines) || (t.isMinorTick && axis.drawMinorGridlines))) {
-                            drawLine(this._right, pos, this._left, pos);
-                        }
-
-                        // draw the mark
-                        if (t.showMark && t.mark && ((!t.isMinorTick && axis.drawMajorTickMarks) || (t.isMinorTick && axis.drawMinorTickMarks))) {
-
-                            s = t.markSize;
-                            m = t.mark;
-
-                            pos = Math.round(axis.u2p(t.value)) + 0.5;
-
-                            switch (m) {
-                            case 'outside':
-                                b = this._left - s;
-                                e = this._left;
-                                break;
-                            case 'inside':
-                                b = this._left;
-                                e = this._left + s;
-                                break;
-                            case 'cross':
-                                b = this._left - s;
-                                e = this._left + s;
-                                break;
-                            default:
-                                b = this._left - s;
-                                e = this._left;
-                                break;
-                            }
-                            
-                            // draw the shadow
-                            if (this.shadow) {
-                                this.renderer.shadowRenderer.draw(ctx, [[b, pos], [e, pos]], {lineCap: 'butt', lineWidth: this.gridLineWidth * 1.5, offset: this.gridLineWidth * 0.75, fill: false, closePath: false});
-                            }
-                            
-                            drawLine(b, pos, e, pos, {strokeStyle: axis.borderColor});
-                            
-                        }
+                        this.renderYaxis(t, pos, axis);
                         break;
-
                     case 'x2axis':
-
-                        // draw the grid line
-                        if (t.showGridline && this.drawGridlines && ((!t.isMinorTick && axis.drawMajorGridlines) || (t.isMinorTick && axis.drawMinorGridlines))) {
-                            drawLine(pos, this._bottom, pos, this._top);
-                        }
-
-                        // draw the mark
-                        if (t.showMark && t.mark && ((!t.isMinorTick && axis.drawMajorTickMarks) || (t.isMinorTick && axis.drawMinorTickMarks))) {
-
-                            s = t.markSize;
-                            m = t.mark;
-
-                            pos = Math.round(axis.u2p(t.value)) + 0.5;
-
-                            switch (m) {
-                            case 'outside':
-                                b = this._top - s;
-                                e = this._top;
-                                break;
-                            case 'inside':
-                                b = this._top;
-                                e = this._top + s;
-                                break;
-                            case 'cross':
-                                b = this._top - s;
-                                e = this._top + s;
-                                break;
-                            default:
-                                b = this._top - s;
-                                e = this._top;
-                                break;
-                            }
-
-                            // draw the shadow
-                            if (this.shadow) {
-                                this.renderer.shadowRenderer.draw(ctx, [[pos, b], [pos, e]], {lineCap: 'butt', lineWidth: this.gridLineWidth, offset: this.gridLineWidth * 0.75, depth: 2, fill: false, closePath: false});
-                            }
-
-                            drawLine(pos, b, pos, e);
-
-                        }
+                        this.renderX2axis(t, pos, axis);
                         break;
-
                     case 'y2axis':
-
-                        // draw the grid line
-                        if (t.showGridline && this.drawGridlines && ((!t.isMinorTick && axis.drawMajorGridlines) || (t.isMinorTick && axis.drawMinorGridlines))) {
-                            drawLine(this._left, pos, this._right, pos);
-                        }
-
-                        // draw the mark
-                        if (t.showMark && t.mark && ((!t.isMinorTick && axis.drawMajorTickMarks) || (t.isMinorTick && axis.drawMinorTickMarks))) {
-
-                            s = t.markSize;
-                            m = t.mark;
-
-                            pos = Math.round(axis.u2p(t.value)) + 0.5;
-
-                            switch (m) {
-                            case 'outside':
-                                b = this._right;
-                                e = this._right + s;
-                                break;
-                            case 'inside':
-                                b = this._right - s;
-                                e = this._right;
-                                break;
-                            case 'cross':
-                                b = this._right - s;
-                                e = this._right + s;
-                                break;
-                            default:
-                                b = this._right;
-                                e = this._right + s;
-                                break;
-                            }
-
-                            // draw the shadow
-                            if (this.shadow) {
-                                this.renderer.shadowRenderer.draw(ctx, [[b, pos], [e, pos]], {lineCap: 'butt', lineWidth: this.gridLineWidth * 1.5, offset: this.gridLineWidth * 0.75, fill: false, closePath: false});
-                            }
-                            
-                            drawLine(b, pos, e, pos, {strokeStyle: axis.borderColor});
-                            
-                        }
+                        this.renderY2axis(t, pos, axis);
                         break;
                     default:
                         break;
