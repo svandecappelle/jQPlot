@@ -131,4 +131,4 @@
 
     jqutils.loadjscssfile(rn + 'font-awesome.min.css', 'css');
 
-})();
+}());

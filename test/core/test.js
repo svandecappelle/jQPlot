@@ -434,6 +434,35 @@ $(function () {
             
         });
         
+        describe("Legend", function () {
+        
+            describe("enhancedLegendRenderer", function () {
+            
+                beforeEach(function () {
+                
+                    dataSeries = [];
+                    
+                    chartOptions = defaultChartOptions;
+                    
+                    chartOptions.axes.xaxis.renderer = $.jqplot.CategoryAxisRenderer;
+                    chartOptions.axes.xaxis.ticks = ["Cat A", "Cat B", "Cat C", "Cat D"];
+                    chartOptions.legend.location = "n";
+                    
+                    dataSeries.push([100, 0, -20, 53.5]);
+
+                    chart = $.jqplot('chart', dataSeries, chartOptions);
+
+                });
+
+                it("Simple construction", function () {
+                    should.exist(chart);
+                    console.log(chart);
+                });
+                
+            });
+            
+        });
+        
     });
     
 });
