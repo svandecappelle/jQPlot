@@ -1,62 +1,51 @@
 ---
-layout: guides
-title: jQPlot Quick start guide
+layout: simple
 ---
+          <div class="rowInside">
+            <article class="grid_12 hrline"></article>
+            <article class="grid_12 contrast">
+              <div class="wrap"><span class="img">&nbsp;</span>
+                <h3 class="fancy"><a href="#GettingStarted">Getting started</a></h3>
+                <ul>
+                  <li>
+                    <p>Insert javascript dependencies replacing <code>&lt;jqplot_dist_directory&gt;</code> by the directory you've installed the distributions files.</p>
+                    <div class='codemirror-container'>
+                        <textarea>
+<head>
+  <script src="<jqplot_dist_directory>/core/jquery.min.js"></script>
+  <script src="<jqplot_dist_directory>/core/jquery.jqplot.min.js"></script>
+  <link type="text/css" rel="stylesheet" href="<jqplot_dist_directory>/core/jquery.jqplot.min.css"/>
+</head>
+                        </textarea>
+                    </div>
+                  </li>
+                  <li>
+                    <p>Insert an html chart container into <code>&lt;body&gt;</code> html.</p>
+                    <div class='codemirror-container'>
+                        <textarea>
+<div id="chart"></div>
+                        </textarea>
+                    </div>
+                  </li>
+                  <li>
+                    <p>Insert the code to generate the chart using the element id defined.</p>
+                    <div class='codemirror-container'>
+                        <textarea>
+<script type="text/javascript">
+  $(function(){
+    // Chart datas
+    var line1 = [[1,4], [2,6.5], [3,5.7], [4,9], [5,8.2]];
 
-
-
-            <h3 class="plain">
-                Step 1: Insert javascript dependencies replacing
-                <code>&lt;jqplot_dist_directory&gt;</code>
-                by the directory you've installed
-                    the distributions files
-            </h3>
-
-
-
-       <pre class="brush: js">
-&lt;head&gt;
-    <script src="<jqplot_dist_directory>/core/jquery.min.js"></script>
-    <script src="<jqplot_dist_directory>/core/jquery.jqplot.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="<jqplot_dist_directory>/core/jquery.jqplot.min.css"/>
-&lt;/head&gt;
-            </pre>
-
-
-            <h3 class="plain">
-                <br />Step 2: Insert an html chart container into <code>&lt;body&gt;</code> html.
-            </h3>
-
-       <pre class="brush: js">
-&lt;body&gt;
-    &lt;div id="chart"&gt;&lt;/div&gt;
-&lt;/body&gt;
-
-                </pre>
-
-
-            <h3 class="plain">
-                <br />Step 3: Insert the code to generate the chart using the element id defined.
-            </h3>
-
-<script class="code" type="text/javascript">
-    $(function(){
-        // Chart datas
-        var line1 = [[1,4], [2,6.5], [3,5.7], [4,9], [5,8.2]];
-
-        // Chart building system call.
-        $.jqplot('chart1', [line1]);
-    });
+    // Chart building system call.
+    $.jqplot('chart', [line1]);
+  });
 </script>
-            <div class="code prettyprint">
-                <pre class="code prettyprint brush: js"></pre>
-            </div>
+                        </textarea>
+                    </div>
+                  </li>
+                </ul>
 
-            <h3 class="plain"><br />Step 4: The finished result</h3>
-
-            <div id="chart1"></div>
-
-            <br />
-
-            <div class="more-wrap"><a href="../demo/index.html" class="more">Go to additional
-                demos<span class="arrow">→</span></a></div>
+                <div class="more-wrap"><a href="../demo/index.html" target="_blank" class="more">See demo<span class="arrow">→</span></a></div>
+              </div>
+            </article>
+          </div>

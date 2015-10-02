@@ -1,0 +1,26 @@
+---
+layout: demopage
+---
+<div class="coding">
+<div id="chart1" style="margin:20px;"></div>
+<script type="text/javascript">
+    $(function(){
+        var plot1 = $.jqplot('chart1', [[30]], {
+            title:'Temperature',
+            seriesDefaults: {
+               renderer: $.jqplot.MeterGaugeRenderer,
+               animate: true,
+               rendererOptions: {
+                   label: 'Celcius degree',
+                   showOuterRing: true,
+                   needelColor: "#FF0000",
+                   showHub: true,
+                   hubColor: "#000000",
+                   ringColor: "grey",
+                   animate: true
+               }
+           }
+        });
+    });
+</script>
+</div>

@@ -1,0 +1,31 @@
+---
+layout: demopage
+---
+<div class="coding">
+<div id="chart1" style="margin:20px;"></div>
+<script type="text/javascript">
+	var plot1;
+	$(function(){
+	plot1 = $.jqplot('chart1', [[]], {
+			background: 'rgba(255,0,0,0.1)',
+			noDataIndicator: {
+				show: true
+			},
+			title: {
+				text: 'Simple chart',
+				fontFamily:'Helvetica',
+				fontSize: '14pt',
+				textColor: 'red'
+			},
+			legend:{
+				show: true,
+				renderer: $.jqplot.EnhancedLegendRenderer,
+				location: 'ne',
+				placement: 'outsideGrid',
+				textColor: 'red'
+			},
+			series: [{lineWidth:4, markerOptions:{style:'square'}, label: 'toto'}]
+		});
+	});
+</script>
+</div>

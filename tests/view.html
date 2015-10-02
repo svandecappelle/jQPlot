@@ -1,65 +1,28 @@
 ---
-layout: frontpage
+layout: tests
 ---
-<head>
-  <meta charset="utf-8">
-  <title>Jqplot core tests</title>
-  <link rel="stylesheet" media="all" href="mocha/mocha.css"/>
-  <link rel="stylesheet" media="all" href="../dist/core/jquery.jqplot.min.css"/>
-  <style>
-    #mocha-stats{
-      background: white;
-    }
-    
-    h1{
-      color: grey;
-    }
+<h1>Testing chart</h1>
+<div id="jqplot-test">
+  <div id="chart" style="margin-top: 50px; margin-left: 10px; margin-right:10px;"></div>
+</div>
+<div id="mocha"><p><a href=".">Jqplot Core Tests</a></p></div>
+<div id="messages"></div>
+<div id="fixtures"></div>
 
-    #jqplot-test{
-      width: 35%;
-      display: inline-block;
-      vertical-align: top;
-    }
+<script src="../dist/core/jquery.min.js"></script>
+<script src="../dist/core/jquery.jqplot.min.js"></script>
 
-    #mocha{
-      display: inline-block;
-    }
-  </style>
-</head>
-<body>
+<script src="mocha/mocha.js"></script>
+<script src="chai/chai.js"></script>
 
-
-<header>
-
-  <div class="content">
-    <section id="content">
-
-  <h1>Testing chart</h1>
-  <div id="jqplot-test">
-    <div id="chart" style="margin-top: 50px; margin-left: 10px; margin-right:10px;"></div>
-  </div>
-  <div id="mocha"><p><a href=".">Jqplot Core Tests</a></p></div>
-  <div id="messages"></div>
-  <div id="fixtures"></div>  
-
-  <script src="../dist/core/jquery.min.js"></script>
-  <script src="../dist/core/jquery.jqplot.min.js"></script>
-
-  <script src="mocha/mocha.js"></script>
-  <script src="chai/chai.js"></script>
-  
-  <script>
-    mocha.ui('bdd');
-    mocha.reporter('html');
-    var expect = chai.expect;
-  </script>
-  <script src="core/test.js"></script>
-  <script>
-    $(function() {
-      mocha.run();
-    });
-  </script>
-</section>
-    </div>
-  </header>
-
+<script>
+  mocha.ui('bdd');
+  mocha.reporter('html');
+  var expect = chai.expect;
+</script>
+<script src="core/test.js"></script>
+<script>
+  $(function() {
+    mocha.run();
+  });
+</script>
