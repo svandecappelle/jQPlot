@@ -335,7 +335,7 @@ span.accented {
 span.accented span.faccentl {
   display: block;
   float: left;
-  background: transparent url("/jQplot/public/img/font-accents.png") no-repeat 0px 0px;
+  background: transparent url("/jQPlot/public/img/font-accents.png") no-repeat 0px 0px;
   width: 50px;
   height: 50px;
   overflow: hidden;
@@ -343,7 +343,7 @@ span.accented span.faccentl {
 span.accented span.faccentr {
   display: block;
   float: right;
-  background: transparent url("/jQplot/public/img/font-accents.png") no-repeat -50px 0px;
+  background: transparent url("/jQPlot/public/img/font-accents.png") no-repeat -50px 0px;
   width: 50px;
   height: 50px;
   overflow: hidden;
@@ -509,7 +509,7 @@ article.contrast {
 }
 #plugin-dir span.img {
   zoom: 1;
-  background: #BDE999 url("/jQplot/public/img/plugin-dir-banner.png") no-repeat;
+  background: #BDE999 url("/jQPlot/public/img/plugin-dir-banner.png") no-repeat;
 }
 #plugin-dir span.img:before,
 #plugin-dir span.img:after {
@@ -524,11 +524,11 @@ article.contrast {
   margin: 15px auto;
   width: 100px;
   height: 100px;
-  background: transparent url("/jQplot/public/img/chai-icons.png") no-repeat 0px -200px;
+  background: transparent url("/jQPlot/public/img/chai-icons.png") no-repeat 0px -200px;
 }
 #plugin-guide span.img {
   zoom: 1;
-  background: #BDE999 url("/jQplot/public/img/plugin-guide-banner.png") no-repeat;
+  background: #BDE999 url("/jQPlot/public/img/plugin-guide-banner.png") no-repeat;
 }
 #plugin-guide span.img:before,
 #plugin-guide span.img:after {
@@ -543,13 +543,13 @@ article.contrast {
   margin: 15px auto;
   width: 100px;
   height: 100px;
-  background: transparent url("/jQplot/public/img/chai-icons.png") no-repeat 0px 0px;
+  background: transparent url("/jQPlot/public/img/chai-icons.png") no-repeat 0px 0px;
 }
 article.code .code-sample pre {
   overflow-x: visible;
 }
 article.github span.img {
-  background: transparent url("/jQplot/public/img/octocat.png");
+  background: transparent url("/jQPlot/public/img/octocat.png");
 }
 
 nav#primary {
@@ -569,7 +569,7 @@ nav#primary .logo h1 {
   line-height: 70px;
 }
 nav#primary .logo h1 a {
-  background: transparent url("/jQplot/public/img/chai-logo-small.png") no-repeat 0px 10px;
+  background: transparent url("/jQPlot/public/img/chai-logo-small.png") no-repeat 0px 10px;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #39A402;
   font-size: 18px;
@@ -693,4 +693,87 @@ table.images-content tr th, table.images-content tr td{
   max-width: unset !important;
   right: 0px;
   width: 100% !important;
+}
+
+.card{
+  border-radius: 5px;
+  background: #FFF none repeat scroll 0% 0%;
+  box-shadow: 0px 0px 1px #784942;
+  position: relative;
+}
+
+.card .card-inner {
+    height: 230px;
+    position: relative;
+    margin: 20px;
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #666;
+}
+.card .card-inner #node.install {
+    display: block;
+    position: absolute;
+    top: 50px;
+}
+
+.card .card-inner .download-banner {
+    margin-top: 30px;
+}
+
+.card .card-inner h2 {
+    font-size: 25px;
+    margin-top: -5px;
+    font-family: "Redressed","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.card .card-inner .download-banner .description {
+    margin-bottom: 20px;
+}
+
+.card .card-inner .download-banner .dsp-left {
+    margin-right: 10px;
+}
+
+.card .card-inner .download-banner .command {
+    display: inline-block;
+    background-color: #FFF;
+    float: left;
+    font-family: "Bitstream Vera Sans Mono","Courier",monospace;
+    width: 210px;
+    line-height: 42px;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0px 0px 1px #666;
+}
+
+.card .card-inner .download-banner .dsp-right {
+    margin-left: 10px;
+}
+
+.card .card-inner h2 small {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    position: relative;
+    bottom: 1px;
+    margin-left: 15px;
+    color: #666;
+    font-size: 13px;
+}
+
+.card .card-inner h1 span.version {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    color: #666;
+    background-color: #FFF;
+    border-radius: 5px;
+    padding: 3px 6px;
+    margin-left: 10px;
+    display: inline-block;
+    position: relative;
+    top: -7px;
+}
+
+.card .card-inner .tech-links {
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    width: 440px;
 }
