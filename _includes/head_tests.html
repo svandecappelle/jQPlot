@@ -1,5 +1,8 @@
 {% include head_demo.html %}
-<link rel="stylesheet" media="all" href="{{ "/mocha/mocha.css" | prepend: site.baseurl }}"/>
+<link rel="stylesheet" media="all" href="{{ "/tests/mocha/mocha.css" | prepend: site.baseurl }}"/>
+<script src="{{ "/tests/mocha/mocha.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/tests/chai/chai.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/tests/core/test.js" | prepend: site.baseurl }}"></script>
 
 <style>
   #mocha-stats{
