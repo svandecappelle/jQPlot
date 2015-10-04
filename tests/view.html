@@ -9,15 +9,11 @@ layout: tests
 <div id="messages"></div>
 <div id="fixtures"></div>
 
-<script src="mocha/mocha.js"></script>
-<script src="chai/chai.js"></script>
-
 <script>
   mocha.ui('bdd');
   mocha.reporter('html');
   var expect = chai.expect;
 </script>
-<script src="core/test.js"></script>
 <script>
   $(function() {
     mocha.run();
