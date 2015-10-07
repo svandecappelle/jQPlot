@@ -1,0 +1,4 @@
+[submodule "site"]
+	path = site
+	url = git@github.com:svandecappelle/jQPlot.git
+	branch = gh-pages
