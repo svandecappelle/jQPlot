@@ -38,3 +38,6 @@ dist
 node_modules
 .tmp
 log.txt
+
+# Site using submodule git
+site
