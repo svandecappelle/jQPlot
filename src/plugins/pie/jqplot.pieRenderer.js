@@ -377,9 +377,9 @@
         if (this.serie.labelsSlices[pid]){
           var pointLblPosition = this.serie.labelsSlices[pid].position();
           var tooltip = this.serie.labelsSlices[pid].find(".tooltip");
-          var topPos = y - pointLblPosition.top - (this.serie.labelsSlices[pid].height()*2 + tooltip.height());
-          var leftPos = x - pointLblPosition.left - this.serie.labelsSlices[pid].width() - tooltip.width() / 2;
-          tooltip.css({left: leftPos, top: topPos});
+          var topPos = - tooltip.height() - (this.serie.labelsSlices[pid].height() / 2);
+          var leftPos = - (tooltip.width() / 2) - (this.serie.labelsSlices[pid].width() / 2);
+          tooltip.css({"margin-left": leftPos + "px", "margin-top": topPos + "px"});
         }
     };
 

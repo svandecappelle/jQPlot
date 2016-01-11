@@ -228,7 +228,10 @@ table.jqplot-cursor-tooltip {
 .jqplot-cursor-tooltip {
     font-size: smaller;
     white-space: nowrap;
-    padding: 1px;
+    padding: 3px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 2;
 }
 
 .jqplot-highlighter-tooltip,

@@ -114,7 +114,8 @@
          * @returns {object}
          */
         getIntersectingPoints = function (plot, x, y) {
-
+            return $.fn.checkIntersection({x: x, y: y}, plot);
+/*
             var ret = {
                     indices: [],
                     data: []
@@ -165,7 +166,7 @@
                     }
                 }
             }
-            return ret;
+            return ret;*/
         },
 
         /**
@@ -174,108 +175,172 @@
          * @param {Object} plot    
          */
         updateTooltip = function (gridpos, datapos, plot) {
-
             var c = plot.plugins.cursor,
                 serie,
                 series = plot.series,
                 seriesLen = series.length,
-                s = '',
-                addbr = false,
-                data,
-                g,
-                i,
-                j,
-                tooltipAxisGroupLen,
-                serieIndex,
+                s = '';
+
+            s = formatCursor(gridpos, datapos, plot);
+
+            if (s === "") {
+                c._tooltipElem.css({display: 'none'});
+            } else {
+                c._tooltipElem.css({display: 'block'});
+            }
+
+            c._tooltipElem.html(s);
+        },
+
+        formatCursor = function (gridpos, datapos, plot) {
+            var c = plot.plugins.cursor,
+                serie,
+                html = "",
+                series = plot.series;
+
+            if (c.showTooltipGridPosition){
+                html += showTooltipGridPosition(gridpos, plot);
+            }
+
+            if (c.showTooltipUnitPosition) {
+                html += showTooltipUnitPosition();
+            }
+
+            if (c.showTooltipDataPosition) {
+                html += showTooltipDataPosition(gridpos, plot);
+            }
+
+
+            return html;        
+        },
+
+        showTooltipGridPosition = function (gridpos, plot) {
+            var s = gridpos.x + ', ' + gridpos.y;
+            return s;
+        },
+
+        showTooltipUnitPosition = function (gridpos, datapos, plot) {
+            var c = plot.plugins.cursor,
+                serie,
+                html,
                 af,
                 afstr,
                 yaxisStr,
                 xaxisStr,
+                s = '';
                 sx,
                 sy,
                 yfstr,
                 xfstr,
-                ret,
-                idx,
-                label,
-                cellid,
                 ystr,
-                xstr;
+                xstr,
+                g,
+                i,
+                j,
+                data,
+                serieIndex,
+                addbr = false,
+                tooltipAxisGroupLen,
+                series = plot.series,
+                seriesLen = series.length;
 
-            if (c.showTooltipGridPosition) {
-                s = gridpos.x + ', ' + gridpos.y;
+            for (i = 0, tooltipAxisGroupLen = c.tooltipAxisGroups.length; i < tooltipAxisGroupLen; i++) {
+                serieIndex = i;
+                
+                g = c.tooltipAxisGroups[i];
+
+                if (addbr) {
+                    s += '<br />';
+                } else {
+                    
+                    for (j = 0; j < g.length; j++) {
+                        if (j) {
+                            s += ', ';
+                        }
+                        af = plot.axes[g[j]]._ticks[0].formatter;
+                        afstr = plot.axes[g[j]]._ticks[0].formatString;
+                        s += af(afstr, datapos[g[j]]);
+                    }
+                    
+                }
+
+                if (c.yaxis || c.xaxis) {
+
+                    if (c.yaxis && c.yaxis.formatter) {
+                        yaxisStr = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, datapos[g[1]], serieIndex);
+                    } else {
+                        yfstr = g._yaxis._ticks[0].formatString;
+                        sx = g._yaxis._ticks[0].formatter(yfstr, datapos[g[1]], serieIndex);
+                    }
+
+                    if (c.xaxis && c.xaxis.formatter) {
+                        xaxisStr = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, datapos[g[0]], serieIndex);
+                    } else {
+                        xfstr = g._xaxis._ticks[0].formatString;
+                        sx = g._xaxis._ticks[0].formatter(xfstr, datapos[g[0]], serieIndex);
+                    }
+
+                    s += $.jqplot.sprintf(c.tooltipFormatString, xaxisStr, yaxisStr);
+
+                } else if (c.useAxesFormatters) {
+
+                    for (j = 0; j < g.length; j++) {
+                        if (j) {
+                            s += ', ';
+                        }
+                        af = plot.axes[g[j]]._ticks[0].formatter;
+                        afstr = plot.axes[g[j]]._ticks[0].formatString;
+                        s += af(afstr, datapos[g[j]], serieIndex);
+                    }
+
+                } else {
+                    s += $.jqplot.sprintf(c.tooltipFormatString, datapos[g[0]], datapos[g[1]]);
+                }
+
                 addbr = true;
             }
+        },
 
-            if (c.showTooltipUnitPosition) {
-
-                for (i = 0, tooltipAxisGroupLen = c.tooltipAxisGroups.length; i < tooltipAxisGroupLen; i++) {
-
-                    serieIndex = i;
-                    
-                    g = c.tooltipAxisGroups[i];
-
-                    if (addbr) {
-                        s += '<br />';
-                    } else {
-                        
-                        for (j = 0; j < g.length; j++) {
-                            if (j) {
-                                s += ', ';
-                            }
-                            af = plot.axes[g[j]]._ticks[0].formatter;
-                            afstr = plot.axes[g[j]]._ticks[0].formatString;
-                            s += af(afstr, datapos[g[j]]);
-                        }
-                        
-                    }
-
-                    if (c.yaxis || c.xaxis) {
-
-                        if (c.yaxis && c.yaxis.formatter) {
-                            yaxisStr = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, datapos[g[1]], serieIndex);
-                        } else {
-                            yfstr = g._yaxis._ticks[0].formatString;
-                            sx = g._yaxis._ticks[0].formatter(yfstr, data[1], serieIndex);
-                        }
-
-                        if (c.xaxis && c.xaxis.formatter) {
-                            xaxisStr = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, datapos[g[0]], serieIndex);
-                        } else {
-                            xfstr = g._xaxis._ticks[0].formatString;
-                            sx = g._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
-                        }
-
-                        s += $.jqplot.sprintf(c.tooltipFormatString, xaxisStr, yaxisStr);
-
-                    } else if (c.useAxesFormatters) {
-
-                        for (j = 0; j < g.length; j++) {
-                            if (j) {
-                                s += ', ';
-                            }
-                            af = plot.axes[g[j]]._ticks[0].formatter;
-                            afstr = plot.axes[g[j]]._ticks[0].formatString;
-                            s += af(afstr, datapos[g[j]], serieIndex);
-                        }
-
-                    } else {
-                        s += $.jqplot.sprintf(c.tooltipFormatString, datapos[g[0]], datapos[g[1]]);
-                    }
-
-                    addbr = true;
-
-                }
-            }
-
-            if (c.showTooltipDataPosition) {
-
+        showTooltipDataPosition = function(gridpos, plot) {
+            var c = plot.plugins.cursor,
+                serie,
+                label,
+                cellid,
+                af,
+                afstr,
+                yaxisStr,
+                xaxisStr,
+                s = '',
+                sx,
+                sy,
+                yfstr,
+                xfstr,
+                ystr,
+                xstr,
+                idx,
+                i,
+                j,
+                addbr = true,
+                data,
+                serieIndex,
+                series = plot.series,
+                seriesLen = series.length,
+                xaxis,
+                yaxis,
+                xaxisTickData,
+                xaxisTickCategIndexData,
+                yaxisTickData,
+                yaxisTick,
                 ret = getIntersectingPoints(plot, gridpos.x, gridpos.y);
 
+            if (ret) {
                 for (i = 0; i < seriesLen; i++) {
 
                     serieIndex = i;
                     serie = series[i];
+                    xaxis = serie._xaxis;
+                    yaxis = serie._yaxis;
+
 
                     if (serie.show) {
 
@@ -286,81 +351,78 @@
                             label = $.jqplot.sprintf("<span style=\"color:%s\">%s</span>", serie.color, label);
                         }
 
-                        cellid = $.inArray(idx, ret.indices);
+                        cellid = ret.pointIndex;
                         
                         sx = null;
                         sy = null;
 
                         if (cellid !== -1) {
 
-                            data = ret.data[cellid].data;
+                            data = ret.data;
+
+                            if (serie._xaxis.ticks){
+                                // categories ticks.
+                                xaxisTickData = serie._xaxis.ticks[cellid];
+                                xaxisTickCategIndexData = data[0];
+                            } else {
+                                xaxisTickData = data[0];
+                            }
+                            yaxisTickData = data[1];
+
+                            yaxisTick = yaxis._ticks[0];
 
                             if (c.yaxis || c.xaxis) {
 
                                 if (c.yaxis && c.yaxis.formatter) {
-                                    sy = c.yaxis.formatter(serie._yaxis._ticks[0].formatString, data[1], serieIndex);
+                                    sy = c.yaxis.formatter(yaxisTick.formatString, yaxisTickData, serieIndex);
                                 } else {
-                                    yfstr = serie._yaxis._ticks[0].formatString;
-                                    sy = serie._yaxis._ticks[0].formatter(yfstr, data[1], serieIndex);
+                                    yfstr = yaxisTick.formatString;
+                                    sy = yaxisTick.formatter(yfstr, yaxisTickData, serieIndex);
                                 }
 
                                 if (c.xaxis && c.xaxis.formatter) {
-                                    sx = c.xaxis.formatter(serie._xaxis._ticks[0].formatString, data[0], serieIndex);
+                                    sx = c.xaxis.formatter(serie._xaxis._ticks[0].formatString, xaxisTickData, serieIndex, xaxisTickCategIndexData);
                                 } else {
                                     xfstr = serie._xaxis._ticks[0].formatString;
-                                    sx = serie._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
-                                }
-
-                                if (!addbr && c.insertHead) {
-                                    s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
-                                    s += '<br />';
+                                    sx = serie._xaxis._ticks[0].formatter(xfstr, xaxisTickData, serieIndex, xaxisTickCategIndexData);
                                 }
 
                             } else if (c.useAxesFormatters) {
-                                
                                 xfstr = serie._xaxis._ticks[0].formatString;
-                                yfstr = serie._yaxis._ticks[0].formatString;
-                                sx = serie._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
-                                sy = serie._yaxis._ticks[0].formatter(yfstr, data[1], serieIndex);
-                                
-                                if (!addbr && c.insertHead) {
-                                    s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
-                                    s += '<br />';
-                                }
-                                
+                                yfstr = yaxisTick.formatString;
+                                sx = serie._xaxis._ticks[0].formatter(xfstr, xaxisTickData, serieIndex);
+                                sy = yaxisTick.formatter(yfstr, yaxisTickData, serieIndex);
                             } else {
-                                sx = data[0];
-                                sy = data[1];
+                                sx = xaxisTickData;
+                                sy = yaxisTickData;
                             }
                             
+                            if (addbr && c.insertHead) {
+                                if (c.headTooltipFormatter){
+                                    s += c.headTooltipFormatter(c.headTooltipFormatString, sx, sy);
+                                } else {
+                                    s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
+                                }
+                            }
+
                             if (addbr) {
                                 s += '<br />';
+                                addbr = false;
                             }
                             
                             s += $.jqplot.sprintf(c.tooltipFormatString, label, sx, sy);
-                            
-                            addbr = true;
-                            
                         }
                     }
                 }
-
             }
 
-            if (s === "") {
-                c._tooltipElem.css({display: 'none'});
-            } else {
-                c._tooltipElem.css({display: 'block'});
-            }
-
-            c._tooltipElem.html(s);
-            
+            return s;
         },
 
         /**
          * @param   {Object}   option
          * @returns {object}
-*/
+         */
         convertToShapeOption = function (option) {
             if (option) {
                 var output = {};
@@ -490,7 +552,6 @@
          * @param {Object} ev      
          */
         moveTooltip = function (gridpos, plot, ev) {
-
             var c = plot.plugins.cursor,
                 elem = c._tooltipElem,
                 fallbackTooltipLocation = null,
@@ -567,7 +628,6 @@
                     return;
                 }
             }
-
             elem.css({'left': x, 'top': y});
             elem = null;
 
@@ -1222,6 +1282,7 @@
 
         this.insertHead = false;
         this.headTooltipFormatString = '%s';
+        this.headTooltipFormatter = null;
         this.useSeriesColor = false;
         this.yaxis = null;
         this.xaxis = null;

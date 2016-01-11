@@ -728,7 +728,6 @@
 
         };
 
-
     /**
      *
      */
@@ -824,6 +823,8 @@
 
         });
     };
+
+    $.fn.checkIntersection = checkIntersection;
 
     /**
      * Namespace: $.jqplot
