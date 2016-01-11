@@ -1,10 +1,12 @@
+var codemirrorTheme = $.codemirrorTheme;
+
 $(".coding").each(function (){
-    $(this).append("<textarea class='code'>"+$(this).html()+"</textarea>");
+    $(this).append("<textarea class='code'>"+$(this).html().trim()+"</textarea>");
     var editor = CodeMirror.fromTextArea($(this).find("textarea.code")[0], {
         lineNumbers: true,
         styleActiveLine: true,
         matchBrackets: true,
-        theme: 'mdn-like',
+        theme: codemirrorTheme,
         readOnly: true,
         mode: 'text/html',
         lineWrapping: true,
@@ -20,7 +22,7 @@ $(".codemirror-container").each(function (){
     var cm = CodeMirror.fromTextArea($(this).find('textarea')[0], {
         lineNumbers: true,
         matchBrackets: true,
-        eadOnly: true,
+        readOnly: true,
         lineNumbers: true,
         styleActiveLine: true,
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],

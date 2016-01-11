@@ -2,73 +2,73 @@
 layout: demopage
 ---
 <div class="coding">
-	<div id="chart1" style="margin:20px;"></div>
+  <div id="chart1" style="margin:20px;"></div>
 
-	<script type="text/javascript">
+  <script type="text/javascript">
 
-		$(function(){
+    $(function(){
 
-		var serie1=[['2008-09-01',4],['2008-09-02',6],['2008-09-03',null],['2008-09-04',2],['2008-09-05',1]];
-		var serie2=[['2008-09-01',2],['2008-09-02',null],['2008-09-03',3],['2008-09-04',4],['2008-09-05',1]];
-		var serie3=[['2008-09-01',2],['2008-09-02',-2],['2008-09-03',null],['2008-09-04',null],['2008-09-05',-4]];
-		var serie4=[['2008-09-01',2],['2008-09-02',3],['2008-09-03',-1],['2008-09-04',5],['2008-09-05',1]]
-		$.jqplot.config.enablePlugins = true;
-		var plot1 = $.jqplot('chart1', [serie1, serie2, serie3, serie4], {
-				title:'A super chart',
-				axes:{
-					xaxis:{
-						renderer:$.jqplot.CategoryAxisRenderer,
-					}
-				},
-				seriesDefaults:{
-					renderer: $.jqplot.BarRenderer,
-					rendererOptions: {
-						varyBarColor: false,
-						barMargin: 30,
-						fillToZero: true,
-						useNegativeColors: false
-					},
-				},
-				seriesColors: ['rgba(96, 94, 153, 0.5)', "rgba(231, 94, 153, 0.5)", "rgba(231, 221, 153, 0.5)", "rgba(102, 98, 247, 0.5)"],
-				legend: {
-					show: true,
-					location: 'ne',
-					placement: 'inside',
-					renderer: $.jqplot.EnhancedLegendRenderer
-				},
-				series: [{label:'Lbl 1'},{label:'Lbl 2',fillGradient: true, fillGradientColor: "rgb(254,134,97)", fillGradientDelay: 0.7},{label:'Lbl 3'},{label:'Lbl 4'},{label:'Lbl 5'},{label:'Lbl 6'},{label:'Lbl 7'},{label:'Lbl 8'}],
-				canvasOverlay: {
-					show: true,
-					bellowSeries: true,
-          			objects: [
-						{rectangle: {
-							name: 'barney',
-							xmin: [0],
-							xmax: [2.5],
-							ymin: [0],
-							ymax: [2000],
-							xOffset: 0,
-							color: 'rgba(122, 122, 122,0.5)',
-							shadow: false,
-							showTooltip: true,
-							tooltipLocation: 'ne',
-							tooltipFormatString: '<b><i><span style="color:red;">Passe</span></i></b> %.2f',
-						}}]
-				},
-				highlighter: {
-					show: true,
-					sizeAdjust: 10,
-					tooltipLocation: 'n',
-					tooltipAxes: 'y',
-					showTooltip: true,
-					tooltipFormatString: '<b><i><span style="color:red;">hello</span></i></b> %.2f',
-				},
-				cursor: {
-					show: true
-				}
-			});
-			plot1.replot();
-		});
+    var serie1=[['2008-09-01',4],['2008-09-02',6],['2008-09-03',null],['2008-09-04',2],['2008-09-05',1]];
+    var serie2=[['2008-09-01',2],['2008-09-02',null],['2008-09-03',3],['2008-09-04',4],['2008-09-05',1]];
+    var serie3=[['2008-09-01',2],['2008-09-02',-2],['2008-09-03',null],['2008-09-04',null],['2008-09-05',-4]];
+    var serie4=[['2008-09-01',2],['2008-09-02',3],['2008-09-03',-1],['2008-09-04',5],['2008-09-05',1]]
+    $.jqplot.config.enablePlugins = true;
+    var plot1 = $.jqplot('chart1', [serie1, serie2, serie3, serie4], {
+        title:'A super chart',
+        axes:{
+          xaxis:{
+            renderer:$.jqplot.CategoryAxisRenderer,
+          }
+        },
+        seriesDefaults:{
+          renderer: $.jqplot.BarRenderer,
+          rendererOptions: {
+            varyBarColor: false,
+            barMargin: 30,
+            fillToZero: true,
+            useNegativeColors: false
+          },
+        },
+        seriesColors: ['rgba(96, 94, 153, 0.5)', "rgba(231, 94, 153, 0.5)", "rgba(231, 221, 153, 0.5)", "rgba(102, 98, 247, 0.5)"],
+        legend: {
+          show: true,
+          location: 'ne',
+          placement: 'inside',
+          renderer: $.jqplot.EnhancedLegendRenderer
+        },
+        series: [{label:'Lbl 1'},{label:'Lbl 2',fillGradient: true, fillGradientColor: "rgb(254,134,97)", fillGradientDelay: 0.7},{label:'Lbl 3'},{label:'Lbl 4'},{label:'Lbl 5'},{label:'Lbl 6'},{label:'Lbl 7'},{label:'Lbl 8'}],
+        canvasOverlay: {
+          show: true,
+          bellowSeries: true,
+                objects: [
+            {rectangle: {
+              name: 'barney',
+              xmin: [0],
+              xmax: [2.5],
+              ymin: [0],
+              ymax: [2000],
+              xOffset: 0,
+              color: 'rgba(122, 122, 122,0.5)',
+              shadow: false,
+              showTooltip: true,
+              tooltipLocation: 'ne',
+              tooltipFormatString: '<b><i><span style="color:red;">Passe</span></i></b> %.2f',
+            }}]
+        },
+        highlighter: {
+          show: true,
+          sizeAdjust: 10,
+          tooltipLocation: 'n',
+          tooltipAxes: 'y',
+          showTooltip: true,
+          tooltipFormatString: '<b><i><span style="color:red;">hello</span></i></b> %.2f',
+        },
+        cursor: {
+          show: true
+        }
+      });
+      plot1.replot();
+    });
 
-	</script>
+  </script>
 </div>

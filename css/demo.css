@@ -245,7 +245,15 @@ footer section#footer .list {
 	display: inline-block;
 	height: 50%;
 	margin-bottom: 30px;
-	text-align: center;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: 0px none;
+  outline: 0px none;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 10pt;
 }
 
 .coding:last-of-type{
@@ -256,6 +264,8 @@ footer section#footer .list {
 	width: 40%;
 	height: 100%;
 	display: inline-block;
+  margin: auto;
+  text-align: left;
 }
 
 .CodeMirror{

@@ -1,4 +1,6 @@
 (function(){
+    $.codemirrorThemeFile = "solarized";
+    $.codemirrorTheme = "solarized light";
 
     var getRootNode = function(){
         // figure out the path to this loader
@@ -27,8 +29,23 @@
             }
         }
     };
-
-    var files = ['codemirror-4.0/lib/codemirror.js','codemirror-4.0/lib/codemirror.css','codemirror-4.0/addon/fold/foldcode.js','codemirror-4.0/addon/fold/foldgutter.js','codemirror-4.0/addon/fold/foldgutter.css','codemirror-4.0/addon/fold/brace-fold.js','codemirror-4.0/addon/fold/xml-fold.js','codemirror-4.0/addon/fold/comment-fold.js','codemirror-4.0/theme/mdn-like.css','codemirror-4.0/mode/xml/xml.js','codemirror-4.0/mode/javascript/javascript.js','codemirror-4.0/mode/css/css.js','codemirror-4.0/mode/htmlmixed/htmlmixed.js','common.css','run.js'];
+    var files = ['codemirror-4.0/lib/codemirror.js',
+        'codemirror-4.0/lib/codemirror.css',
+        'codemirror-4.0/addon/fold/foldcode.js',
+        'codemirror-4.0/addon/fold/foldgutter.js',
+        'codemirror-4.0/addon/fold/foldgutter.css',
+        'codemirror-4.0/addon/fold/brace-fold.js',
+        'codemirror-4.0/addon/fold/xml-fold.js',
+        'codemirror-4.0/addon/fold/comment-fold.js',
+        'codemirror-4.0/theme/' + $.codemirrorThemeFile + '.css',
+        'codemirror-4.0/mode/xml/xml.js',
+        'codemirror-4.0/mode/javascript/javascript.js',
+        'codemirror-4.0/mode/css/css.js',
+        'codemirror-4.0/mode/htmlmixed/htmlmixed.js',
+        'codemirror-4.0/addon/selection/active-line.js',
+        'common.css',
+        'run.js'
+    ];
     var minfiles = [''];
     
     var rootNode = getRootNode();
