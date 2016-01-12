@@ -1,4 +1,44 @@
-/*jslint browser: true, plusplus: true, nomen: true, white: false, continue: true */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jqplot.core.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="$.jqplot.Axis.html">Axis</a></li><li><a href="$.jqplot.CanvasManager.html">CanvasManager</a></li><li><a href="$.jqplot.ColorGenerator.html">ColorGenerator</a></li><li><a href="$.jqplot.EventListenerManager.html">EventListenerManager</a></li><li><a href="$.jqplot.GenericCanvas.html">GenericCanvas</a><ul class='methods'><li data-type='method'><a href="$.jqplot.GenericCanvas.html#resetCanvas">resetCanvas</a></li></ul></li><li><a href="$.jqplot.Grid.html">Grid</a></li><li><a href="$.jqplot.HooksManager.html">HooksManager</a></li><li><a href="$.jqplot.JqPlot.html">JqPlot</a><ul class='methods'><li data-type='method'><a href="$.jqplot.JqPlot.html#activateTheme">activateTheme</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#bindCustomEvents">bindCustomEvents</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#computePlotData">computePlotData</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#destroy">destroy</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#doFillBetweenLines">doFillBetweenLines</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#drawSeries">drawSeries</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#init">init</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#moveSeriesToBack">moveSeriesToBack</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#moveSeriesToFront">moveSeriesToFront</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onClick">onClick</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onDblClick">onDblClick</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseDown">onMouseDown</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseEnter">onMouseEnter</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseLeave">onMouseLeave</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseMove">onMouseMove</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseUp">onMouseUp</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onRightClick">onRightClick</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#parseOptions">parseOptions</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#populatePlotData">populatePlotData</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#quickInit">quickInit</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#redraw">redraw</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#reInitialize">reInitialize</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#replot">replot</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#resetAxesScale">resetAxesScale</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#restoreOriginalSeriesOrder">restoreOriginalSeriesOrder</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#restorePreviousSeriesOrder">restorePreviousSeriesOrder</a></li></ul></li><li><a href="$.jqplot.Legend.html">Legend</a><ul class='methods'><li data-type='method'><a href="$.jqplot.Legend.html#setOptions">setOptions</a></li></ul></li><li><a href="$.jqplot.Series.html">Series</a><ul class='methods'><li data-type='method'><a href="$.jqplot.Series.html#toggleDisplay">toggleDisplay</a></li></ul></li><li><a href="$.jqplot.Title.html">Title</a></li></ul><h3>Namespaces</h3><ul><li><a href="$.jqplot.html">jqplot</a><ul class='methods'><li data-type='method'><a href="$.jqplot.html#.CanvasGridRenderer">CanvasGridRenderer</a></li><li data-type='method'><a href="$.jqplot.html#.computeHighlightColors">computeHighlightColors</a></li><li data-type='method'><a href="$.jqplot.html#.getColorComponents">getColorComponents</a></li><li data-type='method'><a href="$.jqplot.html#.getColorRGB">getColorRGB</a></li><li data-type='method'><a href="$.jqplot.html#.hex2rgb">hex2rgb</a></li><li data-type='method'><a href="$.jqplot.html#.isDarkColor">isDarkColor</a></li><li data-type='method'><a href="$.jqplot.html#.log">log</a></li><li data-type='method'><a href="$.jqplot.html#.normalize2rgb">normalize2rgb</a></li><li data-type='method'><a href="$.jqplot.html#.rgb2hex">rgb2hex</a></li><li data-type='method'><a href="$.jqplot.html#.sprintf">sprintf</a></li><li data-type='method'><a href="$.jqplot.html#.support_canvas">support_canvas</a></li><li data-type='method'><a href="$.jqplot.html#.support_canvas_text">support_canvas_text</a></li><li data-type='method'><a href="$.jqplot.html#.ThemeEngine">ThemeEngine</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">jqplot.core.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*jslint browser: true, plusplus: true, nomen: true, white: false, continue: true */
 /*global jQuery, console, jqPlot */
 
 /**
@@ -11,14 +51,14 @@
  * version: @VERSION
  * revision: @REVISION
  *
- * About: Copyright & License
+ * About: Copyright &amp; License
  *
  * Copyright (c) 2009-2013 Chris Leonello
  * jqPlot is currently available for use in all personal or commercial projects
  * under both the MIT and GPL version 2.0 licenses. This means that you can
  * choose the license that best suits your project and use it accordingly.
  *
- * See <GPL Version 2> and <MIT License> contained within this distribution for further information.
+ * See &lt;GPL Version 2> and &lt;MIT License> contained within this distribution for further information.
  *
  * The author would appreciate an email letting him know of any substantial
  * use of jqPlot.  You can reach the author at: chris at jqplot dot com
@@ -43,17 +83,17 @@
  * To use jqPlot include jQuery, the jqPlot jQuery plugin, the jqPlot css file and optionally
  * the excanvas script for IE support in your web page:
  *
- * > <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="excanvas.js"></script><![endif]-->
- * > <script language="javascript" type="text/javascript" src="jquery-1.4.4.min.js"></script>
- * > <script language="javascript" type="text/javascript" src="jquery.jqplot.min.js"></script>
- * > <link rel="stylesheet" type="text/css" href="jquery.jqplot.css" />
+ * > &lt;!--[if lt IE 9]>&lt;script language="javascript" type="text/javascript" src="excanvas.js">&lt;/script>&lt;![endif]-->
+ * > &lt;script language="javascript" type="text/javascript" src="jquery-1.4.4.min.js">&lt;/script>
+ * > &lt;script language="javascript" type="text/javascript" src="jquery.jqplot.min.js">&lt;/script>
+ * > &lt;link rel="stylesheet" type="text/css" href="jquery.jqplot.css" />
  *
  * jqPlot can be customized by overriding the defaults of any of the objects which make
  * up the plot. The general usage of jqplot is:
  *
  * > chart = $.jqplot('targetElemId', [dataArray,...], {optionsObject});
  *
- * The options available to jqplot are detailed in <jqPlot Options> in the jqPlotOptions.txt file.
+ * The options available to jqplot are detailed in &lt;jqPlot Options> in the jqPlotOptions.txt file.
  *
  * An actual call to $.jqplot() may look like the
  * examples below:
@@ -65,23 +105,23 @@
  * > dataArray = [34,12,43,55,77];
  * > chart = $.jqplot('targetElemId', [dataArray, ...], {title:'My Plot', axes:{yaxis:{min:20, max:100}}});
  *
- * For more inforrmation, see <jqPlot Usage>.
+ * For more inforrmation, see &lt;jqPlot Usage>.
  *
  * About: Usage
  *
- * See <jqPlot Usage>
+ * See &lt;jqPlot Usage>
  *
  * About: Available Options
  *
- * See <jqPlot Options> for a list of options available thorugh the options object (not complete yet!)
+ * See &lt;jqPlot Options> for a list of options available thorugh the options object (not complete yet!)
  *
  * About: Options Usage
  *
- * See <Options Tutorial>
+ * See &lt;Options Tutorial>
  *
  * About: Changes
  *
- * See <Change Log>
+ * See &lt;Change Log>
  *
  */
 
@@ -118,13 +158,13 @@
                     return a[0] - b[0];
                 };
 
-            for (i = 0; i < l; i++) {
+            for (i = 0; i &lt; l; i++) {
                 bat = [series[i].data, series[i]._stackData, series[i]._plotData, series[i]._prevPlotData];
-                for (n = 0; n < 4; n++) {
+                for (n = 0; n &lt; 4; n++) {
                     check = true;
                     d = bat[n];
                     if (series[i]._stackAxis === 'x') {
-                        for (j = 0, dlen = d.length; j < dlen; j++) {
+                        for (j = 0, dlen = d.length; j &lt; dlen; j++) {
                             if (typeof (d[j][1]) !== "number") {
                                 check = false;
                                 break;
@@ -134,7 +174,7 @@
                             d.sort(simplesort1);
                         }
                     } else {
-                        for (j = 0, dlen = d.length; j < dlen; j++) {
+                        for (j = 0, dlen = d.length; j &lt; dlen; j++) {
                             if (typeof (d[j][0]) !== "number") {
                                 check = false;
                                 break;
@@ -209,12 +249,12 @@
                         points,
                         p;
 
-                    for (j = 0, l = s._barPoints.length; j < l; j++) {
+                    for (j = 0, l = s._barPoints.length; j &lt; l; j++) {
 
                         points = s._barPoints[j];
                         p = s.gridData[j];
 
-                        if (x > points[0][0] && x < points[2][0] && y > points[2][1] && y < points[0][1]) {
+                        if (x > points[0][0] &amp;&amp; x &lt; points[2][0] &amp;&amp; y > points[2][1] &amp;&amp; y &lt; points[0][1]) {
                             return {
                                 seriesIndex: s.index,
                                 pointIndex: j,
@@ -242,12 +282,12 @@
                         p,
                         hp = s._highlightThreshold;
 
-                    for (j = 0, l = s._barPoints.length; j < l; j++) {
+                    for (j = 0, l = s._barPoints.length; j &lt; l; j++) {
 
                         points = s._barPoints[j];
                         p = s.gridData[j];
 
-                        if (x > points[0][0] + hp[0][0] && x < points[2][0] + hp[2][0] && y > points[2][1] && y < points[0][1]) {
+                        if (x > points[0][0] + hp[0][0] &amp;&amp; x &lt; points[2][0] + hp[2][0] &amp;&amp; y > points[2][1] &amp;&amp; y &lt; points[0][1]) {
                             return {
                                 seriesIndex: s.index,
                                 pointIndex: j,
@@ -283,22 +323,22 @@
                     y = gridpos.y - s._center[1];
                     r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 
-                    if (x > 0 && -y >= 0) {
+                    if (x > 0 &amp;&amp; -y >= 0) {
                         theta = 2 * Math.PI - Math.atan(-y / x);
-                    } else if (x > 0 && -y < 0) {
+                    } else if (x > 0 &amp;&amp; -y &lt; 0) {
                         theta = -Math.atan(-y / x);
-                    } else if (x < 0) {
+                    } else if (x &lt; 0) {
                         theta = Math.PI - Math.atan(-y / x);
-                    } else if (x === 0 && -y > 0) {
+                    } else if (x === 0 &amp;&amp; -y > 0) {
                         theta = 3 * Math.PI / 2;
-                    } else if (x === 0 && -y < 0) {
+                    } else if (x === 0 &amp;&amp; -y &lt; 0) {
                         theta = Math.PI / 2;
-                    } else if (x === 0 && y === 0) {
+                    } else if (x === 0 &amp;&amp; y === 0) {
                         theta = 0;
                     }
                     if (sa) {
                         theta -= sa;
-                        if (theta < 0) {
+                        if (theta &lt; 0) {
                             theta += 2 * Math.PI;
                         } else if (theta > 2 * Math.PI) {
                             theta -= 2 * Math.PI;
@@ -307,12 +347,12 @@
 
                     sm = s.sliceMargin / 180 * Math.PI;
 
-                    if (r < s._radius && r > s._innerRadius) {
-                        for (j = 0, l = s.gridData.length; j < l; j++) {
+                    if (r &lt; s._radius &amp;&amp; r > s._innerRadius) {
+                        for (j = 0, l = s.gridData.length; j &lt; l; j++) {
                             minang = (j > 0) ? s.gridData[j - 1][1] + sm : sm;
                             maxang = s.gridData[j][1];
                             
-                            if (theta > minang && theta < maxang) {
+                            if (theta > minang &amp;&amp; theta &lt; maxang) {
                                 return {
                                     seriesIndex: s.index,
                                     pointIndex: j,
@@ -347,23 +387,23 @@
                     y = gridpos.y - s._center[1];
                     r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 
-                    if (x > 0 && -y >= 0) {
+                    if (x > 0 &amp;&amp; -y >= 0) {
                         theta = 2 * Math.PI - Math.atan(-y / x);
-                    } else if (x > 0 && -y < 0) {
+                    } else if (x > 0 &amp;&amp; -y &lt; 0) {
                         theta = -Math.atan(-y / x);
-                    } else if (x < 0) {
+                    } else if (x &lt; 0) {
                         theta = Math.PI - Math.atan(-y / x);
-                    } else if (x === 0 && -y > 0) {
+                    } else if (x === 0 &amp;&amp; -y > 0) {
                         theta = 3 * Math.PI / 2;
-                    } else if (x === 0 && -y < 0) {
+                    } else if (x === 0 &amp;&amp; -y &lt; 0) {
                         theta = Math.PI / 2;
-                    } else if (x === 0 && y === 0) {
+                    } else if (x === 0 &amp;&amp; y === 0) {
                         theta = 0;
                     }
 
                     if (sa) {
                         theta -= sa;
-                        if (theta < 0) {
+                        if (theta &lt; 0) {
                             theta += 2 * Math.PI;
                         } else if (theta > 2 * Math.PI) {
                             theta -= 2 * Math.PI;
@@ -372,11 +412,11 @@
 
                     sm = s.sliceMargin / 180 * Math.PI;
 
-                    if (r < s._radius) {
-                        for (j = 0, l = s.gridData.length; j < l; j++) {
+                    if (r &lt; s._radius) {
+                        for (j = 0, l = s.gridData.length; j &lt; l; j++) {
                             minang = (j > 0) ? s.gridData[j - 1][1] + sm : sm;
                             maxang = s.gridData[j][1];
-                            if (theta > minang && theta < maxang) {
+                            if (theta > minang &amp;&amp; theta &lt; maxang) {
                                 return {
                                     seriesIndex: s.index,
                                     pointIndex: j,
@@ -409,10 +449,10 @@
                     y = gridpos.y;
 
                     if (s.show) {
-                        for (j = 0, l = s.gridData.length; j < l; j++) {
+                        for (j = 0, l = s.gridData.length; j &lt; l; j++) {
                             p = s.gridData[j];
                             d = Math.sqrt((x - p[0]) * (x - p[0]) + (y - p[1]) * (y - p[1]));
-                            if (d <= p[2] && (d <= d0 || d0 === null)) {
+                            if (d &lt;= p[2] &amp;&amp; (d &lt;= d0 || d0 === null)) {
                                 d0 = d;
                                 ret = {
                                     seriesIndex: i,
@@ -455,13 +495,13 @@
                     if (s.show) {
                         t = s.markerRenderer.size / 2 + s.neighborThreshold;
                         threshold = (t > 0) ? t : 0;
-                        for (j = 0, l = s.gridData.length; j < s.gridData.length; j++) {
+                        for (j = 0, l = s.gridData.length; j &lt; s.gridData.length; j++) {
                             p = s.gridData[j];
                             // neighbor looks different to OHLC chart.
                             if (r.constructor === $.jqplot.OHLCRenderer) {
                                 if (r.candleStick) {
                                     yp = s._yaxis.series_u2p;
-                                    if (x >= p[0] - r._bodyWidth / 2 && x <= p[0] + r._bodyWidth / 2 && y >= yp(s.data[j][2]) && y <= yp(s.data[j][3])) {
+                                    if (x >= p[0] - r._bodyWidth / 2 &amp;&amp; x &lt;= p[0] + r._bodyWidth / 2 &amp;&amp; y >= yp(s.data[j][2]) &amp;&amp; y &lt;= yp(s.data[j][3])) {
                                         return {
                                             seriesIndex: i,
                                             pointIndex: j,
@@ -472,7 +512,7 @@
                                 // if an open hi low close chart
                                 } else if (!r.hlc) {
                                     yp = s._yaxis.series_u2p;
-                                    if (x >= p[0] - r._tickLength && x <= p[0] + r._tickLength && y >= yp(s.data[j][2]) && y <= yp(s.data[j][3])) {
+                                    if (x >= p[0] - r._tickLength &amp;&amp; x &lt;= p[0] + r._tickLength &amp;&amp; y >= yp(s.data[j][2]) &amp;&amp; y &lt;= yp(s.data[j][3])) {
                                         return {
                                             seriesIndex: i,
                                             pointIndex: j,
@@ -483,7 +523,7 @@
                                 // a hi low close chart
                                 } else {
                                     yp = s._yaxis.series_u2p;
-                                    if (x >= p[0] - r._tickLength && x <= p[0] + r._tickLength && y >= yp(s.data[j][1]) && y <= yp(s.data[j][2])) {
+                                    if (x >= p[0] - r._tickLength &amp;&amp; x &lt;= p[0] + r._tickLength &amp;&amp; y >= yp(s.data[j][1]) &amp;&amp; y &lt;= yp(s.data[j][2])) {
                                         return {
                                             seriesIndex: i,
                                             pointIndex: j,
@@ -495,7 +535,7 @@
 
                             } else {
                                 d = Math.sqrt((x - p[0]) * (x - p[0]) + (y - p[1]) * (y - p[1]));
-                                if (d <= threshold && (d <= d0 || d0 === null)) {
+                                if (d &lt;= threshold &amp;&amp; (d &lt;= d0 || d0 === null)) {
                                     d0 = d;
                                     return {
                                         seriesIndex: i,
@@ -541,9 +581,9 @@
                     lex = findedge(y, vfirst[0], vlast[3]);
                     rex = findedge(y, vfirst[1], vlast[2]);
 
-                    for (j = 0, l = v.length; j < l; j++) {
+                    for (j = 0, l = v.length; j &lt; l; j++) {
                         cv = v[j];
-                        if (y >= cv[0][1] && y <= cv[3][1] && x >= lex[0] && x <= rex[0]) {
+                        if (y >= cv[0][1] &amp;&amp; y &lt;= cv[3][1] &amp;&amp; x >= lex[0] &amp;&amp; x &lt;= rex[0]) {
                             return {
                                 seriesIndex: s.index,
                                 pointIndex: j,
@@ -585,24 +625,24 @@
 
                     if (s.show) {
 
-                        if ((s.fill || (s.renderer.bands.show && s.renderer.bands.fill)) && (!plot.plugins.highlighter || !plot.plugins.highlighter.show)) {
+                        if ((s.fill || (s.renderer.bands.show &amp;&amp; s.renderer.bands.fill)) &amp;&amp; (!plot.plugins.highlighter || !plot.plugins.highlighter.show)) {
 
                             // first check if it is in bounding box
                             inside = false;
 
-                            if (x > s._boundingBox[0][0] && x < s._boundingBox[1][0] && y > s._boundingBox[1][1] && y < s._boundingBox[0][1]) {
+                            if (x > s._boundingBox[0][0] &amp;&amp; x &lt; s._boundingBox[1][0] &amp;&amp; y > s._boundingBox[1][1] &amp;&amp; y &lt; s._boundingBox[0][1]) {
                                 // now check the crossing number
 
                                 numPoints = s._areaPoints.length;
                                 j = numPoints - 1;
 
-                                for (ii = 0; ii < numPoints; ii++) {
+                                for (ii = 0; ii &lt; numPoints; ii++) {
 
                                     vertex1 = [s._areaPoints[ii][0], s._areaPoints[ii][1]];
                                     vertex2 = [s._areaPoints[j][0], s._areaPoints[j][1]];
 
-                                    if ((vertex1[1] < y && vertex2[1] >= y) || (vertex2[1] < y && vertex1[1] >= y)) {
-                                        if (vertex1[0] + (y - vertex1[1]) / (vertex2[1] - vertex1[1]) * (vertex2[0] - vertex1[0]) < x) {
+                                    if ((vertex1[1] &lt; y &amp;&amp; vertex2[1] >= y) || (vertex2[1] &lt; y &amp;&amp; vertex1[1] >= y)) {
+                                        if (vertex1[0] + (y - vertex1[1]) / (vertex2[1] - vertex1[1]) * (vertex2[0] - vertex1[0]) &lt; x) {
                                             inside = !inside;
                                         }
                                     }
@@ -627,7 +667,7 @@
                             t = s.markerRenderer.size / 2 + s.neighborThreshold;
                             threshold = (t > 0) ? t : 0;
 
-                            for (j = 0, l = s.gridData.length; j < l; j++) {
+                            for (j = 0, l = s.gridData.length; j &lt; l; j++) {
 
                                 p = s.gridData[j];
                                 // neighbor looks different to OHLC chart.
@@ -635,7 +675,7 @@
                                 if (r.constructor === $.jqplot.OHLCRenderer) {
                                     if (r.candleStick) {
                                         yp = s._yaxis.series_u2p;
-                                        if (x >= p[0] - r._bodyWidth / 2 && x <= p[0] + r._bodyWidth / 2 && y >= yp(s.data[j][2]) && y <= yp(s.data[j][3])) {
+                                        if (x >= p[0] - r._bodyWidth / 2 &amp;&amp; x &lt;= p[0] + r._bodyWidth / 2 &amp;&amp; y >= yp(s.data[j][2]) &amp;&amp; y &lt;= yp(s.data[j][3])) {
                                             return {
                                                 seriesIndex: i,
                                                 pointIndex: j,
@@ -646,7 +686,7 @@
                                     // if an open hi low close chart
                                     } else if (!r.hlc) {
                                         yp = s._yaxis.series_u2p;
-                                        if (x >= p[0] - r._tickLength && x <= p[0] + r._tickLength && y >= yp(s.data[j][2]) && y <= yp(s.data[j][3])) {
+                                        if (x >= p[0] - r._tickLength &amp;&amp; x &lt;= p[0] + r._tickLength &amp;&amp; y >= yp(s.data[j][2]) &amp;&amp; y &lt;= yp(s.data[j][3])) {
                                             return {
                                                 seriesIndex: i,
                                                 pointIndex: j,
@@ -657,7 +697,7 @@
                                     // a hi low close chart
                                     } else {
                                         yp = s._yaxis.series_u2p;
-                                        if (x >= p[0] - r._tickLength && x <= p[0] + r._tickLength && y >= yp(s.data[j][1]) && y <= yp(s.data[j][2])) {
+                                        if (x >= p[0] - r._tickLength &amp;&amp; x &lt;= p[0] + r._tickLength &amp;&amp; y >= yp(s.data[j][1]) &amp;&amp; y &lt;= yp(s.data[j][2])) {
                                             return {
                                                 seriesIndex: i,
                                                 pointIndex: j,
@@ -667,9 +707,9 @@
                                         }
                                     }
 
-                                } else if (p[0] !== null && p[1] !== null) {
+                                } else if (p[0] !== null &amp;&amp; p[1] !== null) {
                                     d = Math.sqrt((x - p[0]) * (x - p[0]) + (y - p[1]) * (y - p[1]));
-                                    if (d <= threshold && (d <= d0 || typeof d0 === "undefined")) {
+                                    if (d &lt;= threshold &amp;&amp; (d &lt;= d0 || typeof d0 === "undefined")) {
                                         d0 = d;
                                         return {
                                             seriesIndex: i,
@@ -719,7 +759,7 @@
 
                 }
 
-                if (output && output !== null){
+                if (output &amp;&amp; output !== null){
                     return output;
                 }
             }
@@ -779,7 +819,7 @@
             l;
 
         // see how many data arrays we have
-        for (i = 0, l = arguments.length; i < l; i++) {
+        for (i = 0, l = arguments.length; i &lt; l; i++) {
             if ($.isArray(arguments[i])) {
                 datas.push(arguments[i]);
             } else if ($.isPlainObject(arguments[i])) {
@@ -796,13 +836,13 @@
                 data,
                 opts;
 
-            if (index < dl) {
+            if (index &lt; dl) {
                 data = datas[index];
             } else {
                 data = dl ? datas[dl - 1] : null;
             }
 
-            if (index < ol) {
+            if (index &lt; ol) {
                 opts = options[index];
             } else {
                 opts = ol ? options[ol - 1] : null;
@@ -869,7 +909,7 @@
             }
         }
 
-        if (_data === null && _options !== null && _options.data) {
+        if (_data === null &amp;&amp; _options !== null &amp;&amp; _options.data) {
             _data = _options.data;
         }
 
@@ -888,7 +928,7 @@
             } catch (e) {
                 msg = $.jqplot.config.errorMessage || e.message;
                 $('#' + target)
-                    .append('<div class="jqplot-error-message">' + msg + '</div>')
+                    .append('&lt;div class="jqplot-error-message">' + msg + '&lt;/div>')
                     .addClass('jqplot-error')
                     .css({
                         background: $.jqplot.config.errorBackground,
@@ -935,7 +975,7 @@
                 l;
 
             if (!$.jqplot.use_excanvas) {
-                for (i = 0, l = $.jqplot.CanvasManager.canvases.length; i < l; i++) {
+                for (i = 0, l = $.jqplot.CanvasManager.canvases.length; i &lt; l; i++) {
                     if ($.jqplot.CanvasManager.free[i] === true) {
                         makeNew = false;
                         canvas = $.jqplot.CanvasManager.canvases[i];
@@ -968,14 +1008,14 @@
 
         this.freeAllCanvases = function () {
             var i, l;
-            for (i = 0, l = myCanvases.length; i < l; i++) {
+            for (i = 0, l = myCanvases.length; i &lt; l; i++) {
                 this.freeCanvas(myCanvases[i]);
             }
             myCanvases = [];
         };
 
         this.freeCanvas = function (idx) {
-            if ($.jqplot.use_excanvas && typeof window.G_vmlCanvasManager.uninitElement !== "undefined") {
+            if ($.jqplot.use_excanvas &amp;&amp; typeof window.G_vmlCanvasManager.uninitElement !== "undefined") {
                 // excanvas can't be reused, but properly unset
                 window.G_vmlCanvasManager.uninitElement($.jqplot.CanvasManager.canvases[idx]);
                 $.jqplot.CanvasManager.canvases[idx] = null;
@@ -1061,17 +1101,17 @@
      */
     $.jqplot.support_canvas_text = function () {
         if (typeof $.jqplot.support_canvas_text.result === 'undefined') {
-            if (window.G_vmlCanvasManager && window.G_vmlCanvasManager._version > 887) {
+            if (window.G_vmlCanvasManager &amp;&amp; window.G_vmlCanvasManager._version > 887) {
                 $.jqplot.support_canvas_text.result = true;
             } else {
-                $.jqplot.support_canvas_text.result = !!(document.createElement('canvas').getContext && typeof document.createElement('canvas').getContext('2d').fillText === 'function');
+                $.jqplot.support_canvas_text.result = !!(document.createElement('canvas').getContext &amp;&amp; typeof document.createElement('canvas').getContext('2d').fillText === 'function');
             }
 
         }
         return $.jqplot.support_canvas_text.result;
     };
 
-    $.jqplot.use_excanvas = ((!$.support.boxModel || !$.support.objectAll || !$.support.leadingWhitespace) && !$.jqplot.support_canvas()) ? true : false;
+    $.jqplot.use_excanvas = ((!$.support.boxModel || !$.support.objectAll || !$.support.leadingWhitespace) &amp;&amp; !$.jqplot.support_canvas()) ? true : false;
 
     /**
      *
@@ -1215,10 +1255,10 @@
         this.show = false;
         // prop: tickRenderer
         // A class of a rendering engine for creating the ticks labels displayed on the plot,
-        // See <$.jqplot.AxisTickRenderer>.
+        // See &lt;$.jqplot.AxisTickRenderer>.
         this.tickRenderer = $.jqplot.AxisTickRenderer;
         // prop: tickOptions
-        // Options that will be passed to the tickRenderer, see <$.jqplot.AxisTickRenderer> options.
+        // Options that will be passed to the tickRenderer, see &lt;$.jqplot.AxisTickRenderer> options.
         this.tickOptions = {};
         // prop: labelRenderer
         // A class of a rendering engine for creating an axis label.
@@ -1272,7 +1312,7 @@
         // scaling input data to pixel grid units and drawing the axis element.
         this.renderer = $.jqplot.LinearAxisRenderer;
         // prop: rendererOptions
-        // renderer specific options.  See <$.jqplot.LinearAxisRenderer> for options.
+        // renderer specific options.  See &lt;$.jqplot.LinearAxisRenderer> for options.
         this.rendererOptions = {};
         // prop: showTicks
         // Wether to show the ticks (both marks and labels) or not.
@@ -1395,7 +1435,7 @@
             this.autoscale = false;
         }
         // if not set, sync ticks for y axes but not x by default.
-        if (this.syncTicks === null && this.name.indexOf('y') > -1) {
+        if (this.syncTicks === null &amp;&amp; this.name.indexOf('y') > -1) {
             this.syncTicks = true;
         } else if (this.syncTicks === null) {
             this.syncTicks = false;
@@ -1459,35 +1499,35 @@
         db.min = null;
         db.max = null;
 
-        for (i = 0; i < this._series.length; i++) {
+        for (i = 0; i &lt; this._series.length; i++) {
             s = this._series[i];
             if (s.show || this.scaleToHiddenSeries) {
                 d = s._plotData;
-                if (s._type === 'line' && s.renderer.bands.show && this.name.charAt(0) !== 'x') {
+                if (s._type === 'line' &amp;&amp; s.renderer.bands.show &amp;&amp; this.name.charAt(0) !== 'x') {
                     d = [[0, s.renderer.bands._min], [1, s.renderer.bands._max]];
                 }
 
                 minyidx = 1;
                 maxyidx = 1;
 
-                if (s._type !== null && s._type === 'ohlc') {
+                if (s._type !== null &amp;&amp; s._type === 'ohlc') {
                     minyidx = 3;
                     maxyidx = 2;
                 }
 
-                for (j = 0, l = d.length; j < l; j++) {
+                for (j = 0, l = d.length; j &lt; l; j++) {
                     if (this.name === 'xaxis' || this.name === 'x2axis') {
-                        if ((d[j][0] !== null && d[j][0] < db.min) || db.min === null) {
+                        if ((d[j][0] !== null &amp;&amp; d[j][0] &lt; db.min) || db.min === null) {
                             db.min = d[j][0];
                         }
-                        if ((d[j][0] !== null && d[j][0] > db.max) || db.max === null) {
+                        if ((d[j][0] !== null &amp;&amp; d[j][0] > db.max) || db.max === null) {
                             db.max = d[j][0];
                         }
                     } else {
-                        if ((d[j][minyidx] !== null && d[j][minyidx] < db.min) || db.min === null) {
+                        if ((d[j][minyidx] !== null &amp;&amp; d[j][minyidx] &lt; db.min) || db.min === null) {
                             db.min = d[j][minyidx];
                         }
-                        if ((d[j][maxyidx] !== null && d[j][maxyidx] > db.max) || db.max === null) {
+                        if ((d[j][maxyidx] !== null &amp;&amp; d[j][maxyidx] > db.max) || db.max === null) {
                             db.max = d[j][maxyidx];
                         }
                     }
@@ -1497,16 +1537,16 @@
                 // every series will have a chance to set doforce to false.  once it is set to
                 // false, it cannot be reset to true.
                 // If any series attached to axis is not a bar, wont force 0.
-                if (doforce && s.renderer.constructor !== $.jqplot.BarRenderer) {
+                if (doforce &amp;&amp; s.renderer.constructor !== $.jqplot.BarRenderer) {
                     doforce = false;
-                } else if (doforce && this._options.hasOwnProperty('forceTickAt0') && this._options.forceTickAt0 === false) {
+                } else if (doforce &amp;&amp; this._options.hasOwnProperty('forceTickAt0') &amp;&amp; this._options.forceTickAt0 === false) {
                     doforce = false;
-                } else if (doforce && s.renderer.constructor === $.jqplot.BarRenderer) {
-                    if (s.barDirection === 'vertical' && this.name !== 'xaxis' && this.name !== 'x2axis') {
+                } else if (doforce &amp;&amp; s.renderer.constructor === $.jqplot.BarRenderer) {
+                    if (s.barDirection === 'vertical' &amp;&amp; this.name !== 'xaxis' &amp;&amp; this.name !== 'x2axis') {
                         if (this._options.pad !== null || this._options.padMin !== null) {
                             doforce = false;
                         }
-                    } else if (s.barDirection === 'horizontal' && (this.name === 'xaxis' || this.name === 'x2axis')) {
+                    } else if (s.barDirection === 'horizontal' &amp;&amp; (this.name === 'xaxis' || this.name === 'x2axis')) {
                         if (this._options.pad !== null || this._options.padMin !== null) {
                             doforce = false;
                         }
@@ -1516,7 +1556,7 @@
             }
         }
 
-        if (doforce && this.renderer.constructor === $.jqplot.LinearAxisRenderer && db.min >= 0) {
+        if (doforce &amp;&amp; this.renderer.constructor === $.jqplot.LinearAxisRenderer &amp;&amp; db.min >= 0) {
             this.padMin = 1.0;
             this.forceTickAt0 = true;
         }
@@ -1586,7 +1626,7 @@
         this.rowSpacing = '0.5em';
         // renderer
         // A class that will create a DOM object for the legend,
-        // see <$.jqplot.TableLegendRenderer>.
+        // see &lt;$.jqplot.TableLegendRenderer>.
         this.renderer = $.jqplot.TableLegendRenderer;
         // prop: rendererOptions
         // renderer specific options passed to the renderer.
@@ -1617,7 +1657,7 @@
         this.marginLeft = null;
         // prop: escapeHtml
         // True to escape special characters with their html entity equivalents
-        // in legend text.  "<" becomes &lt; and so on, so html tags are not rendered.
+        // in legend text.  "&lt;" becomes &amp;lt; and so on, so html tags are not rendered.
         this.escapeHtml = false;
         this._series = [];
 
@@ -1733,7 +1773,7 @@
         }
 
         // TO-DO:
-        // Handle case where offsets are < 0.
+        // Handle case where offsets are &lt; 0.
         //
     };
 
@@ -1746,7 +1786,7 @@
 
     Legend.prototype.draw = function (offsets, plot) {
         var i, l;
-        for (i = 0, l = $.jqplot.preDrawLegendHooks.length; i < l; i++) {
+        for (i = 0, l = $.jqplot.preDrawLegendHooks.length; i &lt; l; i++) {
             $.jqplot.preDrawLegendHooks[i].call(this, offsets);
         }
         return this.renderer.draw.call(this, offsets, plot);
@@ -1791,14 +1831,14 @@
         this.textColor = null;
         // prop: renderer
         // A class for creating a DOM element for the title,
-        // see <$.jqplot.DivTitleRenderer>.
+        // see &lt;$.jqplot.DivTitleRenderer>.
         this.renderer = $.jqplot.DivTitleRenderer;
         // prop: rendererOptions
         // renderer specific options passed to the renderer.
         this.rendererOptions = {};
         // prop: escapeHtml
         // True to escape special characters with their html entity equivalents
-        // in title text.  "<" becomes &lt; and so on, so html tags are not rendered.
+        // in title text.  "&lt;" becomes &amp;lt; and so on, so html tags are not rendered.
         this.escapeHtml = false;
     }
 
@@ -1858,7 +1898,7 @@
         this.gridBorderWidth = 2.0;
         // prop: renderer
         // A class of a renderer which will draw the series,
-        // see <$.jqplot.LineRenderer>.
+        // see &lt;$.jqplot.LineRenderer>.
         this.renderer = $.jqplot.LineRenderer;
         // prop: rendererOptions
         // Options to pass on to the renderer.
@@ -1912,11 +1952,11 @@
         this.breakOnNull = false;
         // prop: markerRenderer
         // A class of a renderer which will draw marker (e.g. circle, square, ...) at the data points,
-        // see <$.jqplot.MarkerRenderer>.
+        // see &lt;$.jqplot.MarkerRenderer>.
         this.markerRenderer = $.jqplot.MarkerRenderer;
         // prop: markerOptions
         // renderer specific options to pass to the markerRenderer,
-        // see <$.jqplot.MarkerRenderer>.
+        // see &lt;$.jqplot.MarkerRenderer>.
         this.markerOptions = {};
         // prop: showLine
         // whether to actually draw the line or not.  Series will still be renderered, even if no line is drawn.
@@ -2020,7 +2060,7 @@
         this.index = index;
         this.gridBorderWidth = gridbw;
 
-        for (i = 0, l = d.length; i < l; i++) {
+        for (i = 0, l = d.length; i &lt; l; i++) {
             if (!this.breakOnNull) {
                 if (d[i] === null || d[i][0] === null || d[i][1] === null) {
                     // svandecappelle modification to implements null values in canvas. TODO check non-regression.
@@ -2058,7 +2098,7 @@
             comp = $.jqplot.normalize2rgb(this.fillColor);
             comp = $.jqplot.getColorComponents(comp);
             this.fillColor = 'rgba(' + comp[0] + ',' + comp[1] + ',' + comp[2] + ',' + this.fillAlpha + ')';
-            if (this.fillGradient && this.fillGradientColor) {
+            if (this.fillGradient &amp;&amp; this.fillGradientColor) {
                 comp2 = $.jqplot.normalize2rgb(this.fillGradientColor);
                 comp2 = $.jqplot.getColorComponents(comp2);
                 this.fillGradientColor = 'rgba(' + comp2[0] + ',' + comp2[1] + ',' + comp2[2] + ',' + this.fillAlpha + ')';
@@ -2099,7 +2139,7 @@
 
         // hooks get called even if series not shown
         // we don't clear canvas here, it would wipe out all other series as well.
-        for (j = 0, l = $.jqplot.preDrawSeriesHooks.length; j < l; j++) {
+        for (j = 0, l = $.jqplot.preDrawSeriesHooks.length; j &lt; l; j++) {
             $.jqplot.preDrawSeriesHooks[j].call(this, sctx, options);
         }
 
@@ -2123,14 +2163,14 @@
 
             gridData = options.gridData || this.renderer.makeGridData.call(this, data, plot);
 
-            if (this._type === 'line' && this.renderer.smooth && this.renderer._smoothedData.length) {
+            if (this._type === 'line' &amp;&amp; this.renderer.smooth &amp;&amp; this.renderer._smoothedData.length) {
                 gridData = this.renderer._smoothedData;
             }
 
             this.renderer.draw.call(this, sctx, gridData, options, plot);
         }
 
-        for (j = 0, l = $.jqplot.postDrawSeriesHooks.length; j < l; j++) {
+        for (j = 0, l = $.jqplot.postDrawSeriesHooks.length; j &lt; l; j++) {
             $.jqplot.postDrawSeriesHooks[j].call(this, sctx, options, plot);
         }
 
@@ -2149,7 +2189,7 @@
 
         // hooks get called even if series not shown
         // we don't clear canvas here, it would wipe out all other series as well.
-        for (j = 0, l = $.jqplot.preDrawSeriesShadowHooks.length; j < l; j++) {
+        for (j = 0, l = $.jqplot.preDrawSeriesShadowHooks.length; j &lt; l; j++) {
             $.jqplot.preDrawSeriesShadowHooks[j].call(this, sctx, options);
         }
 
@@ -2172,7 +2212,7 @@
             this.renderer.drawShadow.call(this, sctx, gridData, options, plot);
         }
 
-        for (j = 0, l = $.jqplot.postDrawSeriesShadowHooks.length; j < l; j++) {
+        for (j = 0, l = $.jqplot.postDrawSeriesShadowHooks.length; j &lt; l; j++) {
             $.jqplot.postDrawSeriesShadowHooks[j].call(this, sctx, options);
         }
 
@@ -2308,11 +2348,11 @@
         this._axes = [];
         // prop: renderer
         // Instance of a renderer which will actually render the grid,
-        // see <$.jqplot.CanvasGridRenderer>.
+        // see &lt;$.jqplot.CanvasGridRenderer>.
         this.renderer = $.jqplot.CanvasGridRenderer;
         // prop: rendererOptions
         // Options to pass on to the renderer,
-        // see <$.jqplot.CanvasGridRenderer>.
+        // see &lt;$.jqplot.CanvasGridRenderer>.
         this.rendererOptions = {};
         this._offsets = {top: null, bottom: null, left: null, right: null};
     }
@@ -2392,7 +2432,7 @@
     $.jqplot.GenericCanvas.prototype.resetCanvas = function () {
 
         if (this._elem) {
-            if ($.jqplot.use_excanvas && window.G_vmlCanvasManager.uninitElement) {
+            if ($.jqplot.use_excanvas &amp;&amp; window.G_vmlCanvasManager.uninitElement) {
                 window.G_vmlCanvasManager.uninitElement(this._elem.get(0));
             }
 
@@ -2420,7 +2460,7 @@
             i,
             l;
 
-        for (i = 0, l = this.hooks.length; i < l; i++) {
+        for (i = 0, l = this.hooks.length; i &lt; l; i++) {
             if (this.hooks[i] === fn) {
                 havehook = true;
             }
@@ -2450,9 +2490,9 @@
             h,
             i,
             l;
-        for (i = 0, l = this.hooks.length; i < l; i++) {
+        for (i = 0, l = this.hooks.length; i &lt; l; i++) {
             h = this.hooks[i];
-            if (h[0] === ev && h[1] === fn) {
+            if (h[0] === ev &amp;&amp; h[1] === fn) {
                 havehook = true;
             }
         }
@@ -2500,7 +2540,7 @@
         this.animateReplot = false;
         // prop: axes
         // up to 4 axes are supported, each with its own options,
-        // See <Axis> for axis specific options.
+        // See &lt;Axis> for axis specific options.
         this.axes = {
             xaxis: new Axis('xaxis'),
             yaxis: new Axis('yaxis'),
@@ -2539,12 +2579,12 @@
         this.defaults = {
             // prop: axesDefaults
             // default options that will be applied to all axes.
-            // see <Axis> for axes options.
+            // see &lt;Axis> for axes options.
             axesDefaults: {},
             axes: {xaxis: {}, yaxis: {}, x2axis: {}, y2axis: {}, y3axis: {}, y4axis: {}, y5axis: {}, y6axis: {}, y7axis: {}, y8axis: {}, y9axis: {}, yMidAxis: {}},
             // prop: seriesDefaults
             // default options that will be applied to all series.
-            // see <Series> for series options.
+            // see &lt;Series> for series options.
             seriesDefaults: {},
             series: []
         };
@@ -2589,10 +2629,10 @@
         // css spec for the font-size attribute.  Default for the entire plot.
         this.fontSize = null;
         // prop: grid
-        // See <Grid> for grid specific options.
+        // See &lt;Grid> for grid specific options.
         this.grid = new Grid();
         // prop: legend
-        // see <$.jqplot.TableLegendRenderer>
+        // see &lt;$.jqplot.TableLegendRenderer>
         this.legend = new Legend();
         // prop: noDataIndicator
         // Options to set up a mock plot with a data loading indicator if no data is specified.
@@ -2624,7 +2664,7 @@
         this.plugins = {};
         // prop: series
         // Array of series object options.
-        // see <Series> for series specific options.
+        // see &lt;Series> for series specific options.
         this.series = [];
         // array of series indices. Keep track of order
         // which series canvases are displayed, lowest
@@ -2657,7 +2697,7 @@
         // css spec for the css color attribute.  Default for the entire plot.
         this.textColor = null;
         // prop: title
-        // Title object.  See <Title> for specific options.  As a shortcut, you
+        // Title object.  See &lt;Title> for specific options.  As a shortcut, you
         // can specify the title option as just a string like: title: 'My Plot'
         // and this will create a new title object with the specified text.
         this.title = new Title();
@@ -2727,7 +2767,7 @@
                 sc = t.seriesColors;
 
             return function () {
-                if (idx < sc.length) {
+                if (idx &lt; sc.length) {
                     return sc[idx++];
                 } else {
                     idx = 0;
@@ -2765,11 +2805,11 @@
 
         options = options || {};
 
-        for (i = 0, l = $.jqplot.preInitHooks.length; i < l; i++) {
+        for (i = 0, l = $.jqplot.preInitHooks.length; i &lt; l; i++) {
             $.jqplot.preInitHooks[i].call(this, target, data, options);
         }
 
-        for (i = 0, l = this.preInitHooks.hooks.length; i < l; i++) {
+        for (i = 0, l = this.preInitHooks.hooks.length; i &lt; l; i++) {
             this.preInitHooks.hooks[i].call(this, target, data, options);
         }
 
@@ -2798,7 +2838,7 @@
 
         // if no height or width specified, use a default.
         if (!this.target.height()) {
-            if (options && options.height) {
+            if (options &amp;&amp; options.height) {
                 h = parseInt(options.height, 10);
             } else if (this.target.attr('data-height')) {
                 h = parseInt(this.target.attr('data-height'), 10);
@@ -2812,7 +2852,7 @@
         }
 
         if (!this.target.width()) {
-            if (options && options.width) {
+            if (options &amp;&amp; options.width) {
                 w = parseInt(options.width, 10);
             } else if (this.target.attr('data-width')) {
                 w = parseInt(this.target.attr('data-width'), 10);
@@ -2825,7 +2865,7 @@
             this._width = w = this.target.width();
         }
 
-        for (i = 0, l = _axisNames.length; i < l; i++) {
+        for (i = 0, l = _axisNames.length; i &lt; l; i++) {
             this.axes[_axisNames[i]] = new Axis(_axisNames[i]);
         }
 
@@ -2837,11 +2877,11 @@
         this.eventCanvas._plotDimensions = this._plotDimensions;
         this.legend._plotDimensions = this._plotDimensions;
 
-        if (this._height <= 0 || this._width <= 0 || !this._height || !this._width) {
+        if (this._height &lt;= 0 || this._width &lt;= 0 || !this._height || !this._width) {
             throw new Error("Canvas dimension not set");
         }
 
-        if (options.dataRenderer && $.isFunction(options.dataRenderer)) {
+        if (options.dataRenderer &amp;&amp; $.isFunction(options.dataRenderer)) {
             if (options.dataRendererOptions) {
                 this.dataRendererOptions = options.dataRendererOptions;
             }
@@ -2849,7 +2889,7 @@
             data = this.dataRenderer(data, this, this.dataRendererOptions);
         }
 
-        if (options.noDataIndicator && $.isPlainObject(options.noDataIndicator)) {
+        if (options.noDataIndicator &amp;&amp; $.isPlainObject(options.noDataIndicator)) {
             $.extend(true, this.noDataIndicator, options.noDataIndicator);
         }
 
@@ -2876,8 +2916,8 @@
 
                     var eh = this.eventCanvas.getHeight(),
                         ew = this.eventCanvas.getWidth(),
-                        $temp = $('<div class="jqplot-noData-container" style="position:absolute;"></div>'),
-                        $temp2 = $('<div class="jqplot-noData-contents" style="text-align:center; position:relative;"><div class="outer-center"><div class="inner-center"></div></div><div class="clear"></div></div>'),
+                        $temp = $('&lt;div class="jqplot-noData-container" style="position:absolute;">&lt;/div>'),
+                        $temp2 = $('&lt;div class="jqplot-noData-contents" style="text-align:center; position:relative;">&lt;div class="outer-center">&lt;div class="inner-center">&lt;/div>&lt;/div>&lt;div class="clear">&lt;/div>&lt;/div>'),
                         th,
                         tw;
 
@@ -2925,7 +2965,7 @@
         this._sumx = 0;
         this.computePlotData();
 
-        for (i = 0, seriesLen = this.series.length; i < seriesLen; i++) {
+        for (i = 0, seriesLen = this.series.length; i &lt; seriesLen; i++) {
 
             // set default stacking order for series canvases
             this.seriesStack.push(i);
@@ -2934,11 +2974,11 @@
             this.series[i].shadowCanvas._plotDimensions = this._plotDimensions;
             this.series[i].canvas._plotDimensions = this._plotDimensions;
 
-            for (j = 0, l = $.jqplot.preSeriesInitHooks.length; j < l; j++) {
+            for (j = 0, l = $.jqplot.preSeriesInitHooks.length; j &lt; l; j++) {
                 $.jqplot.preSeriesInitHooks[j].call(this.series[i], target, this.data, this.options.seriesDefaults, this.options.series[i], this);
             }
 
-            for (j = 0, l = this.preSeriesInitHooks.hooks.length; j < l; j++) {
+            for (j = 0, l = this.preSeriesInitHooks.hooks.length; j &lt; l; j++) {
                 this.preSeriesInitHooks.hooks[j].call(this.series[i], target, this.data, this.options.seriesDefaults, this.options.series[i], this);
             }
 
@@ -2946,11 +2986,11 @@
             this.series[i]._plotDimensions = this._plotDimensions;
             this.series[i].init(i, this.grid.borderWidth, this);
 
-            for (j = 0, l = $.jqplot.postSeriesInitHooks.length; j < l; j++) {
+            for (j = 0, l = $.jqplot.postSeriesInitHooks.length; j &lt; l; j++) {
                 $.jqplot.postSeriesInitHooks[j].call(this.series[i], target, this.data, this.options.seriesDefaults, this.options.series[i], this);
             }
 
-            for (j = 0, l = this.postSeriesInitHooks.hooks.length; j < l; j++) {
+            for (j = 0, l = this.postSeriesInitHooks.hooks.length; j &lt; l; j++) {
                 this.postSeriesInitHooks.hooks[j].call(this.series[i], target, this.data, this.options.seriesDefaults, this.options.series[i], this);
             }
 
@@ -2959,7 +2999,7 @@
 
         }
 
-        for (i = 0, l = _axisNames.length; i < l; i++) {
+        for (i = 0, l = _axisNames.length; i &lt; l; i++) {
 
             name = _axisNames[i];
             axis = this.axes[name];
@@ -2967,7 +3007,7 @@
             axis.init();
 
             if (this.axes[name].borderColor === null) {
-                if (name.charAt(0) !== 'x' && axis.useSeriesColor === true && axis.show) {
+                if (name.charAt(0) !== 'x' &amp;&amp; axis.useSeriesColor === true &amp;&amp; axis.show) {
                     axis.borderColor = axis._series[0].color;
                 } else {
                     axis.borderColor = this.grid.borderColor;
@@ -2984,11 +3024,11 @@
 
         this.legend._series = this.series;
 
-        for (i = 0, l = $.jqplot.postInitHooks.length; i < l; i++) {
+        for (i = 0, l = $.jqplot.postInitHooks.length; i &lt; l; i++) {
             $.jqplot.postInitHooks[i].call(this, target, this.data, options);
         }
 
-        for (i = 0, l = this.postInitHooks.hooks.length; i < l; i++) {
+        for (i = 0, l = this.postInitHooks.hooks.length; i &lt; l; i++) {
             this.postInitHooks.hooks[i].call(this, target, this.data, options);
         }
 
@@ -3015,7 +3055,7 @@
         }
 
         if ($.isArray(ax)) {
-            for (i = 0, l = ax.length; i < l; i++) {
+            for (i = 0, l = ax.length; i &lt; l; i++) {
                 this.axes[ax[i]].resetScale(opts[ax[i]]);
             }
         } else if (typeof (ax) === 'object') {
@@ -3055,18 +3095,18 @@
             el,
             tlen;
 
-        for (i = 0, l = $.jqplot.preInitHooks.length; i < l; i++) {
+        for (i = 0, l = $.jqplot.preInitHooks.length; i &lt; l; i++) {
             $.jqplot.preInitHooks[i].call(this, target, tdata, options);
         }
 
-        for (i = 0, l = this.preInitHooks.hooks.length; i < l; i++) {
+        for (i = 0, l = this.preInitHooks.hooks.length; i &lt; l; i++) {
             this.preInitHooks.hooks[i].call(this, target, tdata, options);
         }
 
         this._height = this.target.height();
         this._width = this.target.width();
 
-        if (this._height <= 0 || this._width <= 0 || !this._height || !this._width) {
+        if (this._height &lt;= 0 || this._width &lt;= 0 || !this._height || !this._width) {
             throw new Error("Target dimension not set");
         }
 
@@ -3078,7 +3118,7 @@
         this.eventCanvas._plotDimensions = this._plotDimensions;
         this.legend._plotDimensions = this._plotDimensions;
 
-        for (i = 0, l = _axisNames.length; i < l; i++) {
+        for (i = 0, l = _axisNames.length; i &lt; l; i++) {
 
             name = _axisNames[i];
             axis = this.axes[name];
@@ -3086,11 +3126,11 @@
             // Memory Leaks patch : clear ticks elements
             t = axis._ticks;
 
-            for (j = 0, tlen = t.length; j < tlen; j++) {
+            for (j = 0, tlen = t.length; j &lt; tlen; j++) {
                 el = t[j]._elem;
                 if (el) {
                     // if canvas renderer
-                    if ($.jqplot.use_excanvas && window.G_vmlCanvasManager.uninitElement) {
+                    if ($.jqplot.use_excanvas &amp;&amp; window.G_vmlCanvasManager.uninitElement) {
                         window.G_vmlCanvasManager.uninitElement(el.get(0));
                     }
                     el.emptyForce();
@@ -3108,7 +3148,7 @@
         }
 
         if (data) {
-            if (options.dataRenderer && $.isFunction(options.dataRenderer)) {
+            if (options.dataRenderer &amp;&amp; $.isFunction(options.dataRenderer)) {
                 if (options.dataRendererOptions) {
                     this.dataRendererOptions = options.dataRendererOptions;
                 }
@@ -3146,7 +3186,7 @@
 
         this.computePlotData();
 
-        for (i = 0, seriesLen = this.series.length; i < seriesLen; i++) {
+        for (i = 0, seriesLen = this.series.length; i &lt; seriesLen; i++) {
 
             // set default stacking order for series canvases
             this.seriesStack.push(i);
@@ -3154,11 +3194,11 @@
             this.series[i].shadowCanvas._plotDimensions = this._plotDimensions;
             this.series[i].canvas._plotDimensions = this._plotDimensions;
 
-            for (j = 0, l = $.jqplot.preSeriesInitHooks.length; j < l; j++) {
+            for (j = 0, l = $.jqplot.preSeriesInitHooks.length; j &lt; l; j++) {
                 $.jqplot.preSeriesInitHooks[j].call(this.series[i], target, this.data, this.options.seriesDefaults, this.options.series[i], this);
             }
 
-            for (j = 0, l = this.preSeriesInitHooks.hooks.length; j < l; j++) {
+            for (j = 0, l = this.preSeriesInitHooks.hooks.length; j &lt; l; j++) {
                 this.preSeriesInitHooks.hooks[j].call(this.series[i], target, this.data, this.options.seriesDefaults, this.options.series[i], this);
             }
 
@@ -3166,11 +3206,11 @@
             this.series[i]._plotDimensions = this._plotDimensions;
             this.series[i].init(i, this.grid.borderWidth, this);
 
-            for (j = 0, l = $.jqplot.postSeriesInitHooks.length; j < l; j++) {
+            for (j = 0, l = $.jqplot.postSeriesInitHooks.length; j &lt; l; j++) {
                 $.jqplot.postSeriesInitHooks[j].call(this.series[i], target, this.data, this.options.seriesDefaults, this.options.series[i], this);
             }
 
-            for (j = 0, l = this.postSeriesInitHooks.hooks.length; j < l; j++) {
+            for (j = 0, l = this.postSeriesInitHooks.hooks.length; j &lt; l; j++) {
                 this.postSeriesInitHooks.hooks[j].call(this.series[i], target, this.data, this.options.seriesDefaults, this.options.series[i], this);
             }
 
@@ -3178,7 +3218,7 @@
             this._sumx += this.series[i]._sumx;
         }
 
-        for (i = 0, l = _axisNames.length; i < l; i++) {
+        for (i = 0, l = _axisNames.length; i &lt; l; i++) {
 
             name = _axisNames[i];
             axis = this.axes[name];
@@ -3187,7 +3227,7 @@
             axis.init();
 
             if (axis.borderColor === null) {
-                if (name.charAt(0) !== 'x' && axis.useSeriesColor === true && axis.show) {
+                if (name.charAt(0) !== 'x' &amp;&amp; axis.useSeriesColor === true &amp;&amp; axis.show) {
                     axis.borderColor = axis._series[0].color;
                 } else {
                     axis.borderColor = this.grid.borderColor;
@@ -3204,11 +3244,11 @@
 
         this.legend._series = this.series;
 
-        for (i = 0, l = $.jqplot.postInitHooks.length; i < l; i++) {
+        for (i = 0, l = $.jqplot.postInitHooks.length; i &lt; l; i++) {
             $.jqplot.postInitHooks[i].call(this, target, this.data, options);
         }
 
-        for (i = 0, l = this.postInitHooks.hooks.length; i < l; i++) {
+        for (i = 0, l = this.postInitHooks.hooks.length; i &lt; l; i++) {
             this.postInitHooks.hooks[i].call(this, target, this.data, options);
         }
     };
@@ -3238,7 +3278,7 @@
         this._height = this.target.height();
         this._width = this.target.width();
 
-        if (this._height <= 0 || this._width <= 0 || !this._height || !this._width) {
+        if (this._height &lt;= 0 || this._width &lt;= 0 || !this._height || !this._width) {
             throw new Error("Target dimension not set");
         }
 
@@ -3273,10 +3313,10 @@
         this._sumx = 0;
         this.computePlotData();
 
-        for (i = 0, l = this.series.length; i < l; i++) {
+        for (i = 0, l = this.series.length; i &lt; l; i++) {
 
             // this.populatePlotData(this.series[i], i);
-            if (this.series[i]._type === 'line' && this.series[i].renderer.bands.show) {
+            if (this.series[i]._type === 'line' &amp;&amp; this.series[i].renderer.bands.show) {
                 this.series[i].renderer.initBands.call(this.series[i], this.series[i].renderer.options, this);
             }
 
@@ -3289,18 +3329,18 @@
 
         }
 
-        for (j = 0; j < 12; j++) {
+        for (j = 0; j &lt; 12; j++) {
 
             name = _axisNames[j];
 
             // Memory Leaks patch : clear ticks elements
             t = this.axes[name]._ticks;
 
-            for (i = 0, l = t.length; i < l; i++) {
+            for (i = 0, l = t.length; i &lt; l; i++) {
                 el = t[i]._elem;
                 if (el) {
                     // if canvas renderer
-                    if ($.jqplot.use_excanvas && window.G_vmlCanvasManager.uninitElement) {
+                    if ($.jqplot.use_excanvas &amp;&amp; window.G_vmlCanvasManager.uninitElement) {
                         window.G_vmlCanvasManager.uninitElement(el.get(0));
                     }
                     el.emptyForce();
@@ -3346,7 +3386,7 @@
         this._plotData = [];
         this._stackData = [];
 
-        for (index = 0, l = this.series.length; index < l; index++) {
+        for (index = 0, l = this.series.length; index &lt; l; index++) {
 
             series = this.series[index];
 
@@ -3363,7 +3403,7 @@
 
             plotValues = {x: [], y: []};
 
-            if (this.stackSeries && !series.disableStack) {
+            if (this.stackSeries &amp;&amp; !series.disableStack) {
 
                 series._stack = true;
 
@@ -3372,7 +3412,7 @@
                 ///////////////////////////
                 sidx = (series._stackAxis === 'x') ? 0 : 1;
 
-                for (k = 0, cdl = cd.length; k < cdl; k++) {
+                for (k = 0, cdl = cd.length; k &lt; cdl; k++) {
 
                     temp = cd[k][sidx];
 
@@ -3401,7 +3441,7 @@
                 }
 
             } else {
-                for (i = 0, dtlen = series.data.length; i < dtlen; i++) {
+                for (i = 0, dtlen = series.data.length; i &lt; dtlen; i++) {
                     plotValues.x.push(series.data[i][0]);
                     plotValues.y.push(series.data[i][1]);
                 }
@@ -3456,7 +3496,7 @@
         series._stackData = [];
         series._plotData = [];
 
-        if (this.stackSeries && !series.disableStack) {
+        if (this.stackSeries &amp;&amp; !series.disableStack) {
 
             series._stack = true;
 
@@ -3469,9 +3509,9 @@
             plotdata = $.extend(true, [], series.data);
 
             // for first series, nothing to add to stackData.
-            for (j = 0; j < index; j++) {
+            for (j = 0; j &lt; index; j++) {
                 cd = this.series[j].data;
-                for (k = 0, l = cd.length; k < l; k++) {
+                for (k = 0, l = cd.length; k &lt; l; k++) {
                     dval = cd[k];
                     tempx = (dval[0] !== null) ? dval[0] : 0;
                     tempy = (dval[1] !== null) ? dval[1] : 0;
@@ -3486,7 +3526,7 @@
                 }
             }
 
-            for (i = 0, l = plotdata.length; i < l; i++) {
+            for (i = 0, l = plotdata.length; i &lt; l; i++) {
                 plotValues.x.push(plotdata[i][0]);
                 plotValues.y.push(plotdata[i][1]);
             }
@@ -3500,7 +3540,7 @@
 
         } else {
 
-            for (i = 0, l = series.data.length; i < l; i++) {
+            for (i = 0, l = series.data.length; i &lt; l; i++) {
                 plotValues.x.push(series.data[i][0]);
                 plotValues.y.push(series.data[i][1]);
             }
@@ -3555,7 +3595,7 @@
                     // we have a series of scalars.  One line with just y values.
                     // turn the scalar list of data into a data array of form:
                     // [[1, data[0]], [2, data[1]], ...]
-                    for (i = 0, l = data.length; i < l; i++) {
+                    for (i = 0, l = data.length; i &lt; l; i++) {
                         if (dir === 'vertical') {
                             temp.push([start + i, data[i]]);
                         } else {
@@ -3572,11 +3612,11 @@
             sopts,
             dir = 'vertical';
 
-        for (i = 0, l = this.preParseOptionsHooks.hooks.length; i < l; i++) {
+        for (i = 0, l = this.preParseOptionsHooks.hooks.length; i &lt; l; i++) {
             this.preParseOptionsHooks.hooks[i].call(this, options);
         }
 
-        for (i = 0, l = $.jqplot.preParseOptionsHooks.length; i < l; i++) {
+        for (i = 0, l = $.jqplot.preParseOptionsHooks.length; i &lt; l; i++) {
             $.jqplot.preParseOptionsHooks[i].call(this, options);
         }
 
@@ -3588,7 +3628,7 @@
         this.stackSeries = opts.stackSeries;
 
         if ($.isPlainObject(opts.fillBetween)) {
-            for (i = 0, l = temp.length; i < l; i++) {
+            for (i = 0, l = temp.length; i &lt; l; i++) {
                 tempi = temp[i];
                 if (opts.fillBetween[tempi] !== null) {
                     this.fillBetween[tempi] = opts.fillBetween[tempi];
@@ -3606,7 +3646,7 @@
             this.captureRightClick = opts.captureRightClick;
         }
 
-        this.defaultAxisStart = (options && typeof options.defaultAxisStart !== "undefined") ? options.defaultAxisStart : this.defaultAxisStart;
+        this.defaultAxisStart = (options &amp;&amp; typeof options.defaultAxisStart !== "undefined") ? options.defaultAxisStart : this.defaultAxisStart;
 
         this.colorGenerator.setColors(this.seriesColors);
         this.negativeColorGenerator.setColors(this.negativeSeriesColors);
@@ -3618,7 +3658,7 @@
 
         this.sortData = (typeof opts.sortData !== "undefined") ? opts.sortData : this.sortData;
 
-        for (i = 0; i < 12; i++) {
+        for (i = 0; i &lt; 12; i++) {
             n = _axisNames[i];
             axis = this.axes[n];
             axis._options = $.extend(true, {}, opts.axesDefaults, opts.axes[n]);
@@ -3628,24 +3668,24 @@
         }
         // if (this.data.length == 0) {
         //     this.data = [];
-        //     for (var i=0; i<this.options.series.length; i++) {
+        //     for (var i=0; i&lt;this.options.series.length; i++) {
         //         this.data.push(this.options.series.data);
         //     }
         // }
 
         this.series = [];
 
-        for (i = 0, dataLen = this.data.length; i < dataLen; i++) {
+        for (i = 0, dataLen = this.data.length; i &lt; dataLen; i++) {
 
             sopts = $.extend(true, {index: i}, { seriesColors: this.seriesColors, negativeSeriesColors: this.negativeSeriesColors}, this.options.seriesDefaults, this.options.series[i], {rendererOptions: {animation: {show:  this.animate}}});
             // pass in options in case something needs set prior to initialization.
             temp = new Series(sopts);
 
-            for (j = 0, l = $.jqplot.preParseSeriesOptionsHooks.length; j < l; j++) {
+            for (j = 0, l = $.jqplot.preParseSeriesOptionsHooks.length; j &lt; l; j++) {
                 $.jqplot.preParseSeriesOptionsHooks[j].call(temp, this.options.seriesDefaults, this.options.series[i]);
             }
 
-            for (j = 0, l = this.preParseSeriesOptionsHooks.hooks.length; j < l; j++) {
+            for (j = 0, l = this.preParseSeriesOptionsHooks.hooks.length; j &lt; l; j++) {
                 this.preParseSeriesOptionsHooks.hooks[j].call(temp, this.options.seriesDefaults, this.options.series[i]);
             }
 
@@ -3653,7 +3693,7 @@
             // mess up preParseSeriesOptionsHooks at this point.
             $.extend(true, temp, sopts);
 
-            if (temp.renderer === $.jqplot.BarRenderer && temp.rendererOptions && temp.rendererOptions.barDirection === 'horizontal') {
+            if (temp.renderer === $.jqplot.BarRenderer &amp;&amp; temp.rendererOptions &amp;&amp; temp.rendererOptions.barDirection === 'horizontal') {
                 dir = 'horizontal';
                 temp._stackAxis = 'x';
                 temp._primaryAxis = '_yaxis';
@@ -3689,11 +3729,11 @@
             }
 
             // // parse the renderer options and apply default colors if not provided
-            // if (!temp.color && temp.show != false) {
+            // if (!temp.color &amp;&amp; temp.show != false) {
             //     temp.color = cg.next();
             //     colorIndex = cg.getIndex() - 1;;
             // }
-            // if (!temp.negativeColor && temp.show != false) {
+            // if (!temp.negativeColor &amp;&amp; temp.show != false) {
             //     temp.negativeColor = ncg.get(colorIndex);
             //     ncg.setIndex(colorIndex);
             // }
@@ -3705,11 +3745,11 @@
             // $.extend(true, temp.renderer, {color:this.seriesColors[i]}, this.rendererOptions);
             this.series.push(temp);
 
-            for (j = 0, l = $.jqplot.postParseSeriesOptionsHooks.length; j < l; j++) {
+            for (j = 0, l = $.jqplot.postParseSeriesOptionsHooks.length; j &lt; l; j++) {
                 $.jqplot.postParseSeriesOptionsHooks[j].call(this.series[i], this.options.seriesDefaults, this.options.series[i]);
             }
 
-            for (j = 0, l = this.postParseSeriesOptionsHooks.hooks.length; j < l; j++) {
+            for (j = 0, l = this.postParseSeriesOptionsHooks.hooks.length; j &lt; l; j++) {
                 this.postParseSeriesOptionsHooks.hooks[j].call(this.series[i], this.options.seriesDefaults, this.options.series[i]);
             }
         }
@@ -3718,7 +3758,7 @@
         $.extend(true, this.grid, this.options.grid);
 
         // if axis border properties aren't set, set default.
-        for (i = 0, l = _axisNames.length; i < l; i++) {
+        for (i = 0, l = _axisNames.length; i &lt; l; i++) {
             n = _axisNames[i];
             axis = this.axes[n];
             if (axis.borderWidth === null) {
@@ -3735,11 +3775,11 @@
         this.title._plotWidth = this._width;
         this.legend.setOptions(this.options.legend);
 
-        for (i = 0, l = $.jqplot.postParseOptionsHooks.length; i < l; i++) {
+        for (i = 0, l = $.jqplot.postParseOptionsHooks.length; i &lt; l; i++) {
             $.jqplot.postParseOptionsHooks[i].call(this, options);
         }
 
-        for (i = 0, l = this.postParseOptionsHooks.hooks.length; i < l; i++) {
+        for (i = 0, l = this.postParseOptionsHooks.hooks.length; i &lt; l; i++) {
             this.postParseOptionsHooks.hooks[i].call(this, options);
         }
 
@@ -3756,7 +3796,7 @@
 
         this.canvasManager.freeAllCanvases();
 
-        if (this.eventCanvas && this.eventCanvas._elem) {
+        if (this.eventCanvas &amp;&amp; this.eventCanvas._elem) {
             this.eventCanvas._elem.unbind();
         }
 
@@ -3860,12 +3900,12 @@
             }
         }
         this.computePlotData();
-        // for (var i=0; i<this.series.length; i++) {
+        // for (var i=0; i&lt;this.series.length; i++) {
         //     this.populatePlotData(this.series[i], i);
         // }
         this._sumy = 0;
         this._sumx = 0;
-        for (i = 0, tsl = this.series.length; i < tsl; i++) {
+        for (i = 0, tsl = this.series.length; i &lt; tsl; i++) {
             this._sumy += this.series[i]._sumy;
             this._sumx += this.series[i]._sumx;
         }
@@ -3912,11 +3952,11 @@
 
             this.target.trigger('jqplotPreDraw');
 
-            for (i = 0, l = $.jqplot.preDrawHooks.length; i < l; i++) {
+            for (i = 0, l = $.jqplot.preDrawHooks.length; i &lt; l; i++) {
                 $.jqplot.preDrawHooks[i].call(this);
             }
 
-            for (i = 0, l = this.preDrawHooks.hooks.length; i < l; i++) {
+            for (i = 0, l = this.preDrawHooks.hooks.length; i &lt; l; i++) {
                 this.preDrawHooks.hooks[i].apply(this, this.preDrawSeriesHooks.args[i]);
             }
 
@@ -3940,7 +3980,7 @@
 
             gridPadding = {top: 0, left: 0, bottom: 0, right: 0};
 
-            if (legendElem && this.legend.placement === "outsideGrid") {
+            if (legendElem &amp;&amp; this.legend.placement === "outsideGrid") {
                 // temporarily append the legend to get dimensions
                 this.target.append(legendElem);
                 switch (this.legend.location) {
@@ -3970,7 +4010,7 @@
             ax = this.axes;
 
             // draw the yMidAxis first, so xaxis of pyramid chart can adjust itself if needed.
-            for (i = 0; i < 12; i++) {
+            for (i = 0; i &lt; 12; i++) {
                 name = _axisNames[i];
                 this.target.append(ax[name].draw(this.baseCanvas._ctx, this));
                 ax[name].set();
@@ -3980,7 +4020,7 @@
                 gridPadding.left += ax.yaxis.getWidth();
             }
 
-            for (n = 0; n < 8; n++) {
+            for (n = 0; n &lt; 8; n++) {
                 if (ax[ra[n]].show) {
                     gpr += ax[ra[n]].getWidth();
                     rapad[n] = gpr;
@@ -4002,14 +4042,14 @@
             // end of gridPadding adjustments.
 
             // if user passed in gridDimensions option, check against calculated gridPadding
-            if (this.options.gridDimensions && $.isPlainObject(this.options.gridDimensions)) {
+            if (this.options.gridDimensions &amp;&amp; $.isPlainObject(this.options.gridDimensions)) {
 
                 gdw = parseInt(this.options.gridDimensions.width, 10) || 0;
                 gdh = parseInt(this.options.gridDimensions.height, 10) || 0;
                 widthAdj = (this._width - gridPadding.left - gridPadding.right - gdw) / 2;
                 heightAdj = (this._height - gridPadding.top - gridPadding.bottom - gdh) / 2;
 
-                if (heightAdj >= 0 && widthAdj >= 0) {
+                if (heightAdj >= 0 &amp;&amp; widthAdj >= 0) {
                     gridPadding.top += heightAdj;
                     gridPadding.bottom += heightAdj;
                     gridPadding.left += widthAdj;
@@ -4017,8 +4057,8 @@
                 }
             }
 
-            for (i = 0, l = positions.length; i < l; i++) {
-                if (this._gridPadding[positions[i]] === null && gridPadding[positions[i]] > 0) {
+            for (i = 0, l = positions.length; i &lt; l; i++) {
+                if (this._gridPadding[positions[i]] === null &amp;&amp; gridPadding[positions[i]] > 0) {
                     this._gridPadding[positions[i]] = gridPadding[positions[i]];
                 } else if (this._gridPadding[positions[i]] === null) {
                     this._gridPadding[positions[i]] = this._defaultGridPadding[positions[i]];
@@ -4060,11 +4100,11 @@
 
             this.grid.draw();
 
-            for (i = 0, l = $.jqplot.preDrawAllSeriesHooks.length; i < l; i++) {
+            for (i = 0, l = $.jqplot.preDrawAllSeriesHooks.length; i &lt; l; i++) {
                 $.jqplot.preDrawAllSeriesHooks[i].call(this);
             }
 
-            for (i = 0, l = this.preDrawAllSeriesHooks.hooks.length; i < l; i++) {
+            for (i = 0, l = this.preDrawAllSeriesHooks.hooks.length; i &lt; l; i++) {
                 this.preDrawAllSeriesHooks.hooks[i].apply(this, this.preDrawAllSeriesHooks.args[i]);
             }
 
@@ -4079,7 +4119,7 @@
             seriesLength = series.length;
 
             // put the shadow canvases behind the series canvases so shadows don't overlap on stacked bars.
-            for (i = 0; i < seriesLength; i++) {
+            for (i = 0; i &lt; seriesLength; i++) {
                 // draw series in order of stacking.  This affects only
                 // order in which canvases are added to dom.
                 j = this.seriesStack[i];
@@ -4088,7 +4128,7 @@
                 series[j].shadowCanvas._elem.data('seriesIndex', j);
             }
 
-            for (i = 0; i < seriesLength; i++) {
+            for (i = 0; i &lt; seriesLength; i++) {
                 // draw series in order of stacking.  This affects only
                 // order in which canvases are added to dom.
                 j = this.seriesStack[i];
@@ -4124,14 +4164,14 @@
             }
 
             // register event listeners on the overlay canvas
-            for (i = 0, l = $.jqplot.eventListenerHooks.length; i < l; i++) {
+            for (i = 0, l = $.jqplot.eventListenerHooks.length; i &lt; l; i++) {
                 // in the handler, this will refer to the eventCanvas dom element.
                 // make sure there are references back into plot objects.
                 this.eventCanvas._elem.bind($.jqplot.eventListenerHooks[i][0], {plot: this}, $.jqplot.eventListenerHooks[i][1]);
             }
 
             // register event listeners on the overlay canvas
-            for (i = 0, l = this.eventListenerHooks.hooks.length; i < l; i++) {
+            for (i = 0, l = this.eventListenerHooks.hooks.length; i &lt; l; i++) {
                 // in the handler, this will refer to the eventCanvas dom element.
                 // make sure there are references back into plot objects.
                 this.eventCanvas._elem.bind(this.eventListenerHooks.hooks[i][0], {plot: this}, this.eventListenerHooks.hooks[i][1]);
@@ -4139,15 +4179,15 @@
 
             fb = this.fillBetween;
 
-            if (fb.fill && fb.series1 !== fb.series2 && fb.series1 < seriesLength && fb.series2 < seriesLength && series[fb.series1]._type === 'line' && series[fb.series2]._type === 'line') {
+            if (fb.fill &amp;&amp; fb.series1 !== fb.series2 &amp;&amp; fb.series1 &lt; seriesLength &amp;&amp; fb.series2 &lt; seriesLength &amp;&amp; series[fb.series1]._type === 'line' &amp;&amp; series[fb.series2]._type === 'line') {
                 this.doFillBetweenLines();
             }
 
-            for (i = 0, l = $.jqplot.postDrawHooks.length; i < l; i++) {
+            for (i = 0, l = $.jqplot.postDrawHooks.length; i &lt; l; i++) {
                 $.jqplot.postDrawHooks[i].call(this);
             }
 
-            for (i = 0, l = this.postDrawHooks.hooks.length; i < l; i++) {
+            for (i = 0, l = this.postDrawHooks.hooks.length; i &lt; l; i++) {
                 this.postDrawHooks.hooks[i].apply(this, this.postDrawHooks.args[i]);
             }
 
@@ -4156,11 +4196,11 @@
             }
 
             // ughh.  ideally would hide all series then show them.
-            for (i = 0; i < seriesLength; i++) {
+            for (i = 0; i &lt; seriesLength; i++) {
                 temps = series[i];
                 tempr = temps.renderer;
                 sel = '.jqplot-point-label.jqplot-series-' + i;
-                if (tempr.animation && tempr.animation._supported && tempr.animation.show && (this._drawCount < 2 || this.animateReplot)) {
+                if (tempr.animation &amp;&amp; tempr.animation._supported &amp;&amp; tempr.animation.show &amp;&amp; (this._drawCount &lt; 2 || this.animateReplot)) {
                     _els = this.target.find(sel);
                     _els.stop(true, true).hide();
                     temps.canvas._elem.stop(true, true).hide();
@@ -4185,7 +4225,7 @@
             sid1 = fb.series1,
             sid2 = fb.series2,
         // first series should always be lowest index
-            id1 = (sid1 < sid2) ? sid1 : sid2,
+            id1 = (sid1 &lt; sid2) ? sid1 : sid2,
             id2 = (sid2 >  sid1) ? sid2 : sid1,
 
             series1 = this.series[id1],
@@ -4244,7 +4284,7 @@
             serelem,
             shadelem;
 
-        for (i = 0, l = this.series.length; i < l; i++) {
+        for (i = 0, l = this.series.length; i &lt; l; i++) {
             arr.push(i);
         }
 
@@ -4255,7 +4295,7 @@
         this.previousSeriesStack = this.seriesStack.slice(0);
         this.seriesStack = arr;
 
-        for (i = 1; i < this.seriesStack.length; i++) {
+        for (i = 1; i &lt; this.seriesStack.length; i++) {
             serelem = this.series[i].canvas._elem.detach();
             shadelem = this.series[i].shadowCanvas._elem.detach();
             this.series[i - 1].shadowCanvas._elem.after(shadelem);
@@ -4287,7 +4327,7 @@
             return;
         }
 
-        for (i = 1, l = this.previousSeriesStack.length; i < l; i++) {
+        for (i = 1, l = this.previousSeriesStack.length; i &lt; l; i++) {
             move = this.previousSeriesStack[i];
             keep = this.previousSeriesStack[i - 1];
             serelem = this.series[move].canvas._elem.detach();
@@ -4389,7 +4429,7 @@
             ctx;
 
         // if only one argument passed in and it is a number, use it ad idx.
-        idx = (typeof (options) === "number" && idx === null) ? options : idx;
+        idx = (typeof (options) === "number" &amp;&amp; idx === null) ? options : idx;
         options = (typeof (options) === "object") ? options : {};
 
         // draw specified series
@@ -4402,7 +4442,7 @@
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
             series.draw(ctx, options, this);
             if (series.renderer.constructor === $.jqplot.BezierCurveRenderer) {
-                if (idx < this.series.length - 1) {
+                if (idx &lt; this.series.length - 1) {
                     this.drawSeries(idx + 1);
                 }
             }
@@ -4410,7 +4450,7 @@
             // if call series drawShadow method first, in case all series shadows
             // should be drawn before any series.  This will ensure, like for
             // stacked bar plots, that shadows don't overlap series.
-            for (i = 0; i < this.series.length; i++) {
+            for (i = 0; i &lt; this.series.length; i++) {
                 // first clear the canvas
                 series = this.series[i];
                 ctx = series.shadowCanvas._ctx;
@@ -4582,11 +4622,11 @@
             l;
         if ($.isArray(colors)) {
             ret = [];
-            for (i = 0, l = colors.length; i < l; i++) {
+            for (i = 0, l = colors.length; i &lt; l; i++) {
                 rgba = $.jqplot.getColorComponents(colors[i]);
                 newrgb = [rgba[0], rgba[1], rgba[2]];
                 sum = newrgb[0] + newrgb[1] + newrgb[2];
-                for (j = 0; j < 3; j++) {
+                for (j = 0; j &lt; 3; j++) {
                     // when darkening, lowest color component can be is 60.
                     newrgb[j] = (sum > 660) ?  newrgb[j] * 0.85 : 0.73 * newrgb[j] + 90;
                     newrgb[j] = parseInt(newrgb[j], 10);
@@ -4601,7 +4641,7 @@
             rgba = $.jqplot.getColorComponents(colors);
             newrgb = [rgba[0], rgba[1], rgba[2]];
             sum = newrgb[0] + newrgb[1] + newrgb[2];
-            for (j = 0; j < 3; j++) {
+            for (j = 0; j &lt; 3; j++) {
                 // when darkening, lowest color component can be is 60.
                 // newrgb[j] = (sum > 570) ?  newrgb[j] * 0.8 : newrgb[j] + 0.3 * (255 - newrgb[j]);
                 // newrgb[j] = parseInt(newrgb[j], 10);
@@ -4629,7 +4669,7 @@
         var idx = 0;
 
         this.next = function () {
-            if (idx < colors.length) {
+            if (idx &lt; colors.length) {
                 return colors[idx++];
             } else {
                 idx = 0;
@@ -4705,7 +4745,7 @@
             i,
             temp;
 
-        for (i = 1; i < 4; i++) {
+        for (i = 1; i &lt; 4; i++) {
             if (m[i].search(/%/) !== -1) {
                 temp = parseInt(255 * m[i] / 100, 10).toString(16);
                 if (temp.length === 1) {
@@ -4753,7 +4793,7 @@
             ret = [],
             i;
 
-        for (i = 1; i < 4; i++) {
+        for (i = 1; i &lt; 4; i++) {
             if (m[i].search(/%/) !== -1) {
                 ret[i - 1] = parseInt(255 * m[i] / 100, 10);
             } else {
@@ -4784,7 +4824,7 @@
             L = 0.300 * (color[0] / 255) + 0.590 * (color[1] / 255) + 0.110 * (color[2] / 255);
         }
 
-        return (L < 0.45);
+        return (L &lt; 0.45);
 
     };
 
@@ -4803,7 +4843,7 @@
             rgb,
             strLen = color.length;
 
-        if (strLen && color.lastIndexOf("rgb") !== -1) {
+        if (strLen &amp;&amp; color.lastIndexOf("rgb") !== -1) {
 
             color = color.replace("rgba", "");
             color = color.replace("rgb", "");
@@ -4821,7 +4861,7 @@
 
             return rgb;
 
-        } else if (strLen && color.indexOf("#") === 0) {
+        } else if (strLen &amp;&amp; color.indexOf("#") === 0) {
 
             // eg. #F90
             if (strLen === 4) {
@@ -5004,3 +5044,22 @@
     };
 
 }(jQuery, window));
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Jan 12 2016 11:14:30 GMT+0100 (CET) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

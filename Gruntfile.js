@@ -35,12 +35,21 @@ module.exports = function (grunt) {
                     }
                 })
             }
+        },
+        jsdoc : {
+            dist : {
+                options: {
+                    destination : './docs',
+                    configure : ".jsdoc.json"
+                }
+            }
         }
     });
 
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-jsdoc');
 
     // Default task(s).
     grunt.registerTask('default', ['uglify:min', 'cssmin']);

@@ -1,4 +1,44 @@
-/*jslint browser: true, plusplus: true, nomen: true, white: false, continue: true */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jqplot.canvasGridRenderer.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="$.jqplot.Axis.html">Axis</a></li><li><a href="$.jqplot.CanvasManager.html">CanvasManager</a></li><li><a href="$.jqplot.ColorGenerator.html">ColorGenerator</a></li><li><a href="$.jqplot.EventListenerManager.html">EventListenerManager</a></li><li><a href="$.jqplot.GenericCanvas.html">GenericCanvas</a><ul class='methods'><li data-type='method'><a href="$.jqplot.GenericCanvas.html#resetCanvas">resetCanvas</a></li></ul></li><li><a href="$.jqplot.Grid.html">Grid</a></li><li><a href="$.jqplot.HooksManager.html">HooksManager</a></li><li><a href="$.jqplot.JqPlot.html">JqPlot</a><ul class='methods'><li data-type='method'><a href="$.jqplot.JqPlot.html#activateTheme">activateTheme</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#bindCustomEvents">bindCustomEvents</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#computePlotData">computePlotData</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#destroy">destroy</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#doFillBetweenLines">doFillBetweenLines</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#drawSeries">drawSeries</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#init">init</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#moveSeriesToBack">moveSeriesToBack</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#moveSeriesToFront">moveSeriesToFront</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onClick">onClick</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onDblClick">onDblClick</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseDown">onMouseDown</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseEnter">onMouseEnter</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseLeave">onMouseLeave</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseMove">onMouseMove</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseUp">onMouseUp</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onRightClick">onRightClick</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#parseOptions">parseOptions</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#populatePlotData">populatePlotData</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#quickInit">quickInit</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#redraw">redraw</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#reInitialize">reInitialize</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#replot">replot</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#resetAxesScale">resetAxesScale</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#restoreOriginalSeriesOrder">restoreOriginalSeriesOrder</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#restorePreviousSeriesOrder">restorePreviousSeriesOrder</a></li></ul></li><li><a href="$.jqplot.Legend.html">Legend</a><ul class='methods'><li data-type='method'><a href="$.jqplot.Legend.html#setOptions">setOptions</a></li></ul></li><li><a href="$.jqplot.Series.html">Series</a><ul class='methods'><li data-type='method'><a href="$.jqplot.Series.html#toggleDisplay">toggleDisplay</a></li></ul></li><li><a href="$.jqplot.Title.html">Title</a></li></ul><h3>Namespaces</h3><ul><li><a href="$.jqplot.html">jqplot</a><ul class='methods'><li data-type='method'><a href="$.jqplot.html#.CanvasGridRenderer">CanvasGridRenderer</a></li><li data-type='method'><a href="$.jqplot.html#.computeHighlightColors">computeHighlightColors</a></li><li data-type='method'><a href="$.jqplot.html#.getColorComponents">getColorComponents</a></li><li data-type='method'><a href="$.jqplot.html#.getColorRGB">getColorRGB</a></li><li data-type='method'><a href="$.jqplot.html#.hex2rgb">hex2rgb</a></li><li data-type='method'><a href="$.jqplot.html#.isDarkColor">isDarkColor</a></li><li data-type='method'><a href="$.jqplot.html#.log">log</a></li><li data-type='method'><a href="$.jqplot.html#.normalize2rgb">normalize2rgb</a></li><li data-type='method'><a href="$.jqplot.html#.rgb2hex">rgb2hex</a></li><li data-type='method'><a href="$.jqplot.html#.sprintf">sprintf</a></li><li data-type='method'><a href="$.jqplot.html#.support_canvas">support_canvas</a></li><li data-type='method'><a href="$.jqplot.html#.support_canvas_text">support_canvas_text</a></li><li data-type='method'><a href="$.jqplot.html#.ThemeEngine">ThemeEngine</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">jqplot.canvasGridRenderer.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*jslint browser: true, plusplus: true, nomen: true, white: false, continue: true */
 /*global jQuery, console, jqPlot */
 /**
  * jqPlot
@@ -37,7 +77,7 @@
     /**
      * @class: $.jqplot.CanvasGridRenderer
      * The default jqPlot grid renderer, creating a grid on a canvas element.
-     * The renderer has no additional options beyond the <Grid> class.
+     * The renderer has no additional options beyond the &lt;Grid> class.
      */
     $.jqplot.CanvasGridRenderer = function () {
         this.shadowRenderer = new $.jqplot.ShadowRenderer();
@@ -64,7 +104,7 @@
         
         // Memory Leaks patch
         if (this._elem) {
-            if ($.jqplot.use_excanvas && window.G_vmlCanvasManager.uninitElement) {
+            if ($.jqplot.use_excanvas &amp;&amp; window.G_vmlCanvasManager.uninitElement) {
                 elem = this._elem.get(0);
                 window.G_vmlCanvasManager.uninitElement(elem);
                 elem = null;
@@ -169,12 +209,12 @@
                 b;
 
             // draw the grid line if we should
-            if (t.showGridline && this.drawGridlines && ((!t.isMinorTick && axis.drawMajorGridlines) || (t.isMinorTick && axis.drawMinorGridlines))) {
+            if (t.showGridline &amp;&amp; this.drawGridlines &amp;&amp; ((!t.isMinorTick &amp;&amp; axis.drawMajorGridlines) || (t.isMinorTick &amp;&amp; axis.drawMinorGridlines))) {
                 drawLine(pos, this._top, pos, this._bottom);
             }
 
             // draw the mark
-            if (t.showMark && t.mark && ((!t.isMinorTick && axis.drawMajorTickMarks) || (t.isMinorTick && axis.drawMinorTickMarks))) {
+            if (t.showMark &amp;&amp; t.mark &amp;&amp; ((!t.isMinorTick &amp;&amp; axis.drawMajorTickMarks) || (t.isMinorTick &amp;&amp; axis.drawMinorTickMarks))) {
 
                 s = t.markSize;
                 m = t.mark;
@@ -226,12 +266,12 @@
                 b;
 
             // draw the grid line
-            if (t.showGridline && this.drawGridlines && ((!t.isMinorTick && axis.drawMajorGridlines) || (t.isMinorTick && axis.drawMinorGridlines))) {
+            if (t.showGridline &amp;&amp; this.drawGridlines &amp;&amp; ((!t.isMinorTick &amp;&amp; axis.drawMajorGridlines) || (t.isMinorTick &amp;&amp; axis.drawMinorGridlines))) {
                 drawLine(this._right, pos, this._left, pos);
             }
 
             // draw the mark
-            if (t.showMark && t.mark && ((!t.isMinorTick && axis.drawMajorTickMarks) || (t.isMinorTick && axis.drawMinorTickMarks))) {
+            if (t.showMark &amp;&amp; t.mark &amp;&amp; ((!t.isMinorTick &amp;&amp; axis.drawMajorTickMarks) || (t.isMinorTick &amp;&amp; axis.drawMinorTickMarks))) {
 
                 s = t.markSize;
                 m = t.mark;
@@ -282,12 +322,12 @@
                 e;
 
             // draw the grid line
-            if (t.showGridline && this.drawGridlines && ((!t.isMinorTick && axis.drawMajorGridlines) || (t.isMinorTick && axis.drawMinorGridlines))) {
+            if (t.showGridline &amp;&amp; this.drawGridlines &amp;&amp; ((!t.isMinorTick &amp;&amp; axis.drawMajorGridlines) || (t.isMinorTick &amp;&amp; axis.drawMinorGridlines))) {
                 drawLine(pos, this._bottom, pos, this._top);
             }
 
             // draw the mark
-            if (t.showMark && t.mark && ((!t.isMinorTick && axis.drawMajorTickMarks) || (t.isMinorTick && axis.drawMinorTickMarks))) {
+            if (t.showMark &amp;&amp; t.mark &amp;&amp; ((!t.isMinorTick &amp;&amp; axis.drawMajorTickMarks) || (t.isMinorTick &amp;&amp; axis.drawMinorTickMarks))) {
 
                 s = t.markSize;
                 m = t.mark;
@@ -338,12 +378,12 @@
                 e;
 
             // draw the grid line
-            if (t.showGridline && this.drawGridlines && ((!t.isMinorTick && axis.drawMajorGridlines) || (t.isMinorTick && axis.drawMinorGridlines))) {
+            if (t.showGridline &amp;&amp; this.drawGridlines &amp;&amp; ((!t.isMinorTick &amp;&amp; axis.drawMajorGridlines) || (t.isMinorTick &amp;&amp; axis.drawMinorGridlines))) {
                 drawLine(this._left, pos, this._right, pos);
             }
 
             // draw the mark
-            if (t.showMark && t.mark && ((!t.isMinorTick && axis.drawMajorTickMarks) || (t.isMinorTick && axis.drawMinorTickMarks))) {
+            if (t.showMark &amp;&amp; t.mark &amp;&amp; ((!t.isMinorTick &amp;&amp; axis.drawMajorTickMarks) || (t.isMinorTick &amp;&amp; axis.drawMinorTickMarks))) {
 
                 s = t.markSize;
                 m = t.mark;
@@ -514,7 +554,7 @@
 
                 pos = Math.round(axis.u2p(t.value)) + 0.5;
 
-                if (t.showMark && t.mark) {
+                if (t.showMark &amp;&amp; t.mark) {
                     
                     switch (m) {
                     case 'outside':
@@ -593,7 +633,7 @@
         
         // Now draw border around grid.  Use axis border definitions. start at
         // upper left and go clockwise.
-        if (this.borderWidth !== 0 && this.drawBorder) {
+        if (this.borderWidth !== 0 &amp;&amp; this.drawBorder) {
             drawLine(this._left, this._top, this._right, this._top, {lineCap: 'round', strokeStyle: axes.x2axis.borderColor, lineWidth: axes.x2axis.borderWidth});
             drawLine(this._right, this._top, this._right, this._bottom, {lineCap: 'round', strokeStyle: axes.y2axis.borderColor, lineWidth: axes.y2axis.borderWidth});
             drawLine(this._right, this._bottom, this._left, this._bottom, {lineCap: 'round', strokeStyle: axes.xaxis.borderColor, lineWidth: axes.xaxis.borderWidth});
@@ -611,4 +651,22 @@
         
     };
     
-}(jQuery));
+}(jQuery));</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Jan 12 2016 11:14:30 GMT+0100 (CET) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

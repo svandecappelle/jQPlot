@@ -1,54 +1,56 @@
 {
-    "name": "jqPlot",
-    "title": "Pure JavaScript plotting plugin for jQuery",
-    "description": "jqPlot is a plotting and charting plugin for the jQuery Javascript framework. jqPlot produces beautiful line, bar and pie charts with many features.",
-    "keywords": [
-        "plotting",
-        "charting",
-        "graphing"
-      ],
-    "version": "1.0.10-dev",
-    "author": {
-        "name": "Chris Leonello",
-        "url": "http://http://www.jqplot.com/info.php"
+  "name": "jqPlot",
+  "title": "Pure JavaScript plotting plugin for jQuery",
+  "description": "jqPlot is a plotting and charting plugin for the jQuery Javascript framework. jqPlot produces beautiful line, bar and pie charts with many features.",
+  "keywords": [
+    "plotting",
+    "charting",
+    "graphing"
+  ],
+  "version": "1.0.10-dev",
+  "author": {
+    "name": "Chris Leonello",
+    "url": "http://http://www.jqplot.com/info.php"
+  },
+  "maintainers": [
+    {
+      "name": "Steeve Vandecappelle",
+      "email": "steeve.vandecappelle@gmail.com",
+      "url": "https://github.com/svandecappelle/"
     },
-    "maintainers": [
-        {
-            "name": "Steeve Vandecappelle",
-            "email": "steeve.vandecappelle@gmail.com",
-            "url": "https://github.com/svandecappelle/"
-    },
-        {
-            "name": "Johan Bové",
-            "email": "johan.bove@gmail.com",
-            "url": "https://github.com/johanbove/"
+    {
+      "name": "Johan Bové",
+      "email": "johan.bove@gmail.com",
+      "url": "https://github.com/johanbove/"
     }
   ],
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "https://github.com/svandecappelle/jQPlot/blob/master/LICENSE"
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/svandecappelle/jQPlot/blob/master/LICENSE"
     }
   ],
-    "scripts": {
-        "dist": "node build/minify.js --core --all-plugins",
-        "core": "node build/minify.js --core",
-        "plugins": "node build/minify.js --all-plugins",
-        "plugin": "node build/minify.js",
-        "test": "mocha"
-    },
-    "dependencies": {
-        "jquery": "1.11.3"
-    }, 
-    "bugs": "https://github.com/svandecappelle/jQPlot/issues/",
-    "homepage": "https://github.com/svandecappelle/jQPlot/",
-    "docs": "https://github.com/svandecappelle/jQPlot/wiki/",
-    "devDependencies": {
-        "chai": "^3.2.0",
-        "grunt": "^0.4.5",
-        "grunt-contrib-cssmin": "^0.12.3",
-        "grunt-contrib-uglify": "^0.9.1",
-        "mocha": "^2.2.5"
-    },
-    "engine": "node >= 0.12"
+  "scripts": {
+    "dist": "node build/minify.js --core --all-plugins",
+    "core": "node build/minify.js --core",
+    "plugins": "node build/minify.js --all-plugins",
+    "plugin": "node build/minify.js",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "jquery": "1.11.3"
+  },
+  "bugs": "https://github.com/svandecappelle/jQPlot/issues/",
+  "homepage": "https://github.com/svandecappelle/jQPlot/",
+  "docs": "https://github.com/svandecappelle/jQPlot/wiki/",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "grunt": "^0.4.5",
+    "grunt-contrib-cssmin": "^0.12.3",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-jsdoc": "^1.1.0",
+    "minami": "^1.1.1",
+    "mocha": "^2.2.5"
+  },
+  "engine": "node >= 0.12"
 }

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>plugins/text/jqplot.canvasTextRenderer.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="$.jqplot.CanvasFontRenderer.html">CanvasFontRenderer</a><ul class='methods'><li data-type='method'><a href="$.jqplot.CanvasFontRenderer.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.CanvasFontRenderer.html#measure">measure</a></li></ul></li><li><a href="$.jqplot.CanvasOverlay.html">CanvasOverlay</a><ul class='methods'><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#.postPlotDraw">postPlotDraw</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#.postPlotInit">postPlotInit</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addDashedHorizontalLine">addDashedHorizontalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addDashedVerticalLine">addDashedVerticalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addHorizontalLine">addHorizontalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addLine">addLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addRectangle">addRectangle</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addVerticalLine">addVerticalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addWorkItem">addWorkItem</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#clear">clear</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#getObject">getObject</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#removeObject">removeObject</a></li></ul></li><li><a href="$.jqplot.CanvasTextRenderer.html">CanvasTextRenderer</a><ul class='methods'><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#fontWeight2Float">fontWeight2Float</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#getHeight">getHeight</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#getText">getText</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#getWidth">getWidth</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#init">init</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#letter">letter</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#measure">measure</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#normalizeFontSize">normalizeFontSize</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#setHeight">setHeight</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#setText">setText</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#setWidth">setWidth</a></li></ul></li><li><a href="$.jqplot.EnhancedLegendRenderer.html">EnhancedLegendRenderer</a><ul class='methods'><li data-type='method'><a href="$.jqplot.EnhancedLegendRenderer.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.EnhancedLegendRenderer.html#init">init</a></li></ul></li><li><a href="Class_%2520jqPlot%250APlot%2520object%2520returned%2520by%2520call%2520to%2520$.jqplot.%2520%2520Handles%2520parsing%2520user%2520options,%250Acreating%2520sub%2520objects%2520(Axes,%2520legend,%2520title,%2520series)%2520and%2520rendering%2520the%2520plot..html">Class: jqPlot
+Plot object returned by call to $.jqplot.  Handles parsing user options,
+creating sub objects (Axes, legend, title, series) and rendering the plot.</a></li><li><a href="DashedHorizontalLine.html">DashedHorizontalLine</a></li><li><a href="DashedVerticalLine.html">DashedVerticalLine</a></li><li><a href="HorizontalLine.html">HorizontalLine</a></li><li><a href="jsDate.html">jsDate</a></li><li><a href="Line.html">Line</a></li><li><a href="Rectangle.html">Rectangle</a></li><li><a href="VerticalLine.html">VerticalLine</a></li><li><a href="WorkItem.html">WorkItem</a></li></ul><h3>Namespaces</h3><ul><li><a href="Configuration%2520options%2520that%2520will%2520be%2520used%2520as%2520defaults%2520for%2520all%2520instances%2520on%2520the%2520page..html">Configuration options that will be used as defaults for all instances on the page.</a></li><li><a href="Holds%2520localizations%2520for%2520month_day%2520names.%250A_p_jsDate%2520attempts%2520to%2520detect%2520locale%2520when%2520loaded%2520and%2520defaults%2520to%2520_en_.%250AIf%2520a%2520localization%2520is%2520detected%2520which%2520is%2520not%2520available,%2520jsDate%2520defaults%2520to%2520_en_.%250AAdditional%2520localizations%2520can%2520be%2520added%2520after%2520jsDate%2520loads.%2520%2520After%2520adding%2520a%2520localization,%250Acall%2520the%2520jsDate.regional.getLocale()%2520method.%2520%2520Currently,%2520en,%2520fr%2520and%2520de%2520are%2520defined.__p_%250A%250A_p_Localizations%2520must%2520be%2520an%2520object%2520and%2520have%2520the%2520following%2520properties%2520defined_%2520%2520monthNames,%2520monthNamesShort,%2520dayNames,%2520dayNamesShort%2520and%2520Localizations%2520are%2520added%2520like___p_%250A_pre%2520class=_code__%250AjsDate.regional._en_%2520=%2520%257B%250AmonthNames%2520%2520%2520%2520%2520%2520_%2520_January%2520February%2520March%2520April%2520May%2520June%2520July%2520August%2520September%2520October%2520November%2520December_.split(_%2520_),%250AmonthNamesShort%2520_%2520_Jan%2520Feb%2520Mar%2520Apr%2520May%2520Jun%2520Jul%2520Aug%2520Sep%2520Oct%2520Nov%2520Dec_.split(_%2520_),%250AdayNames%2520%2520%2520%2520%2520%2520%2520%2520_%2520_Sunday%2520Monday%2520Tuesday%2520Wednesday%2520Thursday%2520Friday%2520Saturday_.split(_%2520_),%250AdayNamesShort%2520%2520%2520_%2520_Sun%2520Mon%2520Tue%2520Wed%2520Thu%2520Fri%2520Sat_.split(_%2520_)%250A%257D;%250A__pre_%250A_p_After%2520adding%2520localizations,%2520call%2520_code_jsDate.regional.getLocale();__code_%2520to%2520update%2520the%2520locale%2520setting%2520with%2520the%250Anew%2520localizations.__p_.html">Holds localizations for month/day names.
+<p>jsDate attempts to detect locale when loaded and defaults to 'en'.
+If a localization is detected which is not available, jsDate defaults to 'en'.
+Additional localizations can be added after jsDate loads.  After adding a localization,
+call the jsDate.regional.getLocale() method.  Currently, en, fr and de are defined.</p>
+
+<p>Localizations must be an object and have the following properties defined:  monthNames, monthNamesShort, dayNames, dayNamesShort and Localizations are added like:</p>
+<pre class="code">
+jsDate.regional['en'] = {
+monthNames      : 'January February March April May June July August September October November December'.split(' '),
+monthNamesShort : 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' '),
+dayNames        : 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' '),
+dayNamesShort   : 'Sun Mon Tue Wed Thu Fri Sat'.split(' ')
+};
+</pre>
+<p>After adding localizations, call <code>jsDate.regional.getLocale();</code> to update the locale setting with the
+new localizations.</p></a></li><li><a href="Namespace%2520to%2520hold%2520format%2520codes%2520and%2520format%2520shortcuts.%2520%2520_perl_%2520and%2520_php_%2520format%2520codes%2520%250Aand%2520shortcuts%2520are%2520defined%2520by%2520default.%2520%2520Additional%2520codes%2520and%2520shortcuts%2520can%2520be%250Aadded%2520like_%250A%250A_pre%2520class=_code__%250AjsDate.formats._perl_%2520=%2520%257B%250A%2520%2520%2520%2520_codes__%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520matcher_%2520_someregex_,%250A%2520%2520%2520%2520%2520%2520%2520%2520Y_%2520_fullYear_,%2520%2520__%2520name%2520of%2520_get_%2520method%2520without%2520the%2520_get_,%250A%2520%2520%2520%2520%2520%2520%2520%2520...,%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520__%2520more%2520codes%250A%2520%2520%2520%2520%257D,%250A%2520%2520%2520%2520_shortcuts__%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520F_%2520_%2525Y-%2525m-%2525d_,%250A%2520%2520%2520%2520%2520%2520%2520%2520...,%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520__%2520more%2520shortcuts%250A%2520%2520%2520%2520%257D%250A%257D;%250A__pre_%250A%250A_p_Additionally,%2520ISO%2520and%2520SQL%2520shortcuts%2520are%2520defined%2520and%2520can%2520be%2520accesses%2520via_%250A_code_jsDate.formats.ISO__code_%2520and%2520_code_jsDate.formats.SQL__code_.html">Namespace to hold format codes and format shortcuts.  "perl" and "php" format codes 
+and shortcuts are defined by default.  Additional codes and shortcuts can be
+added like:
+
+<pre class="code">
+jsDate.formats["perl"] = {
+    "codes": {
+        matcher: /someregex/,
+        Y: "fullYear",  // name of "get" method without the "get",
+        ...,            // more codes
+    },
+    "shortcuts": {
+        F: '%Y-%m-%d',
+        ...,            // more shortcuts
+    }
+};
+</pre>
+
+<p>Additionally, ISO and SQL shortcuts are defined and can be accesses via:
+<code>jsDate.formats.ISO</code> and <code>jsDate.formats.SQL</code></a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">plugins/text/jqplot.canvasTextRenderer.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*jslint browser: true, plusplus: true, nomen: true, white: false, continue: true */
+/*global jQuery, console, jqPlot */
+
+/**
+ * jqPlot
+ * Pure JavaScript plotting plugin using jQuery
+ *
+ * Version: @VERSION
+ * Revision: @REVISION
+ *
+ * Copyright (c) 2009-2013 Chris Leonello
+ * jqPlot is currently available for use in all personal or commercial projects 
+ * under both the MIT (http://www.opensource.org/licenses/mit-license.php) and GPL 
+ * version 2.0 (http://www.gnu.org/licenses/gpl-2.0.html) licenses. This means that you can 
+ * choose the license that best suits your project and use it accordingly. 
+ *
+ * Although not required, the author would appreciate an email letting him 
+ * know of any substantial use of jqPlot.  You can reach the author at: 
+ * chris at jqplot dot com or see http://www.jqplot.com/info.php .
+ *
+ * If you are feeling kind and generous, consider supporting the project by
+ * making a donation at: http://www.jqplot.com/donate.php .
+ *
+ * sprintf functions contained in jqplot.sprintf.js by Ash Searle:
+ *
+ *     version 2007.04.27
+ *     author Ash Searle
+ *     http://hexmen.com/blog/2007/03/printf-sprintf/
+ *     http://hexmen.com/js/sprintf.js
+ *     The author (Ash Searle) has placed this code in the public domain:
+ *     "This code is unrestricted: you are free to use it however you like."
+ *
+ * included jsDate library by Chris Leonello:
+ *
+ * Copyright (c) 2010-2013 Chris Leonello
+ *
+ * jsDate is currently available for use in all personal or commercial projects 
+ * under both the MIT and GPL version 2.0 licenses. This means that you can 
+ * choose the license that best suits your project and use it accordingly.
+ *
+ * jsDate borrows many concepts and ideas from the Date Instance 
+ * Methods by Ken Snyder along with some parts of Ken's actual code.
+ * 
+ * Ken's original Date Instance Methods and copyright notice:
+ * 
+ * Ken Snyder (ken d snyder at gmail dot com)
+ * 2008-09-10
+ * version 2.0.2 (http://kendsnyder.com/sandbox/date/)     
+ * Creative Commons Attribution License 3.0 (http://creativecommons.org/licenses/by/3.0/)
+ *
+ * jqplotToImage function based on Larry Siden's export-jqplot-to-png.js.
+ * Larry has generously given permission to adapt his code for inclusion
+ * into jqPlot.
+ *
+ * Larry's original code can be found here:
+ *
+ * https://github.com/lsiden/export-jqplot-to-png
+ * 
+ * 
+ */
+
+(function ($) {
+    "use strict";
+
+    // This code is a modified version of the canvastext.js code, copyright below:
+    //
+    // This code is released to the public domain by Jim Studt, 2007.
+    // He may keep some sort of up to date copy at http://www.federated.com/~jim/canvastext/
+    //
+
+    /**
+    * Canvas text renderer jQplot plugin. Converts text html into canvas widgets.
+    * @class $.jqplot.CanvasTextRenderer
+    * @param {object} options - all plugin options properties.
+    */
+    $.jqplot.CanvasTextRenderer = function (options) {
+        /**
+        * Text font style
+        * @default 'normal'
+        * @todo implement oblique.
+        */
+        this.fontStyle = 'normal';  // normal, italic, oblique [not implemented]
+        /**
+        * Text font style variant. Authorized values: ['normal']
+        * @default 'normal'
+        * @todo implements small caps.
+        */
+        this.fontVariant = 'normal';    // normal, small caps [not implemented]
+        /**
+        * Text font weight. Authorized values: ['normal', 'bold', 'bolder', 'lighter', '100 - 900']
+        * @default 'normal'
+        */
+        this.fontWeight = 'normal'; // normal, bold, bolder, lighter, 100 - 900
+        /**
+        * Text font size in css style.
+        * @default '10px'
+        */
+        this.fontSize = '10px';
+        /**
+        * Text font family.
+        * @default 'sans-serif'
+        */
+        this.fontFamily = 'sans-serif';
+        /**
+        * fontStretch
+        * @default 1.0
+        */
+        this.fontStretch = 1.0;
+        /**
+        * Text canvas draw style: colors.
+        * @default '#666666'
+        */
+        this.fillStyle = '#666666';
+        /**
+        * Text rotation angle.
+        * @default 0
+        */
+        this.angle = 0;
+        /**
+        * Text alignment.
+        * @default 'start'
+        */
+        this.textAlign = 'start';
+        /**
+        * Text base line.
+        * @default 'alphabetic'
+        */
+        this.textBaseline = 'alphabetic';
+        /**
+        * Text to display
+        * @default value: null
+        */
+        this.text = null;
+        /**
+        * Width
+        */
+        this.width = null;
+        /**
+        * Height
+        */
+        this.height = null;
+        /**
+        * Pt to px constant
+        * @constant 1.28
+        */
+        this.pt2px = 1.28;
+
+        $.extend(true, this, options);
+        this.normalizedFontSize = this.normalizeFontSize(this.fontSize);
+        this.setHeight();
+    };
+
+    /**
+    * Initialize canvas text rendering using options.
+    * @param {object} options - object of all rendering canvas text options.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.init = function (options) {
+        $.extend(true, this, options);
+        this.normalizedFontSize = this.normalizeFontSize(this.fontSize);
+        this.setHeight();
+    };
+
+    /**
+    * convert css spec into point size.
+    * @param {String} sz - string text in the css form: 'size(px|em|%|pt)'. 
+    * @returns {float} - font size in px / pt / em / % depending on the String font definition.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.normalizeFontSize = function (sz) {
+        sz = String(sz);
+        var n = parseFloat(sz);
+
+        if (sz.indexOf('px') > -1) {
+            return n / this.pt2px;
+        }
+
+        if (sz.indexOf('pt') > -1) {
+            return n;
+        }
+
+        if (sz.indexOf('em') > -1) {
+            return n * 12;
+        }
+        if (sz.indexOf('%') > -1) {
+            return n * 12 / 100;
+        }
+
+        // default to pixels;
+        return n / this.pt2px;
+    };
+
+    /**
+    * @param {Number} w - fontWeight option. Authorized values: ['normal', 'bold', 'bolder', 'lighter', 100, 200, 300, 400, 500, 600, 700, 800, 900]
+    * @returns {float} values adjusted for Hershey font.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.fontWeight2Float = function (w) {
+        // w = normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+        // return values adjusted for Hershey font.
+        if (Number(w)) {
+            return w / 400;
+        }
+
+        switch (w) {
+        case 'normal':
+            return 1;
+        case 'bold':
+            return 1.75;
+        case 'bolder':
+            return 2.25;
+        case 'lighter':
+            return 0.75;
+        default:
+            return 1;
+        }
+    };
+
+    /**
+    * Get canvas text.
+    * @returns this.text value.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.getText = function () {
+        return this.text;
+    };
+
+    /**
+    * Set canvas text value.
+    * @param {String} t - Text.
+    * @param {object} ctx - Canvas context.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.setText = function (t, ctx) {
+        this.text = t;
+        this.setWidth(ctx);
+        return this;
+    };
+
+    /**
+    * Get width.
+    * @param {object} ctx - Canvas context.
+    * @returns this.width.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.getWidth = function (ctx) {
+        return this.width;
+    };
+
+    /**
+    * Set width.
+    * @param {object} ctx - Canvas context.
+    * @param {String} w - Width.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.setWidth = function (ctx, w) {
+        if (!w) {
+            this.width = this.measure(ctx, this.text);
+        } else {
+            this.width = w;
+        }
+        return this;
+    };
+
+    /**
+    * return height in pixels.
+    * @param {object} ctx - Canvas context.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.getHeight = function (ctx) {
+        return this.height;
+    };
+
+    /**
+    * Set height.
+    * @param {String} w - height in pt.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.setHeight = function (w) {
+        if (!w) {
+            //height = this.fontSize /0.75;
+            this.height = this.normalizedFontSize * this.pt2px;
+        } else {
+            this.height = w;
+        }
+        return this;
+    };
+
+    /**
+    * Convert a character into canvas object.
+    * @param {object} ch - Get canvas letter.
+    * @returns canvas definition letter.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.letter = function (ch) {
+        return this.letters[ch];
+    };
+
+    $.jqplot.CanvasTextRenderer.prototype.ascent = function () {
+        return this.normalizedFontSize;
+    };
+
+    $.jqplot.CanvasTextRenderer.prototype.descent = function () {
+        return 7.0 * this.normalizedFontSize / 25.0;
+    };
+
+    /**
+    * Measure the canvas text width for font size.
+    * @param {object} ctx - Canvas context.
+    * @param {String} str - Text.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.measure = function (ctx, str) {
+        var total = 0,
+            len = str.length,
+            i,
+            c;
+
+        for (i = 0; i &lt; len; i++) {
+            c = this.letter(str.charAt(i));
+            if (c) {
+                total += c.width * this.normalizedFontSize / 25.0 * this.fontStretch;
+            }
+        }
+        return total;
+    };
+
+    /**
+    * Draw canvas text.
+    * @param {object} ctx - Canvas context.
+    * @param {String} str - Text to convert into canvas.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.draw = function (ctx, str) {
+        var x = 0,
+            // leave room at bottom for descenders.
+            y = this.height * 0.72,
+            total = 0,
+            len = str.length,
+            mag = this.normalizedFontSize / 25.0,
+            tx,
+            ty,
+            fact,
+            i,
+            j,
+            c,
+            penUp,
+            needStroke,
+            a;
+
+        ctx.save();
+         // 1st quadrant
+        if ((-Math.PI / 2 &lt;= this.angle &amp;&amp; this.angle &lt;= 0) || (Math.PI * 3 / 2 &lt;= this.angle &amp;&amp; this.angle &lt;= Math.PI * 2)) {
+            tx = 0;
+            ty = -Math.sin(this.angle) * this.width;
+        } else if ((0 &lt; this.angle &amp;&amp; this.angle &lt;= Math.PI / 2) || (-Math.PI * 2 &lt;= this.angle &amp;&amp; this.angle &lt;= -Math.PI * 3 / 2)) {
+            // 4th quadrant
+            tx = Math.sin(this.angle) * this.height;
+            ty = 0;
+        } else if ((-Math.PI &lt; this.angle &amp;&amp; this.angle &lt; -Math.PI / 2) || (Math.PI &lt;= this.angle &amp;&amp; this.angle &lt;= Math.PI * 3 / 2)) {
+            // 2nd quadrant
+            tx = -Math.cos(this.angle) * this.width;
+            ty = -Math.sin(this.angle) * this.width - Math.cos(this.angle) * this.height;
+        } else if ((-Math.PI * 3 / 2 &lt; this.angle &amp;&amp; this.angle &lt; Math.PI) || (Math.PI / 2 &lt; this.angle &amp;&amp; this.angle &lt; Math.PI)) {
+            // 3rd quadrant
+            tx = Math.sin(this.angle) * this.height - Math.cos(this.angle) * this.width;
+            ty = -Math.cos(this.angle) * this.height;
+        }
+
+        ctx.strokeStyle = this.fillStyle;
+        ctx.fillStyle = this.fillStyle;
+        ctx.translate(tx, ty);
+        ctx.rotate(this.angle);
+        ctx.lineCap = "round";
+        // multiplier was 2.0
+        fact = (this.normalizedFontSize > 30) ? 2.0 : 2 + (30 - this.normalizedFontSize) / 20;
+        ctx.lineWidth = fact * mag * this.fontWeight2Float(this.fontWeight);
+
+        for (i = 0; i &lt; len; i++) {
+            c = this.letter(str.charAt(i));
+            if (!c) {
+                continue;
+            }
+
+            ctx.beginPath();
+
+            penUp = 1;
+            needStroke = 0;
+            for (j = 0; j &lt; c.points.length; j++) {
+                a = c.points[j];
+                if (a[0] === -1 &amp;&amp; a[1] === -1) {
+                    penUp = 1;
+                    continue;
+                }
+                if (penUp) {
+                    ctx.moveTo(x + a[0] * mag * this.fontStretch, y - a[1] * mag);
+                    penUp = false;
+                } else {
+                    ctx.lineTo(x + a[0] * mag * this.fontStretch, y - a[1] * mag);
+                }
+            }
+            ctx.stroke();
+            x += c.width * mag * this.fontStretch;
+        }
+        ctx.restore();
+        return total;
+    };
+
+    /**
+    * Define constants letters representation into canvas.
+    */
+    $.jqplot.CanvasTextRenderer.prototype.letters = {
+        ' ': { width: 16, points: [] },
+        '!': { width: 10, points: [[5, 21], [5, 7], [-1, -1], [5, 2], [4, 1], [5, 0], [6, 1], [5, 2]] },
+        '"': { width: 16, points: [[4, 21], [4, 14], [-1, -1], [12, 21], [12, 14]] },
+        '#': { width: 21, points: [[11, 25], [4, -7], [-1, -1], [17, 25], [10, -7], [-1, -1], [4, 12], [18, 12], [-1, -1], [3, 6], [17, 6]] },
+        '$': { width: 20, points: [[8, 25], [8, -4], [ -1, -1], [12, 25], [12, -4], [-1, -1], [17, 18], [15, 20], [12, 21], [8, 21], [5, 20], [3, 18], [3, 16], [4, 14], [5, 13], [7, 12], [13, 10], [15, 9], [16, 8], [17, 6], [17, 3], [15, 1], [12, 0], [8, 0], [5, 1], [3, 3]] },
+        '%': { width: 24, points: [[21, 21], [3, 0], [-1, -1], [8, 21], [10, 19], [10, 17], [9, 15], [7, 14], [5, 14], [3, 16], [3, 18], [4, 20], [6, 21], [8, 21], [10, 20], [13, 19], [16, 19], [19, 20], [21, 21], [-1, -1], [17, 7], [15, 6], [14, 4], [14, 2], [16, 0], [18, 0], [20, 1], [21, 3], [21, 5], [19, 7], [17, 7]] },
+        '&amp;': { width: 26, points: [[23, 12], [23, 13], [22, 14], [21, 14], [20, 13], [19, 11], [17, 6], [15, 3], [13, 1], [11, 0], [7, 0], [5, 1], [4, 2], [3, 4], [3, 6], [4, 8], [5, 9], [12, 13], [13, 14], [14, 16], [14, 18], [13, 20], [11, 21], [9, 20], [8, 18], [8, 16], [9, 13], [11, 10], [16, 3], [18, 1], [20, 0], [22, 0], [23, 1], [23, 2]] },
+        '\'': { width: 10, points: [[5, 19], [4, 20], [5, 21], [6, 20], [6, 18], [5, 16], [4, 15]] },
+        '(': { width: 14, points: [[11, 25], [9, 23], [7, 20], [5, 16], [4, 11], [4, 7], [5, 2], [7, -2], [9, -5], [11, -7]] },
+        ')': { width: 14, points: [[3, 25], [5, 23], [7, 20], [9, 16], [10, 11], [10, 7], [9, 2], [7, -2], [5, -5], [3, -7]] },
+        '*': { width: 16, points: [[8, 21], [8, 9], [-1, -1], [3, 18], [13, 12], [-1, -1], [13, 18], [3, 12]] },
+        '+': { width: 26, points: [[13, 18], [13, 0], [-1, -1], [4, 9], [22, 9]] },
+        ',': { width: 10, points: [[6, 1], [5, 0], [4, 1], [5, 2], [6, 1], [6, -1], [5, -3], [4, -4]] },
+        '-': { width: 18, points: [[6, 9], [12, 9]] },
+        '.': { width: 10, points: [[5, 2], [4, 1], [5, 0], [6, 1], [5, 2]] },
+        '/': { width: 22, points: [[20, 25], [2, -7]] },
+        '0': { width: 20, points: [[9, 21], [6, 20], [4, 17], [3, 12], [3, 9], [4, 4], [6, 1], [9, 0], [11, 0], [14, 1], [16, 4], [17, 9], [17, 12], [16, 17], [14, 20], [11, 21], [9, 21]] },
+        '1': { width: 20, points: [[6, 17], [8, 18], [11, 21], [11, 0]] },
+        '2': { width: 20, points: [[4, 16], [4, 17], [5, 19], [6, 20], [8, 21], [12, 21], [14, 20], [15, 19], [16, 17], [16, 15], [15, 13], [13, 10], [3, 0], [17, 0]] },
+        '3': { width: 20, points: [[5, 21], [16, 21], [10, 13], [13, 13], [15, 12], [16, 11], [17, 8], [17, 6], [16, 3], [14, 1], [11, 0], [8, 0], [5, 1], [4, 2], [3, 4]] },
+        '4': { width: 20, points: [[13, 21], [3, 7], [18, 7], [-1, -1], [13, 21], [13, 0]] },
+        '5': { width: 20, points: [[15, 21], [5, 21], [4, 12], [5, 13], [8, 14], [11, 14], [14, 13], [16, 11], [17, 8], [17, 6], [16, 3], [14, 1], [11, 0], [8, 0], [5, 1], [4, 2], [3, 4]] },
+        '6': { width: 20, points: [[16, 18], [15, 20], [12, 21], [10, 21], [7, 20], [5, 17], [4, 12], [4, 7], [5, 3], [7, 1], [10, 0], [11, 0], [14, 1], [16, 3], [17, 6], [17, 7], [16, 10], [14, 12], [11, 13], [10, 13], [7, 12], [5, 10], [4, 7]] },
+        '7': { width: 20, points: [[17, 21], [7, 0], [-1, -1], [3, 21], [17, 21]] },
+        '8': { width: 20, points: [[8, 21], [5, 20], [4, 18], [4, 16], [5, 14], [7, 13], [11, 12], [14, 11], [16, 9], [17, 7], [17, 4], [16, 2], [15, 1], [12, 0], [8, 0], [5, 1], [4, 2], [3, 4], [3, 7], [4, 9], [6, 11], [9, 12], [13, 13], [15, 14], [16, 16], [16, 18], [15, 20], [12, 21], [8, 21]] },
+        '9': { width: 20, points: [[16, 14], [15, 11], [13, 9], [10, 8], [9, 8], [6, 9], [4, 11], [3, 14], [3, 15], [4, 18], [6, 20], [9, 21], [10, 21], [13, 20], [15, 18], [16, 14], [16, 9], [15, 4], [13, 1], [10, 0], [8, 0], [5, 1], [4, 3]] },
+        ':': { width: 10, points: [[5, 14], [4, 13], [5, 12], [6, 13], [5, 14], [-1, -1], [5, 2], [4, 1], [5, 0], [6, 1], [5, 2]] },
+        ';': { width: 10, points: [[5, 14], [4, 13], [5, 12], [6, 13], [5, 14], [-1, -1], [6, 1], [5, 0], [4, 1], [5, 2], [6, 1], [6, -1], [5, -3], [4, -4]] },
+        '&lt;': { width: 24, points: [[20, 18], [4, 9], [20, 0]] },
+        '=': { width: 26, points: [[4, 12], [22, 12], [-1, -1], [4, 6], [22, 6]] },
+        '>': { width: 24, points: [[4, 18], [20, 9], [4, 0]] },
+        '?': { width: 18, points: [[3, 16], [3, 17], [4, 19], [5, 20], [7, 21], [11, 21], [13, 20], [14, 19], [15, 17], [15, 15], [14, 13], [13, 12], [9, 10], [9, 7], [-1, -1], [9, 2], [8, 1], [9, 0], [10, 1], [9, 2]] },
+        '@': { width: 27, points: [[18, 13], [17, 15], [15, 16], [12, 16], [10, 15], [9, 14], [8, 11], [8, 8], [9, 6], [11, 5], [14, 5], [16, 6], [17, 8], [-1, -1], [12, 16], [10, 14], [9, 11], [9, 8], [10, 6], [11, 5], [-1, -1], [18, 16], [17, 8], [17, 6], [19, 5], [21, 5], [23, 7], [24, 10], [24, 12], [23, 15], [22, 17], [20, 19], [18, 20], [15, 21], [12, 21], [9, 20], [7, 19], [5, 17], [4, 15], [3, 12], [3, 9], [4, 6], [5, 4], [7, 2], [9, 1], [12, 0], [15, 0], [18, 1], [20, 2], [21, 3], [-1, -1], [19, 16], [18, 8], [18, 6], [19, 5]] },
+        'A': { width: 18, points: [[9, 21], [1, 0], [-1, -1], [9, 21], [17, 0], [-1, -1], [4, 7], [14, 7]] },
+        'B': { width: 21, points: [[4, 21], [4, 0], [-1, -1], [4, 21], [13, 21], [16, 20], [17, 19], [18, 17], [18, 15], [17, 13], [16, 12], [13, 11], [-1, -1], [4, 11], [13, 11], [16, 10], [17, 9], [18, 7], [18, 4], [17, 2], [16, 1], [13, 0], [4, 0]] },
+        'C': { width: 21, points: [[18, 16], [17, 18], [15, 20], [13, 21], [9, 21], [7, 20], [5, 18], [4, 16], [3, 13], [3, 8], [4, 5], [5, 3], [7, 1], [9, 0], [13, 0], [15, 1], [17, 3], [18, 5]] },
+        'D': { width: 21, points: [[4, 21], [4, 0], [-1, -1], [4, 21], [11, 21], [14, 20], [16, 18], [17, 16], [18, 13], [18, 8], [17, 5], [16, 3], [14, 1], [11, 0], [4, 0]] },
+        'E': { width: 19, points: [[4, 21], [4, 0], [-1, -1], [4, 21], [17, 21], [-1, -1], [4, 11], [12, 11], [-1, -1], [4, 0], [17, 0]] },
+        'F': { width: 18, points: [[4, 21], [4, 0], [-1, -1], [4, 21], [17, 21], [-1, -1], [4, 11], [12, 11]] },
+        'G': { width: 21, points: [[18, 16], [17, 18], [15, 20], [13, 21], [9, 21], [7, 20], [5, 18], [4, 16], [3, 13], [3, 8], [4, 5], [5, 3], [7, 1], [9, 0], [13, 0], [15, 1], [17, 3], [18, 5], [18, 8], [-1, -1], [13, 8], [18, 8]] },
+        'H': { width: 22, points: [[4, 21], [4, 0], [-1, -1], [18, 21], [18, 0], [-1, -1], [4, 11], [18, 11]] },
+        'I': { width: 8, points: [[4, 21], [4, 0]] },
+        'J': { width: 16, points: [[12, 21], [12, 5], [11, 2], [10, 1], [8, 0], [6, 0], [4, 1], [3, 2], [2, 5], [2, 7]] },
+        'K': { width: 21, points: [[4, 21], [4, 0], [-1, -1], [18, 21], [4, 7], [-1, -1], [9, 12], [18, 0]] },
+        'L': { width: 17, points: [[4, 21], [4, 0], [-1, -1], [4, 0], [16, 0]] },
+        'M': { width: 24, points: [[4, 21], [4, 0], [-1, -1], [4, 21], [12, 0], [-1, -1], [20, 21], [12, 0], [-1, -1], [20, 21], [20, 0]] },
+        'N': { width: 22, points: [[4, 21], [4, 0], [-1, -1], [4, 21], [18, 0], [-1, -1], [18, 21], [18, 0]] },
+        'O': { width: 22, points: [[9, 21], [7, 20], [5, 18], [4, 16], [3, 13], [3, 8], [4, 5], [5, 3], [7, 1], [9, 0], [13, 0], [15, 1], [17, 3], [18, 5], [19, 8], [19, 13], [18, 16], [17, 18], [15, 20], [13, 21], [9, 21]] },
+        'P': { width: 21, points: [[4, 21], [4, 0], [-1, -1], [4, 21], [13, 21], [16, 20], [17, 19], [18, 17], [18, 14], [17, 12], [16, 11], [13, 10], [4, 10]] },
+        'Q': { width: 22, points: [[9, 21], [7, 20], [5, 18], [4, 16], [3, 13], [3, 8], [4, 5], [5, 3], [7, 1], [9, 0], [13, 0], [15, 1], [17, 3], [18, 5], [19, 8], [19, 13], [18, 16], [17, 18], [15, 20], [13, 21], [9, 21], [-1, -1], [12, 4], [18, -2]] },
+        'R': { width: 21, points: [[4, 21], [4, 0], [-1, -1], [4, 21], [13, 21], [16, 20], [17, 19], [18, 17], [18, 15], [17, 13], [16, 12], [13, 11], [4, 11], [-1, -1], [11, 11], [18, 0]] },
+        'S': { width: 20, points: [[17, 18], [15, 20], [12, 21], [8, 21], [5, 20], [3, 18], [3, 16], [4, 14], [5, 13], [7, 12], [13, 10], [15, 9], [16, 8], [17, 6], [17, 3], [15, 1], [12, 0], [8, 0], [5, 1], [3, 3]] },
+        'T': { width: 16, points: [[8, 21], [8, 0], [-1, -1], [1, 21], [15, 21]] },
+        'U': { width: 22, points: [[4, 21], [4, 6], [5, 3], [7, 1], [10, 0], [12, 0], [15, 1], [17, 3], [18, 6], [18, 21]] },
+        'V': { width: 18, points: [[1, 21], [9, 0], [-1, -1], [17, 21], [9, 0]] },
+        'W': { width: 24, points: [[2, 21], [7, 0], [-1, -1], [12, 21], [7, 0], [-1, -1], [12, 21], [17, 0], [-1, -1], [22, 21], [17, 0]] },
+        'X': { width: 20, points: [[3, 21], [17, 0], [-1, -1], [17, 21], [3, 0]] },
+        'Y': { width: 18, points: [[1, 21], [9, 11], [9, 0], [-1, -1], [17, 21], [9, 11]] },
+        'Z': { width: 20, points: [[17, 21], [3, 0], [-1, -1], [3, 21], [17, 21], [-1, -1], [3, 0], [17, 0]] },
+        '[': { width: 14, points: [[4, 25], [4, -7], [-1, -1], [5, 25], [5, -7], [-1, -1], [4, 25], [11, 25], [-1, -1], [4, -7], [11, -7]] },
+        '\\': { width: 14, points: [[0, 21], [14, -3]] },
+        ']': { width: 14, points: [[9, 25], [9, -7], [-1, -1], [10, 25], [10, -7], [-1, -1], [3, 25], [10, 25], [-1, -1], [3, -7], [10, -7]] },
+        '^': { width: 16, points: [[6, 15], [8, 18], [10, 15], [-1, -1], [3, 12], [8, 17], [13, 12], [-1, -1], [8, 17], [8, 0]] },
+        '_': { width: 16, points: [[0, -2], [16, -2]] },
+        '`': { width: 10, points: [[6, 21], [5, 20], [4, 18], [4, 16], [5, 15], [6, 16], [5, 17]] },
+        'a': { width: 19, points: [[15, 14], [15, 0], [-1, -1], [15, 11], [13, 13], [11, 14], [8, 14], [6, 13], [4, 11], [3, 8], [3, 6], [4, 3], [6, 1], [8, 0], [11, 0], [13, 1], [15, 3]] },
+        'b': { width: 19, points: [[4, 21], [4, 0], [-1, -1], [4, 11], [6, 13], [8, 14], [11, 14], [13, 13], [15, 11], [16, 8], [16, 6], [15, 3], [13, 1], [11, 0], [8, 0], [6, 1], [4, 3]] },
+        'c': { width: 18, points: [[15, 11], [13, 13], [11, 14], [8, 14], [6, 13], [4, 11], [3, 8], [3, 6], [4, 3], [6, 1], [8, 0], [11, 0], [13, 1], [15, 3]] },
+        'd': { width: 19, points: [[15, 21], [15, 0], [-1, -1], [15, 11], [13, 13], [11, 14], [8, 14], [6, 13], [4, 11], [3, 8], [3, 6], [4, 3], [6, 1], [8, 0], [11, 0], [13, 1], [15, 3]] },
+        'e': { width: 18, points: [[3, 8], [15, 8], [15, 10], [14, 12], [13, 13], [11, 14], [8, 14], [6, 13], [4, 11], [3, 8], [3, 6], [4, 3], [6, 1], [8, 0], [11, 0], [13, 1], [15, 3]] },
+        'f': { width: 12, points: [[10, 21], [8, 21], [6, 20], [5, 17], [5, 0], [-1, -1], [2, 14], [9, 14]] },
+        'g': { width: 19, points: [[15, 14], [15, -2], [14, -5], [13, -6], [11, -7], [8, -7], [6, -6], [-1, -1], [15, 11], [13, 13], [11, 14], [8, 14], [6, 13], [4, 11], [3, 8], [3, 6], [4, 3], [6, 1], [8, 0], [11, 0], [13, 1], [15, 3]] },
+        'h': { width: 19, points: [[4, 21], [4, 0], [-1, -1], [4, 10], [7, 13], [9, 14], [12, 14], [14, 13], [15, 10], [15, 0]] },
+        'i': { width: 8, points: [[3, 21], [4, 20], [5, 21], [4, 22], [3, 21], [-1, -1], [4, 14], [4, 0]] },
+        'j': { width: 10, points: [[5, 21], [6, 20], [7, 21], [6, 22], [5, 21], [-1, -1], [6, 14], [6, -3], [5, -6], [3, -7], [1, -7]] },
+        'k': { width: 17, points: [[4, 21], [4, 0], [-1, -1], [14, 14], [4, 4], [-1, -1], [8, 8], [15, 0]] },
+        'l': { width: 8, points: [[4, 21], [4, 0]] },
+        'm': { width: 30, points: [[4, 14], [4, 0], [-1, -1], [4, 10], [7, 13], [9, 14], [12, 14], [14, 13], [15, 10], [15, 0], [-1, -1], [15, 10], [18, 13], [20, 14], [23, 14], [25, 13], [26, 10], [26, 0]] },
+        'n': { width: 19, points: [[4, 14], [4, 0], [-1, -1], [4, 10], [7, 13], [9, 14], [12, 14], [14, 13], [15, 10], [15, 0]] },
+        'o': { width: 19, points: [[8, 14], [6, 13], [4, 11], [3, 8], [3, 6], [4, 3], [6, 1], [8, 0], [11, 0], [13, 1], [15, 3], [16, 6], [16, 8], [15, 11], [13, 13], [11, 14], [8, 14]] },
+        'p': { width: 19, points: [[4, 14], [4, -7], [-1, -1], [4, 11], [6, 13], [8, 14], [11, 14], [13, 13], [15, 11], [16, 8], [16, 6], [15, 3], [13, 1], [11, 0], [8, 0], [6, 1], [4, 3]] },
+        'q': { width: 19, points: [[15, 14], [15, -7], [-1, -1], [15, 11], [13, 13], [11, 14], [8, 14], [6, 13], [4, 11], [3, 8], [3, 6], [4, 3], [6, 1], [8, 0], [11, 0], [13, 1], [15, 3]] },
+        'r': { width: 13, points: [[4, 14], [4, 0], [-1, -1], [4, 8], [5, 11], [7, 13], [9, 14], [12, 14]] },
+        's': { width: 17, points: [[14, 11], [13, 13], [10, 14], [7, 14], [4, 13], [3, 11], [4, 9], [6, 8], [11, 7], [13, 6], [14, 4], [14, 3], [13, 1], [10, 0], [7, 0], [4, 1], [3, 3]] },
+        't': { width: 12, points: [[5, 21], [5, 4], [6, 1], [8, 0], [10, 0], [-1, -1], [2, 14], [9, 14]] },
+        'u': { width: 19, points: [[4, 14], [4, 4], [5, 1], [7, 0], [10, 0], [12, 1], [15, 4], [-1, -1], [15, 14], [15, 0]] },
+        'v': { width: 16, points: [[2, 14], [8, 0], [-1, -1], [14, 14], [8, 0]] },
+        'w': { width: 22, points: [[3, 14], [7, 0], [-1, -1], [11, 14], [7, 0], [-1, -1], [11, 14], [15, 0], [-1, -1], [19, 14], [15, 0]] },
+        'x': { width: 17, points: [[3, 14], [14, 0], [-1, -1], [14, 14], [3, 0]] },
+        'y': { width: 16, points: [[2, 14], [8, 0], [-1, -1], [14, 14], [8, 0], [6, -4], [4, -6], [2, -7], [1, -7]] },
+        'z': { width: 17, points: [[14, 14], [3, 0], [-1, -1], [3, 14], [14, 14], [-1, -1], [3, 0], [14, 0]] },
+        '{': { width: 14, points: [[9, 25], [7, 24], [6, 23], [5, 21], [5, 19], [6, 17], [7, 16], [8, 14], [8, 12], [6, 10], [-1, -1], [7, 24], [6, 22], [6, 20], [7, 18], [8, 17], [9, 15], [9, 13], [8, 11], [4, 9], [8, 7], [9, 5], [9, 3], [8, 1], [7, 0], [6, -2], [6, -4], [7, -6], [-1, -1], [6, 8], [8, 6], [8, 4], [7, 2], [6, 1], [5, -1], [5, -3], [6, -5], [7, -6], [9, -7]] },
+        '|': { width: 8, points: [[4, 25], [4, -7]] },
+        '}': { width: 14, points: [[5, 25], [7, 24], [8, 23], [9, 21], [9, 19], [8, 17], [7, 16], [6, 14], [6, 12], [8, 10], [-1, -1], [7, 24], [8, 22], [8, 20], [7, 18], [6, 17], [5, 15], [5, 13], [6, 11], [10, 9], [6, 7], [5, 5], [5, 3], [6, 1], [7, 0], [8, -2], [8, -4], [7, -6], [-1, -1], [8, 8], [6, 6], [6, 4], [7, 2], [8, 1], [9, -1], [9, -3], [8, -5], [7, -6], [5, -7]] },
+        '~': { width: 24, points: [[3, 6], [3, 8], [4, 11], [6, 12], [8, 12], [10, 11], [14, 8], [16, 7], [18, 7], [20, 8], [21, 10], [-1, -1], [3, 8], [4, 10], [6, 11], [8, 11], [10, 10], [14, 7], [16, 6], [18, 6], [20, 7], [21, 10], [21, 12]] }
+    };
+
+    /**
+    * Canvas font renderer plugin.
+    * @class $.jqplot.CanvasFontRenderer
+    * @param {object} options - Font renderer options.
+    */
+    $.jqplot.CanvasFontRenderer = function (options) {
+        options = options || {};
+        if (!options.pt2px) {
+            options.pt2px = 1.5;
+        }
+        $.jqplot.CanvasTextRenderer.call(this, options);
+    };
+
+    /**
+    * Constructor of canvasTextRenderer using canvasFontRenderer.
+    */
+    $.jqplot.CanvasFontRenderer.prototype = new $.jqplot.CanvasTextRenderer({});
+    $.jqplot.CanvasFontRenderer.prototype.constructor = $.jqplot.CanvasFontRenderer;
+
+    /**
+    * Measure the text width for the canvas.
+    * @param {object} ctx - Canvas context.
+    * @param {String} str - String text.
+    */
+    $.jqplot.CanvasFontRenderer.prototype.measure = function (ctx, str) {
+        // var fstyle = this.fontStyle+' '+this.fontVariant+' '+this.fontWeight+' '+this.fontSize+' '+this.fontFamily;
+        var fstyle = this.fontSize + ' ' + this.fontFamily,
+            w;
+        ctx.save();
+        ctx.font = fstyle;
+        w = ctx.measureText(str).width;
+        ctx.restore();
+        return w;
+    };
+
+    /**
+    * Draw the text using font renderer.
+    * @param {object} ctx - Canvas context.
+    * @param {String} str - String text to draw.
+    */
+    $.jqplot.CanvasFontRenderer.prototype.draw = function (ctx, str) {
+        var x = 0,
+            // leave room at bottom for descenders.
+            y = this.height * 0.72,
+            tx,
+            ty,
+            fstyle = this.fontSize + ' ' + this.fontFamily;
+        ctx.save();
+
+        if ((-Math.PI / 2 &lt;= this.angle &amp;&amp; this.angle &lt;= 0) || (Math.PI * 3 / 2 &lt;= this.angle &amp;&amp; this.angle &lt;= Math.PI * 2)) {
+            // 1st quadrant
+            tx = 0;
+            ty = -Math.sin(this.angle) * this.width;
+        } else if ((0 &lt; this.angle &amp;&amp; this.angle &lt;= Math.PI / 2) || (-Math.PI * 2 &lt;= this.angle &amp;&amp; this.angle &lt;= -Math.PI * 3 / 2)) {
+            // 4th quadrant
+            tx = Math.sin(this.angle) * this.height;
+            ty = 0;
+        } else if ((-Math.PI &lt; this.angle &amp;&amp; this.angle &lt; -Math.PI / 2) || (Math.PI &lt;= this.angle &amp;&amp; this.angle &lt;= Math.PI * 3 / 2)) {
+            // 2nd quadrant
+            tx = -Math.cos(this.angle) * this.width;
+            ty = -Math.sin(this.angle) * this.width - Math.cos(this.angle) * this.height;
+        } else if ((-Math.PI * 3 / 2 &lt; this.angle &amp;&amp; this.angle &lt; Math.PI) || (Math.PI / 2 &lt; this.angle &amp;&amp; this.angle &lt; Math.PI)) {
+            // 3rd quadrant
+            tx = Math.sin(this.angle) * this.height - Math.cos(this.angle) * this.width;
+            ty = -Math.cos(this.angle) * this.height;
+        }
+
+        ctx.strokeStyle = this.fillStyle;
+        ctx.fillStyle = this.fillStyle;
+        ctx.font = fstyle;
+        ctx.translate(tx, ty);
+        ctx.rotate(this.angle);
+        ctx.fillText(str, x, y);
+
+        ctx.restore();
+    };
+
+}(jQuery));</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Jan 12 2016 09:37:25 GMT+0100 (CET) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
