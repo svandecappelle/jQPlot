@@ -1,61 +1,6 @@
 @import url("http://fonts.googleapis.com/css?family=Lato:300|Redressed");
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td {
+
+html * {
   margin: 0;
   padding: 0;
   border: 0;
@@ -66,6 +11,7 @@ td {
   font-size: 100%;
   vertical-align: baseline;
 }
+
 body {
   line-height: 1;
   color: #000;
@@ -565,11 +511,15 @@ article.github span.img {
 }
 
 nav#primary {
-    box-shadow: 0px 0px 10px #BAE999;
-    width: 100%;
-    position: fixed;
-    z-index: 1000;
-    top: 0px;
+  box-shadow: 0px 0px 10px #BAE999;
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+  top: 0px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
 }
 
 nav#primary {
@@ -616,6 +566,10 @@ footer {
   text-align: center;
   position: fixed;
   z-index: 10;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
 }
 footer ul {
   list-style: none;
@@ -627,32 +581,7 @@ footer a {
 footer .branding h3 {
   margin-top: 0px;
 }
-table {
-  width: 100%;
-  background-color: #fff;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-bottom: 1.5em;
-}
-table td,
-table th {
-  display: table-cell;
-}
-table tr {
-  border-top: 1px #ccc solid;
-}
-table tr:nth-child(2n) {
-  background-color: #f2f2f2;
-}
-table tr th,
-table tr td {
-  padding: 6px 13px;
-}
-table tr th {
-  border-bottom: 1px #ccc solid;
-}
+
 code,
 pre {
   font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
@@ -668,126 +597,4 @@ pre {
   background: #f8f8f8;
   border: 1px solid #e5e5e5;
   margin-bottom: 1.5em;
-}
-pre code {
-  display: block;
-}
-table.images-content tr th, table.images-content tr td{
-  padding: 2px;
-}
-
-.preview-content{
-  margin-bottom: 12px;
-  max-width: 1020px;
-  overflow-x: auto;
-}
-
-.centered{
-  text-align: center;
-}
-
-.screenshot{
-  overflow: hidden;
-  height: 135px;
-}
-
-.screenshot>img{
-  width: 100%;
-}
-
-.codemirror-container{
-  position: relative;
-  height: 300px;
-}
-
-.codemirror-container .CodeMirror{
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  max-width: unset !important;
-  right: 0px;
-  width: 100% !important;
-}
-
-.card{
-  border-radius: 5px;
-  background: #FFF none repeat scroll 0% 0%;
-  box-shadow: 0px 0px 1px #784942;
-  position: relative;
-}
-
-.card .card-inner {
-    height: 230px;
-    position: relative;
-    margin: 20px;
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: #666;
-}
-.card .card-inner #node.install {
-    display: block;
-    position: absolute;
-    top: 50px;
-}
-
-.card .card-inner .download-banner {
-    margin-top: 30px;
-}
-
-.card .card-inner h2 {
-    font-size: 25px;
-    margin-top: -5px;
-    font-family: "Redressed","Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.card .card-inner .download-banner .description {
-    margin-bottom: 20px;
-}
-
-.card .card-inner .download-banner .dsp-left {
-    margin-right: 10px;
-}
-
-.card .card-inner .download-banner .command {
-    display: inline-block;
-    background-color: #FFF;
-    float: left;
-    font-family: "Bitstream Vera Sans Mono","Courier",monospace;
-    width: 210px;
-    line-height: 42px;
-    text-align: center;
-    border-radius: 3px;
-    box-shadow: 0px 0px 1px #666;
-}
-
-.card .card-inner .download-banner .dsp-right {
-    margin-left: 10px;
-}
-
-.card .card-inner h2 small {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-    position: relative;
-    bottom: 1px;
-    margin-left: 15px;
-    color: #666;
-    font-size: 13px;
-}
-
-.card .card-inner h1 span.version {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 12px;
-    color: #666;
-    background-color: #FFF;
-    border-radius: 5px;
-    padding: 3px 6px;
-    margin-left: 10px;
-    display: inline-block;
-    position: relative;
-    top: -7px;
-}
-
-.card .card-inner .tech-links {
-    text-align: center;
-    position: absolute;
-    bottom: 0px;
-    width: 440px;
 }

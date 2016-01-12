@@ -1,6 +1,8 @@
 var codemirrorTheme = $.codemirrorTheme;
 
 $(".coding").each(function (){
+    console.log($(this).find("div.jqplot-target"));
+
     $(this).append("<textarea class='code'>"+$(this).html().trim()+"</textarea>");
     var editor = CodeMirror.fromTextArea($(this).find("textarea.code")[0], {
         lineNumbers: true,
@@ -14,7 +16,7 @@ $(".coding").each(function (){
         foldGutter: true,
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
     });
-    editor.setSize($(this).width()-25, $(this).find("div").height());
+    //editor.setSize($(this).width()-25, $(this).find("div.jqplot-target").height());
 });
 
 // Take the code and put it into the textarea.
