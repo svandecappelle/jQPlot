@@ -224,10 +224,6 @@ section#content {
 .grid_12 {
   min-width: 990px;
   max-width: 990px;
-  margin: 0 15px;
-  overflow: hidden;
-  float: left;
-  display: inline;
 }
 footer section#footer {
   margin: 0 auto;
@@ -254,6 +250,7 @@ body .content {
   background-color: #EEFAE8;
   padding-top: 30px;
   padding-bottom: 30px;
+  margin-bottom: 90px;
 }
 h1,
 h2 {
@@ -271,6 +268,21 @@ h3.fancy {
   font-family: "Redressed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal !important;
 }
+
+ul.nl{
+  list-style-type: none;
+  padding: 0px;
+}
+
+ul.nl li{
+  margin: 0px;
+}
+
+.fancy {
+  font-family: "Redressed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal !important;
+}
+
 a {
   color: #39A402;
   text-decoration: none;
@@ -602,6 +614,8 @@ footer {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   bottom: 0px;
   text-align: center;
+  position: fixed;
+  z-index: 10;
 }
 footer ul {
   list-style: none;

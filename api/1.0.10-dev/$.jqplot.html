@@ -1,0 +1,2156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jqplot - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="$.jqplot.Axis.html">Axis</a></li><li><a href="$.jqplot.CanvasManager.html">CanvasManager</a></li><li><a href="$.jqplot.ColorGenerator.html">ColorGenerator</a></li><li><a href="$.jqplot.EventListenerManager.html">EventListenerManager</a></li><li><a href="$.jqplot.GenericCanvas.html">GenericCanvas</a><ul class='methods'><li data-type='method'><a href="$.jqplot.GenericCanvas.html#resetCanvas">resetCanvas</a></li></ul></li><li><a href="$.jqplot.Grid.html">Grid</a></li><li><a href="$.jqplot.HooksManager.html">HooksManager</a></li><li><a href="$.jqplot.JqPlot.html">JqPlot</a><ul class='methods'><li data-type='method'><a href="$.jqplot.JqPlot.html#activateTheme">activateTheme</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#bindCustomEvents">bindCustomEvents</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#computePlotData">computePlotData</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#destroy">destroy</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#doFillBetweenLines">doFillBetweenLines</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#drawSeries">drawSeries</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#init">init</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#moveSeriesToBack">moveSeriesToBack</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#moveSeriesToFront">moveSeriesToFront</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onClick">onClick</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onDblClick">onDblClick</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseDown">onMouseDown</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseEnter">onMouseEnter</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseLeave">onMouseLeave</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseMove">onMouseMove</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onMouseUp">onMouseUp</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#onRightClick">onRightClick</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#parseOptions">parseOptions</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#populatePlotData">populatePlotData</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#quickInit">quickInit</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#redraw">redraw</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#reInitialize">reInitialize</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#replot">replot</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#resetAxesScale">resetAxesScale</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#restoreOriginalSeriesOrder">restoreOriginalSeriesOrder</a></li><li data-type='method'><a href="$.jqplot.JqPlot.html#restorePreviousSeriesOrder">restorePreviousSeriesOrder</a></li></ul></li><li><a href="$.jqplot.Legend.html">Legend</a><ul class='methods'><li data-type='method'><a href="$.jqplot.Legend.html#setOptions">setOptions</a></li></ul></li><li><a href="$.jqplot.Series.html">Series</a><ul class='methods'><li data-type='method'><a href="$.jqplot.Series.html#toggleDisplay">toggleDisplay</a></li></ul></li><li><a href="$.jqplot.Title.html">Title</a></li></ul><h3>Namespaces</h3><ul><li><a href="$.jqplot.html">jqplot</a><ul class='methods'><li data-type='method'><a href="$.jqplot.html#.CanvasGridRenderer">CanvasGridRenderer</a></li><li data-type='method'><a href="$.jqplot.html#.computeHighlightColors">computeHighlightColors</a></li><li data-type='method'><a href="$.jqplot.html#.getColorComponents">getColorComponents</a></li><li data-type='method'><a href="$.jqplot.html#.getColorRGB">getColorRGB</a></li><li data-type='method'><a href="$.jqplot.html#.hex2rgb">hex2rgb</a></li><li data-type='method'><a href="$.jqplot.html#.isDarkColor">isDarkColor</a></li><li data-type='method'><a href="$.jqplot.html#.log">log</a></li><li data-type='method'><a href="$.jqplot.html#.normalize2rgb">normalize2rgb</a></li><li data-type='method'><a href="$.jqplot.html#.rgb2hex">rgb2hex</a></li><li data-type='method'><a href="$.jqplot.html#.sprintf">sprintf</a></li><li data-type='method'><a href="$.jqplot.html#.support_canvas">support_canvas</a></li><li data-type='method'><a href="$.jqplot.html#.support_canvas_text">support_canvas_text</a></li><li data-type='method'><a href="$.jqplot.html#.ThemeEngine">ThemeEngine</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">jqplot</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        jqplot
+        </h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Namespace: $.jqplot
+jQuery function called by the user to create a plot.
+
+Parameters:
+target - ID of target element to render the plot into.
+data - an array of data series.
+options - user defined options object.  See the individual classes for available options.
+
+Properties:
+config - object to hold configuration information for jqPlot plot object.
+
+attributes:
+enablePlugins - False to disable plugins by default.  Plugins must then be explicitly
+  enabled in the individual plot options.  Default: false.
+  This property sets the "show" property of certain plugins to true or false.
+  Only plugins that can be immediately active upon loading are affected.  This includes
+  non-renderer plugins like cursor, dragable, highlighter, and trendline.
+defaultHeight - Default height for plots where no css height specification exists.  This
+  is a jqplot wide default.
+defaultWidth - Default height for plots where no css height specification exists.  This
+  is a jqplot wide default.</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line829">line 829</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="$.jqplot.Axis.html">Axis</a></dt>
+            <dd></dd>
+        
+            <dt><a href="$.jqplot.CanvasManager.html">CanvasManager</a></dt>
+            <dd></dd>
+        
+            <dt><a href="$.jqplot.ColorGenerator.html">ColorGenerator</a></dt>
+            <dd></dd>
+        
+            <dt><a href="$.jqplot.EventListenerManager.html">EventListenerManager</a></dt>
+            <dd></dd>
+        
+            <dt><a href="$.jqplot.GenericCanvas.html">GenericCanvas</a></dt>
+            <dd></dd>
+        
+            <dt><a href="$.jqplot.Grid.html">Grid</a></dt>
+            <dd></dd>
+        
+            <dt><a href="$.jqplot.HooksManager.html">HooksManager</a></dt>
+            <dd></dd>
+        
+            <dt><a href="$.jqplot.JqPlot.html">JqPlot</a></dt>
+            <dd></dd>
+        
+            <dt><a href="$.jqplot.Legend.html">Legend</a></dt>
+            <dd></dd>
+        
+            <dt><a href="$.jqplot.Series.html">Series</a></dt>
+            <dd></dd>
+        
+            <dt><a href="$.jqplot.Title.html">Title</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".colorKeywordMap"><span class="type-signature">(static) </span>colorKeywordMap<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    {@link}
+</div>
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>jqplot</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">map</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">themes commons colors map.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line4856">line 4856</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".config"><span class="type-signature">(static) </span>config<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Settings and configuration
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line1010">line 1010</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".preInitHooks"><span class="type-signature">(static) </span>preInitHooks<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Hooks: jqPlot Pugin Hooks
+
+$.jqplot.preInitHooks - called before initialization.
+$.jqplot.postInitHooks - called after initialization.
+$.jqplot.preParseOptionsHooks - called before user options are parsed.
+$.jqplot.postParseOptionsHooks - called after user options are parsed.
+$.jqplot.preDrawHooks - called before plot draw.
+$.jqplot.postDrawHooks - called after plot draw.
+$.jqplot.preDrawSeriesHooks - called before each series is drawn.
+$.jqplot.postDrawSeriesHooks - called after each series is drawn.
+$.jqplot.preDrawLegendHooks - called before the legend is drawn.
+$.jqplot.addLegendRowHooks - called at the end of legend draw, so plugins
+    can add rows to the legend table.
+$.jqplot.preSeriesInitHooks - called before series is initialized.
+$.jqplot.postSeriesInitHooks - called after series is initialized.
+$.jqplot.preParseSeriesOptionsHooks - called before series related options
+    are parsed.
+$.jqplot.postParseSeriesOptionsHooks - called after series related options
+    are parsed.
+$.jqplot.eventListenerHooks - called at the end of plot drawing, binds
+    listeners to the event canvas which lays on top of the grid area.
+$.jqplot.preDrawAllSeriesHooks - called before the first serie drawn and after grid drawn.
+$.jqplot.preDrawSeriesShadowHooks - called before series shadows are drawn.
+$.jqplot.postDrawSeriesShadowHooks - called after series shadows are drawn.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line1105">line 1105</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".CanvasGridRenderer"><span class="type-signature">(static) </span>CanvasGridRenderer<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.canvasGridRenderer.js.html">jqplot.canvasGridRenderer.js</a>, <a href="jqplot.canvasGridRenderer.js.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".computeHighlightColors"><span class="type-signature">(static) </span>computeHighlightColors<span class="signature">(colors)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Computes a highlight color or array of highlight colors from given colors.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>colors</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line4575">line 4575</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getColorComponents"><span class="type-signature">(static) </span>getColorComponents<span class="signature">(s)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Extracts the r, g, b, a color components out of a css color spec.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>s</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">match the string color name for the rgba color.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line4745">line 4745</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the rgba color specified @see <a href="$.jqplot.html#.colorKeywordMap">$.jqplot.colorKeywordMap</a>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getColorRGB"><span class="type-signature">(static) </span>getColorRGB<span class="signature">(color)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Gets the RGB color value for a given color
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">css string color representation.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line4796">line 4796</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    [Number] rgb array color.
+</div>
+
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".hex2rgb"><span class="type-signature">(static) </span>hex2rgb<span class="signature">({string, a)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    convert a hex color string to rgb string.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>{string</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">h 3 or 6 character hex string, with or without leading #</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">optional alpha</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line4676">line 4676</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".isDarkColor"><span class="type-signature">(static) </span>isDarkColor<span class="signature">(color)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+<div class="description">
+    know if a color is dark or not
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string color css representation</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line4772">line 4772</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    true if the color is dark.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".log"><span class="type-signature">(static) </span>log<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Convienence function that won't hang IE or FF without FireBug.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line1001">line 1001</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".normalize2rgb"><span class="type-signature">(static) </span>normalize2rgb<span class="signature">(s, a)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    given a css color spec, return an rgb css color spec.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>s</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">css spec</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">alpha opacity</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line4730">line 4730</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".rgb2hex"><span class="type-signature">(static) </span>rgb2hex<span class="signature">(s)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    convert an rgb color spec to a hex spec.  ignore any alpha specification.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>s</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string css spe</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line4701">line 4701</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".sprintf"><span class="type-signature">(static) </span>sprintf<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Chris Leonello
+
+Added %p %P specifier
+Acts like %g or %G but will not add more significant digits to the output than present in the input.
+Example:
+Format: '%.3p', Input: 0.012, Output: 0.012
+Format: '%.3g', Input: 0.012, Output: 0.0120
+Format: '%.4p', Input: 12.0, Output: 12.0
+Format: '%.4g', Input: 12.0, Output: 12.00
+Format: '%.4p', Input: 4.321e-5, Output: 4.321e-5
+Format: '%.4g', Input: 4.321e-5, Output: 4.3210e-5
+
+Example:
+>>> $.jqplot.sprintf('%.2f, %d', 23.3452, 43.23)
+"23.35, 43"
+>>> $.jqplot.sprintf("no value: %n, decimal with thousands separator: %'d", 23.3452, 433524)
+"no value: , decimal with thousands separator: 433,524"</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.sprintf.js.html">jqplot.sprintf.js</a>, <a href="jqplot.sprintf.js.html#line94">line 94</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".support_canvas"><span class="type-signature">(static) </span>support_canvas<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    canvas related tests taken from modernizer:
+Copyright (c) 2009 - 2010 Faruk Ates.
+http://www.modernizr.com
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line1050">line 1050</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".support_canvas_text"><span class="type-signature">(static) </span>support_canvas_text<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    canvas related tests taken from modernizer:
+Copyright (c) 2009 - 2010 Faruk Ates.
+http://www.modernizr.com
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.core.js.html">jqplot.core.js</a>, <a href="jqplot.core.js.html#line1062">line 1062</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ThemeEngine"><span class="type-signature">(static) </span>ThemeEngine<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Class: $.jqplot.ThemeEngine
+Theme Engine provides a programatic way to change some of the  more
+common jqplot styling options such as fonts, colors and grid options.
+A theme engine instance is created with each plot.  The theme engine
+manages a collection of themes which can be modified, added to, or 
+applied to the plot.
+
+The themeEngine class is not instantiated directly.
+When a plot is initialized, the current plot options are scanned
+an a default theme named "Default" is created.  This theme is
+used as the basis for other themes added to the theme engine and
+is always available.
+
+A theme is a simple javascript object with styling parameters for
+various entities of the plot.  A theme has the form:
+
+
+> {
+>     _name:f "Default",
+>     target: {
+>         backgroundColor: "transparent"
+>     },
+>     legend: {
+>         textColor: null,
+>         fontFamily: null,
+>         fontSize: null,
+>         border: null,
+>         background: null
+>     },
+>     title: {
+>         textColor: "rgb(102, 102, 102)",
+>         fontFamily: "'Trebuchet MS',Arial,Helvetica,sans-serif",
+>         fontSize: "19.2px",
+>         textAlign: "center"
+>     },
+>     seriesStyles: {},
+>     series: [{
+>         color: "#4bb2c5",
+>         lineWidth: 2.5,
+>         linePattern: "solid",
+>         shadow: true,
+>         fillColor: "#4bb2c5",
+>         showMarker: true,
+>         markerOptions: {
+>             color: "#4bb2c5",
+>             show: true,
+>             style: 'filledCircle',
+>             lineWidth: 1.5,
+>             size: 4,
+>             shadow: true
+>         }
+>     }],
+>     grid: {
+>         drawGridlines: true,
+>         gridLineColor: "#cccccc",
+>         gridLineWidth: 1,
+>         backgroundColor: "#fffdf6",
+>         borderColor: "#999999",
+>         borderWidth: 2,
+>         shadow: true
+>     },
+>     axesStyles: {
+>         label: {},
+>         ticks: {}
+>     },
+>     axes: {
+>         xaxis: {
+>             borderColor: "#999999",
+>             borderWidth: 2,
+>             ticks: {
+>                 show: true,
+>                 showGridline: true,
+>                 showLabel: true,
+>                 showMark: true,
+>                 size: 4,
+>                 textColor: "",
+>                 whiteSpace: "nowrap",
+>                 fontSize: "12px",
+>                 fontFamily: "'Trebuchet MS',Arial,Helvetica,sans-serif"
+>             },
+>             label: {
+>                 textColor: "rgb(102, 102, 102)",
+>                 whiteSpace: "normal",
+>                 fontSize: "14.6667px",
+>                 fontFamily: "'Trebuchet MS',Arial,Helvetica,sans-serif",
+>                 fontWeight: "400"
+>             }
+>         },
+>         yaxis: {
+>             borderColor: "#999999",
+>             borderWidth: 2,
+>             ticks: {
+>                 show: true,
+>                 showGridline: true,
+>                 showLabel: true,
+>                 showMark: true,
+>                 size: 4,
+>                 textColor: "",
+>                 whiteSpace: "nowrap",
+>                 fontSize: "12px",
+>                 fontFamily: "'Trebuchet MS',Arial,Helvetica,sans-serif"
+>             },
+>             label: {
+>                 textColor: null,
+>                 whiteSpace: null,
+>                 fontSize: null,
+>                 fontFamily: null,
+>                 fontWeight: null
+>             }
+>         },
+>         x2axis: {...
+>         },
+>         ...
+>         y9axis: {...
+>         }
+>     }
+> }
+
+"seriesStyles" is a style object that will be applied to all series in the plot.
+It will forcibly override any styles applied on the individual series.  "axesStyles" is
+a style object that will be applied to all axes in the plot.  It will also forcibly
+override any styles on the individual axes.
+
+The example shown above has series options for a line series.  Options for other
+series types are shown below:
+
+Bar Series:
+
+> {
+>     color: "#4bb2c5",
+>     seriesColors: ["#4bb2c5", "#EAA228", "#c5b47f", "#579575", "#839557", "#958c12", "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc", "#c747a3", "#cddf54", "#FBD178", "#26B4E3", "#bd70c7"],
+>     lineWidth: 2.5,
+>     shadow: true,
+>     barPadding: 2,
+>     barMargin: 10,
+>     barWidth: 15.09375,
+>     highlightColors: ["rgb(129,201,214)", "rgb(129,201,214)", "rgb(129,201,214)", "rgb(129,201,214)", "rgb(129,201,214)", "rgb(129,201,214)", "rgb(129,201,214)", "rgb(129,201,214)"]
+> }
+
+Pie Series:
+
+> {
+>     seriesColors: ["#4bb2c5", "#EAA228", "#c5b47f", "#579575", "#839557", "#958c12", "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc", "#c747a3", "#cddf54", "#FBD178", "#26B4E3", "#bd70c7"],
+>     padding: 20,
+>     sliceMargin: 0,
+>     fill: true,
+>     shadow: true,
+>     startAngle: 0,
+>     lineWidth: 2.5,
+>     highlightColors: ["rgb(129,201,214)", "rgb(240,189,104)", "rgb(214,202,165)", "rgb(137,180,158)", "rgb(168,180,137)", "rgb(180,174,89)", "rgb(180,113,161)", "rgb(129,141,236)", "rgb(227,205,120)", "rgb(255,138,76)", "rgb(76,169,219)", "rgb(215,126,190)", "rgb(220,232,135)", "rgb(200,167,96)", "rgb(103,202,235)", "rgb(208,154,215)"]
+> }
+
+Funnel Series:
+
+> {
+>     color: "#4bb2c5",
+>     lineWidth: 2,
+>     shadow: true,
+>     padding: {
+>         top: 20,
+>         right: 20,
+>         bottom: 20,
+>         left: 20
+>     },
+>     sectionMargin: 6,
+>     seriesColors: ["#4bb2c5", "#EAA228", "#c5b47f", "#579575", "#839557", "#958c12", "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc", "#c747a3", "#cddf54", "#FBD178", "#26B4E3", "#bd70c7"],
+>     highlightColors: ["rgb(147,208,220)", "rgb(242,199,126)", "rgb(220,210,178)", "rgb(154,191,172)", "rgb(180,191,154)", "rgb(191,186,112)", "rgb(191,133,174)", "rgb(147,157,238)", "rgb(231,212,139)", "rgb(255,154,102)", "rgb(102,181,224)", "rgb(221,144,199)", "rgb(225,235,152)", "rgb(200,167,96)", "rgb(124,210,238)", "rgb(215,169,221)"]
+> }
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jqplot.themeEngine.js.html">jqplot.themeEngine.js</a>, <a href="jqplot.themeEngine.js.html#line203">line 203</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Jan 12 2016 11:14:30 GMT+0100 (CET) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

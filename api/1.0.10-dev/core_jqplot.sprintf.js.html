@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>core/jqplot.sprintf.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="$.jqplot.CanvasFontRenderer.html">CanvasFontRenderer</a><ul class='methods'><li data-type='method'><a href="$.jqplot.CanvasFontRenderer.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.CanvasFontRenderer.html#measure">measure</a></li></ul></li><li><a href="$.jqplot.CanvasOverlay.html">CanvasOverlay</a><ul class='methods'><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#.postPlotDraw">postPlotDraw</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#.postPlotInit">postPlotInit</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addDashedHorizontalLine">addDashedHorizontalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addDashedVerticalLine">addDashedVerticalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addHorizontalLine">addHorizontalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addLine">addLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addRectangle">addRectangle</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addVerticalLine">addVerticalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addWorkItem">addWorkItem</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#clear">clear</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#getObject">getObject</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#removeObject">removeObject</a></li></ul></li><li><a href="$.jqplot.CanvasTextRenderer.html">CanvasTextRenderer</a><ul class='methods'><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#fontWeight2Float">fontWeight2Float</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#getHeight">getHeight</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#getText">getText</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#getWidth">getWidth</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#init">init</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#letter">letter</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#measure">measure</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#normalizeFontSize">normalizeFontSize</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#setHeight">setHeight</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#setText">setText</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#setWidth">setWidth</a></li></ul></li><li><a href="$.jqplot.EnhancedLegendRenderer.html">EnhancedLegendRenderer</a><ul class='methods'><li data-type='method'><a href="$.jqplot.EnhancedLegendRenderer.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.EnhancedLegendRenderer.html#init">init</a></li></ul></li><li><a href="Class_%2520jqPlot%250APlot%2520object%2520returned%2520by%2520call%2520to%2520$.jqplot.%2520%2520Handles%2520parsing%2520user%2520options,%250Acreating%2520sub%2520objects%2520(Axes,%2520legend,%2520title,%2520series)%2520and%2520rendering%2520the%2520plot..html">Class: jqPlot
+Plot object returned by call to $.jqplot.  Handles parsing user options,
+creating sub objects (Axes, legend, title, series) and rendering the plot.</a></li><li><a href="DashedHorizontalLine.html">DashedHorizontalLine</a></li><li><a href="DashedVerticalLine.html">DashedVerticalLine</a></li><li><a href="HorizontalLine.html">HorizontalLine</a></li><li><a href="jsDate.html">jsDate</a></li><li><a href="Line.html">Line</a></li><li><a href="Rectangle.html">Rectangle</a></li><li><a href="VerticalLine.html">VerticalLine</a></li><li><a href="WorkItem.html">WorkItem</a></li></ul><h3>Namespaces</h3><ul><li><a href="Configuration%2520options%2520that%2520will%2520be%2520used%2520as%2520defaults%2520for%2520all%2520instances%2520on%2520the%2520page..html">Configuration options that will be used as defaults for all instances on the page.</a></li><li><a href="Holds%2520localizations%2520for%2520month_day%2520names.%250A_p_jsDate%2520attempts%2520to%2520detect%2520locale%2520when%2520loaded%2520and%2520defaults%2520to%2520_en_.%250AIf%2520a%2520localization%2520is%2520detected%2520which%2520is%2520not%2520available,%2520jsDate%2520defaults%2520to%2520_en_.%250AAdditional%2520localizations%2520can%2520be%2520added%2520after%2520jsDate%2520loads.%2520%2520After%2520adding%2520a%2520localization,%250Acall%2520the%2520jsDate.regional.getLocale()%2520method.%2520%2520Currently,%2520en,%2520fr%2520and%2520de%2520are%2520defined.__p_%250A%250A_p_Localizations%2520must%2520be%2520an%2520object%2520and%2520have%2520the%2520following%2520properties%2520defined_%2520%2520monthNames,%2520monthNamesShort,%2520dayNames,%2520dayNamesShort%2520and%2520Localizations%2520are%2520added%2520like___p_%250A_pre%2520class=_code__%250AjsDate.regional._en_%2520=%2520%257B%250AmonthNames%2520%2520%2520%2520%2520%2520_%2520_January%2520February%2520March%2520April%2520May%2520June%2520July%2520August%2520September%2520October%2520November%2520December_.split(_%2520_),%250AmonthNamesShort%2520_%2520_Jan%2520Feb%2520Mar%2520Apr%2520May%2520Jun%2520Jul%2520Aug%2520Sep%2520Oct%2520Nov%2520Dec_.split(_%2520_),%250AdayNames%2520%2520%2520%2520%2520%2520%2520%2520_%2520_Sunday%2520Monday%2520Tuesday%2520Wednesday%2520Thursday%2520Friday%2520Saturday_.split(_%2520_),%250AdayNamesShort%2520%2520%2520_%2520_Sun%2520Mon%2520Tue%2520Wed%2520Thu%2520Fri%2520Sat_.split(_%2520_)%250A%257D;%250A__pre_%250A_p_After%2520adding%2520localizations,%2520call%2520_code_jsDate.regional.getLocale();__code_%2520to%2520update%2520the%2520locale%2520setting%2520with%2520the%250Anew%2520localizations.__p_.html">Holds localizations for month/day names.
+<p>jsDate attempts to detect locale when loaded and defaults to 'en'.
+If a localization is detected which is not available, jsDate defaults to 'en'.
+Additional localizations can be added after jsDate loads.  After adding a localization,
+call the jsDate.regional.getLocale() method.  Currently, en, fr and de are defined.</p>
+
+<p>Localizations must be an object and have the following properties defined:  monthNames, monthNamesShort, dayNames, dayNamesShort and Localizations are added like:</p>
+<pre class="code">
+jsDate.regional['en'] = {
+monthNames      : 'January February March April May June July August September October November December'.split(' '),
+monthNamesShort : 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' '),
+dayNames        : 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' '),
+dayNamesShort   : 'Sun Mon Tue Wed Thu Fri Sat'.split(' ')
+};
+</pre>
+<p>After adding localizations, call <code>jsDate.regional.getLocale();</code> to update the locale setting with the
+new localizations.</p></a></li><li><a href="Namespace%2520to%2520hold%2520format%2520codes%2520and%2520format%2520shortcuts.%2520%2520_perl_%2520and%2520_php_%2520format%2520codes%2520%250Aand%2520shortcuts%2520are%2520defined%2520by%2520default.%2520%2520Additional%2520codes%2520and%2520shortcuts%2520can%2520be%250Aadded%2520like_%250A%250A_pre%2520class=_code__%250AjsDate.formats._perl_%2520=%2520%257B%250A%2520%2520%2520%2520_codes__%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520matcher_%2520_someregex_,%250A%2520%2520%2520%2520%2520%2520%2520%2520Y_%2520_fullYear_,%2520%2520__%2520name%2520of%2520_get_%2520method%2520without%2520the%2520_get_,%250A%2520%2520%2520%2520%2520%2520%2520%2520...,%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520__%2520more%2520codes%250A%2520%2520%2520%2520%257D,%250A%2520%2520%2520%2520_shortcuts__%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520F_%2520_%2525Y-%2525m-%2525d_,%250A%2520%2520%2520%2520%2520%2520%2520%2520...,%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520__%2520more%2520shortcuts%250A%2520%2520%2520%2520%257D%250A%257D;%250A__pre_%250A%250A_p_Additionally,%2520ISO%2520and%2520SQL%2520shortcuts%2520are%2520defined%2520and%2520can%2520be%2520accesses%2520via_%250A_code_jsDate.formats.ISO__code_%2520and%2520_code_jsDate.formats.SQL__code_.html">Namespace to hold format codes and format shortcuts.  "perl" and "php" format codes 
+and shortcuts are defined by default.  Additional codes and shortcuts can be
+added like:
+
+<pre class="code">
+jsDate.formats["perl"] = {
+    "codes": {
+        matcher: /someregex/,
+        Y: "fullYear",  // name of "get" method without the "get",
+        ...,            // more codes
+    },
+    "shortcuts": {
+        F: '%Y-%m-%d',
+        ...,            // more shortcuts
+    }
+};
+</pre>
+
+<p>Additionally, ISO and SQL shortcuts are defined and can be accesses via:
+<code>jsDate.formats.ISO</code> and <code>jsDate.formats.SQL</code></a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">core/jqplot.sprintf.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * jqPlot
+ * Pure JavaScript plotting plugin using jQuery
+ *
+ * Version: @VERSION
+ * Revision: @REVISION
+ *
+ * Copyright (c) 2009-2013 Chris Leonello
+ * jqPlot is currently available for use in all personal or commercial projects 
+ * under both the MIT (http://www.opensource.org/licenses/mit-license.php) and GPL 
+ * version 2.0 (http://www.gnu.org/licenses/gpl-2.0.html) licenses. This means that you can 
+ * choose the license that best suits your project and use it accordingly. 
+ *
+ * Although not required, the author would appreciate an email letting him 
+ * know of any substantial use of jqPlot.  You can reach the author at: 
+ * chris at jqplot dot com or see http://www.jqplot.com/info.php .
+ *
+ * If you are feeling kind and generous, consider supporting the project by
+ * making a donation at: http://www.jqplot.com/donate.php .
+ *
+ * sprintf functions contained in jqplot.sprintf.js by Ash Searle:
+ *
+ *     version 2007.04.27
+ *     author Ash Searle
+ *     http://hexmen.com/blog/2007/03/printf-sprintf/
+ *     http://hexmen.com/js/sprintf.js
+ *     The author (Ash Searle) has placed this code in the public domain:
+ *     "This code is unrestricted: you are free to use it however you like."
+ * 
+ */
+(function($) {      
+    /**
+     * JavaScript printf/sprintf functions.
+     * 
+     * This code has been adapted from the publicly available sprintf methods
+     * by Ash Searle. His original header follows:
+     *
+     *     This code is unrestricted: you are free to use it however you like.
+     *     
+     *     The functions should work as expected, performing left or right alignment,
+     *     truncating strings, outputting numbers with a required precision etc.
+     *
+     *     For complex cases, these functions follow the Perl implementations of
+     *     (s)printf, allowing arguments to be passed out-of-order, and to set the
+     *     precision or length of the output based on arguments instead of fixed
+     *     numbers.
+     *
+     *     See http://perldoc.perl.org/functions/sprintf.html for more information.
+     *
+     *     Implemented:
+     *     - zero and space-padding
+     *     - right and left-alignment,
+     *     - base X prefix (binary, octal and hex)
+     *     - positive number prefix
+     *     - (minimum) width
+     *     - precision / truncation / maximum width
+     *     - out of order arguments
+     *
+     *     Not implemented (yet):
+     *     - vector flag
+     *     - size (bytes, words, long-words etc.)
+     *     
+     *     Will not implement:
+     *     - %n or %p (no pass-by-reference in JavaScript)
+     *
+     *     @version 2007.04.27
+     *     @author Ash Searle 
+     * 
+     * You can see the original work and comments on his blog:
+     * http://hexmen.com/blog/2007/03/printf-sprintf/
+     * http://hexmen.com/js/sprintf.js
+     */
+     
+     /**
+      * @Modifications 2009.05.26
+      * @author Chris Leonello
+      * 
+      * Added %p %P specifier
+      * Acts like %g or %G but will not add more significant digits to the output than present in the input.
+      * Example:
+      * Format: '%.3p', Input: 0.012, Output: 0.012
+      * Format: '%.3g', Input: 0.012, Output: 0.0120
+      * Format: '%.4p', Input: 12.0, Output: 12.0
+      * Format: '%.4g', Input: 12.0, Output: 12.00
+      * Format: '%.4p', Input: 4.321e-5, Output: 4.321e-5
+      * Format: '%.4g', Input: 4.321e-5, Output: 4.3210e-5
+      * 
+      * Example:
+      * >>> $.jqplot.sprintf('%.2f, %d', 23.3452, 43.23)
+      * "23.35, 43"
+      * >>> $.jqplot.sprintf("no value: %n, decimal with thousands separator: %'d", 23.3452, 433524)
+      * "no value: , decimal with thousands separator: 433,524"
+      */
+    $.jqplot.sprintf = function() {
+        function pad(str, len, chr, leftJustify) {
+            var padding = (str.length >= len) ? '' : Array(1 + len - str.length >>> 0).join(chr);
+            return leftJustify ? str + padding : padding + str;
+
+        }
+
+        function thousand_separate(value) {
+            var value_str = new String(value);
+            for (var i=10; i>0; i--) {
+                if (value_str == (value_str = value_str.replace(/^(\d+)(\d{3})/, "$1"+$.jqplot.sprintf.thousandsSeparator+"$2"))) break;
+            }
+            return value_str; 
+        }
+
+        function justify(value, prefix, leftJustify, minWidth, zeroPad, htmlSpace) {
+            var diff = minWidth - value.length;
+            if (diff > 0) {
+                var spchar = ' ';
+                if (htmlSpace) { spchar = '&amp;nbsp;'; }
+                if (leftJustify || !zeroPad) {
+                    value = pad(value, minWidth, spchar, leftJustify);
+                } else {
+                    value = value.slice(0, prefix.length) + pad('', diff, '0', true) + value.slice(prefix.length);
+                }
+            }
+            return value;
+        }
+
+        function formatBaseX(value, base, prefix, leftJustify, minWidth, precision, zeroPad, htmlSpace) {
+            // Note: casts negative numbers to positive ones
+            var number = value >>> 0;
+            prefix = prefix &amp;&amp; number &amp;&amp; {'2': '0b', '8': '0', '16': '0x'}[base] || '';
+            value = prefix + pad(number.toString(base), precision || 0, '0', false);
+            return justify(value, prefix, leftJustify, minWidth, zeroPad, htmlSpace);
+        }
+
+        function formatString(value, leftJustify, minWidth, precision, zeroPad, htmlSpace) {
+            if (precision != null) {
+                value = value.slice(0, precision);
+            }
+            return justify(value, '', leftJustify, minWidth, zeroPad, htmlSpace);
+        }
+
+        var a = arguments, i = 0, format = a[i++];
+
+        return format.replace($.jqplot.sprintf.regex, function(substring, valueIndex, flags, minWidth, _, precision, type) {
+            if (substring == '%%') { return '%'; }
+
+            // parse flags
+            var leftJustify = false, positivePrefix = '', zeroPad = false, prefixBaseX = false, htmlSpace = false, thousandSeparation = false;
+            for (var j = 0; flags &amp;&amp; j &lt; flags.length; j++) switch (flags.charAt(j)) {
+                case ' ': positivePrefix = ' '; break;
+                case '+': positivePrefix = '+'; break;
+                case '-': leftJustify = true; break;
+                case '0': zeroPad = true; break;
+                case '#': prefixBaseX = true; break;
+                case '&amp;': htmlSpace = true; break;
+                case '\'': thousandSeparation = true; break;
+            }
+
+            // parameters may be null, undefined, empty-string or real valued
+            // we want to ignore null, undefined and empty-string values
+
+            if (!minWidth) {
+                minWidth = 0;
+            } 
+            else if (minWidth == '*') {
+                minWidth = +a[i++];
+            } 
+            else if (minWidth.charAt(0) == '*') {
+                minWidth = +a[minWidth.slice(1, -1)];
+            } 
+            else {
+                minWidth = +minWidth;
+            }
+
+            // Note: undocumented perl feature:
+            if (minWidth &lt; 0) {
+                minWidth = -minWidth;
+                leftJustify = true;
+            }
+
+            if (!isFinite(minWidth)) {
+                throw new Error('$.jqplot.sprintf: (minimum-)width must be finite');
+            }
+
+            if (!precision) {
+                precision = 'fFeE'.indexOf(type) > -1 ? 6 : (type == 'd') ? 0 : void(0);
+            } 
+            else if (precision == '*') {
+                precision = +a[i++];
+            } 
+            else if (precision.charAt(0) == '*') {
+                precision = +a[precision.slice(1, -1)];
+            } 
+            else {
+                precision = +precision;
+            }
+
+            // grab value using valueIndex if required?
+            var value = valueIndex ? a[valueIndex.slice(0, -1)] : a[i++];
+
+            switch (type) {
+            case 's': {
+                if (value == null) {
+                    return '';
+                }
+                return formatString(String(value), leftJustify, minWidth, precision, zeroPad, htmlSpace);
+            }
+            case 'c': return formatString(String.fromCharCode(+value), leftJustify, minWidth, precision, zeroPad, htmlSpace);
+            case 'b': return formatBaseX(value, 2, prefixBaseX, leftJustify, minWidth, precision, zeroPad,htmlSpace);
+            case 'o': return formatBaseX(value, 8, prefixBaseX, leftJustify, minWidth, precision, zeroPad, htmlSpace);
+            case 'x': return formatBaseX(value, 16, prefixBaseX, leftJustify, minWidth, precision, zeroPad, htmlSpace);
+            case 'X': return formatBaseX(value, 16, prefixBaseX, leftJustify, minWidth, precision, zeroPad, htmlSpace).toUpperCase();
+            case 'u': return formatBaseX(value, 10, prefixBaseX, leftJustify, minWidth, precision, zeroPad, htmlSpace);
+            case 'i': {
+              var number = parseInt(+value, 10);
+              if (isNaN(number)) {
+                return '';
+              }
+              var prefix = number &lt; 0 ? '-' : positivePrefix;
+              var number_str = thousandSeparation ? thousand_separate(String(Math.abs(number))): String(Math.abs(number));
+              value = prefix + pad(number_str, precision, '0', false);
+              //value = prefix + pad(String(Math.abs(number)), precision, '0', false);
+              return justify(value, prefix, leftJustify, minWidth, zeroPad, htmlSpace);
+                  }
+            case 'd': {
+              var number = Math.round(+value);
+              if (isNaN(number)) {
+                return '';
+              }
+              var prefix = number &lt; 0 ? '-' : positivePrefix;
+              var number_str = thousandSeparation ? thousand_separate(String(Math.abs(number))): String(Math.abs(number));
+              value = prefix + pad(number_str, precision, '0', false);
+              return justify(value, prefix, leftJustify, minWidth, zeroPad, htmlSpace);
+                  }
+            case 'e':
+            case 'E':
+            case 'f':
+            case 'F':
+            case 'g':
+            case 'G':
+                      {
+                      var number = +value;
+                      if (isNaN(number)) {
+                          return '';
+                      }
+                      var prefix = number &lt; 0 ? '-' : positivePrefix;
+                      var method = ['toExponential', 'toFixed', 'toPrecision']['efg'.indexOf(type.toLowerCase())];
+                      var textTransform = ['toString', 'toUpperCase']['eEfFgG'.indexOf(type) % 2];
+                      var number_str = Math.abs(number)[method](precision);
+                      
+                      // Apply the decimal mark properly by splitting the number by the
+                      //   decimalMark, applying thousands separator, and then placing it
+                      //   back in.
+                      var parts = number_str.toString().split('.');
+                      parts[0] = thousandSeparation ? thousand_separate(parts[0]) : parts[0];
+                      number_str = parts.join($.jqplot.sprintf.decimalMark);
+                      
+                      value = prefix + number_str;
+                      var justified = justify(value, prefix, leftJustify, minWidth, zeroPad, htmlSpace)[textTransform]();
+                      
+                      return justified;
+                  }
+            case 'p':
+            case 'P':
+            {
+                // make sure number is a number
+                var number = +value;
+                if (isNaN(number)) {
+                    return '';
+                }
+                var prefix = number &lt; 0 ? '-' : positivePrefix;
+
+                var parts = String(Number(Math.abs(number)).toExponential()).split(/e|E/);
+                var sd = (parts[0].indexOf('.') != -1) ? parts[0].length - 1 : String(number).length;
+                var zeros = (parts[1] &lt; 0) ? -parts[1] - 1 : 0;
+                
+                if (Math.abs(number) &lt; 1) {
+                    if (sd + zeros  &lt;= precision) {
+                        value = prefix + Math.abs(number).toPrecision(sd);
+                    }
+                    else {
+                        if (sd  &lt;= precision - 1) {
+                            value = prefix + Math.abs(number).toExponential(sd-1);
+                        }
+                        else {
+                            value = prefix + Math.abs(number).toExponential(precision-1);
+                        }
+                    }
+                }
+                else {
+                    var prec = (sd &lt;= precision) ? sd : precision;
+                    value = prefix + Math.abs(number).toPrecision(prec);
+                }
+                var textTransform = ['toString', 'toUpperCase']['pP'.indexOf(type) % 2];
+                return justify(value, prefix, leftJustify, minWidth, zeroPad, htmlSpace)[textTransform]();
+            }
+            case 'n': return '';
+            default: return substring;
+            }
+        });
+    };
+
+    $.jqplot.sprintf.thousandsSeparator = ',';
+    // Specifies the decimal mark for floating point values. By default a period '.'
+    // is used. If you change this value to for example a comma be sure to also
+    // change the thousands separator or else this won't work since a simple String
+    // replace is used (replacing all periods with the mark specified here).
+    $.jqplot.sprintf.decimalMark = '.';
+    
+    $.jqplot.sprintf.regex = /%%|%(\d+\$)?([-+#0&amp;\' ]*)(\*\d+\$|\*|\d+)?(\.(\*\d+\$|\*|\d+))?([nAscboxXuidfegpEGP])/g;
+
+    $.jqplot.getSignificantFigures = function(number) {
+        var parts = String(Number(Math.abs(number)).toExponential()).split(/e|E/);
+        // total significant digits
+        var sd = (parts[0].indexOf('.') != -1) ? parts[0].length - 1 : parts[0].length;
+        var zeros = (parts[1] &lt; 0) ? -parts[1] - 1 : 0;
+        // exponent
+        var expn = parseInt(parts[1], 10);
+        // digits to the left of the decimal place
+        var dleft = (expn + 1 > 0) ? expn + 1 : 0;
+        // digits to the right of the decimal place
+        var dright = (sd &lt;= dleft) ? 0 : sd - expn - 1;
+        return {significantDigits: sd, digitsLeft: dleft, digitsRight: dright, zeros: zeros, exponent: expn} ;
+    };
+
+    $.jqplot.getPrecision = function(number) {
+        return $.jqplot.getSignificantFigures(number).digitsRight;
+    };
+
+})(jQuery);  
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Jan 12 2016 09:37:25 GMT+0100 (CET) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

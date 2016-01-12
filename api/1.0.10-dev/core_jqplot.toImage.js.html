@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>core/jqplot.toImage.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="$.jqplot.CanvasFontRenderer.html">CanvasFontRenderer</a><ul class='methods'><li data-type='method'><a href="$.jqplot.CanvasFontRenderer.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.CanvasFontRenderer.html#measure">measure</a></li></ul></li><li><a href="$.jqplot.CanvasOverlay.html">CanvasOverlay</a><ul class='methods'><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#.postPlotDraw">postPlotDraw</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#.postPlotInit">postPlotInit</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addDashedHorizontalLine">addDashedHorizontalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addDashedVerticalLine">addDashedVerticalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addHorizontalLine">addHorizontalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addLine">addLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addRectangle">addRectangle</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addVerticalLine">addVerticalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addWorkItem">addWorkItem</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#clear">clear</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#getObject">getObject</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#removeObject">removeObject</a></li></ul></li><li><a href="$.jqplot.CanvasTextRenderer.html">CanvasTextRenderer</a><ul class='methods'><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#fontWeight2Float">fontWeight2Float</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#getHeight">getHeight</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#getText">getText</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#getWidth">getWidth</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#init">init</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#letter">letter</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#measure">measure</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#normalizeFontSize">normalizeFontSize</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#setHeight">setHeight</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#setText">setText</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#setWidth">setWidth</a></li></ul></li><li><a href="$.jqplot.EnhancedLegendRenderer.html">EnhancedLegendRenderer</a><ul class='methods'><li data-type='method'><a href="$.jqplot.EnhancedLegendRenderer.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.EnhancedLegendRenderer.html#init">init</a></li></ul></li><li><a href="Class_%2520jqPlot%250APlot%2520object%2520returned%2520by%2520call%2520to%2520$.jqplot.%2520%2520Handles%2520parsing%2520user%2520options,%250Acreating%2520sub%2520objects%2520(Axes,%2520legend,%2520title,%2520series)%2520and%2520rendering%2520the%2520plot..html">Class: jqPlot
+Plot object returned by call to $.jqplot.  Handles parsing user options,
+creating sub objects (Axes, legend, title, series) and rendering the plot.</a></li><li><a href="DashedHorizontalLine.html">DashedHorizontalLine</a></li><li><a href="DashedVerticalLine.html">DashedVerticalLine</a></li><li><a href="HorizontalLine.html">HorizontalLine</a></li><li><a href="jsDate.html">jsDate</a></li><li><a href="Line.html">Line</a></li><li><a href="Rectangle.html">Rectangle</a></li><li><a href="VerticalLine.html">VerticalLine</a></li><li><a href="WorkItem.html">WorkItem</a></li></ul><h3>Namespaces</h3><ul><li><a href="Configuration%2520options%2520that%2520will%2520be%2520used%2520as%2520defaults%2520for%2520all%2520instances%2520on%2520the%2520page..html">Configuration options that will be used as defaults for all instances on the page.</a></li><li><a href="Holds%2520localizations%2520for%2520month_day%2520names.%250A_p_jsDate%2520attempts%2520to%2520detect%2520locale%2520when%2520loaded%2520and%2520defaults%2520to%2520_en_.%250AIf%2520a%2520localization%2520is%2520detected%2520which%2520is%2520not%2520available,%2520jsDate%2520defaults%2520to%2520_en_.%250AAdditional%2520localizations%2520can%2520be%2520added%2520after%2520jsDate%2520loads.%2520%2520After%2520adding%2520a%2520localization,%250Acall%2520the%2520jsDate.regional.getLocale()%2520method.%2520%2520Currently,%2520en,%2520fr%2520and%2520de%2520are%2520defined.__p_%250A%250A_p_Localizations%2520must%2520be%2520an%2520object%2520and%2520have%2520the%2520following%2520properties%2520defined_%2520%2520monthNames,%2520monthNamesShort,%2520dayNames,%2520dayNamesShort%2520and%2520Localizations%2520are%2520added%2520like___p_%250A_pre%2520class=_code__%250AjsDate.regional._en_%2520=%2520%257B%250AmonthNames%2520%2520%2520%2520%2520%2520_%2520_January%2520February%2520March%2520April%2520May%2520June%2520July%2520August%2520September%2520October%2520November%2520December_.split(_%2520_),%250AmonthNamesShort%2520_%2520_Jan%2520Feb%2520Mar%2520Apr%2520May%2520Jun%2520Jul%2520Aug%2520Sep%2520Oct%2520Nov%2520Dec_.split(_%2520_),%250AdayNames%2520%2520%2520%2520%2520%2520%2520%2520_%2520_Sunday%2520Monday%2520Tuesday%2520Wednesday%2520Thursday%2520Friday%2520Saturday_.split(_%2520_),%250AdayNamesShort%2520%2520%2520_%2520_Sun%2520Mon%2520Tue%2520Wed%2520Thu%2520Fri%2520Sat_.split(_%2520_)%250A%257D;%250A__pre_%250A_p_After%2520adding%2520localizations,%2520call%2520_code_jsDate.regional.getLocale();__code_%2520to%2520update%2520the%2520locale%2520setting%2520with%2520the%250Anew%2520localizations.__p_.html">Holds localizations for month/day names.
+<p>jsDate attempts to detect locale when loaded and defaults to 'en'.
+If a localization is detected which is not available, jsDate defaults to 'en'.
+Additional localizations can be added after jsDate loads.  After adding a localization,
+call the jsDate.regional.getLocale() method.  Currently, en, fr and de are defined.</p>
+
+<p>Localizations must be an object and have the following properties defined:  monthNames, monthNamesShort, dayNames, dayNamesShort and Localizations are added like:</p>
+<pre class="code">
+jsDate.regional['en'] = {
+monthNames      : 'January February March April May June July August September October November December'.split(' '),
+monthNamesShort : 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' '),
+dayNames        : 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' '),
+dayNamesShort   : 'Sun Mon Tue Wed Thu Fri Sat'.split(' ')
+};
+</pre>
+<p>After adding localizations, call <code>jsDate.regional.getLocale();</code> to update the locale setting with the
+new localizations.</p></a></li><li><a href="Namespace%2520to%2520hold%2520format%2520codes%2520and%2520format%2520shortcuts.%2520%2520_perl_%2520and%2520_php_%2520format%2520codes%2520%250Aand%2520shortcuts%2520are%2520defined%2520by%2520default.%2520%2520Additional%2520codes%2520and%2520shortcuts%2520can%2520be%250Aadded%2520like_%250A%250A_pre%2520class=_code__%250AjsDate.formats._perl_%2520=%2520%257B%250A%2520%2520%2520%2520_codes__%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520matcher_%2520_someregex_,%250A%2520%2520%2520%2520%2520%2520%2520%2520Y_%2520_fullYear_,%2520%2520__%2520name%2520of%2520_get_%2520method%2520without%2520the%2520_get_,%250A%2520%2520%2520%2520%2520%2520%2520%2520...,%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520__%2520more%2520codes%250A%2520%2520%2520%2520%257D,%250A%2520%2520%2520%2520_shortcuts__%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520F_%2520_%2525Y-%2525m-%2525d_,%250A%2520%2520%2520%2520%2520%2520%2520%2520...,%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520__%2520more%2520shortcuts%250A%2520%2520%2520%2520%257D%250A%257D;%250A__pre_%250A%250A_p_Additionally,%2520ISO%2520and%2520SQL%2520shortcuts%2520are%2520defined%2520and%2520can%2520be%2520accesses%2520via_%250A_code_jsDate.formats.ISO__code_%2520and%2520_code_jsDate.formats.SQL__code_.html">Namespace to hold format codes and format shortcuts.  "perl" and "php" format codes 
+and shortcuts are defined by default.  Additional codes and shortcuts can be
+added like:
+
+<pre class="code">
+jsDate.formats["perl"] = {
+    "codes": {
+        matcher: /someregex/,
+        Y: "fullYear",  // name of "get" method without the "get",
+        ...,            // more codes
+    },
+    "shortcuts": {
+        F: '%Y-%m-%d',
+        ...,            // more shortcuts
+    }
+};
+</pre>
+
+<p>Additionally, ISO and SQL shortcuts are defined and can be accesses via:
+<code>jsDate.formats.ISO</code> and <code>jsDate.formats.SQL</code></a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">core/jqplot.toImage.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * jqPlot
+ * Pure JavaScript plotting plugin using jQuery
+ *
+ * Version: @VERSION
+ * Revision: @REVISION
+ *
+ * Copyright (c) 2009-2013 Chris Leonello
+ * jqPlot is currently available for use in all personal or commercial projects 
+ * under both the MIT (http://www.opensource.org/licenses/mit-license.php) and GPL 
+ * version 2.0 (http://www.gnu.org/licenses/gpl-2.0.html) licenses. This means that you can 
+ * choose the license that best suits your project and use it accordingly. 
+ *
+ * Although not required, the author would appreciate an email letting him 
+ * know of any substantial use of jqPlot.  You can reach the author at: 
+ * chris at jqplot dot com or see http://www.jqplot.com/info.php .
+ *
+ * If you are feeling kind and generous, consider supporting the project by
+ * making a donation at: http://www.jqplot.com/donate.php .
+ *
+ * sprintf functions contained in jqplot.sprintf.js by Ash Searle:
+ *
+ *     version 2007.04.27
+ *     author Ash Searle
+ *     http://hexmen.com/blog/2007/03/printf-sprintf/
+ *     http://hexmen.com/js/sprintf.js
+ *     The author (Ash Searle) has placed this code in the public domain:
+ *     "This code is unrestricted: you are free to use it however you like."
+ *
+ * jsDate library by Chris Leonello:
+ *
+ * Copyright (c) 2010-2013 Chris Leonello
+ *
+ * jsDate is currently available for use in all personal or commercial projects 
+ * under both the MIT and GPL version 2.0 licenses. This means that you can 
+ * choose the license that best suits your project and use it accordingly.
+ *
+ * jsDate borrows many concepts and ideas from the Date Instance 
+ * Methods by Ken Snyder along with some parts of Ken's actual code.
+ * Ken has generously given permission to adapt his code and release
+ * under the MIT and GPL V2 licenses.
+ * 
+ * Ken's original Date Instance Methods and copyright notice:
+ * 
+ * Ken Snyder (ken d snyder at gmail dot com)
+ * 2008-09-10
+ * version 2.0.2 (http://kendsnyder.com/sandbox/date/)     
+ * Creative Commons Attribution License 3.0 (http://creativecommons.org/licenses/by/3.0/)
+ *
+ * jqplotToImage function based on Larry Siden's export-jqplot-to-png.js.
+ * Larry has generously given permission to adapt his code for inclusion
+ * into jqPlot.
+ *
+ * Larry's original code can be found here:
+ *
+ * https://github.com/lsiden/export-jqplot-to-png
+ * 
+ * 
+ */
+
+(function($) {
+
+    $.fn.jqplotChildText = function() {
+        return $(this).contents().filter(function() {
+            return this.nodeType == 3;  // Node.TEXT_NODE not defined in I7
+        }).text();
+    };
+
+    // Returns font style as abbreviation for "font" property.
+    $.fn.jqplotGetComputedFontStyle = function() {
+        var css = window.getComputedStyle ?  window.getComputedStyle(this[0], "") : this[0].currentStyle;
+        var attrs = css['font-style'] ? ['font-style', 'font-weight', 'font-size', 'font-family'] : ['fontStyle', 'fontWeight', 'fontSize', 'fontFamily'];
+        var style = [];
+
+        for (var i=0 ; i &lt; attrs.length; ++i) {
+            var attr = String(css[attrs[i]]);
+
+            if (attr &amp;&amp; attr != 'normal') {
+                style.push(attr);
+            }
+        }
+        return style.join(' ');
+    };
+
+    /**
+     * Namespace: $.fn
+     * jQuery namespace to attach functions to jQuery elements.
+     *  
+     */
+
+    $.fn.jqplotToImageCanvas = function(options) {
+
+        options = options || {};
+        var x_offset = (options.x_offset == null) ? 0 : options.x_offset;
+        var y_offset = (options.y_offset == null) ? 0 : options.y_offset;
+        var backgroundColor = (options.backgroundColor == null) ? 'rgb(255,255,255)' : options.backgroundColor;
+
+        if ($(this).width() == 0 || $(this).height() == 0) {
+            return null;
+        }
+
+        // excanvas and hence IE &lt; 9 do not support toDataURL and cannot export images.
+        if ($.jqplot.use_excanvas) {
+            return null;
+        }
+        
+        var newCanvas = document.createElement("canvas");
+        var h = $(this).outerHeight(true);
+        var w = $(this).outerWidth(true);
+        var offs = $(this).offset();
+        var plotleft = offs.left;
+        var plottop = offs.top;
+        var transx = 0, transy = 0;
+
+        // have to check if any elements are hanging outside of plot area before rendering,
+        // since changing width of canvas will erase canvas.
+
+        var clses = ['jqplot-table-legend', 'jqplot-xaxis-tick', 'jqplot-x2axis-tick', 'jqplot-yaxis-tick', 'jqplot-y2axis-tick', 'jqplot-y3axis-tick', 
+        'jqplot-y4axis-tick', 'jqplot-y5axis-tick', 'jqplot-y6axis-tick', 'jqplot-y7axis-tick', 'jqplot-y8axis-tick', 'jqplot-y9axis-tick',
+        'jqplot-xaxis-label', 'jqplot-x2axis-label', 'jqplot-yaxis-label', 'jqplot-y2axis-label', 'jqplot-y3axis-label', 'jqplot-y4axis-label', 
+        'jqplot-y5axis-label', 'jqplot-y6axis-label', 'jqplot-y7axis-label', 'jqplot-y8axis-label', 'jqplot-y9axis-label' ];
+
+        var temptop, templeft, tempbottom, tempright;
+
+        for (var i = 0; i &lt; clses.length; i++) {
+            $(this).find('.'+clses[i]).each(function() {
+                temptop = $(this).offset().top - plottop;
+                templeft = $(this).offset().left - plotleft;
+                tempright = templeft + $(this).outerWidth(true) + transx;
+                tempbottom = temptop + $(this).outerHeight(true) + transy;
+                if (templeft &lt; -transx) {
+                    w = w - transx - templeft;
+                    transx = -templeft;
+                }
+                if (temptop &lt; -transy) {
+                    h = h - transy - temptop;
+                    transy = - temptop;
+                }
+                if (tempright > w) {
+                    w = tempright;
+                }
+                if (tempbottom > h) {
+                    h =  tempbottom;
+                }
+            });
+        }
+
+        newCanvas.width = w + Number(x_offset);
+        newCanvas.height = h + Number(y_offset);
+
+        var newContext = newCanvas.getContext("2d"); 
+
+        newContext.save();
+        newContext.fillStyle = backgroundColor;
+        newContext.fillRect(0,0, newCanvas.width, newCanvas.height);
+        newContext.restore();
+
+        newContext.translate(transx, transy);
+        newContext.textAlign = 'left';
+        newContext.textBaseline = 'top';
+
+        function getLineheight(el) {
+            var lineheight = parseInt($(el).css('line-height'), 10);
+
+            if (isNaN(lineheight)) {
+                lineheight = parseInt($(el).css('font-size'), 10) * 1.2;
+            }
+            return lineheight;
+        }
+
+        function writeWrappedText (el, context, text, left, top, canvasWidth) {
+            var lineheight = getLineheight(el);
+            var tagwidth = $(el).innerWidth();
+            var tagheight = $(el).innerHeight();
+            var words = text.split(/\s+/);
+            var wl = words.length;
+            var w = '';
+            var breaks = [];
+            var temptop = top;
+            var templeft = left;
+
+            var max_tries=800;
+            for (var i=0; i&lt;wl; i++) {
+                var oldw = w;
+                w += words[i];
+                // Merging merge#49 issue#794
+                if (oldw != '' &amp;&amp; context.measureText(w).width > tagwidth) {
+                    breaks.push(i);
+                    w = '';
+                    i--;
+                    max_tries--;
+                }
+
+                if (max_tries&lt;=0){
+                    break;
+                }
+            }
+
+            if (breaks.length === 0) {
+                // center text if necessary
+                if ($(el).css('textAlign') === 'center') {
+                    templeft = left + (canvasWidth - context.measureText(w).width)/2  - transx;
+                }
+                context.fillText(text, templeft, top);
+            }
+            else {
+                w = words.slice(0, breaks[0]).join(' ');
+                // center text if necessary
+                if ($(el).css('textAlign') === 'center') {
+                    templeft = left + (canvasWidth - context.measureText(w).width)/2  - transx;
+                }
+                context.fillText(w, templeft, temptop);
+                temptop += lineheight;
+                for (var i=1, l=breaks.length; i&lt;l; i++) {
+                    w = words.slice(breaks[i-1], breaks[i]).join(' ');
+                    // center text if necessary
+                    if ($(el).css('textAlign') === 'center') {
+                        templeft = left + (canvasWidth - context.measureText(w).width)/2  - transx;
+                    }
+                    context.fillText(w, templeft, temptop);
+                    temptop += lineheight;
+                }
+                w = words.slice(breaks[i-1], words.length).join(' ');
+                // center text if necessary
+                if ($(el).css('textAlign') === 'center') {
+                    templeft = left + (canvasWidth - context.measureText(w).width)/2  - transx;
+                }
+                context.fillText(w, templeft, temptop);
+            }
+
+        }
+
+        function _jqpToImage(el, x_offset, y_offset) {
+            var tagname = el.tagName.toLowerCase();
+            var p = $(el).position();
+            var css = window.getComputedStyle ?  window.getComputedStyle(el, "") : el.currentStyle; // for IE &lt; 9
+            var left = x_offset + p.left + parseInt(css.marginLeft, 10) + parseInt(css.borderLeftWidth, 10) + parseInt(css.paddingLeft, 10);
+            var top = y_offset + p.top + parseInt(css.marginTop, 10) + parseInt(css.borderTopWidth, 10)+ parseInt(css.paddingTop, 10);
+            var w = newCanvas.width;
+            // var left = x_offset + p.left + $(el).css('marginLeft') + $(el).css('borderLeftWidth') 
+
+            // somehow in here, for divs within divs, the width of the inner div should be used instead of the canvas.
+
+            if ((tagname == 'div' || tagname == 'span') &amp;&amp; !$(el).hasClass('jqplot-highlighter-tooltip')) {
+                $(el).children().each(function() {
+                    _jqpToImage(this, left, top);
+                });
+                var text = $(el).jqplotChildText();
+
+                if (text) {
+                    newContext.font = $(el).jqplotGetComputedFontStyle();
+                    newContext.fillStyle = $(el).css('color');
+
+                    writeWrappedText(el, newContext, text, left, top, w);
+                }
+            }
+
+            // handle the standard table legend
+
+            else if (tagname === 'table' &amp;&amp; $(el).hasClass('jqplot-table-legend')) {
+                newContext.strokeStyle = $(el).css('border-top-color');
+                newContext.fillStyle = $(el).css('background-color');
+                newContext.fillRect(left, top, $(el).innerWidth(), $(el).innerHeight());
+                if (parseInt($(el).css('border-top-width'), 10) > 0) {
+                    newContext.strokeRect(left, top, $(el).innerWidth(), $(el).innerHeight());
+                }
+
+                // find all the swatches
+                $(el).find('div.jqplot-table-legend-swatch-outline').each(function() {
+                    // get the first div and stroke it
+                    var elem = $(this);
+                    newContext.strokeStyle = elem.css('border-top-color');
+                    var l = left + elem.position().left;
+                    var t = top + elem.position().top;
+                    newContext.strokeRect(l, t, elem.innerWidth(), elem.innerHeight());
+
+                    // now fill the swatch
+                    
+                    l += parseInt(elem.css('padding-left'), 10);
+                    t += parseInt(elem.css('padding-top'), 10);
+                    var h = elem.innerHeight() - 2 * parseInt(elem.css('padding-top'), 10);
+                    var w = elem.innerWidth() - 2 * parseInt(elem.css('padding-left'), 10);
+
+                    var swatch = elem.children('div.jqplot-table-legend-swatch');
+                    newContext.fillStyle = swatch.css('background-color');
+                    newContext.fillRect(l, t, w, h);
+                });
+
+                // now add text
+
+                $(el).find('td.jqplot-table-legend-label').each(function(){
+                    var elem = $(this);
+                    var l = left + elem.position().left;
+                    var t = top + elem.position().top + parseInt(elem.css('padding-top'), 10);
+                    newContext.font = elem.jqplotGetComputedFontStyle();
+                    newContext.fillStyle = elem.css('color');
+                    writeWrappedText(elem, newContext, elem.text(), l, t, w);
+                });
+
+                var elem = null;
+            }
+
+            else if (tagname == 'canvas') {
+                newContext.drawImage(el, left, top);
+            }
+        }
+        $(this).children().each(function() {
+            _jqpToImage(this, x_offset, y_offset);
+        });
+        return newCanvas;
+    };
+
+    // return the raw image data string.
+    // Should work on canvas supporting browsers.
+    $.fn.jqplotToImageStr = function(options) {
+        var imgCanvas = $(this).jqplotToImageCanvas(options);
+        if (imgCanvas) {
+            return imgCanvas.toDataURL("image/png;base64;");
+        }
+        else {
+            return null;
+        }
+    };
+
+    // return a DOM &lt;img> element and return it.
+    // Should work on canvas supporting browsers.
+    $.fn.jqplotToImageElem = function(options) {
+        var elem = document.createElement("img");
+        var str = $(this).jqplotToImageStr(options);
+        elem.src = str;
+        return elem;
+    };
+
+    // return a string for an &lt;img> element and return it.
+    // Should work on canvas supporting browsers.
+    $.fn.jqplotToImageElemStr = function(options) {
+        var str = '&lt;img src='+$(this).jqplotToImageStr(options)+' />';
+        return str;
+    };
+
+    // Not guaranteed to work, even on canvas supporting browsers due to 
+    // limitations with location.href and browser support.
+    $.fn.jqplotSaveImage = function() {
+        var imgData = $(this).jqplotToImageStr({});
+        if (imgData) {
+            var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
+            if($(this).find("#jqplot-download-link").length == 0){
+                $(this).append("&lt;a id='jqplot-download-link' style='display:none;' href='" + imgData + "' download='chart-" + d + ".png"+"'>&lt;/a>");
+            }else{
+                $(this).find('#jqplot-download-link').attr("href", imgData).attr("download", 'chart-' + d + '.png');
+            }
+
+            $("#jqplot-download-link").get(0).click();
+        }
+
+    };
+
+    // Not guaranteed to work, even on canvas supporting browsers due to
+    // limitations with window.open and arbitrary data.
+    $.fn.jqplotViewImage = function() {
+        var imgStr = $(this).jqplotToImageElemStr({});
+        var imgData = $(this).jqplotToImageStr({});
+        if (imgStr) {
+            var w = window.open('');
+            w.document.open("image/png");
+            w.document.write(imgStr);
+            w.document.close();
+            w = null;
+        }
+    };
+    
+})(jQuery);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Jan 12 2016 09:37:25 GMT+0100 (CET) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>plugins/utils/jqplot.ciParser.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="$.jqplot.CanvasFontRenderer.html">CanvasFontRenderer</a><ul class='methods'><li data-type='method'><a href="$.jqplot.CanvasFontRenderer.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.CanvasFontRenderer.html#measure">measure</a></li></ul></li><li><a href="$.jqplot.CanvasOverlay.html">CanvasOverlay</a><ul class='methods'><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#.postPlotDraw">postPlotDraw</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#.postPlotInit">postPlotInit</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addDashedHorizontalLine">addDashedHorizontalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addDashedVerticalLine">addDashedVerticalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addHorizontalLine">addHorizontalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addLine">addLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addRectangle">addRectangle</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addVerticalLine">addVerticalLine</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#addWorkItem">addWorkItem</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#clear">clear</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#getObject">getObject</a></li><li data-type='method'><a href="$.jqplot.CanvasOverlay.html#removeObject">removeObject</a></li></ul></li><li><a href="$.jqplot.CanvasTextRenderer.html">CanvasTextRenderer</a><ul class='methods'><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#fontWeight2Float">fontWeight2Float</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#getHeight">getHeight</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#getText">getText</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#getWidth">getWidth</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#init">init</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#letter">letter</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#measure">measure</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#normalizeFontSize">normalizeFontSize</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#setHeight">setHeight</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#setText">setText</a></li><li data-type='method'><a href="$.jqplot.CanvasTextRenderer.html#setWidth">setWidth</a></li></ul></li><li><a href="$.jqplot.EnhancedLegendRenderer.html">EnhancedLegendRenderer</a><ul class='methods'><li data-type='method'><a href="$.jqplot.EnhancedLegendRenderer.html#draw">draw</a></li><li data-type='method'><a href="$.jqplot.EnhancedLegendRenderer.html#init">init</a></li></ul></li><li><a href="Class_%2520jqPlot%250APlot%2520object%2520returned%2520by%2520call%2520to%2520$.jqplot.%2520%2520Handles%2520parsing%2520user%2520options,%250Acreating%2520sub%2520objects%2520(Axes,%2520legend,%2520title,%2520series)%2520and%2520rendering%2520the%2520plot..html">Class: jqPlot
+Plot object returned by call to $.jqplot.  Handles parsing user options,
+creating sub objects (Axes, legend, title, series) and rendering the plot.</a></li><li><a href="DashedHorizontalLine.html">DashedHorizontalLine</a></li><li><a href="DashedVerticalLine.html">DashedVerticalLine</a></li><li><a href="HorizontalLine.html">HorizontalLine</a></li><li><a href="jsDate.html">jsDate</a></li><li><a href="Line.html">Line</a></li><li><a href="Rectangle.html">Rectangle</a></li><li><a href="VerticalLine.html">VerticalLine</a></li><li><a href="WorkItem.html">WorkItem</a></li></ul><h3>Namespaces</h3><ul><li><a href="Configuration%2520options%2520that%2520will%2520be%2520used%2520as%2520defaults%2520for%2520all%2520instances%2520on%2520the%2520page..html">Configuration options that will be used as defaults for all instances on the page.</a></li><li><a href="Holds%2520localizations%2520for%2520month_day%2520names.%250A_p_jsDate%2520attempts%2520to%2520detect%2520locale%2520when%2520loaded%2520and%2520defaults%2520to%2520_en_.%250AIf%2520a%2520localization%2520is%2520detected%2520which%2520is%2520not%2520available,%2520jsDate%2520defaults%2520to%2520_en_.%250AAdditional%2520localizations%2520can%2520be%2520added%2520after%2520jsDate%2520loads.%2520%2520After%2520adding%2520a%2520localization,%250Acall%2520the%2520jsDate.regional.getLocale()%2520method.%2520%2520Currently,%2520en,%2520fr%2520and%2520de%2520are%2520defined.__p_%250A%250A_p_Localizations%2520must%2520be%2520an%2520object%2520and%2520have%2520the%2520following%2520properties%2520defined_%2520%2520monthNames,%2520monthNamesShort,%2520dayNames,%2520dayNamesShort%2520and%2520Localizations%2520are%2520added%2520like___p_%250A_pre%2520class=_code__%250AjsDate.regional._en_%2520=%2520%257B%250AmonthNames%2520%2520%2520%2520%2520%2520_%2520_January%2520February%2520March%2520April%2520May%2520June%2520July%2520August%2520September%2520October%2520November%2520December_.split(_%2520_),%250AmonthNamesShort%2520_%2520_Jan%2520Feb%2520Mar%2520Apr%2520May%2520Jun%2520Jul%2520Aug%2520Sep%2520Oct%2520Nov%2520Dec_.split(_%2520_),%250AdayNames%2520%2520%2520%2520%2520%2520%2520%2520_%2520_Sunday%2520Monday%2520Tuesday%2520Wednesday%2520Thursday%2520Friday%2520Saturday_.split(_%2520_),%250AdayNamesShort%2520%2520%2520_%2520_Sun%2520Mon%2520Tue%2520Wed%2520Thu%2520Fri%2520Sat_.split(_%2520_)%250A%257D;%250A__pre_%250A_p_After%2520adding%2520localizations,%2520call%2520_code_jsDate.regional.getLocale();__code_%2520to%2520update%2520the%2520locale%2520setting%2520with%2520the%250Anew%2520localizations.__p_.html">Holds localizations for month/day names.
+<p>jsDate attempts to detect locale when loaded and defaults to 'en'.
+If a localization is detected which is not available, jsDate defaults to 'en'.
+Additional localizations can be added after jsDate loads.  After adding a localization,
+call the jsDate.regional.getLocale() method.  Currently, en, fr and de are defined.</p>
+
+<p>Localizations must be an object and have the following properties defined:  monthNames, monthNamesShort, dayNames, dayNamesShort and Localizations are added like:</p>
+<pre class="code">
+jsDate.regional['en'] = {
+monthNames      : 'January February March April May June July August September October November December'.split(' '),
+monthNamesShort : 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' '),
+dayNames        : 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' '),
+dayNamesShort   : 'Sun Mon Tue Wed Thu Fri Sat'.split(' ')
+};
+</pre>
+<p>After adding localizations, call <code>jsDate.regional.getLocale();</code> to update the locale setting with the
+new localizations.</p></a></li><li><a href="Namespace%2520to%2520hold%2520format%2520codes%2520and%2520format%2520shortcuts.%2520%2520_perl_%2520and%2520_php_%2520format%2520codes%2520%250Aand%2520shortcuts%2520are%2520defined%2520by%2520default.%2520%2520Additional%2520codes%2520and%2520shortcuts%2520can%2520be%250Aadded%2520like_%250A%250A_pre%2520class=_code__%250AjsDate.formats._perl_%2520=%2520%257B%250A%2520%2520%2520%2520_codes__%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520matcher_%2520_someregex_,%250A%2520%2520%2520%2520%2520%2520%2520%2520Y_%2520_fullYear_,%2520%2520__%2520name%2520of%2520_get_%2520method%2520without%2520the%2520_get_,%250A%2520%2520%2520%2520%2520%2520%2520%2520...,%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520__%2520more%2520codes%250A%2520%2520%2520%2520%257D,%250A%2520%2520%2520%2520_shortcuts__%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520F_%2520_%2525Y-%2525m-%2525d_,%250A%2520%2520%2520%2520%2520%2520%2520%2520...,%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520__%2520more%2520shortcuts%250A%2520%2520%2520%2520%257D%250A%257D;%250A__pre_%250A%250A_p_Additionally,%2520ISO%2520and%2520SQL%2520shortcuts%2520are%2520defined%2520and%2520can%2520be%2520accesses%2520via_%250A_code_jsDate.formats.ISO__code_%2520and%2520_code_jsDate.formats.SQL__code_.html">Namespace to hold format codes and format shortcuts.  "perl" and "php" format codes 
+and shortcuts are defined by default.  Additional codes and shortcuts can be
+added like:
+
+<pre class="code">
+jsDate.formats["perl"] = {
+    "codes": {
+        matcher: /someregex/,
+        Y: "fullYear",  // name of "get" method without the "get",
+        ...,            // more codes
+    },
+    "shortcuts": {
+        F: '%Y-%m-%d',
+        ...,            // more shortcuts
+    }
+};
+</pre>
+
+<p>Additionally, ISO and SQL shortcuts are defined and can be accesses via:
+<code>jsDate.formats.ISO</code> and <code>jsDate.formats.SQL</code></a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">plugins/utils/jqplot.ciParser.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * jqPlot
+ * Pure JavaScript plotting plugin using jQuery
+ *
+ * Version: @VERSION
+ * Revision: @REVISION
+ *
+ * Copyright (c) 2009-2013 Chris Leonello
+ * jqPlot is currently available for use in all personal or commercial projects 
+ * under both the MIT (http://www.opensource.org/licenses/mit-license.php) and GPL 
+ * version 2.0 (http://www.gnu.org/licenses/gpl-2.0.html) licenses. This means that you can 
+ * choose the license that best suits your project and use it accordingly. 
+ *
+ * Although not required, the author would appreciate an email letting him 
+ * know of any substantial use of jqPlot.  You can reach the author at: 
+ * chris at jqplot dot com or see http://www.jqplot.com/info.php .
+ *
+ * If you are feeling kind and generous, consider supporting the project by
+ * making a donation at: http://www.jqplot.com/donate.php .
+ *
+ * sprintf functions contained in jqplot.sprintf.js by Ash Searle:
+ *
+ *     version 2007.04.27
+ *     author Ash Searle
+ *     http://hexmen.com/blog/2007/03/printf-sprintf/
+ *     http://hexmen.com/js/sprintf.js
+ *     The author (Ash Searle) has placed this code in the public domain:
+ *     "This code is unrestricted: you are free to use it however you like."
+ * 
+ */
+(function($) {
+    /**
+     * Class: $.jqplot.ciParser
+     * Data Renderer function which converts a custom JSON data object into jqPlot data format.
+     * Set this as a callable on the jqplot dataRenderer plot option:
+     * 
+     * > plot = $.jqplot('mychart', [data], { dataRenderer: $.jqplot.ciParser, ... });
+     * 
+     * Where data is an object in JSON format or a JSON encoded string conforming to the
+     * City Index API spec.
+     * 
+     * Note that calling the renderer function is handled internally by jqPlot.  The
+     * user does not have to call the function.  The parameters described below will
+     * automatically be passed to the ciParser function.
+     * 
+     * Parameters:
+     * data - JSON encoded string or object.
+     * plot - reference to jqPlot Plot object.
+     * 
+     * Returns:
+     * data array in jqPlot format.
+     * 
+     */
+    $.jqplot.ciParser = function (data, plot) {
+        var ret = [],
+            line,
+            temp,
+            i, j, k, kk;
+    
+         if (typeof(data) == "string") {
+             data =  $.jqplot.JSON.parse(data, handleStrings);
+         }
+ 
+         else if (typeof(data) == "object") {
+             for (k in data) {
+                 for (i=0; i&lt;data[k].length; i++) {
+                     for (kk in data[k][i]) {
+                         data[k][i][kk] = handleStrings(kk, data[k][i][kk]);
+                     }
+                 }
+             }
+         }
+ 
+         else {
+             return null;
+         }
+ 
+         // function handleStrings
+         // Checks any JSON encoded strings to see if they are
+         // encoded dates.  If so, pull out the timestamp.
+         // Expects dates to be represented by js timestamps.
+ 
+         function handleStrings(key, value) {
+            var a;
+            if (value != null) {
+                if (value.toString().indexOf('Date') >= 0) {
+                    //here we will try to extract the ticks from the Date string in the "value" fields of JSON returned data
+                    a = /^\/Date\((-?[0-9]+)\)\/$/.exec(value);
+                    if (a) {
+                        return parseInt(a[1], 10);
+                    }
+                }
+                return value;
+            }
+         }
+ 
+        for (var prop in data) {
+            line = [];
+            temp = data[prop];
+            switch (prop) {
+                case "PriceTicks":
+                    for (i=0; i&lt;temp.length; i++) {
+                        line.push([temp[i]['TickDate'], temp[i]['Price']]);
+                    }
+                    break;
+                case "PriceBars":
+                    for (i=0; i&lt;temp.length; i++) {
+                        line.push([temp[i]['BarDate'], temp[i]['Open'], temp[i]['High'], temp[i]['Low'], temp[i]['Close']]);
+                    }
+                    break;
+            }
+            ret.push(line);
+        }
+        return ret;
+    };
+})(jQuery);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Jan 12 2016 09:37:25 GMT+0100 (CET) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

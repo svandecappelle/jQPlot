@@ -1,4 +1,20 @@
 ---
 layout: simple
 ---
-  	Construction in progress...
+
+<div>
+  <h2>Versions</h2>
+  <ul class="post-list">
+    {% for post in site.posts %}
+      {% if post.categories contains "version" %}
+        <li>
+          <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+          <h2>
+            <a class="post-link" href="{{ post.index | prepend: site.baseurl }}">{{ post.title }}</a>
+          </h2>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
