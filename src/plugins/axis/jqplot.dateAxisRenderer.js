@@ -633,10 +633,12 @@
      */
     $.jqplot.DateTickFormatter = function (typeFormatter) {
         this.typeFormatter = typeFormatter;
+    };
+
+    $.jqplot.DateTickFormatter.prototype.format = function (val, format){
         if (!format) {
             format = '%Y/%m/%d';
         }
-
         return $.jsDate.strftime(val, format, this.typeFormatter);
     };
     
@@ -678,7 +680,7 @@
         // this.tickRenderer = $.jqplot.AxisTickRenderer;
         // this.labelRenderer = $.jqplot.AxisLabelRenderer;
         this.tickOptions.typeFormatter = (typeof this.tickOptions.typeFormatter !== "undefined") ? this.tickOptions.typeFormatter : 'perl';
-        this.tickOptions.formatter = new $.jqplot.DateTickFormatter(this.tickOptions.typeFormatter);
+        this.tickOptions.formatter = (new $.jqplot.DateTickFormatter(this.tickOptions.typeFormatter)).format;
         // prop: tickInset
         // Controls the amount to inset the first and last ticks from 
         // the edges of the grid, in multiples of the tick interval.
