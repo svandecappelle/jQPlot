@@ -115,58 +115,6 @@
          */
         getIntersectingPoints = function (plot, x, y) {
             return $.fn.checkIntersection({x: x, y: y}, plot);
-/*
-            var ret = {
-                    indices: [],
-                    data: []
-                },
-                s,
-                i,
-                d0,
-                d,
-                j,
-                r,
-                p,
-                threshold,
-                c = plot.plugins.cursor,
-                seriesLen = plot.series.length,
-                gridDataLen = 0;
-
-            for (i = 0; i < seriesLen; i++) {
-
-                s = plot.series[i];
-                r = s.renderer;
-
-                if (s.show) {
-
-                    threshold = c.intersectionThreshold;
-
-                    if (s.showMarker) {
-                        threshold += s.markerRenderer.size / 2;
-                    }
-
-                    gridDataLen = s.gridData.length;
-
-                    for (j = 0; j < gridDataLen; j++) {
-
-                        p = s.gridData[j];
-                        // check vertical line
-
-                        if (c.showVerticalLine) {
-                            if (Math.abs(x - p[0]) <= threshold) {
-                                ret.indices.push(i);
-                                ret.data.push({
-                                    seriesIndex: i,
-                                    pointIndex: j,
-                                    gridData: p,
-                                    data: s.data[j]
-                                });
-                            }
-                        }
-                    }
-                }
-            }
-            return ret;*/
         },
 
         /**
@@ -203,7 +151,7 @@
             }
 
             if (c.showTooltipUnitPosition) {
-                html += showTooltipUnitPosition();
+                html += showTooltipUnitPosition(gridpos, datapos, plot);
             }
 
             if (c.showTooltipDataPosition) {
