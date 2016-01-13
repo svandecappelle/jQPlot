@@ -175,7 +175,7 @@
                 afstr,
                 yaxisStr,
                 xaxisStr,
-                s = '';
+                s = '',
                 sx,
                 sy,
                 yfstr,
