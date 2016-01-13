@@ -645,7 +645,11 @@
         if (!format) {
             format = '%Y/%m/%d';
         }
-        return $.jsDate.strftime(val, format, this.typeFormatter);
+
+        if (this.typeFormatter){
+            return $.jsDate.strftime(val, format, this.typeFormatter);
+        }
+        return $.jsDate.strftime(val, format, "php");
     };
     
     /**
