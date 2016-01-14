@@ -2073,13 +2073,16 @@
 
         this.markerRenderer = new this.markerRenderer();
 
-        if (!this.markerOptions.color) {
+        if ( !this.markerOptions.color ) {
             this.markerOptions.color = this.color;
         }
-        if (this.markerOptions.show === null) {
+
+        if ( this.markerOptions.show === undefined || this.markerOptions.show === null ) {
             this.markerOptions.show = this.showMarker;
         }
+
         this.showMarker = this.markerOptions.show;
+
         // the markerRenderer is called within its own scope, don't want to overwrite series options!!
         this.markerRenderer.init(this.markerOptions);
     };
