@@ -3844,7 +3844,7 @@
         var i,
             ax,
             tsl;
-        clear = (clear !== null) ? clear : true;
+        clear = (clear !== undefined && clear !== null) ? clear : true;
         this.target.trigger('jqplotPreRedraw');
         if (clear) {
             this.canvasManager.freeAllCanvases();
