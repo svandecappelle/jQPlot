@@ -82,7 +82,6 @@
 
             for (i = 0; i < scripts.length; i++) {
                 src = scripts[i].getAttribute("src");
-                console.log("test: ".concat(src));
                 if (!src) {
                     continue;
                 }
