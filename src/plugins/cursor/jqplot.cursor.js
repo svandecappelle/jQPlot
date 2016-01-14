@@ -158,7 +158,6 @@
                 html += showTooltipDataPosition(gridpos, plot);
             }
 
-
             return html;        
         },
 

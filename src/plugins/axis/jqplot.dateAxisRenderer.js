@@ -632,13 +632,14 @@
      * @param {[[Type]]} typeFormatter [[Description]]
      */
     $.jqplot.DateTickFormatter = function (typeFormatter) {
-        this.typeFormatter = typeFormatter;
+        this.typeFormatter = typeFormatter ? typeFormatter : 'perl';
     };
 
-    $.jqplot.DateTickFormatter.prototype.format = function (val, format){
-        if (!format) {
+    $.jqplot.DateTickFormatter.prototype.format = function (format, val){
+        if ( !format ) {
             format = '%Y/%m/%d';
         }
+
         return $.jsDate.strftime(val, format, this.typeFormatter);
     };
     
