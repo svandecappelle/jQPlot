@@ -531,7 +531,7 @@ nav#primary .logo h1 {
   line-height: 70px;
 }
 nav#primary .logo h1 a {
-  background: transparent url("/jQPlot/public/img/chai-logo-small.png") no-repeat 0px 10px;
+  background: transparent url("/jQPlot/public/img/jqplot-logo-small.png") no-repeat 0px 10px;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #39A402;
   font-size: 18px;
@@ -597,4 +597,8 @@ pre {
   background: #f8f8f8;
   border: 1px solid #e5e5e5;
   margin-bottom: 1.5em;
+}
+
+.code.hidden{
+  display: none;
 }

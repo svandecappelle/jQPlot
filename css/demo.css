@@ -55,6 +55,7 @@ section#content{
   text-align: center;
   margin: auto;
 	margin-bottom: 30px;
+  position: relative;
 }
 
 .coding:last-of-type{
