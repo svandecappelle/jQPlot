@@ -1097,7 +1097,7 @@
         }
         
         ctx.restore();
-    };  
+    };
     
     $.jqplot.LineRenderer.prototype.drawShadow = function(ctx, gd, options) {
         // This is a no-op, shadows drawn with lines.

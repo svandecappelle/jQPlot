@@ -34,7 +34,6 @@ Thumbs.db
 
 # Ignore for Jekyll Grunt projects #
 bower_components
-dist
 node_modules
 .tmp
 log.txt

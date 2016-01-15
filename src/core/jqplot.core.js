@@ -689,7 +689,6 @@
 
                 i = plot.seriesStack[k];
                 s = series[i];
-
                 switch (s.renderer.constructor) {
 
                 case $.jqplot.BarRenderer:
