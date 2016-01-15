@@ -1,0 +1,46 @@
+---
+layout: demopage
+---
+
+<div class="coding">
+<div id="chart1" style="margin:20px;"></div>
+<script type="text/javascript">
+  var plot1;
+  $(function(){
+    var line1=[[0, 2], [0, 0], [1, 0], [1, 2]];
+
+    plot1 = $.jqplot('chart1', [line1], {
+        title:'Polygon empty',
+        seriesDefaults: {
+          renderer: $.jqplot.PolygonRenderer,
+          showMarker: true,
+          markerOptions:{
+            style:'square'
+          }
+        }
+      });
+    });
+</script>
+</div>
+
+<div class="coding">
+<div id="chart2" style="margin:20px;"></div>
+<script type="text/javascript">
+  var plot1;
+  $(function(){
+    var line1=[[0, 2], [0, 0], [1, 0], [1, 2]];
+
+    plot1 = $.jqplot('chart2', [line1], {
+        title:'Polygon filled',
+        seriesDefaults: {
+          renderer: $.jqplot.PolygonRenderer,
+          markerOptions:{
+            style:'square'
+          },
+          fill: true
+        }
+      });
+    });
+</script>
+</div>
+
