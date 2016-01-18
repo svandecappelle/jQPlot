@@ -35,6 +35,47 @@
     
     "use strict";
     
+    var postSeriesInit = function() {
+        var i, 
+            evt,
+            plot = this;
+        for (i = 0; i < plot.series.length; i++) {
+            $(plot.series[i]).on("SerieShow", function (ev){
+                evt = $.Event('jqplotSerieShow', {id: ev.id});
+                $(plot).trigger(evt);
+                toggleSerieLegendText(ev.id, plot);
+            });
+
+            $(plot.series[i]).on("SerieHide", function (ev){
+                evt = $.Event('jqplotSerieHide', {id: ev.id});
+                $(plot).trigger(evt);
+                toggleSerieLegendText(ev.id, plot);
+            });
+        }
+    };
+
+    var toggleSerieLegendText = function(sidx, plot) {
+        var s = plot.series[sidx];
+
+        if (s.canvas._elem.is(':hidden') || !s.show) {
+            // Not sure if there is a better way to check for showSwatches and showLabels === true.
+            // Test for "undefined" since default values for both showSwatches and showLables is true.
+            if (typeof plot.options.legend.showSwatches === 'undefined' || plot.options.legend.showSwatches === true) {
+                plot.legend._elem.find('td').eq(sidx * 2).addClass('jqplot-series-hidden');
+            }
+            if (typeof plot.options.legend.showLabels === 'undefined' || plot.options.legend.showLabels === true) {
+                plot.legend._elem.find('td').eq((sidx * 2) + 1).addClass('jqplot-series-hidden');
+            }
+        } else {
+            if (typeof plot.options.legend.showSwatches === 'undefined' || plot.options.legend.showSwatches === true) {
+                plot.legend._elem.find('td').eq(sidx * 2).removeClass('jqplot-series-hidden');
+            }
+            if (typeof plot.options.legend.showLabels === 'undefined' || plot.options.legend.showLabels === true) {
+                plot.legend._elem.find('td').eq((sidx * 2) + 1).removeClass('jqplot-series-hidden');
+            }
+        }
+    };
+
     /**
      * Called with scope of plot.
      */
@@ -133,27 +174,7 @@
                         }
 
                     } else {
-
                         s = plot.series[sidx];
-
-                        if (s.canvas._elem.is(':hidden') || !s.show) {
-                            // Not sure if there is a better way to check for showSwatches and showLabels === true.
-                            // Test for "undefined" since default values for both showSwatches and showLables is true.
-                            if (typeof plot.options.legend.showSwatches === 'undefined' || plot.options.legend.showSwatches === true) {
-                                plot.legend._elem.find('td').eq(sidx * 2).addClass('jqplot-series-hidden');
-                            }
-                            if (typeof plot.options.legend.showLabels === 'undefined' || plot.options.legend.showLabels === true) {
-                                plot.legend._elem.find('td').eq((sidx * 2) + 1).addClass('jqplot-series-hidden');
-                            }
-                        } else {
-                            if (typeof plot.options.legend.showSwatches === 'undefined' || plot.options.legend.showSwatches === true) {
-                                plot.legend._elem.find('td').eq(sidx * 2).removeClass('jqplot-series-hidden');
-                            }
-                            if (typeof plot.options.legend.showLabels === 'undefined' || plot.options.legend.showLabels === true) {
-                                plot.legend._elem.find('td').eq((sidx * 2) + 1).removeClass('jqplot-series-hidden');
-                            }
-                        }
-
                     }
 
                 };
@@ -180,6 +201,7 @@
                 showing = true;
             }
 
+            // Event binded will toggle the legend text automaticaly.
             s.toggleDisplay(ev, doLegendToggle);
 
         };
@@ -199,7 +221,7 @@
      * Called with scope of legend.
      * @param {[[Type]]} options [[Description]]
      */
-    $.jqplot.EnhancedLegendRenderer.prototype.init = function (options) {
+    $.jqplot.EnhancedLegendRenderer.prototype.init = function (options, plot) {
         // prop: numberRows
         // Maximum number of rows in the legend.  0 or null for unlimited.
         this.numberRows = null;
@@ -230,6 +252,7 @@
         if (this.seriesToggle) {
             $.jqplot.postDrawHooks.push(postDraw);
         }
+        plot.postInitHooks.addOnce(postSeriesInit);
     };
     
     /**
@@ -436,7 +459,7 @@
             td1 = td2 = div0 = div1 = null;
 
         }
-        
+
         return this._elem;
         
     };

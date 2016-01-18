@@ -36,6 +36,7 @@
     };
     
     $.jqplot.TableLegendRenderer.prototype.init = function(options) {
+        console.log("options table: ", options);
         $.extend(true, this, options);
     };
         
@@ -318,6 +319,6 @@
                         break;
                 }
             }
-        } 
+        }
     };
 })(jQuery);

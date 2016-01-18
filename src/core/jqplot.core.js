@@ -856,7 +856,6 @@
             _options = null,
             plot,
             msg;
-
         if (arguments.length === 3) {
             _data = data;
             _options = options;
@@ -1630,7 +1629,6 @@
      * @param {object} options
      */
     Legend.prototype.setOptions = function (options) {
-
         $.extend(true, this, options);
 
         // Try to emulate deprecated behaviour
@@ -1736,11 +1734,11 @@
         //
     };
 
-    Legend.prototype.init = function () {
+    Legend.prototype.init = function (plot) {
         if ($.isFunction(this.renderer)) {
             this.renderer = new this.renderer();
         }
-        this.renderer.init.call(this, this.rendererOptions);
+        this.renderer.init.call(this, this.rendererOptions, plot);
     };
 
     Legend.prototype.draw = function (offsets, plot) {
@@ -2191,58 +2189,125 @@
         var s,
             speed;
 
-        if (ev.data.series) {
+        if (ev && ev.data && ev.data.series) {
             s = ev.data.series;
         } else {
             s = this;
         }
 
-        if (ev.data.speed) {
+        if (ev && ev.data && ev.data.speed) {
             speed = ev.data.speed;
         }
         if (speed) {
             // this can be tricky because series may not have a canvas element if replotting.
             if (s.canvas._elem.is(':hidden') || !s.show) {
                 s.show = true;
-
-                s.canvas._elem.removeClass('jqplot-series-hidden');
-                if (s.shadowCanvas._elem) {
-                    s.shadowCanvas._elem.fadeIn(speed);
-                }
-                s.canvas._elem.fadeIn(speed, callback);
-                s.canvas._elem.nextAll('.jqplot-point-label.jqplot-series-' + s.index).fadeIn(speed);
+                s.setVisible(ev, callback);
             } else {
                 s.show = false;
-
-                s.canvas._elem.addClass('jqplot-series-hidden');
-                if (s.shadowCanvas._elem) {
-                    s.shadowCanvas._elem.fadeOut(speed);
-                }
-                s.canvas._elem.fadeOut(speed, callback);
-                s.canvas._elem.nextAll('.jqplot-point-label.jqplot-series-' + s.index).fadeOut(speed);
+                s.setHidden(ev, callback);
             }
         } else {
             // this can be tricky because series may not have a canvas element if replotting.
             if (s.canvas._elem.is(':hidden') || !s.show) {
                 s.show = true;
-
-                s.canvas._elem.removeClass('jqplot-series-hidden');
-                if (s.shadowCanvas._elem) {
-                    s.shadowCanvas._elem.show();
-                }
-                s.canvas._elem.show(0, callback);
-                s.canvas._elem.nextAll('.jqplot-point-label.jqplot-series-' + s.index).show();
+                s.setVisible(ev, callback);
             } else {
                 s.show = false;
-
-                s.canvas._elem.addClass('jqplot-series-hidden');
-                if (s.shadowCanvas._elem) {
-                    s.shadowCanvas._elem.hide();
-                }
-                s.canvas._elem.hide(0, callback);
-                s.canvas._elem.nextAll('.jqplot-point-label.jqplot-series-' + s.index).hide();
+                s.setHidden(ev, callback);
             }
         }
+    };
+
+    /** 
+     * Show series display on plot.
+     * @param {object} ev - event.
+     * @param {function} callback - callback function called when seres had been toggled.
+     */
+    Series.prototype.setVisible = function (ev, callback) {
+        var s,
+            speed,
+            evt;
+        if (ev && ev.data && ev.data.series) {
+            s = ev.data.series;
+        } else {
+            s = this;
+        }
+
+        if (ev && ev.data && ev.data.speed) {
+            speed = ev.data.speed;
+        } else if (ev && ev.speed){
+            speed = ev.speed;
+        }
+
+        if (speed) {
+            // this can be tricky because series may not have a canvas element if replotting.
+            s.show = true;
+
+            s.canvas._elem.removeClass('jqplot-series-hidden');
+            if (s.shadowCanvas._elem) {
+                s.shadowCanvas._elem.fadeIn(speed);
+            }
+            s.canvas._elem.fadeIn(speed, callback);
+            s.canvas._elem.nextAll('.jqplot-point-label.jqplot-series-' + s.index).fadeIn(speed);
+        } else {
+            // this can be tricky because series may not have a canvas element if replotting.
+            s.show = true;
+
+            s.canvas._elem.removeClass('jqplot-series-hidden');
+            if (s.shadowCanvas._elem) {
+                s.shadowCanvas._elem.show();
+            }
+            s.canvas._elem.show(0, callback);
+            s.canvas._elem.nextAll('.jqplot-point-label.jqplot-series-' + s.index).show();
+        }
+        evt = $.Event("SerieShow", {id: s.index});
+        $(this).trigger(evt);
+    };
+
+    /** 
+     * toggles series display on plot, e.g. show/hide series
+     * @param {object} ev - event.
+     * @param {function} callback - callback function called when seres had been toggled.
+     */
+    Series.prototype.setHidden = function (ev, callback) {
+        var s,
+            speed,
+            evt;
+        if (ev && ev.data && ev.data.series) {
+            s = ev.data.series;
+        } else {
+            s = this;
+        }
+
+        if (ev && ev.data && ev.data.speed) {
+            speed = ev.data.speed;
+        } else if (ev && ev.speed){
+            speed = ev.speed;
+        }
+
+        if (speed) {
+            // this can be tricky because series may not have a canvas element if replotting.
+            s.show = false;
+
+            s.canvas._elem.addClass('jqplot-series-hidden');
+            if (s.shadowCanvas._elem) {
+                s.shadowCanvas._elem.fadeOut(speed);
+            }
+            s.canvas._elem.fadeOut(speed, callback);
+            s.canvas._elem.nextAll('.jqplot-point-label.jqplot-series-' + s.index).fadeOut(speed);
+        } else {
+            s.show = false;
+
+            s.canvas._elem.addClass('jqplot-series-hidden');
+            if (s.shadowCanvas._elem) {
+                s.shadowCanvas._elem.hide();
+            }
+            s.canvas._elem.hide(0, callback);
+            s.canvas._elem.nextAll('.jqplot-point-label.jqplot-series-' + s.index).hide();
+        }
+        evt = $.Event("SerieHide", {id : s.index});
+        $(this).trigger(evt);
     };
 
     /**
@@ -2922,7 +2987,8 @@
         }
 
         this.title.init();
-        this.legend.init();
+        this.legend.init(this);
+
         this._sumy = 0;
         this._sumx = 0;
         this.computePlotData();
@@ -3139,7 +3205,7 @@
         }
 
         this.title.init();
-        this.legend.init();
+        this.legend.init(this);
         this._sumy = 0;
         this._sumx = 0;
 
