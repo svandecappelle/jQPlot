@@ -51,8 +51,8 @@ layout: demopage
         },
         cursor: {
           followMouse: true,
-          show: true,
           showTooltipDataPosition: true,
+          show: true,
           showVerticalLine: true,
           showHorizontalLine: true,
           horizontalLine: {
@@ -70,7 +70,7 @@ layout: demopage
           },
           yaxis: {
             formatter: function(formatString, ydata, serieIndex){
-              return (ydata !=null ? ydata : "n/a");
+              return (ydata ? ydata : "n/a");
             }
           },
           xaxis: {
