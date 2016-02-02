@@ -148,14 +148,10 @@
 
             if (c.showTooltipGridPosition){
                 html += showTooltipGridPosition(gridpos, plot);
-            }
-
-            if (c.showTooltipUnitPosition) {
+            }else if (c.showTooltipUnitPosition) {
                 html += showTooltipUnitPosition(gridpos, datapos, plot);
-            }
-
-            if (c.showTooltipDataPosition) {
-                html += showTooltipDataPosition(gridpos, plot);
+            } else if (c.showTooltipDataPosition) {
+                html += showTooltipDataPosition(gridpos, datapos, plot);
             }
 
             return html;        
@@ -192,8 +188,7 @@
                 seriesLen = series.length;
 
             for (i = 0, tooltipAxisGroupLen = c.tooltipAxisGroups.length; i < tooltipAxisGroupLen; i++) {
-                serieIndex = i;
-                
+                serieIndex = i;                
                 g = c.tooltipAxisGroups[i];
 
                 if (addbr) {
@@ -217,14 +212,14 @@
                         yaxisStr = c.yaxis.formatter(series[i]._yaxis._ticks[0].formatString, datapos[g[1]], serieIndex);
                     } else {
                         yfstr = g._yaxis._ticks[0].formatString;
-                        sx = g._yaxis._ticks[0].formatter(yfstr, datapos[g[1]], serieIndex);
+                        yaxisStr = g._yaxis._ticks[0].formatter(yfstr, datapos[g[1]], serieIndex);
                     }
 
                     if (c.xaxis && c.xaxis.formatter) {
                         xaxisStr = c.xaxis.formatter(series[i]._xaxis._ticks[0].formatString, datapos[g[0]], serieIndex);
                     } else {
                         xfstr = g._xaxis._ticks[0].formatString;
-                        sx = g._xaxis._ticks[0].formatter(xfstr, datapos[g[0]], serieIndex);
+                        xaxisStr = g._xaxis._ticks[0].formatter(xfstr, datapos[g[0]], serieIndex);
                     }
 
                     s += $.jqplot.sprintf(c.tooltipFormatString, xaxisStr, yaxisStr);
@@ -248,7 +243,7 @@
             }
         },
 
-        showTooltipDataPosition = function(gridpos, plot) {
+        showTooltipDataPosition = function(gridpos, datapos, plot) {
             var c = plot.plugins.cursor,
                 serie,
                 label,
@@ -314,7 +309,13 @@
                             } else {
                                 xaxisTickData = data[0];
                             }
-                            yaxisTickData = data[1];
+
+
+                            if (serie.data[cellid]) {
+                                yaxisTickData = serie.data[cellid][1];
+                            } else {
+                                yaxisTickData = data[1];
+                            }
 
                             yaxisTick = yaxis._ticks[0];
 
