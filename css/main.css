@@ -90,13 +90,7 @@ code {
   display: inline;
 }
 .header-wrap .installation {
-  min-width: 480px;
-  max-width: 480px;
-  margin: 0 15px;
-  overflow: hidden;
-  float: left;
-  display: inline;
-  overflow: visible;
+  margin: 1px;
 }
 nav#primary .nav-wrap {
   width: 1020px;
@@ -124,7 +118,7 @@ section#content {
   margin: 0 auto;
 }
 .rowInside {
-  margin: 0 -15px;
+  margin: 0 -14px;
   display: inline-block;
 }
 .grid_3 {
