@@ -270,7 +270,7 @@
                 xaxis,
                 yaxis,
                 xaxisTickData,
-                xaxisTickCategIndexData,
+                xaxisTickCategData,
                 yaxisTickData,
                 yaxisTick,
                 ret = getIntersectingPoints(plot, gridpos.x, gridpos.y);
@@ -304,8 +304,8 @@
 
                             if (serie._xaxis.ticks){
                                 // categories ticks.
-                                xaxisTickData = serie._xaxis.ticks[cellid];
-                                xaxisTickCategIndexData = data[0];
+                                xaxisTickData = data[0];
+                                xaxisTickCategData = serie._xaxis.ticks[cellid];
                             } else {
                                 xaxisTickData = data[0];
                             }
@@ -329,19 +329,19 @@
                                 }
 
                                 if (c.xaxis && c.xaxis.formatter) {
-                                    sx = c.xaxis.formatter(serie._xaxis._ticks[0].formatString, xaxisTickData, serieIndex, xaxisTickCategIndexData);
+                                    sx = c.xaxis.formatter(serie._xaxis._ticks[0].formatString, data[0], serieIndex, xaxisTickCategData);
                                 } else {
                                     xfstr = serie._xaxis._ticks[0].formatString;
-                                    sx = serie._xaxis._ticks[0].formatter(xfstr, xaxisTickData, serieIndex, xaxisTickCategIndexData);
+                                    sx = serie._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex, xaxisTickCategData);
                                 }
 
                             } else if (c.useAxesFormatters) {
                                 xfstr = serie._xaxis._ticks[0].formatString;
                                 yfstr = yaxisTick.formatString;
-                                sx = serie._xaxis._ticks[0].formatter(xfstr, xaxisTickData, serieIndex);
+                                sx = serie._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
                                 sy = yaxisTick.formatter(yfstr, yaxisTickData, serieIndex);
                             } else {
-                                sx = xaxisTickData;
+                                sx = data[0];
                                 sy = yaxisTickData;
                             }
                             
