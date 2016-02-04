@@ -304,12 +304,9 @@
 
                             if (serie._xaxis.ticks){
                                 // categories ticks.
-                                xaxisTickData = data[0];
                                 xaxisTickCategData = serie._xaxis.ticks[cellid];
-                            } else {
-                                xaxisTickData = data[0];
                             }
-
+                            xaxisTickData = data[0];
 
                             if (serie.data[cellid]) {
                                 yaxisTickData = serie.data[cellid][1];
@@ -329,19 +326,19 @@
                                 }
 
                                 if (c.xaxis && c.xaxis.formatter) {
-                                    sx = c.xaxis.formatter(serie._xaxis._ticks[0].formatString, data[0], serieIndex, xaxisTickCategData);
+                                    sx = c.xaxis.formatter(serie._xaxis._ticks[0].formatString, xaxisTickData, serieIndex, xaxisTickCategData);
                                 } else {
                                     xfstr = serie._xaxis._ticks[0].formatString;
-                                    sx = serie._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex, xaxisTickCategData);
+                                    sx = serie._xaxis._ticks[0].formatter(xfstr, xaxisTickData, serieIndex, xaxisTickCategData);
                                 }
 
                             } else if (c.useAxesFormatters) {
                                 xfstr = serie._xaxis._ticks[0].formatString;
                                 yfstr = yaxisTick.formatString;
-                                sx = serie._xaxis._ticks[0].formatter(xfstr, data[0], serieIndex);
+                                sx = serie._xaxis._ticks[0].formatter(xfstr, xaxisTickData, serieIndex);
                                 sy = yaxisTick.formatter(yfstr, yaxisTickData, serieIndex);
                             } else {
-                                sx = data[0];
+                                sx = xaxisTickData;
                                 sy = yaxisTickData;
                             }
                             
