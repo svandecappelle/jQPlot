@@ -64,9 +64,9 @@ layout: demopage
           insertHead: true,
           headTooltipFormatString: "<div class=\"jqplot-cursor-highlighter-head\">%s</div>",
           constrainTooltipToScreen: true,
-          useAxesFormatters: true,
-          headTooltipFormatter: function(formatString, ydata, yIndex){
-            return ydata;
+          //useAxesFormatters: true,
+          headTooltipFormatter: function(formatString, xdata, yIndex){
+            return "HEAD: " + xdata;
           },
           yaxis: {
             formatter: function(formatString, ydata, serieIndex){
@@ -74,8 +74,8 @@ layout: demopage
             }
           },
           xaxis: {
-            formatter: function(formatString, category, serieIndex, categoryIndex){
-              return category + " [idxCateg: " + (categoryIndex + 1) +"]";
+            formatter: function(formatString, xdata, serieIndex, category){
+              return xdata + " [Categ: " + category +"]";
             }
           }
         }
@@ -171,5 +171,81 @@ layout: demopage
         stackSeries: true,
       });
     });
+  </script>
+</div>
+
+<div class="coding">
+<div id="chart3"></div>
+  <script type="text/javascript">
+      $(function(){
+      var line1=[['2008-09-30',4], ['2008-10-30',6.5], ['2008-11-30',5.7], ['2008-12-30',9], ['2009-01-30',8.2]];
+      var plot1 = $.jqplot('chart3', [line1], {
+              title:'Date axis (PHP mode)',
+              axesDefaults : {
+                  rendererOptions:{
+                      tickRenderer: $.jqplot.CanvasAxisTickRenderer
+                  },
+                  tickOptions: {
+                      fontSize:'10pt',
+                      fontFamily:'Tahoma',
+                  }
+              },
+              legend:{
+                  renderer: $.jqplot.EnhancedLegendRenderer,
+                  show:true,
+                  placement: "outsideGrid",
+                  location: "ne",
+                  rowSpacing: "0px",
+                  rendererOptions: {
+                      // set to true to replot when toggling series on/off
+                      // set to an options object to pass in replot options.
+                      seriesToggle: 'normal',
+                      seriesToggleReplot: {resetAxes: true}
+                  }
+              },
+              axes:{
+                  xaxis:{
+                      renderer:$.jqplot.DateAxisRenderer,
+                      rendererOptions:{
+                          tickRenderer:$.jqplot.CanvasAxisTickRenderer
+                      },
+                      tickOptions: {
+                          formatString: '%Y #%V',
+                          typeFormatter: 'php',
+                          angle:-40
+                      }
+                  }
+              },
+              cursor: {
+                followMouse: true,
+                show: true,
+                showTooltipDataPosition: true,
+                showVerticalLine: true,
+                showHorizontalLine: true,
+                horizontalLine: {
+                  color: "#ff0000",
+                  style: "dotted"
+                },
+                tooltipLocation: "nw",
+                tooltipFormatString: "<div class=\"jqplot-cursor-highlight\">%s%n: %s</div>",
+                insertHead: true,
+                headTooltipFormatString: "<div class=\"jqplot-cursor-highlighter-head\">%s</div>",
+                constrainTooltipToScreen: true,
+                headTooltipFormatter: function(formatString, ydata, yIndex){
+                  return "HEAD: " + ydata;
+                },
+                yaxis: {
+                  formatter: function(formatString, ydata, serieIndex){
+                    return (ydata!=null?ydata:"n/a") + " - Serie number: " + (serieIndex + 1);
+                  }
+                }
+              },
+              series:[{lineWidth:4, markerOptions:{style:'square'}}]
+          });
+
+          $('#chart1').bind('jqplotLegendToggleSerie', function (ev) {
+              console.log(ev.name);
+          })
+      });
   </script>
 </div>
