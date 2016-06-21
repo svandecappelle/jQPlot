@@ -105,3 +105,76 @@ layout: demopage
 
   </script>
 </div>
+
+
+<div class="coding">
+  <div id="chart3" style="margin:20px;"></div>
+  <script type="text/javascript">
+    $(function(){
+      var serie1=[['2008-09-01',4],['2008-09-02',1],['2008-09-03',2],['2008-09-04',3],['2008-09-05',1]];
+      var serie2=[['2008-09-01',2],['2008-09-02',4],['2008-09-03',1],['2008-09-04',2],['2008-09-05',2]];
+      var serie3=[['2008-09-01',2],['2008-09-02',2],['2008-09-03',1],['2008-09-04',5],['2008-09-05',2]];
+      var serie4=[['2008-09-01',2],['2008-09-02',3],['2008-09-03',4],['2008-09-04',4],['2008-09-05',3]];
+
+      var line1 = [['Nissan', 4],['Porche', 6],['Acura', 2],['Aston Martin', 5],['Rolls Royce', 6]];
+      $('#chart3').jqplot( [[[2,1], [4,2], [6,3], [3,4]], [[5,1], [1,2], [3,3], [4,4]], [[4,1], [7,2], [1,3], [2,4]]], {
+            seriesDefaults: {
+                trendline: {
+                  show: false
+                },
+                renderer:$.jqplot.BarRenderer,
+                pointLabels: { show: true, location: 'e', edgeTolerance: -15 },
+                shadowAngle: 135,
+                rendererOptions: {
+                    barDirection: 'horizontal'
+                }
+            },
+            axes: {
+                yaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer
+                }
+            }
+        });
+    });
+
+  </script>
+</div>
+
+
+
+
+
+
+<div class="coding">
+  <div id="chart4" style="margin:20px;"></div>
+  <script type="text/javascript">
+    $(function(){
+      var serie1=[['2008-09-01',4],['2008-09-02',1],['2008-09-03',2],['2008-09-04',3],['2008-09-05',1]];
+      var serie2=[['2008-09-01',2],['2008-09-02',4],['2008-09-03',1],['2008-09-04',2],['2008-09-05',2]];
+      var serie3=[['2008-09-01',2],['2008-09-02',2],['2008-09-03',1],['2008-09-04',5],['2008-09-05',2]];
+      var serie4=[['2008-09-01',2],['2008-09-02',3],['2008-09-03',4],['2008-09-04',4],['2008-09-05',3]];
+
+      var line1 = [['Nissan', 4],['Porche', 6],['Acura', 2],['Aston Martin', 5],['Rolls Royce', 6]];
+      $('#chart4').jqplot( [[[2,1], [4,2], [6,3], [3,4]], [[5,1], [1,2], [3,3], [4,4]], [[4,1], [7,2], [1,3], [2,4]]], {
+            seriesDefaults: {
+                trendline: {
+                  show: false
+                },
+                renderer:$.jqplot.BarRenderer,
+                pointLabels: { show: true, location: 'e', edgeTolerance: -15 },
+                shadowAngle: 135,
+                rendererOptions: {
+                    barDirection: 'horizontal'
+                }
+            },
+            axes: {
+                yaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer
+                }
+            },
+            stackSeries: true
+        });
+    });
+
+  </script>
+</div>

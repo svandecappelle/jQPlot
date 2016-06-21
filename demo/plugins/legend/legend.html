@@ -67,7 +67,7 @@ layout: demopage
       plot1.series[0].setHidden();
 
       $(plot1).on("jqplotSerieShow", function(ev){
-        console.log("serie showed: ", ev.id);
+        console.log("serie showed: ", ev);
       });
 
       $(plot1).on("jqplotSerieHide", function(ev){
@@ -77,6 +77,9 @@ layout: demopage
         console.log("toggled");
       });
 
+      $("#chart2").on("jqplotSerieShow", function(ev){
+        console.log("toggled");
+      });
     });
 </script>
 </div>

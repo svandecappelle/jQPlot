@@ -1,0 +1,33 @@
+---
+layout: demopage
+---
+<div class="coding">
+  <div id="chart1" style="margin:20px;"></div>
+
+  <script type="text/javascript">
+      $(function(){
+
+        var l2 = [[1, 11], [2, 9], [3, 5], [4, 12], [5, 14]];
+        var l3 = [[1, 4], [2, 8], [3, 5], [4, 3], [5, 6]];
+        var l4 = [[1, 12], [2, 6], [3, 13], [4, 11], [5, 2]];
+
+        var plot1b = $.jqplot('chart1',[l2, l3, l4],{
+          stackSeries: true,
+          showMarker: false,
+          seriesDefaults: {
+              fill: true,
+              pointLabels: {
+                show: true,
+                stackedValue: true
+              },
+          },
+          axes: {
+              xaxis: {
+                  renderer: $.jqplot.CategoryAxisRenderer,
+                  ticks: ["Mon", "Tue", "Wed", "Thr", "Fri"]
+              }
+          }
+        });
+      });
+  </script>
+</div>
