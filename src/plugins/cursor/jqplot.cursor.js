@@ -136,7 +136,6 @@
             } else {
                 c._tooltipElem.css({display: 'block'});
             }
-
             c._tooltipElem.html(s);
         },
 
@@ -241,6 +240,8 @@
 
                 addbr = true;
             }
+
+            return s;
         },
 
         showTooltipDataPosition = function(gridpos, datapos, plot) {
@@ -259,6 +260,7 @@
                 xfstr,
                 ystr,
                 xstr,
+                header,
                 idx,
                 i,
                 j,
@@ -344,20 +346,28 @@
                             
                             if (addbr && c.insertHead) {
                                 if (c.headTooltipFormatter){
-                                    s += c.headTooltipFormatter(c.headTooltipFormatString, sx, sy);
+                                    header = c.headTooltipFormatter(c.headTooltipFormatString, sx, sy);
                                 } else {
-                                    s += $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
+                                    header = $.jqplot.sprintf(c.headTooltipFormatString, sx, sy);
                                 }
-                            }
 
-                            if (addbr) {
-                                s += '<br />';
+                                header += '<br />';
                                 addbr = false;
                             }
+
                             
                             s += $.jqplot.sprintf(c.tooltipFormatString, label, sx, sy);
                         }
                     }
+                }
+            }
+
+
+            if (header) {
+                if (c.globalTooltipFormat){
+                    s = $.jqplot.sprintf(c.globalTooltipFormat, header, s);
+                } else {
+                    s = header + s;
                 }
             }
 
@@ -1117,6 +1127,7 @@
         // Tooltip will show on the grid at the location given by
         // tooltipLocation, offset from the grid edge by tooltipOffset.
         this.followMouse = false;
+        this.globalTooltipFormat = null;
         // prop: tooltipLocation
         // Where to position tooltip.  If followMouse is true, this is
         // relative to the cursor, otherwise, it is relative to the grid.
@@ -1710,7 +1721,6 @@
                 tr = null;
                 td = null;
             };
-        
         if (this._elem) {
             this._elem.emptyForce();
             this._elem = null;
