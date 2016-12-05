@@ -346,7 +346,7 @@
     };
     $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.move = function(pid, x, y){
         var tooltip = this.serie.labelsSlices[pid].find(".tooltip");
-        tooltip.css({"left": -(this.serie.labelsSlices[pid].width() / 2) + "px", "top": -(this.serie.labelsSlices[pid].height() + 15) + "px"});
+        tooltip.css({"left": (x - (tooltip.width() / 2)) + "px", "top": (y - (tooltip.height() + 15))+ "px"});
     };
 
     // called with scope of series

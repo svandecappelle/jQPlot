@@ -317,7 +317,7 @@ span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover {
 
 span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip,
 span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip {
-    position: absolute;
+    position: fixed;
     width: auto;
     min-width: 20px;
     padding-left: 5px;
