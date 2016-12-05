@@ -337,19 +337,16 @@
     };
 
     $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.highlight = function(pid){
-        this.serie.labelsSlices[pid].removeClass("hidden");
+        this.serie.labelsSlices[pid].find(".tooltip").removeClass("hidden");
     };
     $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.unhighlight = function(pid){
         for (var i = this.serie.labelsSlices.length - 1; i >= 0; i--) {
-            this.serie.labelsSlices[i].addClass("hidden");
+            this.serie.labelsSlices[i].find(".tooltip").addClass("hidden");
         };
     };
     $.jqplot.DonutHighlighterLabelSliceRenderer.prototype.move = function(pid, x, y){
-        var pointLblPosition = this.serie.labelsSlices[pid].position();
         var tooltip = this.serie.labelsSlices[pid].find(".tooltip");
-        var topPos = - tooltip.height() - (this.serie.labelsSlices[pid].height() / 2);
-        var leftPos = - (tooltip.width() / 2) - (this.serie.labelsSlices[pid].width() / 2);
-        tooltip.css({"margin-left": leftPos + "px", "margin-top": topPos + "px"});
+        tooltip.css({"left": -(this.serie.labelsSlices[pid].width() / 2) + "px", "top": -(this.serie.labelsSlices[pid].height() + 15) + "px"});
     };
 
     // called with scope of series
@@ -477,12 +474,12 @@
                     var fstrTooltip = this.dataLabelFormatString || '%s';
                     labelTooltip = $.jqplot.sprintf(fstrTooltip, gd[i][0]);
 
-                    var tooltip = '<span class="tooltip">' + labelTooltip + '</span>';
+                    var tooltip = '<span class="hidden tooltip">' + labelTooltip + '</span>';
                     var txt = '<span class="jqplot-donut-series jqplot-data-label" style="position:absolute;">' + label + tooltip + + '</span>'
                     var labelelem = $(txt).insertBefore(plot.eventCanvas._elem);
 
                     this.labelsSlices.push(labelelem);
-                    labelelem.addClass('jqplot-donut-show-hover hidden');
+                    labelelem.addClass('jqplot-donut-show-hover');
                 }else{
                     var labelelem = $('<span class="jqplot-donut-series jqplot-data-label" style="position:absolute;">' + label + '</span>').insertBefore(plot.eventCanvas._elem);
                 }

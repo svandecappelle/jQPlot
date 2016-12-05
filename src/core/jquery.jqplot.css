@@ -353,17 +353,18 @@ span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip {
     opacity: 0.8;
     margin: auto;
     z-index: 999;
+    pointer-events: none;
 }
 
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover.hidden,
-span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover.hidden {
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip,
+span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip{
+    display: block;
+}
+
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip.hidden,
+span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip.hidden {
     display: none;
 }
 
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover,
-span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover {}
-
-span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover,
-span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover {
-    display: block;
-}
+span.jqplot-donut-series.jqplot-data-label.jqplot-donut-show-hover .tooltip,
+span.jqplot-pie-series.jqplot-data-label.jqplot-pie-show-hover .tooltip{}
