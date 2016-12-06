@@ -534,7 +534,7 @@
                     var fstrTooltip = this.dataLabelFormatString || '%s';
                     labelTooltip = $.jqplot.sprintf(fstrTooltip, gd[i][0]);
 
-                    var tooltip = '<span class="hidden tooltip" style="position:absolute;color:'+labelColor+';">' + labelTooltip + '</span>';
+                    var tooltip = '<span class="hidden tooltip" style="position:fixed;color:'+labelColor+';">' + labelTooltip + '</span>';
                     var txt = '<span class="jqplot-pie-series jqplot-data-label" style="position:absolute;color:'+labelColor+';">' + label + tooltip + + '</span>'
                     var labelelem = $(txt).insertBefore(plot.eventCanvas._elem);
 
@@ -585,7 +585,7 @@
                   var fstrTooltip = this.dataLabelFormatString || '%s';
                   labelTooltip = $.jqplot.sprintf(fstrTooltip, gd[i][0]);
 
-                  var tooltip = '<span class="tooltip" style="position:absolute;color:'+labelColor+';">' + labelTooltip + '</span>';
+                  var tooltip = '<span class="tooltip" style="position:fixed;color:'+labelColor+';">' + labelTooltip + '</span>';
                   var txt = '<span class="jqplot-pie-series jqplot-data-label" style="position:absolute;color:'+labelColor+';">' + label + tooltip + + '</span>'
                   var labelelem = $(txt).insertBefore(plot.eventCanvas._elem);
 
