@@ -358,7 +358,7 @@
         var offx = 0;
         var offy = 0;
         var trans = 1;
-        // var colorGenerator = new this.colorGenerator(this.seriesColors);
+        var colorGenerator = new $.jqplot.ColorGenerator(this.seriesColors);
         if (options.legendInfo && options.legendInfo.placement == 'insideGrid') {
             var li = options.legendInfo;
             switch (li.location) {
@@ -435,11 +435,12 @@
         }
         for (var i=0; i<gd.length; i++) {
             var ang1 = (i == 0) ? sa : gd[i-1][1] + sa;
+            var sliceColor = colorGenerator.next();
             // Adjust ang1 and ang2 for sliceMargin
             ang1 += this.sliceMargin/180*Math.PI;
             var ang2 = gd[i][1] + sa;
             this._sliceAngles.push([ang1, ang2]);
-            this.renderer.drawSlice.call (this, ctx, ang1, ang2, this.seriesColors[i], false);
+            this.renderer.drawSlice.call (this, ctx, ang1, ang2, sliceColor, false);
             
             if (this.showDataLabels && gd[i][2]*100 >= this.dataLabelThreshold) {
                 var fstr, avgang = (ang1+ang2)/2, label;
