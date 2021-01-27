@@ -138,7 +138,6 @@
         }
 
         // Show scale labels
-        // ctx.rotate(rotationDegree*.5);
         if (this.renderer.options.scaleShowLabels){
             for (var i=1; i<=this._calculatedScale.steps; i++) {
                 ctx.textAlign = 'center';
