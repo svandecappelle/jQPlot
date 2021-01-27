@@ -15,25 +15,49 @@
 	</head>
 	<body>
 		<div class="coding">
-			<div id="chart1" style="margin:20px; width:500px; height:500px;"></div>
+			<div id="chart1" style="margin:20px; width:600px; height:500px;"></div>
 
 			<script type="text/javascript">
 				$(function(){
-					
-					var s1 = [1, 2, 3, 5];
-					
-					var plot1 = $.jqplot('chart1', [s1], {
+					var radarAxisLabels = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight"];
+					var s1 = [3, 2, 6, 2, 10, 4, 9, 4];
+					var s2 = [8, 11, 4, 1, 2, 6, 5, 7];
+
+					var plot1 = $.jqplot('chart1', [s1, s2], {
 						title:'Disc usage',
+						axes: {
+							xaxis: { showTicks: false},
+							yaxis: { showTicks: false},
+						},
 						seriesDefaults: {
 							renderer: $.jqplot.RadarRenderer,
 							rendererOptions: {
-								scaleLineColor: "lightgrey",
+								lineWidth: 1.5,
+
+								showOrigin: true,
+								originStyle: "#DDDDDD",
+
 								scaleShowLine: true,
+								scaleLineColor: "#DDDDDD",
+								scaleLineWidth: 1,
+								scaleLineMax: 12,
+								scaleLineCount: 6,
+
 								scaleShowLabels: true,
-								scaleFontColor: "blue"
+								scaleFontColor: "grey",
+								scaleFontSize: 12,
+								scaleFontFamily: "Roboto, sans-serif",
+
+								showAxisLabels: true,
+								radarAxisLabels: radarAxisLabels,
+								labelFontFamily: "Roboto, sans-serif",
+								labelFontSize: 16,
+								labelFontStyle: "black",
 							}
 						},
-						legend: { show:true, location: 'e'}
+						seriesColors: ["red", "blue"],
+						grid: { drawGridLines: false, gridLineColor: 'transparent' },
+						legend: { show:true, location: 'ne'},
 					});
 					plot1.themeEngine.newTheme('bluealpha_pie', new VklThemes().get('bluealpha_pie', plot1));
 					plot1.activateTheme('bluealpha_pie');
